@@ -1,5 +1,7 @@
 # Networked Influence in a Tabula Rasa Legislature
 
+**[📄 Extended Abstract (5 pages)](docs/extended-abstract.pdf)** — Full mathematical specifications, results tables, and discussion.
+
 ## Overview
 
 The 2021–2022 Chilean Constitutional Convention offers a rare natural experiment for studying political network formation and legislative effectiveness. Delegates were largely unfamiliar with each other, including both career politicians and civically recruited citizens, established their own procedural rules, and required co-sponsorships for constitutional proposals. This *tabula rasa* legislature—where networks were not predetermined by party structure—enables us to trace how alliances form and translate into political success.
