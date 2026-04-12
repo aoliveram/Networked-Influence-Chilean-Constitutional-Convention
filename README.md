@@ -1,15 +1,8 @@
 # Networked Influence in a Tabula Rasa Legislature
 
-**Co-authorship, Ideological Dynamics, and Political Success in the Chilean Constitutional Convention (2021–2022)**
-
-Aníbal Olivera · Jorge Fábrega
-*Centro de Investigación en Complejidad Social, Universidad del Desarrollo, Santiago, Chile*
-
----
-
 ## Overview
 
-The 2021–2022 Chilean Constitutional Convention offers a rare natural experiment for studying political network formation and legislative effectiveness. Delegates were largely unfamiliar with each other, included both career politicians and civically recruited citizens, established their own procedural rules, and required co-sponsorships for constitutional proposals. This *tabula rasa* legislature—where networks were not predetermined by party structure—enables us to trace how alliances form and translate into political success.
+The 2021–2022 Chilean Constitutional Convention offers a rare natural experiment for studying political network formation and legislative effectiveness. Delegates were largely unfamiliar with each other, including both career politicians and civically recruited citizens, established their own procedural rules, and required co-sponsorships for constitutional proposals. This *tabula rasa* legislature—where networks were not predetermined by party structure—enables us to trace how alliances form and translate into political success.
 
 We analyze 159 delegates across 5 thematic commissions over 91 temporal periods using a three-stage modeling pipeline:
 
@@ -17,7 +10,7 @@ We analyze 159 delegates across 5 thematic commissions over 91 temporal periods 
 2. **Model 2** — Ideological dynamics via **panel regression** with individual fixed effects
 3. **Model 3** — Legislative success via **Spatial Durbin Model** (SDM)
 
-## Key Findings
+## Findings
 
 ### 1. Strategic Gatekeeping in Co-sponsorship Networks
 
@@ -111,21 +104,6 @@ Rscript code/08-robustness-checks.R
 
 Only derived and manually enriched data files are included in this repository; raw scraping inputs are excluded to keep the repository focused on analysis.
 
-## Ongoing Work
+---
 
-We are expanding the dataset to include all seven commissions (C2, C4, C6, C7 currently excluded from Models 2–3 pending completion of modification mapping). This will allow us to test whether gatekeeping dynamics and spatial dependence patterns generalize across different thematic domains.
-
-## Citation
-
-If you use this work, please cite:
-
-> Olivera, A., & Fábrega, J. (2026). *Networked Influence in a Tabula Rasa Legislature: Co-authorship, Ideological Dynamics, and Political Success in the Chilean Constitutional Convention (2021–2022)*. Centro de Investigación en Complejidad Social, Universidad del Desarrollo.
-
-## License
-
-Code is released under the MIT License. Data files are provided for research reproducibility under the same license.
-
-## Contact
-
-- **Aníbal Olivera** — [Centro de Investigación en Complejidad Social, UDD](https://complejidadsocial.udd.cl/)
-- **Jorge Fábrega** — [Centro de Investigación en Complejidad Social, UDD](https://complejidadsocial.udd.cl/)
+This is a working paper: we are expanding the dataset to include all seven commissions (C2, C4, C6, C7 are currently excluded from Models 2–3 pending completion of modification mapping).
