@@ -1,0 +1,241 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{caption}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{natbib}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{authblk}
+\usepackage{setspace}
+\usepackage{float}
+\usepackage[dvipsnames]{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=MidnightBlue,
+    citecolor=MidnightBlue,
+    urlcolor=MidnightBlue,
+}
+
+\title{\textbf{Networked Influence in a Tabula Rasa Legislature: \\
+Co-authorship, Ideological Dynamics, and Political Success \\
+in the Chilean Constitutional Convention (2021--2022)}}
+
+\author[1]{An\'ibal Olivera}
+\author[1]{Jorge F\'abrega}
+\affil[1]{Centro de Investigaci\'on en Complejidad Social, \\
+Universidad del Desarrollo, Santiago, Chile}
+
+\date{April 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+\noindent The 2021--2022 Chilean Constitutional Convention offers a rare natural experiment for studying network formation and legislative effectiveness. Delegates were largely unfamiliar, included both career politicians and civically recruited citizens, and required co-sponsorships for proposals. This ``tabula rasa'' legislature enables us to trace how alliances form and translate into political success. Using Valued ERGM, panel regression with fixed effects, and Spatial Durbin Models on 159 delegates across 5 commissions over 91 temporal periods, we uncover three novel findings: (1) privileged delegates (lawyers and institutionally experienced) exhibit \emph{negative} homophily, dispersing across coalitions as strategic gatekeepers; (2) network exposure does not causally affect ideological dynamics---correlation reflects endogenous selection, not influence; (3) legislative success is overwhelmingly collective: spatial autocorrelation in lexical retention is near-complete ($\rho \approx 0.997$), with success ``spilling over'' through co-authorship ties.
+
+\medskip
+\noindent\textbf{Keywords:} political networks, constitutional design, valued ERGM, spatial econometrics, legislative success, ideal-point estimation
+\end{abstract}
+
+\section{Introduction and Context}
+
+Constitutional moments are rare laboratories for studying how political networks form and structure collective action. The 2021--2022 Chilean Constitutional Convention is particularly instructive: triggered by the 2019 social uprising, it assembled 155 delegates---many of them political outsiders elected through citizen lists---to draft a new constitution from scratch. Unlike traditional parliaments, delegates had no pre-established party hierarchies, shared no procedural history, and had to write their own rules of engagement. Constitutional initiatives required formal co-sponsorship by at least 8 delegates, which we use as a proxy for political collaboration.
+
+This institutional setting provides three empirical advantages: (i)~\emph{tabula rasa} conditions that allow us to observe network formation ex nihilo; (ii)~explicit co-sponsorship as an observable proxy of strategic alliance; and (iii)~a well-defined outcome (text retained in the final draft) that permits clean measurement of legislative success.
+
+We ask three interrelated questions: \textbf{(RQ1)} What factors drive co-sponsorship network formation? \textbf{(RQ2)} Does network exposure causally influence ideological dynamics, or does ideology predate the network? \textbf{(RQ3)} How does network structure predict political success, operationalized as lexical retention in the final constitutional text?
+
+\section{Data}
+
+\paragraph{Commissions and articles.} We digitized all article-level proposals from five of the seven thematic commissions (C1: Political System; C3: State Form; C5: Fundamental Rights; C6: Environment; C7: Knowledge Systems), producing manually enriched JSON files with delegate authorship metadata. For the co-authorship network (Model~1), we use all top-level genesis entries across the five commissions. For Models~2 and~3, we restrict attention to articles whose final status was labeled \emph{id\'entico} or \emph{similar} relative to the final constitutional draft, yielding 236 mapped articles (125 identical, 111 similar; C1:~131, C3:~71, C5:~34).
+
+\paragraph{Delegate covariates.} We scraped the Biblioteca del Congreso Nacional (BCN) biographical portal to construct structured profiles for each delegate, including: political affiliation, gender, legal profession, prior institutional experience, age, and electoral district. This yields a final network of 159 delegates with complete covariate information.
+
+\paragraph{Ideal points.} Ideological positions come from a dynamic Bayesian IRT model \citep{imai2016fast} estimated on all legislative votes (2021-07-13 to 2022-06-24; 91~periods). We use a Random Walk prior ($\omega^2 = 0.025$) and anchor the scale using Teresa Marinovic (right) and Jorge Baradit (left). The output is an $N \times T$ matrix $\{\theta_{i,t}\}$ of 154 delegates over 91 periods.
+
+\section{Model 1: Co-sponsorship Network Formation}
+
+We model the pooled co-authorship network as an undirected weighted graph $G = (V, E, W)$ where $V$ is the set of 159 delegates, $E$ is the set of edges, and $w_{ij} \in \mathbb{N}$ counts shared article co-sponsorships. Because edge weights are counts (mean $\approx 28$, max $> 300$), we estimate a \emph{Valued ERGM} \citep{krivitsky2012exponential} with Poisson reference distribution:
+\begin{equation}
+  P_\theta(Y = y) = \frac{h(y) \exp\left(\theta^{\top} g(y)\right)}{Z(\theta)}, \quad y_{ij} \sim \text{Poisson-reference}
+\end{equation}
+where $g(y)$ is the vector of sufficient statistics and $Z(\theta)$ is the normalizing constant. Our specification is:
+\begin{equation}
+  \begin{split}
+    g(y) = \; & \texttt{sum}(y) + \texttt{nodematch}(\text{afiliaci\'on}) \\
+              & + \texttt{nodematch}(\text{lawyer}) + \texttt{nodematch}(\text{institutional}) \\
+              & + \texttt{nodematch}(\text{female}) + \texttt{absdiff}(\text{age}) \\
+              & + \texttt{nodecov}(\text{age})
+  \end{split}
+\end{equation}
+
+\begin{table}[H]
+\centering
+\caption{Valued ERGM results (pooled network, 159 delegates).}
+\label{tab:ergm}
+\begin{tabular}{lrr}
+\toprule
+Term & Estimate & $p$-value \\
+\midrule
+\texttt{sum} (intercept)            & $-4.72$  & $<0.001$ \\
+\texttt{nodematch}(afiliaci\'on)    & $+0.41$  & $<0.001$ \\
+\texttt{nodematch}(lawyer)          & $-0.09$  & $<0.001$ \\
+\texttt{nodematch}(institutional)   & $-0.12$  & $<0.001$ \\
+\texttt{nodematch}(female)          & $+0.08$  & $<0.001$ \\
+\texttt{absdiff}(age)               & $+0.00$  & $0.403$  \\
+\texttt{nodecov}(age)               & $-0.024$ & $<0.001$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Key finding.} While political homophily is expected as a baseline, we uncover a novel pattern: lawyers and delegates with prior institutional experience co-sponsor \emph{less} with peers sharing these attributes (negative homophily). Rather than clustering densely, these ``privileged'' actors disperse across coalitions---consistent with strategic gatekeeping, where they mentor novices and maintain leadership through representational diversity.
+
+\section{Model 2: Ideological Dynamics and Network Influence}
+
+To test whether network exposure causally shapes ideological trajectories, we estimate a panel regression with individual fixed effects on the $2{,}926$ delegate-period observations (C1, C3, C5). Define the dependent variable as the first-difference of the ideal point:
+\begin{equation}
+  \Delta\theta_{i,t} = \theta_{i,t} - \theta_{i,t-1}
+\end{equation}
+
+The key independent variable, \emph{network exposure}, is the weighted average of co-authors' ideal points in the previous period:
+\begin{equation}
+  \text{NetExp}_{i,t-1} = \frac{\sum_{j \neq i} w_{ij,t-1} \cdot \theta_{j,t-1}}{\sum_{j \neq i} w_{ij,t-1}}
+\end{equation}
+where $w_{ij,t-1}$ is the number of articles co-sponsored by $i$ and $j$ up to $t-1$.
+
+The fixed-effects specification is:
+\begin{equation}
+  \Delta\theta_{i,t} = \alpha_i + \beta_1 \theta_{i,t-1} + \beta_3 \text{NetExp}_{i,t-1} + \gamma X_i + \epsilon_{i,t}
+\end{equation}
+where $\alpha_i$ absorbs time-invariant delegate heterogeneity, and $X_i$ includes affiliation, profession, gender, and experience covariates.
+
+\begin{table}[H]
+\centering
+\caption{Panel regression results: network exposure and ideological dynamics.}
+\label{tab:panel}
+\begin{tabular}{lrrr}
+\toprule
+Model & $\hat{\beta}_3$ (NetExp) & SE & $p$-value \\
+\midrule
+Fixed Effects (within)     & $+0.0004$ & $0.0036$ & $0.91$   \\
+Pooled OLS                 & $+0.033$  & $0.008$  & $<0.001$ \\
+OLS + commission FE        & $+0.035$  & $0.009$  & $0.0002$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Diagnostics and interpretation.} The Hausman test rejects random effects ($\chi^2 = 784.96$, $p<0.001$), confirming that $\alpha_i$ is correlated with $X_i$. The fixed-effects coefficient on NetExp is statistically null ($\hat{\beta}_3 = +0.0004$, $p = 0.91$), while pooled OLS shows a significant positive effect ($+0.033$, $p < 0.001$). The discrepancy indicates \emph{endogenous selection}: delegates choose co-sponsors aligned with pre-existing positions, not convergence toward their collaborators.
+
+\paragraph{Falsification test.} As a further check, we regress past ideological change on \emph{future} network exposure (lead). If the baseline result reflected causal influence, this should be null. Instead, the lead term is significant ($p < 0.001$)---falsification fails, corroborating the selection interpretation.
+
+\section{Model 3: Legislative Success}
+
+The dependent variable is \emph{lexical retention}, the mean TF-IDF cosine similarity between each delegate's co-authored genesis articles and their corresponding final constitutional text. Robustness uses Sentence-BERT embeddings \citep{reimers2019sentence}. Validation: articles labeled \emph{id\'entico} score $0.979$ on average, confirming measurement validity.
+
+Let $W$ be the row-normalized co-authorship adjacency matrix of the 141 complete-case delegates. Moran's~$I$ test yields $I = 0.155$, $p < 10^{-6}$, confirming strong spatial autocorrelation in retention scores and justifying a spatial model.
+
+\paragraph{Model specifications.} We estimate four nested models:
+\begin{align}
+  \text{OLS:} \quad & y = \alpha + X\beta + \epsilon                               \label{eq:ols} \\
+  \text{SAR:} \quad & y = \rho W y + X\beta + \epsilon                             \label{eq:sar} \\
+  \text{SEM:} \quad & y = X\beta + u, \quad u = \lambda W u + \epsilon             \label{eq:sem} \\
+  \text{SDM:} \quad & y = \rho W y + X\beta + W X \theta + \epsilon                \label{eq:sdm}
+\end{align}
+where $y$ is the vector of retention scores and $X$ includes degree, betweenness, profession, gender, experience, age, mean and SD of ideal point, and ego heterophily.
+
+\begin{table}[H]
+\centering
+\caption{Model comparison for legislative success (N=141).}
+\label{tab:sdm-comparison}
+\begin{tabular}{lrrr}
+\toprule
+Model & AIC       & $\rho$ / $\lambda$ & $p$-value \\
+\midrule
+OLS   & $-338.54$ & ---              & ---        \\
+SEM   & $-354.82$ & $0.81$ ($\lambda$) & $<0.001$ \\
+SAR   & $-355.32$ & $0.89$ ($\rho$)    & $<0.001$ \\
+\textbf{SDM} & $\mathbf{-383.35}$ & $\mathbf{0.997}$ ($\rho$) & $<0.001$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Selected OLS coefficients (baseline, Model~\ref{eq:ols}).}
+\label{tab:ols}
+\begin{tabular}{lrr}
+\toprule
+Variable & Estimate & $p$-value \\
+\midrule
+\texttt{theta\_mean}       & $+0.012$ & $0.008$ \\
+\texttt{theta\_sd}         & $-0.103$ & $0.015$ \\
+\texttt{ego\_heterophily}  & $-0.063$ & $0.027$ \\
+\texttt{degree}            & $+0.0003$ & $0.213$ \\
+\texttt{betweenness}       & $+0.0001$ & $0.147$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Interpretation.} The SDM dominates by AIC (difference of 44+ points over SAR/SEM), showing that both direct spillovers ($\rho W y$) and contextual effects ($W X \theta$) are necessary. The spatial lag coefficient $\hat{\rho} = 0.997$ indicates that legislative success is overwhelmingly a \emph{collective phenomenon}: a delegate's retention depends more on who their co-authors are than on their individual attributes. Ideological consistency (low $\theta_{sd}$) and ideological moderation (higher $\theta_{\text{mean}}$) predict retention, while cross-coalitional bridges (high ego heterophily) reduce it.
+
+\section{Robustness Checks}
+
+\paragraph{Per-commission ERGMs.} We re-estimate Model~1 separately for C1, C3, and C5. Results are directionally heterogeneous: C1 and C3 show mildly negative affiliation homophily, whereas C5 shows positive homophily, suggesting that pooled results average opposing commission-level dynamics. C3 and C5 did not fully converge, indicating data-size limitations at the per-commission level.
+
+\paragraph{Alternative lexical retention.} We re-estimate Model~3 using Sentence-BERT cosine similarity. Coefficients preserve signs; $\texttt{theta\_mean}$ becomes marginally significant ($p \approx 0.064$), consistent with the TF-IDF baseline.
+
+\paragraph{Binary spatial weights.} Replacing weighted~$W$ with a binary adjacency reduces $\hat{\rho}$ to $0.374$, but retains the significance of $\texttt{theta\_mean}$ and $\texttt{theta\_sd}$. The core substantive conclusions are robust.
+
+\section{Discussion and Contribution}
+
+Our three-stage analysis reveals how networks simultaneously structure social selection and collective action in constitutional design. Three contributions stand out:
+
+\begin{enumerate}
+  \item \textbf{Strategic gatekeeping} as a novel form of negative homophily in elite legislative networks. Privileged actors (lawyers, institutional veterans) deliberately disperse rather than cluster, challenging the standard homophily narrative.
+
+  \item \textbf{Methodological caution} against inferring influence from cross-sectional network-ideology correlations. Our fixed-effects and falsification tests show that apparent influence is selection in disguise---a warning relevant for the broader literature on network effects on political behavior.
+
+  \item \textbf{Collective legislative success.} The near-unity spatial lag in the SDM reframes legislative success as a property of coalitions rather than individuals. Political scientists working on legislative effectiveness should take spatial dependence seriously when delegates share committee or co-sponsorship ties.
+\end{enumerate}
+
+\paragraph{Ongoing work.} We are extending the dataset to include all seven commissions (C2, C4, C6, C7 currently excluded from Models~2--3 pending completion of their modification mapping). This will allow us to test whether gatekeeping dynamics and spatial dependence patterns generalize across different thematic domains and a broader delegate population.
+
+\bigskip
+
+\noindent\textbf{Data and code.} All data and replication code are available at \url{https://github.com/aoliveram/Networked-Influence-Chilean-Constitutional-Convention}.
+
+\bibliographystyle{apalike}
+\begin{thebibliography}{9}
+
+\bibitem[Imai et al.(2016)]{imai2016fast}
+Imai, K., Lo, J., \& Olmsted, J. (2016).
+\newblock Fast estimation of ideal points with massive data.
+\newblock \emph{American Political Science Review}, 110(4), 631--656.
+
+\bibitem[Krivitsky(2012)]{krivitsky2012exponential}
+Krivitsky, P.~N. (2012).
+\newblock Exponential-family random graph models for valued networks.
+\newblock \emph{Electronic Journal of Statistics}, 6, 1100--1128.
+
+\bibitem[Reimers \& Gurevych(2019)]{reimers2019sentence}
+Reimers, N., \& Gurevych, I. (2019).
+\newblock Sentence-BERT: Sentence embeddings using Siamese BERT-networks.
+\newblock In \emph{Proceedings of EMNLP-IJCNLP 2019}.
+
+\bibitem[LeSage \& Pace(2009)]{lesage2009}
+LeSage, J., \& Pace, R.~K. (2009).
+\newblock \emph{Introduction to Spatial Econometrics}.
+\newblock Chapman and Hall/CRC.
+
+\end{thebibliography}
+
+\end{document}

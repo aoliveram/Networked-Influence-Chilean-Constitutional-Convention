@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+venvs/
+.venv/
+pip-log.txt
+
+# R
+.Rhistory
+.RData
+.Ruserdata
+.Rproj.user/
+
+# LaTeX intermediate files
+*.aux
+*.log
+*.out
+*.toc
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+*.bbl
+*.blg
+*.nav
+*.snm
+*.vrb
+*.dvi
+
+# System
+.DS_Store
+.DS_Store?
+._*
+.Trashes
+Thumbs.db
+
+# macOS/iCloud sync duplicates
+* 2
+* 2.*
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
