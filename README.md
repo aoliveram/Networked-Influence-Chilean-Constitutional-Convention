@@ -6,7 +6,7 @@
 
 The 2021–2022 Chilean Constitutional Convention offers a rare natural experiment for studying political network formation and legislative effectiveness. Delegates were largely unfamiliar with each other, including both career politicians and civically recruited citizens, established their own procedural rules, and required co-sponsorships for constitutional proposals. This *tabula rasa* legislature—where networks were not predetermined by party structure—enables us to trace how alliances form and translate into political success.
 
-We analyze 159 delegates across 5 thematic commissions over 91 temporal periods using a three-stage modeling pipeline:
+We analyze 154 delegates across 5 thematic commissions over 91 temporal periods using a three-stage modeling pipeline:
 
 1. **Model 1** — Co-sponsorship network formation via **Valued ERGM**
 2. **Model 2** — Ideological dynamics via **panel regression** with individual fixed effects

@@ -22,12 +22,10 @@ library(spatialreg)
 
 set.seed(42)
 
-base_dir <- "/Users/anibaloliveramorales/Desktop/Doctorado/-Projects-/B - constitutional-proposal-tracking"
-impl_dir <- file.path(base_dir, "playground/research-proposal-implementation")
-data_dir <- file.path(impl_dir, "data")
+repo_dir <- "/Users/anibaloliveramorales/Desktop/Doctorado/-Projects-/B - Networked-Influence-Chilean-Constitutional-Convention"
+data_dir <- file.path(repo_dir, "data/processed")
 
-profiles <- fromJSON(file.path(base_dir,
-                               "conventionals-bcn-webscrapping/conventional-profiles.json"))
+profiles <- fromJSON(file.path(repo_dir, "data/raw/conventional-profiles.json"))
 
 get_attr <- function(name, attr_col, default_val) {
   idx <- match(name, profiles$nombre_armonizado)
@@ -47,7 +45,7 @@ for (comm in c("C1", "C3", "C5")) {
   cat(sprintf("--- %s ---\n", comm))
 
   # Load per-commission network
-  net_file <- file.path(impl_dir, "network-visualization",
+  net_file <- file.path(repo_dir, "data/raw/network-visualization",
                         paste0(comm, "_dynamic_networks.json"))
   net_data <- fromJSON(net_file, simplifyVector = FALSE)
 

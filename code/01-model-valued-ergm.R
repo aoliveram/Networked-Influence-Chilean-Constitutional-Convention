@@ -15,8 +15,9 @@ library(statnet)
 
 set.seed(42)
 
-base_dir <- "/Users/anibaloliveramorales/Desktop/Doctorado/-Projects-/B - constitutional-proposal-tracking"
-data_dir <- file.path(base_dir, "playground/research-proposal-implementation/data")
+repo_dir <- dirname(dirname(normalizePath(sys.frames()[[1]]$ofile %||% "code/01-model-valued-ergm.R")))
+repo_dir <- "/Users/anibaloliveramorales/Desktop/Doctorado/-Projects-/B - Networked-Influence-Chilean-Constitutional-Convention"
+data_dir <- file.path(repo_dir, "data/processed")
 
 # =============================================================================
 # 1. Load pooled network and profiles
@@ -27,7 +28,7 @@ edges_df <- read.csv(file.path(data_dir, "pooled_cumulative_network.csv"),
                      stringsAsFactors = FALSE)
 cat(sprintf("  Edges: %d, Total weight: %d\n", nrow(edges_df), sum(edges_df$weight)))
 
-profiles <- fromJSON(file.path(base_dir, "conventionals-bcn-webscrapping/conventional-profiles.json"))
+profiles <- fromJSON(file.path(repo_dir, "data/raw/conventional-profiles.json"))
 cat(sprintf("  Profiles loaded: %d\n", nrow(profiles)))
 
 # =============================================================================

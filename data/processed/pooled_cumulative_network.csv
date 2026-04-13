@@ -45,10 +45,8 @@ source,target,weight
 "Abarca, Damaris","Roa, Giovanna",18
 "Abarca, Damaris","Sanchez, Beatriz",28
 "Abarca, Damaris","Schonhaut, Constanza",26
-"Abarca, Damaris","Sepulveda, Barbara",7
-"Abarca, Damaris","Sepulveda, Carolina",7
-"Abarca, Damaris","Sepúlveda, Barbara",6
-"Abarca, Damaris","Sepúlveda, Carolina",2
+"Abarca, Damaris","Sepulveda, Barbara",13
+"Abarca, Damaris","Sepulveda, Carolina",9
 "Abarca, Damaris","Serey, Mariela",16
 "Abarca, Damaris","Stingo, Daniel",29
 "Abarca, Damaris","Urrutia, Tatiana",20
@@ -294,8 +292,7 @@ source,target,weight
 "Aguilera, Tiare","Celedon, Roberto",1
 "Aguilera, Tiare","Celis, Raul",12
 "Aguilera, Tiare","Cespedes, Lorena",9
-"Aguilera, Tiare",Chinga,1
-"Aguilera, Tiare","Chinga, Eric",190
+"Aguilera, Tiare","Chinga, Eric",191
 "Aguilera, Tiare","Daza, Mauricio",10
 "Aguilera, Tiare","Delgado, Aurora",9
 "Aguilera, Tiare","Dominguez, Gaspar",10
@@ -506,8 +503,7 @@ source,target,weight
 "Alvarez, Julio","Castillo, Eduardo",105
 "Alvarez, Julio","Castillo, Maria Trinidad",190
 "Alvarez, Julio","Cespedes, Lorena",1
-"Alvarez, Julio",Chinga,1
-"Alvarez, Julio","Chinga, Eric",156
+"Alvarez, Julio","Chinga, Eric",157
 "Alvarez, Julio","Cozzi, Ruggero",1
 "Alvarez, Julio","Cruz, Andres",110
 "Alvarez, Julio","Daza, Mauricio",23
@@ -645,8 +641,7 @@ source,target,weight
 "Alvez, Amaya","Catrileo, Rosa",9
 "Alvez, Amaya","Celis, Raul",9
 "Alvez, Amaya","Cespedes, Lorena",9
-"Alvez, Amaya",Chinga,1
-"Alvez, Amaya","Chinga, Eric",188
+"Alvez, Amaya","Chinga, Eric",189
 "Alvez, Amaya","Daza, Mauricio",10
 "Alvez, Amaya","Delgado, Aurora",21
 "Alvez, Amaya","Dominguez, Gaspar",14
@@ -744,8 +739,7 @@ source,target,weight
 "Ampuero, Adriana","Catrileo, Rosa",33
 "Ampuero, Adriana","Celis, Raul",9
 "Ampuero, Adriana","Cespedes, Lorena",9
-"Ampuero, Adriana",Chinga,1
-"Ampuero, Adriana","Chinga, Eric",188
+"Ampuero, Adriana","Chinga, Eric",189
 "Ampuero, Adriana","Cretton, Eduardo",1
 "Ampuero, Adriana","Cruz, Andres",8
 "Ampuero, Adriana","Cubillos, Marcela",1
@@ -855,8 +849,7 @@ source,target,weight
 "Andrade, Cristobal","Celedon, Roberto",1
 "Andrade, Cristobal","Celis, Raul",9
 "Andrade, Cristobal","Cespedes, Lorena",9
-"Andrade, Cristobal",Chinga,1
-"Andrade, Cristobal","Chinga, Eric",170
+"Andrade, Cristobal","Chinga, Eric",171
 "Andrade, Cristobal","Cretton, Eduardo",1
 "Andrade, Cristobal","Cruz, Andres",1
 "Andrade, Cristobal","Cubillos, Marcela",1
@@ -1027,8 +1020,7 @@ source,target,weight
 "Antilef, Victorino","Ubilla, Maria Cecilia",9
 "Antilef, Victorino","Uribe, Cesar",9
 "Antilef, Victorino","Vallejos, Loreto",9
-"Antilef, Victorino","Vargas, Margarita",35
-"Antilef, Victorino","Vargas, Margaritfa",1
+"Antilef, Victorino","Vargas, Margarita",36
 "Antilef, Victorino","Vega, Roberto",1
 "Antilef, Victorino","Veloso, Paulina",10
 "Antilef, Victorino","Vergara, Lisette",42
@@ -1217,8 +1209,7 @@ source,target,weight
 "Arauna, Francisca","Millabur, Adolfo",20
 "Arauna, Francisca","Miranda, Valentina",36
 "Arauna, Francisca","Montero, Ricardo",226
-"Arauna, Francisca","Munoz, Pedro",222
-"Arauna, Francisca","Muñoz, Pedro",3
+"Arauna, Francisca","Munoz, Pedro",225
 "Arauna, Francisca","Namor, Guillermo",259
 "Arauna, Francisca","Neumann, Ricardo",2
 "Arauna, Francisca","Nunez, Nicolas",112
@@ -1239,10 +1230,8 @@ source,target,weight
 "Arauna, Francisca","San Juan, Constanza",99
 "Arauna, Francisca","Sanchez, Beatriz",10
 "Arauna, Francisca","Schonhaut, Constanza",286
-"Arauna, Francisca","Sepulveda, Barbara",179
-"Arauna, Francisca","Sepulveda, Carolina",59
-"Arauna, Francisca","Sepúlveda, Barbara",93
-"Arauna, Francisca","Sepúlveda, Carolina",2
+"Arauna, Francisca","Sepulveda, Barbara",272
+"Arauna, Francisca","Sepulveda, Carolina",61
 "Arauna, Francisca","Serey, Mariela",13
 "Arauna, Francisca","Silva, Luciano",9
 "Arauna, Francisca","Stingo, Daniel",9
@@ -1338,9 +1327,8 @@ source,target,weight
 "Arellano, Marco","San Juan, Constanza",40
 "Arellano, Marco","Sanchez, Beatriz",9
 "Arellano, Marco","Schonhaut, Constanza",144
-"Arellano, Marco","Sepulveda, Barbara",92
+"Arellano, Marco","Sepulveda, Barbara",161
 "Arellano, Marco","Sepulveda, Carolina",14
-"Arellano, Marco","Sepúlveda, Barbara",69
 "Arellano, Marco","Serey, Mariela",14
 "Arellano, Marco","Silva, Luciano",9
 "Arellano, Marco","Stingo, Daniel",9
@@ -1350,8 +1338,7 @@ source,target,weight
 "Arellano, Marco","Valenzuela, Cesar",1
 "Arellano, Marco","Valenzuela, Paulina",11
 "Arellano, Marco","Vallejos, Loreto",34
-"Arellano, Marco","Vargas, Margarita",37
-"Arellano, Marco","Vargas, Margaritfa",1
+"Arellano, Marco","Vargas, Margarita",38
 "Arellano, Marco","Veloso, Paulina",9
 "Arellano, Marco","Vergara, Lisette",83
 "Arellano, Marco","Vidal, Rossana",11
@@ -1506,8 +1493,7 @@ source,target,weight
 "Atria, Fernando","Millabur, Adolfo",33
 "Atria, Fernando","Miranda, Valentina",29
 "Atria, Fernando","Montero, Ricardo",229
-"Atria, Fernando","Munoz, Pedro",230
-"Atria, Fernando","Muñoz, Pedro",3
+"Atria, Fernando","Munoz, Pedro",233
 "Atria, Fernando","Namor, Guillermo",257
 "Atria, Fernando","Neumann, Ricardo",1
 "Atria, Fernando","Nunez, Nicolas",31
@@ -1528,9 +1514,8 @@ source,target,weight
 "Atria, Fernando","San Juan, Constanza",9
 "Atria, Fernando","Sanchez, Beatriz",26
 "Atria, Fernando","Schonhaut, Constanza",300
-"Atria, Fernando","Sepulveda, Barbara",142
+"Atria, Fernando","Sepulveda, Barbara",225
 "Atria, Fernando","Sepulveda, Carolina",36
-"Atria, Fernando","Sepúlveda, Barbara",83
 "Atria, Fernando","Serey, Mariela",9
 "Atria, Fernando","Silva, Luciano",9
 "Atria, Fernando","Stingo, Daniel",27
@@ -1570,8 +1555,7 @@ source,target,weight
 "Bacian, Wilfredo","Celedon, Roberto",11
 "Bacian, Wilfredo","Celis, Raul",9
 "Bacian, Wilfredo","Cespedes, Lorena",19
-"Bacian, Wilfredo",Chinga,1
-"Bacian, Wilfredo","Chinga, Eric",202
+"Bacian, Wilfredo","Chinga, Eric",203
 "Bacian, Wilfredo","Cruz, Andres",2
 "Bacian, Wilfredo","Daza, Mauricio",31
 "Bacian, Wilfredo","De la Maza, Bernardo",1
@@ -1652,8 +1636,7 @@ source,target,weight
 "Bacian, Wilfredo","Valenzuela, Cesar",1
 "Bacian, Wilfredo","Valenzuela, Paulina",1
 "Bacian, Wilfredo","Vallejos, Loreto",9
-"Bacian, Wilfredo","Vargas, Margarita",30
-"Bacian, Wilfredo","Vargas, Margaritfa",1
+"Bacian, Wilfredo","Vargas, Margarita",31
 "Bacian, Wilfredo","Vega, Roberto",1
 "Bacian, Wilfredo","Velasquez, Hernan",156
 "Bacian, Wilfredo","Veloso, Paulina",10
@@ -2001,17 +1984,15 @@ source,target,weight
 "Barraza, Marcos","San Juan, Constanza",2
 "Barraza, Marcos","Sanchez, Beatriz",1
 "Barraza, Marcos","Schonhaut, Constanza",167
-"Barraza, Marcos","Sepulveda, Barbara",174
+"Barraza, Marcos","Sepulveda, Barbara",249
 "Barraza, Marcos","Sepulveda, Carolina",16
-"Barraza, Marcos","Sepúlveda, Barbara",75
 "Barraza, Marcos","Tepper, Maria Angelica",6
 "Barraza, Marcos","Tirado, Fernando",3
 "Barraza, Marcos","Uribe, Cesar",20
 "Barraza, Marcos","Urrutia, Tatiana",2
 "Barraza, Marcos","Valenzuela, Paulina",5
 "Barraza, Marcos","Vallejos, Loreto",26
-"Barraza, Marcos","Vargas, Margarita",24
-"Barraza, Marcos","Vargas, Margaritfa",1
+"Barraza, Marcos","Vargas, Margarita",25
 "Barraza, Marcos","Vargas, Mario",9
 "Barraza, Marcos","Velasquez, Hernan",33
 "Barraza, Marcos","Vergara, Lisette",21
@@ -2084,9 +2065,8 @@ source,target,weight
 "Bassa, Jaime","San Juan, Constanza",5
 "Bassa, Jaime","Sanchez, Beatriz",17
 "Bassa, Jaime","Schonhaut, Constanza",219
-"Bassa, Jaime","Sepulveda, Barbara",99
+"Bassa, Jaime","Sepulveda, Barbara",168
 "Bassa, Jaime","Sepulveda, Carolina",2
-"Bassa, Jaime","Sepúlveda, Barbara",69
 "Bassa, Jaime","Serey, Mariela",1
 "Bassa, Jaime","Stingo, Daniel",24
 "Bassa, Jaime","Uribe, Cesar",1
@@ -2513,8 +2493,7 @@ source,target,weight
 "Caiguan, Alexis","Urrutia, Tatiana",1
 "Caiguan, Alexis","Valenzuela, Paulina",20
 "Caiguan, Alexis","Vallejos, Loreto",21
-"Caiguan, Alexis","Vargas, Margarita",47
-"Caiguan, Alexis","Vargas, Margaritfa",1
+"Caiguan, Alexis","Vargas, Margarita",48
 "Caiguan, Alexis","Vega, Roberto",1
 "Caiguan, Alexis","Velasquez, Hernan",18
 "Caiguan, Alexis","Veloso, Paulina",10
@@ -2798,8 +2777,7 @@ source,target,weight
 "Carrillo, Alondra","Millabur, Adolfo",13
 "Carrillo, Alondra","Miranda, Valentina",34
 "Carrillo, Alondra","Montero, Ricardo",237
-"Carrillo, Alondra","Munoz, Pedro",233
-"Carrillo, Alondra","Muñoz, Pedro",3
+"Carrillo, Alondra","Munoz, Pedro",236
 "Carrillo, Alondra","Namor, Guillermo",261
 "Carrillo, Alondra","Neumann, Ricardo",2
 "Carrillo, Alondra","Nunez, Nicolas",27
@@ -2820,10 +2798,8 @@ source,target,weight
 "Carrillo, Alondra","San Juan, Constanza",30
 "Carrillo, Alondra","Sanchez, Beatriz",10
 "Carrillo, Alondra","Schonhaut, Constanza",290
-"Carrillo, Alondra","Sepulveda, Barbara",180
-"Carrillo, Alondra","Sepulveda, Carolina",35
-"Carrillo, Alondra","Sepúlveda, Barbara",89
-"Carrillo, Alondra","Sepúlveda, Carolina",2
+"Carrillo, Alondra","Sepulveda, Barbara",269
+"Carrillo, Alondra","Sepulveda, Carolina",37
 "Carrillo, Alondra","Serey, Mariela",20
 "Carrillo, Alondra","Silva, Luciano",9
 "Carrillo, Alondra","Stingo, Daniel",16
@@ -3071,9 +3047,8 @@ source,target,weight
 "Catrileo, Rosa","San Juan, Constanza",9
 "Catrileo, Rosa","Sanchez, Beatriz",10
 "Catrileo, Rosa","Schonhaut, Constanza",154
-"Catrileo, Rosa","Sepulveda, Barbara",80
+"Catrileo, Rosa","Sepulveda, Barbara",149
 "Catrileo, Rosa","Sepulveda, Carolina",9
-"Catrileo, Rosa","Sepúlveda, Barbara",69
 "Catrileo, Rosa","Serey, Mariela",9
 "Catrileo, Rosa","Silva, Luciano",9
 "Catrileo, Rosa","Stingo, Daniel",16
@@ -3342,8 +3317,7 @@ source,target,weight
 "Chahin, Fuad","Miranda, Valentina",1
 "Chahin, Fuad","Monckeberg, Cristian",5
 "Chahin, Fuad","Montero, Ricardo",149
-"Chahin, Fuad","Munoz, Pedro",140
-"Chahin, Fuad","Muñoz, Pedro",9
+"Chahin, Fuad","Munoz, Pedro",149
 "Chahin, Fuad","Namor, Guillermo",149
 "Chahin, Fuad","Navarrete, Geoconda",1
 "Chahin, Fuad","Neumann, Ricardo",1
@@ -3357,9 +3331,8 @@ source,target,weight
 "Chahin, Fuad","Reyes, Maria Ramona",1
 "Chahin, Fuad","Rivera, Maria Magdalena",3
 "Chahin, Fuad","Schonhaut, Constanza",132
-"Chahin, Fuad","Sepulveda, Barbara",86
+"Chahin, Fuad","Sepulveda, Barbara",100
 "Chahin, Fuad","Sepulveda, Carolina",27
-"Chahin, Fuad","Sepúlveda, Barbara",14
 "Chahin, Fuad","Silva, Luciano",3
 "Chahin, Fuad","Squella, Agustin",31
 "Chahin, Fuad","Tepper, Maria Angelica",1
@@ -3368,17 +3341,6 @@ source,target,weight
 "Chahin, Fuad","Veloso, Paulina",2
 "Chahin, Fuad","Vidal, Rossana",1
 "Chahin, Fuad","Videla, Carolina",2
-Chinga,"Giustinianovich, Elisa",1
-Chinga,"Gomez, Claudio",1
-Chinga,"Gomez, Yarela",1
-Chinga,"Martinez, Helmuth",1
-Chinga,"Mella, Jeniffer",1
-Chinga,"Millabur, Adolfo",1
-Chinga,"Pustilnick, Tammy",1
-Chinga,"Quinteros, Maria Elisa",1
-Chinga,"Reyes, Maria Ramona",1
-Chinga,"Uribe, Cesar",1
-Chinga,"Velasquez, Hernan",1
 "Chinga, Eric","Cruz, Andres",2
 "Chinga, Eric","Daza, Mauricio",1
 "Chinga, Eric","De la Maza, Bernardo",1
@@ -3391,10 +3353,10 @@ Chinga,"Velasquez, Hernan",1
 "Chinga, Eric","Gallardo, Bessy",27
 "Chinga, Eric","Galleguillos, Felix",19
 "Chinga, Eric","Garin, Renato",2
-"Chinga, Eric","Giustinianovich, Elisa",186
+"Chinga, Eric","Giustinianovich, Elisa",187
 "Chinga, Eric","Godoy, Isabel",55
-"Chinga, Eric","Gomez, Claudio",189
-"Chinga, Eric","Gomez, Yarela",190
+"Chinga, Eric","Gomez, Claudio",190
+"Chinga, Eric","Gomez, Yarela",191
 "Chinga, Eric","Gonzalez, Dayana",9
 "Chinga, Eric","Grandon, Giovanna",38
 "Chinga, Eric","Grandon, Paola",10
@@ -3414,11 +3376,11 @@ Chinga,"Velasquez, Hernan",1
 "Chinga, Eric","Madriaga, Tania",51
 "Chinga, Eric","Mamani, Isabella",10
 "Chinga, Eric","Martin, Juan Jose",9
-"Chinga, Eric","Martinez, Helmuth",146
-"Chinga, Eric","Mella, Jeniffer",186
+"Chinga, Eric","Martinez, Helmuth",147
+"Chinga, Eric","Mella, Jeniffer",187
 "Chinga, Eric","Mena, Felipe",47
 "Chinga, Eric","Meneses, Janis",9
-"Chinga, Eric","Millabur, Adolfo",190
+"Chinga, Eric","Millabur, Adolfo",191
 "Chinga, Eric","Miranda, Valentina",25
 "Chinga, Eric","Monckeberg, Cristian",1
 "Chinga, Eric","Montero, Ricardo",1
@@ -3434,9 +3396,9 @@ Chinga,"Velasquez, Hernan",1
 "Chinga, Eric","Pinto, Malucha",12
 "Chinga, Eric","Politzer, Patricia",1
 "Chinga, Eric","Portilla, Ericka",30
-"Chinga, Eric","Pustilnick, Tammy",146
-"Chinga, Eric","Quinteros, Maria Elisa",186
-"Chinga, Eric","Reyes, Maria Ramona",155
+"Chinga, Eric","Pustilnick, Tammy",147
+"Chinga, Eric","Quinteros, Maria Elisa",187
+"Chinga, Eric","Reyes, Maria Ramona",156
 "Chinga, Eric","Rivera, Maria Magdalena",30
 "Chinga, Eric","Roa, Giovanna",9
 "Chinga, Eric","Royo, Manuela",33
@@ -3453,13 +3415,12 @@ Chinga,"Velasquez, Hernan",1
 "Chinga, Eric","Tepper, Maria Angelica",1
 "Chinga, Eric","Tirado, Fernando",12
 "Chinga, Eric","Ubilla, Maria Cecilia",9
-"Chinga, Eric","Uribe, Cesar",189
+"Chinga, Eric","Uribe, Cesar",190
 "Chinga, Eric","Valenzuela, Cesar",1
 "Chinga, Eric","Vallejos, Loreto",11
-"Chinga, Eric","Vargas, Margarita",35
-"Chinga, Eric","Vargas, Margaritfa",1
+"Chinga, Eric","Vargas, Margarita",36
 "Chinga, Eric","Vega, Roberto",1
-"Chinga, Eric","Velasquez, Hernan",177
+"Chinga, Eric","Velasquez, Hernan",178
 "Chinga, Eric","Veloso, Paulina",10
 "Chinga, Eric","Vergara, Lisette",53
 "Chinga, Eric","Videla, Carolina",27
@@ -3841,10 +3802,8 @@ Chinga,"Velasquez, Hernan",1
 "Delgado, Aurora","San Juan, Constanza",19
 "Delgado, Aurora","Sanchez, Beatriz",38
 "Delgado, Aurora","Schonhaut, Constanza",39
-"Delgado, Aurora","Sepulveda, Barbara",16
-"Delgado, Aurora","Sepulveda, Carolina",13
-"Delgado, Aurora","Sepúlveda, Barbara",6
-"Delgado, Aurora","Sepúlveda, Carolina",2
+"Delgado, Aurora","Sepulveda, Barbara",22
+"Delgado, Aurora","Sepulveda, Carolina",15
 "Delgado, Aurora","Serey, Mariela",28
 "Delgado, Aurora","Silva, Luciano",9
 "Delgado, Aurora","Stingo, Daniel",37
@@ -4111,8 +4070,7 @@ Chinga,"Velasquez, Hernan",1
 "Flores, Alejandra","Millabur, Adolfo",12
 "Flores, Alejandra","Miranda, Valentina",33
 "Flores, Alejandra","Montero, Ricardo",215
-"Flores, Alejandra","Munoz, Pedro",211
-"Flores, Alejandra","Muñoz, Pedro",3
+"Flores, Alejandra","Munoz, Pedro",214
 "Flores, Alejandra","Namor, Guillermo",239
 "Flores, Alejandra","Neumann, Ricardo",2
 "Flores, Alejandra","Nunez, Nicolas",53
@@ -4133,10 +4091,8 @@ Chinga,"Velasquez, Hernan",1
 "Flores, Alejandra","San Juan, Constanza",48
 "Flores, Alejandra","Sanchez, Beatriz",9
 "Flores, Alejandra","Schonhaut, Constanza",267
-"Flores, Alejandra","Sepulveda, Barbara",160
-"Flores, Alejandra","Sepulveda, Carolina",35
-"Flores, Alejandra","Sepúlveda, Barbara",85
-"Flores, Alejandra","Sepúlveda, Carolina",2
+"Flores, Alejandra","Sepulveda, Barbara",245
+"Flores, Alejandra","Sepulveda, Carolina",37
 "Flores, Alejandra","Serey, Mariela",20
 "Flores, Alejandra","Silva, Luciano",9
 "Flores, Alejandra","Stingo, Daniel",16
@@ -4328,8 +4284,7 @@ Chinga,"Velasquez, Hernan",1
 "Gallardo, Bessy","Uribe, Cesar",29
 "Gallardo, Bessy","Valenzuela, Paulina",3
 "Gallardo, Bessy","Vallejos, Loreto",22
-"Gallardo, Bessy","Vargas, Margarita",24
-"Gallardo, Bessy","Vargas, Margaritfa",1
+"Gallardo, Bessy","Vargas, Margarita",25
 "Gallardo, Bessy","Velasquez, Hernan",41
 "Gallardo, Bessy","Veloso, Paulina",9
 "Gallardo, Bessy","Vergara, Lisette",33
@@ -4393,8 +4348,7 @@ Chinga,"Velasquez, Hernan",1
 "Galleguillos, Felix","Uribe, Cesar",39
 "Galleguillos, Felix","Valenzuela, Paulina",2
 "Galleguillos, Felix","Vallejos, Loreto",31
-"Galleguillos, Felix","Vargas, Margarita",17
-"Galleguillos, Felix","Vargas, Margaritfa",1
+"Galleguillos, Felix","Vargas, Margarita",18
 "Galleguillos, Felix","Veloso, Paulina",9
 "Galleguillos, Felix","Vergara, Lisette",17
 "Galleguillos, Felix","Videla, Carolina",17
@@ -4584,8 +4538,7 @@ Chinga,"Velasquez, Hernan",1
 "Godoy, Isabel","Urrutia, Tatiana",2
 "Godoy, Isabel","Valenzuela, Cesar",1
 "Godoy, Isabel","Vallejos, Loreto",42
-"Godoy, Isabel","Vargas, Margarita",41
-"Godoy, Isabel","Vargas, Margaritfa",1
+"Godoy, Isabel","Vargas, Margarita",42
 "Godoy, Isabel","Vargas, Mario",2
 "Godoy, Isabel","Vega, Roberto",2
 "Godoy, Isabel","Velasquez, Hernan",41
@@ -4894,8 +4847,7 @@ Chinga,"Velasquez, Hernan",1
 "Grandon, Giovanna","Urrutia, Tatiana",2
 "Grandon, Giovanna","Valenzuela, Cesar",1
 "Grandon, Giovanna","Vallejos, Loreto",11
-"Grandon, Giovanna","Vargas, Margarita",31
-"Grandon, Giovanna","Vargas, Margaritfa",1
+"Grandon, Giovanna","Vargas, Margarita",32
 "Grandon, Giovanna","Vargas, Mario",2
 "Grandon, Giovanna","Vega, Roberto",1
 "Grandon, Giovanna","Velasquez, Hernan",1
@@ -4935,8 +4887,7 @@ Chinga,"Velasquez, Hernan",1
 "Grandon, Paola","Uribe, Cesar",17
 "Grandon, Paola","Urrutia, Tatiana",2
 "Grandon, Paola","Vallejos, Loreto",20
-"Grandon, Paola","Vargas, Margarita",7
-"Grandon, Paola","Vargas, Margaritfa",1
+"Grandon, Paola","Vargas, Margarita",8
 "Grandon, Paola","Vargas, Mario",1
 "Grandon, Paola","Velasquez, Hernan",5
 "Grandon, Paola","Vergara, Lisette",11
@@ -4994,8 +4945,7 @@ Chinga,"Velasquez, Hernan",1
 "Gutierrez, Hugo","Uribe, Cesar",30
 "Gutierrez, Hugo","Valenzuela, Paulina",32
 "Gutierrez, Hugo","Vallejos, Loreto",26
-"Gutierrez, Hugo","Vargas, Margarita",37
-"Gutierrez, Hugo","Vargas, Margaritfa",1
+"Gutierrez, Hugo","Vargas, Margarita",38
 "Gutierrez, Hugo","Velasquez, Hernan",46
 "Gutierrez, Hugo","Veloso, Paulina",9
 "Gutierrez, Hugo","Vergara, Lisette",26
@@ -5136,10 +5086,8 @@ Chinga,"Velasquez, Hernan",1
 "Hoppe, Vanessa","San Juan, Constanza",100
 "Hoppe, Vanessa","Sanchez, Beatriz",9
 "Hoppe, Vanessa","Schonhaut, Constanza",27
-"Hoppe, Vanessa","Sepulveda, Barbara",32
-"Hoppe, Vanessa","Sepulveda, Carolina",39
-"Hoppe, Vanessa","Sepúlveda, Barbara",6
-"Hoppe, Vanessa","Sepúlveda, Carolina",2
+"Hoppe, Vanessa","Sepulveda, Barbara",38
+"Hoppe, Vanessa","Sepulveda, Carolina",41
 "Hoppe, Vanessa","Serey, Mariela",20
 "Hoppe, Vanessa","Silva, Luciano",9
 "Hoppe, Vanessa","Stingo, Daniel",45
@@ -5215,8 +5163,7 @@ Chinga,"Velasquez, Hernan",1
 "Hurtado, Maximiliano","Mella, Jeniffer",5
 "Hurtado, Maximiliano","Monckeberg, Cristian",1
 "Hurtado, Maximiliano","Montero, Ricardo",353
-"Hurtado, Maximiliano","Munoz, Pedro",360
-"Hurtado, Maximiliano","Muñoz, Pedro",9
+"Hurtado, Maximiliano","Munoz, Pedro",369
 "Hurtado, Maximiliano","Namor, Guillermo",277
 "Hurtado, Maximiliano","Orellana, Matias",97
 "Hurtado, Maximiliano","Ossandon, Manuel",3
@@ -5228,9 +5175,8 @@ Chinga,"Velasquez, Hernan",1
 "Hurtado, Maximiliano","Rebolledo, Barbara",1
 "Hurtado, Maximiliano","Reyes, Maria Ramona",96
 "Hurtado, Maximiliano","Schonhaut, Constanza",255
-"Hurtado, Maximiliano","Sepulveda, Barbara",122
+"Hurtado, Maximiliano","Sepulveda, Barbara",205
 "Hurtado, Maximiliano","Sepulveda, Carolina",30
-"Hurtado, Maximiliano","Sepúlveda, Barbara",83
 "Hurtado, Maximiliano","Uribe, Cesar",1
 "Hurtado, Maximiliano","Valenzuela, Cesar",93
 "Hurtado, Maximiliano","Vargas, Mario",63
@@ -5579,8 +5525,7 @@ Chinga,"Velasquez, Hernan",1
 "Laibe, Tomas","Miranda, Valentina",2
 "Laibe, Tomas","Monckeberg, Cristian",2
 "Laibe, Tomas","Montero, Ricardo",110
-"Laibe, Tomas","Munoz, Pedro",114
-"Laibe, Tomas","Muñoz, Pedro",6
+"Laibe, Tomas","Munoz, Pedro",120
 "Laibe, Tomas","Namor, Guillermo",35
 "Laibe, Tomas","Nunez, Nicolas",4
 "Laibe, Tomas","Olivares, Ivanna",1
@@ -5701,8 +5646,7 @@ Chinga,"Velasquez, Hernan",1
 "Linconao, Francisca","Salinas, Fernando",1
 "Linconao, Francisca","Sepulveda, Barbara",17
 "Linconao, Francisca","Tepper, Maria Angelica",1
-"Linconao, Francisca","Vargas, Margarita",18
-"Linconao, Francisca","Vargas, Margaritfa",1
+"Linconao, Francisca","Vargas, Margarita",19
 "Linconao, Francisca","Vega, Roberto",1
 "Linconao, Francisca","Veloso, Paulina",1
 "Linconao, Francisca","Vergara, Lisette",21
@@ -5751,8 +5695,7 @@ Chinga,"Velasquez, Hernan",1
 "Llanquileo, Natividad","Uribe, Cesar",19
 "Llanquileo, Natividad","Valenzuela, Paulina",18
 "Llanquileo, Natividad","Vallejos, Loreto",9
-"Llanquileo, Natividad","Vargas, Margarita",32
-"Llanquileo, Natividad","Vargas, Margaritfa",1
+"Llanquileo, Natividad","Vargas, Margarita",33
 "Llanquileo, Natividad","Vega, Roberto",1
 "Llanquileo, Natividad","Veloso, Paulina",10
 "Llanquileo, Natividad","Vergara, Lisette",46
@@ -5857,9 +5800,8 @@ Chinga,"Velasquez, Hernan",1
 "Madriaga, Tania","San Juan, Constanza",9
 "Madriaga, Tania","Sanchez, Beatriz",10
 "Madriaga, Tania","Schonhaut, Constanza",150
-"Madriaga, Tania","Sepulveda, Barbara",99
+"Madriaga, Tania","Sepulveda, Barbara",168
 "Madriaga, Tania","Sepulveda, Carolina",9
-"Madriaga, Tania","Sepúlveda, Barbara",69
 "Madriaga, Tania","Serey, Mariela",10
 "Madriaga, Tania","Silva, Luciano",9
 "Madriaga, Tania","Stingo, Daniel",9
@@ -5869,8 +5811,7 @@ Chinga,"Velasquez, Hernan",1
 "Madriaga, Tania","Uribe, Cesar",10
 "Madriaga, Tania","Valenzuela, Cesar",1
 "Madriaga, Tania","Vallejos, Loreto",9
-"Madriaga, Tania","Vargas, Margarita",32
-"Madriaga, Tania","Vargas, Margaritfa",1
+"Madriaga, Tania","Vargas, Margarita",33
 "Madriaga, Tania","Vega, Roberto",1
 "Madriaga, Tania","Veloso, Paulina",10
 "Madriaga, Tania","Vergara, Lisette",52
@@ -6219,10 +6160,8 @@ Chinga,"Velasquez, Hernan",1
 "Miranda, Valentina","San Juan, Constanza",11
 "Miranda, Valentina","Sanchez, Beatriz",9
 "Miranda, Valentina","Schonhaut, Constanza",36
-"Miranda, Valentina","Sepulveda, Barbara",93
-"Miranda, Valentina","Sepulveda, Carolina",21
-"Miranda, Valentina","Sepúlveda, Barbara",2
-"Miranda, Valentina","Sepúlveda, Carolina",2
+"Miranda, Valentina","Sepulveda, Barbara",95
+"Miranda, Valentina","Sepulveda, Carolina",23
 "Miranda, Valentina","Serey, Mariela",12
 "Miranda, Valentina","Silva, Luciano",9
 "Miranda, Valentina","Stingo, Daniel",9
@@ -6231,8 +6170,7 @@ Chinga,"Velasquez, Hernan",1
 "Miranda, Valentina","Ubilla, Maria Cecilia",9
 "Miranda, Valentina","Uribe, Cesar",18
 "Miranda, Valentina","Vallejos, Loreto",12
-"Miranda, Valentina","Vargas, Margarita",24
-"Miranda, Valentina","Vargas, Margaritfa",1
+"Miranda, Valentina","Vargas, Margarita",25
 "Miranda, Valentina","Velasquez, Hernan",29
 "Miranda, Valentina","Veloso, Paulina",9
 "Miranda, Valentina","Vergara, Lisette",26
@@ -6280,8 +6218,7 @@ Chinga,"Velasquez, Hernan",1
 "Montealegre, Katerine","Vega, Roberto",8
 "Montealegre, Katerine","Veloso, Paulina",2
 "Montealegre, Katerine","Zuniga, Luis Arturo",13
-"Montero, Ricardo","Munoz, Pedro",343
-"Montero, Ricardo","Muñoz, Pedro",9
+"Montero, Ricardo","Munoz, Pedro",352
 "Montero, Ricardo","Namor, Guillermo",272
 "Montero, Ricardo","Orellana, Matias",83
 "Montero, Ricardo","Perez, Alejandra",121
@@ -6293,9 +6230,8 @@ Chinga,"Velasquez, Hernan",1
 "Montero, Ricardo","Reyes, Maria Ramona",85
 "Montero, Ricardo","Royo, Manuela",2
 "Montero, Ricardo","Schonhaut, Constanza",251
-"Montero, Ricardo","Sepulveda, Barbara",121
+"Montero, Ricardo","Sepulveda, Barbara",204
 "Montero, Ricardo","Sepulveda, Carolina",25
-"Montero, Ricardo","Sepúlveda, Barbara",83
 "Montero, Ricardo","Tirado, Fernando",2
 "Montero, Ricardo","Valenzuela, Cesar",93
 "Montero, Ricardo","Vargas, Mario",46
@@ -6312,25 +6248,24 @@ Chinga,"Velasquez, Hernan",1
 "Moreno, Alfredo","Ubilla, Maria Cecilia",4
 "Moreno, Alfredo","Vega, Roberto",4
 "Moreno, Alfredo","Zuniga, Luis Arturo",7
-"Munoz, Pedro","Namor, Guillermo",269
+"Munoz, Pedro","Namor, Guillermo",278
 "Munoz, Pedro","Nunez, Nicolas",2
 "Munoz, Pedro","Olivares, Ivanna",1
 "Munoz, Pedro","Orellana, Matias",93
 "Munoz, Pedro","Oyarzun, Maria Jose",1
 "Munoz, Pedro","Perez, Alejandra",121
 "Munoz, Pedro","Pinto, Malucha",92
-"Munoz, Pedro","Politzer, Patricia",262
+"Munoz, Pedro","Politzer, Patricia",271
 "Munoz, Pedro","Portilla, Ericka",1
-"Munoz, Pedro","Pustilnick, Tammy",37
+"Munoz, Pedro","Pustilnick, Tammy",43
 "Munoz, Pedro","Rebolledo, Barbara",1
 "Munoz, Pedro","Reyes, Maria Ramona",97
 "Munoz, Pedro","Roa, Giovanna",2
 "Munoz, Pedro","Royo, Manuela",1
 "Munoz, Pedro","Saldana, Alvin",1
-"Munoz, Pedro","Schonhaut, Constanza",249
-"Munoz, Pedro","Sepulveda, Barbara",119
+"Munoz, Pedro","Schonhaut, Constanza",252
+"Munoz, Pedro","Sepulveda, Barbara",205
 "Munoz, Pedro","Sepulveda, Carolina",31
-"Munoz, Pedro","Sepúlveda, Barbara",83
 "Munoz, Pedro","Stingo, Daniel",1
 "Munoz, Pedro","Uribe, Cesar",1
 "Munoz, Pedro","Urrutia, Tatiana",1
@@ -6341,11 +6276,6 @@ Chinga,"Velasquez, Hernan",1
 "Munoz, Pedro","Viera, Christian",2
 "Munoz, Pedro","Vilches, Carolina",2
 "Munoz, Pedro","Woldarsky, Manuel",1
-"Muñoz, Pedro","Namor, Guillermo",9
-"Muñoz, Pedro","Politzer, Patricia",9
-"Muñoz, Pedro","Pustilnick, Tammy",6
-"Muñoz, Pedro","Schonhaut, Constanza",3
-"Muñoz, Pedro","Sepulveda, Barbara",3
 "Namor, Guillermo","Neumann, Ricardo",1
 "Namor, Guillermo","Nunez, Nicolas",47
 "Namor, Guillermo","Olivares, Ivanna",9
@@ -6366,9 +6296,8 @@ Chinga,"Velasquez, Hernan",1
 "Namor, Guillermo","San Juan, Constanza",22
 "Namor, Guillermo","Sanchez, Beatriz",9
 "Namor, Guillermo","Schonhaut, Constanza",278
-"Namor, Guillermo","Sepulveda, Barbara",154
+"Namor, Guillermo","Sepulveda, Barbara",237
 "Namor, Guillermo","Sepulveda, Carolina",71
-"Namor, Guillermo","Sepúlveda, Barbara",83
 "Namor, Guillermo","Serey, Mariela",11
 "Namor, Guillermo","Silva, Luciano",9
 "Namor, Guillermo","Stingo, Daniel",27
@@ -6463,8 +6392,7 @@ Chinga,"Velasquez, Hernan",1
 "Nunez, Nicolas","Urrutia, Tatiana",5
 "Nunez, Nicolas","Valenzuela, Paulina",24
 "Nunez, Nicolas","Vallejos, Loreto",72
-"Nunez, Nicolas","Vargas, Margarita",26
-"Nunez, Nicolas","Vargas, Margaritfa",1
+"Nunez, Nicolas","Vargas, Margarita",27
 "Nunez, Nicolas","Vargas, Mario",2
 "Nunez, Nicolas","Velasquez, Hernan",17
 "Nunez, Nicolas","Veloso, Paulina",9
@@ -6598,9 +6526,8 @@ Chinga,"Velasquez, Hernan",1
 "Perez, Alejandra","San Juan, Constanza",18
 "Perez, Alejandra","Sanchez, Beatriz",9
 "Perez, Alejandra","Schonhaut, Constanza",150
-"Perez, Alejandra","Sepulveda, Barbara",99
+"Perez, Alejandra","Sepulveda, Barbara",168
 "Perez, Alejandra","Sepulveda, Carolina",10
-"Perez, Alejandra","Sepúlveda, Barbara",69
 "Perez, Alejandra","Serey, Mariela",9
 "Perez, Alejandra","Silva, Luciano",9
 "Perez, Alejandra","Stingo, Daniel",9
@@ -6610,8 +6537,7 @@ Chinga,"Velasquez, Hernan",1
 "Perez, Alejandra","Uribe, Cesar",10
 "Perez, Alejandra","Valenzuela, Cesar",1
 "Perez, Alejandra","Vallejos, Loreto",9
-"Perez, Alejandra","Vargas, Margarita",33
-"Perez, Alejandra","Vargas, Margaritfa",1
+"Perez, Alejandra","Vargas, Margarita",34
 "Perez, Alejandra","Vega, Roberto",1
 "Perez, Alejandra","Veloso, Paulina",10
 "Perez, Alejandra","Vergara, Lisette",52
@@ -6666,10 +6592,8 @@ Chinga,"Velasquez, Hernan",1
 "Politzer, Patricia","San Juan, Constanza",8
 "Politzer, Patricia","Sanchez, Beatriz",1
 "Politzer, Patricia","Schonhaut, Constanza",284
-"Politzer, Patricia","Sepulveda, Barbara",159
-"Politzer, Patricia","Sepulveda, Carolina",33
-"Politzer, Patricia","Sepúlveda, Barbara",85
-"Politzer, Patricia","Sepúlveda, Carolina",2
+"Politzer, Patricia","Sepulveda, Barbara",244
+"Politzer, Patricia","Sepulveda, Carolina",35
 "Politzer, Patricia","Serey, Mariela",4
 "Politzer, Patricia","Stingo, Daniel",18
 "Politzer, Patricia","Tepper, Maria Angelica",4
@@ -6709,8 +6633,7 @@ Chinga,"Velasquez, Hernan",1
 "Portilla, Ericka","Valenzuela, Cesar",1
 "Portilla, Ericka","Valenzuela, Paulina",13
 "Portilla, Ericka","Vallejos, Loreto",26
-"Portilla, Ericka","Vargas, Margarita",36
-"Portilla, Ericka","Vargas, Margaritfa",1
+"Portilla, Ericka","Vargas, Margarita",37
 "Portilla, Ericka","Velasquez, Hernan",34
 "Portilla, Ericka","Veloso, Paulina",9
 "Portilla, Ericka","Vergara, Lisette",32
@@ -6728,10 +6651,8 @@ Chinga,"Velasquez, Hernan",1
 "Pustilnick, Tammy","Royo, Manuela",14
 "Pustilnick, Tammy","Sanchez, Beatriz",1
 "Pustilnick, Tammy","Schonhaut, Constanza",26
-"Pustilnick, Tammy","Sepulveda, Barbara",25
-"Pustilnick, Tammy","Sepulveda, Carolina",33
-"Pustilnick, Tammy","Sepúlveda, Barbara",2
-"Pustilnick, Tammy","Sepúlveda, Carolina",2
+"Pustilnick, Tammy","Sepulveda, Barbara",27
+"Pustilnick, Tammy","Sepulveda, Carolina",35
 "Pustilnick, Tammy","Serey, Mariela",4
 "Pustilnick, Tammy","Stingo, Daniel",1
 "Pustilnick, Tammy","Tepper, Maria Angelica",3
@@ -6796,10 +6717,8 @@ Chinga,"Velasquez, Hernan",1
 "Reyes, Maria Ramona","Salinas, Fernando",1
 "Reyes, Maria Ramona","Sanchez, Beatriz",1
 "Reyes, Maria Ramona","Schonhaut, Constanza",19
-"Reyes, Maria Ramona","Sepulveda, Barbara",15
-"Reyes, Maria Ramona","Sepulveda, Carolina",22
-"Reyes, Maria Ramona","Sepúlveda, Barbara",6
-"Reyes, Maria Ramona","Sepúlveda, Carolina",2
+"Reyes, Maria Ramona","Sepulveda, Barbara",21
+"Reyes, Maria Ramona","Sepulveda, Carolina",24
 "Reyes, Maria Ramona","Serey, Mariela",3
 "Reyes, Maria Ramona","Stingo, Daniel",1
 "Reyes, Maria Ramona","Tirado, Fernando",2
@@ -6993,10 +6912,8 @@ Chinga,"Velasquez, Hernan",1
 "Sanchez, Beatriz","Villena, Ingrid",1
 "Sanchez, Beatriz","Woldarsky, Manuel",9
 "Sanchez, Beatriz","Zarate, Camila",9
-"Schonhaut, Constanza","Sepulveda, Barbara",179
-"Schonhaut, Constanza","Sepulveda, Carolina",37
-"Schonhaut, Constanza","Sepúlveda, Barbara",89
-"Schonhaut, Constanza","Sepúlveda, Carolina",2
+"Schonhaut, Constanza","Sepulveda, Barbara",268
+"Schonhaut, Constanza","Sepulveda, Carolina",39
 "Schonhaut, Constanza","Serey, Mariela",13
 "Schonhaut, Constanza","Silva, Luciano",9
 "Schonhaut, Constanza","Stingo, Daniel",26
@@ -7016,8 +6933,8 @@ Chinga,"Velasquez, Hernan",1
 "Schonhaut, Constanza","Villena, Ingrid",22
 "Schonhaut, Constanza","Woldarsky, Manuel",10
 "Schonhaut, Constanza","Zarate, Camila",9
-"Sepulveda, Barbara","Sepulveda, Carolina",21
-"Sepulveda, Barbara","Serey, Mariela",18
+"Sepulveda, Barbara","Sepulveda, Carolina",23
+"Sepulveda, Barbara","Serey, Mariela",20
 "Sepulveda, Barbara","Silva, Luciano",9
 "Sepulveda, Barbara","Stingo, Daniel",9
 "Sepulveda, Barbara","Tepper, Maria Angelica",2
@@ -7026,19 +6943,18 @@ Chinga,"Velasquez, Hernan",1
 "Sepulveda, Barbara","Uribe, Cesar",24
 "Sepulveda, Barbara","Valenzuela, Paulina",1
 "Sepulveda, Barbara","Vallejos, Loreto",20
-"Sepulveda, Barbara","Vargas, Margarita",25
-"Sepulveda, Barbara","Vargas, Margaritfa",1
+"Sepulveda, Barbara","Vargas, Margarita",26
 "Sepulveda, Barbara","Velasquez, Hernan",10
 "Sepulveda, Barbara","Veloso, Paulina",9
 "Sepulveda, Barbara","Vergara, Lisette",23
 "Sepulveda, Barbara","Vidal, Rossana",3
-"Sepulveda, Barbara","Videla, Carolina",95
+"Sepulveda, Barbara","Videla, Carolina",101
 "Sepulveda, Barbara","Viera, Christian",8
 "Sepulveda, Barbara","Vilches, Carolina",29
-"Sepulveda, Barbara","Villena, Ingrid",33
+"Sepulveda, Barbara","Villena, Ingrid",39
 "Sepulveda, Barbara","Woldarsky, Manuel",24
 "Sepulveda, Barbara","Zarate, Camila",15
-"Sepulveda, Carolina","Serey, Mariela",17
+"Sepulveda, Carolina","Serey, Mariela",19
 "Sepulveda, Carolina","Silva, Luciano",9
 "Sepulveda, Carolina","Squella, Agustin",2
 "Sepulveda, Carolina","Stingo, Daniel",10
@@ -7053,19 +6969,12 @@ Chinga,"Velasquez, Hernan",1
 "Sepulveda, Carolina","Velasquez, Hernan",6
 "Sepulveda, Carolina","Veloso, Paulina",9
 "Sepulveda, Carolina","Vergara, Lisette",10
-"Sepulveda, Carolina","Videla, Carolina",26
+"Sepulveda, Carolina","Videla, Carolina",28
 "Sepulveda, Carolina","Viera, Christian",2
 "Sepulveda, Carolina","Vilches, Carolina",45
-"Sepulveda, Carolina","Villena, Ingrid",22
+"Sepulveda, Carolina","Villena, Ingrid",24
 "Sepulveda, Carolina","Woldarsky, Manuel",9
 "Sepulveda, Carolina","Zarate, Camila",41
-"Sepúlveda, Barbara","Sepúlveda, Carolina",2
-"Sepúlveda, Barbara","Serey, Mariela",2
-"Sepúlveda, Barbara","Videla, Carolina",6
-"Sepúlveda, Barbara","Villena, Ingrid",6
-"Sepúlveda, Carolina","Serey, Mariela",2
-"Sepúlveda, Carolina","Videla, Carolina",2
-"Sepúlveda, Carolina","Villena, Ingrid",2
 "Serey, Mariela","Silva, Luciano",9
 "Serey, Mariela","Stingo, Daniel",20
 "Serey, Mariela","Tirado, Fernando",9
@@ -7199,16 +7108,13 @@ Chinga,"Velasquez, Hernan",1
 "Vallejos, Loreto","Zarate, Camila",67
 "Vargas, Margarita","Vega, Roberto",1
 "Vargas, Margarita","Veloso, Paulina",10
-"Vargas, Margarita","Vergara, Lisette",33
+"Vargas, Margarita","Vergara, Lisette",34
 "Vargas, Margarita","Vidal, Rossana",23
-"Vargas, Margarita","Videla, Carolina",47
+"Vargas, Margarita","Videla, Carolina",48
 "Vargas, Margarita","Vilches, Carolina",16
 "Vargas, Margarita","Villena, Ingrid",16
-"Vargas, Margarita","Woldarsky, Manuel",37
+"Vargas, Margarita","Woldarsky, Manuel",38
 "Vargas, Margarita","Zarate, Camila",20
-"Vargas, Margaritfa","Vergara, Lisette",1
-"Vargas, Margaritfa","Videla, Carolina",1
-"Vargas, Margaritfa","Woldarsky, Manuel",1
 "Vargas, Mario","Vergara, Lisette",1
 "Vargas, Mario","Vidal, Rossana",7
 "Vargas, Mario","Viera, Christian",2

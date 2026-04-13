@@ -16,18 +16,28 @@ import csv
 import itertools
 from collections import defaultdict
 
-base_dir = "/Users/anibaloliveramorales/Desktop/Doctorado/-Projects-/B - constitutional-proposal-tracking"
-impl_dir = os.path.join(base_dir, "playground/research-proposal-implementation")
-output_dir = os.path.join(impl_dir, "network-visualization")
-data_dir = os.path.join(impl_dir, "data")
+repo_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+output_dir = os.path.join(repo_dir, "data/raw/network-visualization")
+data_dir = os.path.join(repo_dir, "data/processed")
 
 # --- Commission file paths ---
 COMMISSION_FILES = {
-    "C1": os.path.join(base_dir, "comision-1/draft-after-indications-manual/C1_texto-sistematizado_enriched_manual.json"),
-    "C3": os.path.join(base_dir, "comision-3/draft-after-indications-manual/C3_historial_manual.json"),
-    "C5": os.path.join(base_dir, "comision-5/draft-after-indications-manual/C5_historial_manual.json"),
-    "C6": os.path.join(base_dir, "comision-6/draft-after-indications-manual/C6_historial_manual.json"),
-    "C7": os.path.join(base_dir, "comision-7/draft-after-indications-manual/C7_GENESIS_texto-sistematizado-02-17_enriched_manual.json"),
+    "C1": os.path.join(repo_dir, "data/raw/commissions/C1_texto-sistematizado_enriched_manual.json"),
+    "C3": os.path.join(repo_dir, "data/raw/commissions/C3_historial_manual.json"),
+    "C5": os.path.join(repo_dir, "data/raw/commissions/C5_historial_manual.json"),
+    "C6": os.path.join(repo_dir, "data/raw/commissions/C6_historial_manual.json"),
+    "C7": os.path.join(repo_dir, "data/raw/commissions/C7_GENESIS_texto-sistematizado-02-17_enriched_manual.json"),
+}
+
+# --- Name normalization map (applied before edge construction) ---
+# Maps raw names from JSON source files to canonical harmonized names.
+# Fixes: accent inconsistencies and typos introduced during data entry.
+NAME_CORRECTIONS = {
+    "Muñoz, Pedro":       "Munoz, Pedro",
+    "Sepúlveda, Barbara": "Sepulveda, Barbara",
+    "Sepúlveda, Carolina":"Sepulveda, Carolina",
+    "Vargas, Margaritfa": "Vargas, Margarita",
+    "Chinga":             "Chinga, Eric",
 }
 
 # Temporal bins for per-commission dynamic networks (C1, C3, C5 only)
@@ -46,16 +56,21 @@ def load_data(filepath):
         return json.load(f)
 
 
+def normalize_name(name):
+    """Apply canonical name corrections before edge construction."""
+    return NAME_CORRECTIONS.get(name, name)
+
+
 def clean_authors(authors_list):
-    """Extract and clean author names from a list (may contain nested lists)."""
+    """Extract, clean, and normalize author names from a list (may contain nested lists)."""
     out = []
     if not authors_list:
         return out
     for a in authors_list:
         if isinstance(a, list):
-            out.extend([str(x).strip() for x in a if x])
+            out.extend([normalize_name(str(x).strip()) for x in a if x])
         elif a:
-            out.append(str(a).strip())
+            out.append(normalize_name(str(a).strip()))
     return sorted(set(x for x in out if len(x) > 3 and "S/I" not in x))
 
 

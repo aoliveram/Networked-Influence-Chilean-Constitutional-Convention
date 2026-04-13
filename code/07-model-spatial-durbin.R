@@ -20,8 +20,8 @@ library(spatialreg)
 
 set.seed(42)
 
-base_dir <- "/Users/anibaloliveramorales/Desktop/Doctorado/-Projects-/B - constitutional-proposal-tracking"
-data_dir <- file.path(base_dir, "playground/research-proposal-implementation/data")
+repo_dir <- "/Users/anibaloliveramorales/Desktop/Doctorado/-Projects-/B - Networked-Influence-Chilean-Constitutional-Convention"
+data_dir <- file.path(repo_dir, "data/processed")
 
 # =============================================================================
 # 1. Load data

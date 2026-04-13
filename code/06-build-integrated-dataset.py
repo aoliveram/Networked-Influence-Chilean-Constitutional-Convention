@@ -15,8 +15,8 @@ import os
 import csv
 from collections import defaultdict
 
-base_dir = "/Users/anibaloliveramorales/Desktop/Doctorado/-Projects-/B - constitutional-proposal-tracking"
-data_dir = os.path.join(base_dir, "playground/research-proposal-implementation/data")
+repo_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+data_dir = os.path.join(repo_dir, "data/processed")
 
 
 def load_csv_as_dict(filepath, key_col):
@@ -51,7 +51,7 @@ ideology = load_csv_as_dict(
 print(f"  Ideological metrics: {len(ideology)} convencionales")
 
 # Profiles
-with open(os.path.join(base_dir, "conventionals-bcn-webscrapping/conventional-profiles.json"),
+with open(os.path.join(repo_dir, "data/raw/conventional-profiles.json"),
           "r", encoding="utf-8") as f:
     profiles_list = json.load(f)
 profiles = {p["nombre_armonizado"]: p for p in profiles_list}
