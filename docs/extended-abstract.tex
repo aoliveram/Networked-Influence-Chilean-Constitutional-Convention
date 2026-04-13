@@ -40,7 +40,7 @@ Universidad del Desarrollo, Santiago, Chile}
 \maketitle
 
 \begin{abstract}
-\noindent The 2021--2022 Chilean Constitutional Convention offers a rare natural experiment for studying network formation and legislative effectiveness. Delegates were largely unfamiliar, included both career politicians and civically recruited citizens, and required co-sponsorships for proposals. This ``tabula rasa'' legislature enables us to trace how alliances form and translate into political success. Using Valued ERGM, panel regression with fixed effects, and Spatial Durbin Models on 159 delegates across 5 commissions over 91 temporal periods, we uncover three novel findings: (1) privileged delegates (lawyers and institutionally experienced) exhibit \emph{negative} homophily, dispersing across coalitions as strategic gatekeepers; (2) network exposure does not causally affect ideological dynamics---correlation reflects endogenous selection, not influence; (3) legislative success is overwhelmingly collective: spatial autocorrelation in lexical retention is near-complete ($\rho \approx 0.997$), with success ``spilling over'' through co-authorship ties.
+\noindent The 2021--2022 Chilean Constitutional Convention offers a rare natural experiment for studying network formation and legislative effectiveness. Delegates were largely unfamiliar, included both career politicians and civically recruited citizens, and required co-sponsorships for proposals. This ``tabula rasa'' legislature enables us to trace how alliances form and translate into political success. Using Valued ERGM, panel regression with fixed effects, and Spatial Durbin Models on 154 delegates across 5 commissions over 91 temporal periods, we uncover three novel findings: (1) privileged delegates (lawyers and institutionally experienced) exhibit \emph{negative} homophily, dispersing across coalitions as strategic gatekeepers; (2) network exposure does not causally affect ideological dynamics---correlation reflects endogenous selection, not influence; (3) legislative success is overwhelmingly collective: spatial autocorrelation in lexical retention is near-complete ($\rho \approx 0.997$), with success ``spilling over'' through co-authorship ties.
 
 \medskip
 \noindent\textbf{Keywords:} political networks, constitutional design, valued ERGM, spatial econometrics, legislative success, ideal-point estimation
@@ -58,13 +58,13 @@ We ask three interrelated questions: \textbf{(RQ1)} What factors drive co-sponso
 
 \paragraph{Commissions and articles.} We digitized all article-level proposals from five of the seven thematic commissions (C1: Political System; C3: State Form; C5: Fundamental Rights; C6: Environment; C7: Knowledge Systems), producing manually enriched JSON files with delegate authorship metadata. For the co-authorship network (Model~1), we use all top-level genesis entries across the five commissions. For Models~2 and~3, we restrict attention to articles whose final status was labeled \emph{id\'entico} or \emph{similar} relative to the final constitutional draft, yielding 236 mapped articles (125 identical, 111 similar; C1:~131, C3:~71, C5:~34).
 
-\paragraph{Delegate covariates.} We scraped the Biblioteca del Congreso Nacional (BCN) biographical portal to construct structured profiles for each delegate, including: political affiliation, gender, legal profession, prior institutional experience, age, and electoral district. This yields a final network of 159 delegates with complete covariate information.
+\paragraph{Delegate covariates.} We scraped the Biblioteca del Congreso Nacional (BCN) biographical portal to construct structured profiles for each delegate, including: political affiliation, gender, legal profession, prior institutional experience, age, and electoral district. This yields a final network of 154 delegates with complete covariate information.
 
 \paragraph{Ideal points.} Ideological positions come from a dynamic Bayesian IRT model \citep{imai2016fast} estimated on all legislative votes (2021-07-13 to 2022-06-24; 91~periods). We use a Random Walk prior ($\omega^2 = 0.025$) and anchor the scale using Teresa Marinovic (right) and Jorge Baradit (left). The output is an $N \times T$ matrix $\{\theta_{i,t}\}$ of 154 delegates over 91 periods.
 
 \section{Model 1: Co-sponsorship Network Formation}
 
-We model the pooled co-authorship network as an undirected weighted graph $G = (V, E, W)$ where $V$ is the set of 159 delegates, $E$ is the set of edges, and $w_{ij} \in \mathbb{N}$ counts shared article co-sponsorships. Because edge weights are counts (mean $\approx 28$, max $> 300$), we estimate a \emph{Valued ERGM} \citep{krivitsky2012exponential} with Poisson reference distribution:
+We model the pooled co-authorship network as an undirected weighted graph $G = (V, E, W)$ where $V$ is the set of 154 delegates, $E$ is the set of edges, and $w_{ij} \in \mathbb{N}$ counts shared article co-sponsorships. Because edge weights are counts (mean $\approx 28$, max $> 300$), we estimate a \emph{Valued ERGM} \citep{krivitsky2012exponential} with Poisson reference distribution:
 \begin{equation}
   P_\theta(Y = y) = \frac{h(y) \exp\left(\theta^{\top} g(y)\right)}{Z(\theta)}, \quad y_{ij} \sim \text{Poisson-reference}
 \end{equation}
@@ -80,7 +80,7 @@ where $g(y)$ is the vector of sufficient statistics and $Z(\theta)$ is the norma
 
 \begin{table}[H]
 \centering
-\caption{Valued ERGM results (pooled network, 159 delegates).}
+\caption{Valued ERGM results (pooled network, 154 delegates).}
 \label{tab:ergm}
 \begin{tabular}{lrr}
 \toprule
