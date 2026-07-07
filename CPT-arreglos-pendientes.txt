@@ -1,83 +1,65 @@
 ARREGLOS PENDIENTES EN EL REPOSITORIO constitutional-proposal-tracking (CPT)
 =============================================================================
-Fecha: 2026-07-06
-Origen: auditoría realizada desde el proyecto Networked-Influence (reporte vivo,
-docs/networked-influence-study.md, problema P8 y afines). Este archivo resume lo
-que hay que arreglar EN CPT; los arreglos del pipeline de análisis van en este repo.
+Actualizado: 2026-07-07 (tras revisión del usuario en branch paper-draft @ 5852519;
+snapshot ingerido en este repo: data/raw/dataverse-final/)
 
-1. COMMITEAR EL FIX DEL SCRAPER BCN (urgente, ya aplicado localmente sin commit)
-   - conventionals-bcn-webscrapping/fetch_convencionales.py: match_names() reescrito
-     en 3 niveles (campo completo -> token exacto del nombre de pila -> fuzzy
-     difflib >= 0.85). Motivo: BCN omite segundos nombres ("Miguel Botto Salinas",
-     "Ramona Reyes Painequeo", "Arturo Zuniga Jory") y hay una variante ortografica
-     ("Dayyana" Gonzalez). Verificado: 154/154 matcheados, 0 cambios de URL en los
-     147 previos.
-   - conventional-profiles-raw.json y conventional-profiles.json regenerados:
-     ahora 154 perfiles (antes 147). Los 7 recuperados: Botto, Castillo M.T.,
-     Gonzalez D., Reyes M.R., Rivera M.M., Tepper, Zuniga L.A.
-   - Sugerencia de commit en branch dedicado o en paper-draft, con mensaje que
-     referencie el issue de perfiles faltantes.
+RESUELTOS EN CPT (paper-draft):
+  [x] Fix del scraper BCN commiteado (49f06f4): 147 -> 154 perfiles.
+  [x] step normalizado a 'Indicacion' en todos los niveles, C3-C7 (a6520c0).
+  [x] Titulos de capitulo eliminados de C1_TRACK_full (230 -> 202 registros).
+  [x] article_uid y final_status al 100% tras armonizacion de ids (f8b9ddc).
+  [x] Nombres de archivo GENESIS estandarizados a C[X]_GENESIS_master.json (2c718a3).
+  [x] coincidencias_comisiones.csv en UTF-8 con separador ',' (7ad001c).
+  [x] Codebook con semantica de timestamp: MM-DD, anio implicito 2022,
+      sufijo -{bloque} = n-esimo informe del dia (1dc377c).
+  [x] .gitignore para archivos lock de Office (5852519).
+  [x] Indicaciones sueltas (210) documentadas como registros independientes en
+      el paper (Data Description y Limitations) (92a25e1).
 
-2. C1_TRACK_full.json — EL ARCHIVO MENOS LIMPIO DEL SET dataverse-final
-   a) 28 registros de titulo de capitulo al nivel superior (claves titleuid/title/
-      timestamp; uno con typo "tite" en vez de "title"). Decidir: eliminarlos o
-      moverlos a un archivo aparte (C1_TITLES.json); no corresponden al esquema
-      de articulo y contaminan el conteo (230 registros no son 230 articulos).
-   b) 103 "indicaciones sueltas": registros de indicacion al nivel superior
-      (tienen action/content/target_scope/placement_instructions arriba, no
-      anidados en history[]). No tienen campo sources y su article_uid usa
-      capitulos placeholder (CH*, CH0X) en 78/103, por lo que NO se pueden anclar
-      mecanicamente a su articulo (solo 8/103 enlazan por uid). Opciones:
-      documentarlas como registros de tipo "indicacion" en el README del dataset,
-      o anidarlas al history[] del articulo correcto (requiere matching manual).
-   c) step = "Indicacion" (sin tilde) en C1 vs "Indicación" (con tilde) en C3/C6:
-      normalizar a una sola forma.
+PENDIENTES (verificados contra el snapshot 2026-07-07):
 
-3. INDICACIONES SUELTAS EN LAS DEMAS COMISIONES (mismo fenomeno que 2b, menor)
-   - C3: 12 (3 con prefijo C3_GEN2_* en vez de *_IND*), C4: 8, C5: 20, C6: 44,
-     C7: 23. C2: 0 (es el estandar de referencia).
-   - Regla mecanica de identificacion: tiene "action" al nivel superior y no
-     tiene "titleuid". Documentarla en el README del dataset para usuarios de
-     Dataverse, o anidar las indicaciones donde corresponda.
+1. CRITICO — C2 SIN AUTORES (bloquea a C2 en la red de co-patrocinio)
+   - C2_GENESIS_master.json: 0/312 registros con `authors`.
+   - C2_TRACK_full.json: 0/182 articulos con `authors`; solo 33/54 entradas de
+     history[] utilizables.
+   - Via probable de arreglo: poblar `authors` desde las iniciativas originales
+     usando `sources` (175/312 del GENESIS los tienen) contra el registro de
+     iniciativas (submitted_initiatives/ o equivalente).
 
-4. ESQUEMA GENESIS NO HOMOGENEO ENTRE COMISIONES
-   - Variante A (C1, C2, C3, C6): campos article/text/sources[/authors].
-   - Variante B (C4, C5, C7): campos voting_result/authors/text/icc_id/article_uid.
-   - Nombre de archivo inconsistente: *_GENESIS_master.json (C2, C3, C6) vs
-     *_GENESIS_master_merged.json (C1, C4, C5, C7).
-   - Para Dataverse conviene homogeneizar (mismo esquema y mismo nombre) o al
-     menos documentar ambas variantes campo por campo en el README.
+2. HUECOS PARCIALES DE `authors` EN ARTICULOS TRACK_full
+   - C4: 135/167 (y C4 no tiene `sources` en ningun articulo: el join deberia
+     ir via icc_id del GENESIS), C5: 420/464, C6: 418/447, C7: 218/228.
+   - En history[]: C1 247/355 y C5 252/559 entradas utilizables (falta authors
+     o timestamp); C2 33/54.
 
-5. TIMESTAMPS
-   - Formato MM-DD sin anio, con variantes como "04-01-2" (segunda sesion del dia).
-     Documentar la semantica (anio implicito 2022 para informes de indicaciones)
-     y el significado del sufijo.
+3. HOMOGENEIZAR ESQUEMA GENESIS (pendiente ya asignado a vcllopeztorres)
+   - C1/C2/C3 sin article_uid; C4 sin article/sources; authors intermitente.
+   - Clave (nota del usuario): heredar los uids que ya usan TRACK/crosswalk,
+     no crear nuevos.
+
+4. TIMESTAMPS NA NO DOCUMENTADOS EN EL CODEBOOK
+   - El codebook registra 55 NA (C6: 17, C7: 38), pero hay 11 mas a nivel
+     top-level en C1 (4), C3 (2) y C5 (5), y 5 dentro de history[] (C2: 1,
+     C3: 2, C7: 2). Total: 66 top-level + 5 anidados. Actualizar codebook o
+     completar timestamps.
+
+5. reporte_autores_faltantes_TRACK.csv obsoleto tras f8b9ddc (uids CH* y rutas
+   locales) — regenerar o borrar. (Ya en la lista del usuario.)
 
 6. VERIFICAR DOBLE REGISTRO DE INDICACIONES
-   - Comprobar programaticamente (hash de authors+timestamp+content) que ninguna
-     indicacion suelta duplica una entrada de history[]. En inspecciones manuales
-     no hubo solape, pero falta la verificacion exhaustiva.
+   - Comprobar programaticamente (hash de authors+timestamp+content) que
+     ninguna indicacion suelta duplica una entrada de history[].
 
-7. HIGIENE DEL REPO
-   - conventionals-bcn-webscrapping/venv/ esta roto (sin bin/python) y no deberia
-     estar versionado: eliminar y agregar requirements.txt (requests, bs4).
-   - Scripts de limpieza en la raiz con rutas Windows hardcodeadas de la
-     colaboradora (C:\Users\vicel\...): parametrizar o mover a scripts/ con rutas
-     relativas.
-   - Carpetas legacy dentro de cada comision (genesis-extracted/,
-     draft-after-indications*/, indicaciones-*-extracted/, comision-#-final/)
-     siguen coexistiendo con dataverse-final/: el PR #4 pedia moverlas a
-     archivo_obsoleto. Decidir si moverlas o documentar que dataverse-final es
-     la unica carpeta canonica.
-   - reporte_autores_faltantes_TRACK.csv: re-generar tras la normalizacion final
-     para confirmar que no quedan autores faltantes.
+7. HIGIENE (ya en la lista del usuario)
+   - Sacar venv/ del versionado (+ requirements.txt con requests y bs4).
+   - Parametrizar los 9 scripts con rutas Windows hardcodeadas.
+   - Decidir destino de carpetas legacy (genesis-extracted/,
+     draft-after-indications*/, indicaciones-*-extracted/, comision-#-final/).
 
-8. DOCUMENTACION
-   - README: declarar convention_members.json como la referencia canonica de los
-     154 nombres ("Apellido, Nombre") y describir los 4 archivos de
-     dataverse-final con sus esquemas (incluyendo las variantes del punto 4).
-   - Registrar que coincidencias_comisiones.csv esta en UTF-8 y es la tabla
-     maestra de trazabilidad de los 498 articulos del borrador final.
-   - Anotar los rotulos tematicos oficiales de las comisiones (verificados contra
-     cconstituyente.cl): C4 = Derechos Fundamentales, C5 = Medio Ambiente,
-     C6 = Sistemas de Justicia (los README/abstract previos los tenian corridos).
+8. DOCUMENTACION RESTANTE
+   - README: declarar convention_members.json como referencia canonica de los
+     154 nombres y describir los 4 archivos dataverse-final con sus variantes
+     de esquema mientras no se homogeneicen.
+   - Anotar que los `authors` pueden contener referencias a iniciativas
+     populares (numeros tipo '7-2', 'Iniciativa Popular Indigena 21-2'): son
+     patrocinios institucionales, no personas.
