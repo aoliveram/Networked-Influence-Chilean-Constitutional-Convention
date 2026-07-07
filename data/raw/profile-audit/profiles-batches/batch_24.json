@@ -1,0 +1,170 @@
+[
+  {
+    "nombre": "Velasquez, Hernan",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1965-10-29",
+      "afiliacion_politica": "Federación Regionalista Verde Social",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D3",
+      "profesion": "Sociólogo",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Concejal por la comuna de Calama (2008-2012, 2012-2016)"
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Hern%C3%A1n_Vel%C3%A1squez_N%C3%BA%C3%B1ez",
+      "genero": "M",
+      "fecha_nacimiento": "1965-10-29",
+      "afiliacion_politica": "Federación Regionalista Verde Social",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D3",
+      "profesion": "Sociólogo",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Concejal de Calama (2008-2016)"
+    }
+  },
+  {
+    "nombre": "Vergara, Lisette",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1992-09-14",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "La Lista del Pueblo",
+      "distrito": "D6",
+      "profesion": "Profesora de Historia y Geografía",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Lisette_Vergara",
+      "genero": "F",
+      "fecha_nacimiento": "1993-01-01",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "La Lista del Pueblo",
+      "distrito": "D6",
+      "profesion": "Profesora",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Vidal, Rossana",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1970-04-09",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "La Lista del Pueblo",
+      "distrito": "D20",
+      "profesion": "Enfermera, Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Loreto_Vidal",
+      "genero": "F",
+      "fecha_nacimiento": "1970-04-09",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "La Lista del Pueblo",
+      "distrito": "D20",
+      "profesion": "Enfermera, abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Videla, Carolina",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1968-12-22",
+      "afiliacion_politica": "Partido Comunista de Chile",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D1",
+      "profesion": "Trabajadora Social",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Carolina_Videla",
+      "genero": "F",
+      "fecha_nacimiento": "1968-12-22",
+      "afiliacion_politica": "Partido Comunista de Chile",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D1",
+      "profesion": "Trabajadora social",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Secretaria Regional Ministerial de Gobierno de Arica y Parinacota (2014-2016)"
+    }
+  },
+  {
+    "nombre": "Viera, Christian",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1972-07-31",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D17",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 3,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Christian_Viera",
+      "genero": "M",
+      "fecha_nacimiento": "1972-07-31",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D17",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 3,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Vilches, Carolina",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1984-12-21",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D6",
+      "profesion": "Geógrafa",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Carolina_Vilches",
+      "genero": "F",
+      "fecha_nacimiento": "1984-12-21",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D6",
+      "profesion": "Geógrafa",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  }
+]

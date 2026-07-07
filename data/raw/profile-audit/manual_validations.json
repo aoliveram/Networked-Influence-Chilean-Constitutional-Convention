@@ -1,0 +1,115 @@
+{
+  "descripcion": "Validaciones manuales del usuario (2026-07-07) sobre discrepancias_pipeline.csv; siempre prevalecen sobre la imputación automática. Se excluyeron las entradas de grado_academico_nivel (hechas bajo la escala antigua 0-2, donde 1=magíster; la corrida v2 con escala 0-3 las recodifica, corroborada por v1) y de distrito (formato estandarizado a \"Escaño reservado: <pueblo>\" por el imputador).",
+  "validaciones": [
+    {
+      "nombre": "Achurra, Ignacio",
+      "campo": "afiliacion_agrupada",
+      "valor": "Convergencia Social"
+    },
+    {
+      "nombre": "Achurra, Ignacio",
+      "campo": "experiencia_previa_institucional",
+      "valor": 0
+    },
+    {
+      "nombre": "Aguilera, Tiare",
+      "campo": "afiliacion_agrupada",
+      "valor": "Independiente"
+    },
+    {
+      "nombre": "Alvarez, Julio",
+      "campo": "afiliacion_agrupada",
+      "valor": "Partido Socialista de Chile"
+    },
+    {
+      "nombre": "Alvarez, Rodrigo",
+      "campo": "afiliacion_agrupada",
+      "valor": "Unión Demócrata Independiente"
+    },
+    {
+      "nombre": "Alvez, Amaya",
+      "campo": "afiliacion_agrupada",
+      "valor": "Revolución Democrática"
+    },
+    {
+      "nombre": "Antilef, Victorino",
+      "campo": "afiliacion_agrupada",
+      "valor": "Independiente"
+    },
+    {
+      "nombre": "Arancibia, Jorge",
+      "campo": "es_mujer",
+      "valor": 0
+    },
+    {
+      "nombre": "Arrau, Martin",
+      "campo": "afiliacion_agrupada",
+      "valor": "Partido Republicano de Chile"
+    },
+    {
+      "nombre": "Atria, Fernando",
+      "campo": "experiencia_previa_institucional",
+      "valor": 0
+    },
+    {
+      "nombre": "Bacian, Wilfredo",
+      "campo": "afiliacion_agrupada",
+      "valor": "Independiente"
+    },
+    {
+      "nombre": "Bown, Carol",
+      "campo": "afiliacion_agrupada",
+      "valor": "Unión Demócrata Independiente"
+    },
+    {
+      "nombre": "Caiguan, Alexis",
+      "campo": "afiliacion_agrupada",
+      "valor": "Independiente"
+    },
+    {
+      "nombre": "Castillo, Eduardo",
+      "campo": "afiliacion_agrupada",
+      "valor": "Partido Por la Democracia"
+    },
+    {
+      "nombre": "Catrileo, Rosa",
+      "campo": "afiliacion_agrupada",
+      "valor": "Independiente"
+    },
+    {
+      "nombre": "Catrileo, Rosa",
+      "campo": "experiencia_previa_institucional",
+      "valor": 0
+    },
+    {
+      "nombre": "Celedon, Roberto",
+      "campo": "experiencia_previa_institucional",
+      "valor": 0
+    },
+    {
+      "nombre": "Celis, Raul",
+      "campo": "afiliacion_agrupada",
+      "valor": "Renovación Nacional"
+    },
+    {
+      "nombre": "Chahin, Fuad",
+      "campo": "afiliacion_agrupada",
+      "valor": "Partido Demócrata Cristiano"
+    },
+    {
+      "nombre": "Chinga, Eric",
+      "campo": "afiliacion_agrupada",
+      "valor": "Independiente"
+    },
+    {
+      "nombre": "Chinga, Eric",
+      "campo": "experiencia_previa_institucional",
+      "valor": 0
+    },
+    {
+      "nombre": "Cretton, Eduardo",
+      "campo": "afiliacion_agrupada",
+      "valor": "Unión Demócrata Independiente"
+    }
+  ]
+}

@@ -1,0 +1,170 @@
+[
+  {
+    "nombre": "Grandon, Giovanna",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1975-05-06",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "La Lista del Pueblo",
+      "distrito": "D12",
+      "profesion": "Asistente de Párvulos",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Giovanna_Grand%C3%B3n",
+      "genero": "F",
+      "fecha_nacimiento": "1975-05-06",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "La Lista del Pueblo",
+      "distrito": "D12",
+      "profesion": "Asistente de párvulos",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Grandon, Paola",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1973-08-29",
+      "afiliacion_politica": "Federación Regionalista Verde Social",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D17",
+      "profesion": null,
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": null,
+      "genero": null,
+      "fecha_nacimiento": null,
+      "afiliacion_politica": null,
+      "lista_electoral": null,
+      "distrito": null,
+      "profesion": null,
+      "es_abogado": null,
+      "grado_academico_nivel": null,
+      "experiencia_previa_institucional": null,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Gutierrez, Hugo",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1961-10-05",
+      "afiliacion_politica": "Partido Comunista de Chile",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D2",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Concejal de Estación Central (2004-2008); Diputado por el Distrito N° 2 (2010-2021)"
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Hugo_Guti%C3%A9rrez",
+      "genero": "M",
+      "fecha_nacimiento": "1961-10-05",
+      "afiliacion_politica": "Partido Comunista de Chile",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D2",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Concejal de Estación Central (2004-2008); Diputado por el Distrito N° 2 (2010-2021)"
+    }
+  },
+  {
+    "nombre": "Gomez, Claudio",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1980-04-06",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D6",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Claudio_G%C3%B3mez_Castro",
+      "genero": "M",
+      "fecha_nacimiento": "1980-04-06",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D6",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Gomez, Yarela",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1990-06-08",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D27",
+      "profesion": "Profesora de Lenguaje y Comunicación",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Yarela_G%C3%B3mez",
+      "genero": "F",
+      "fecha_nacimiento": "1990-06-08",
+      "afiliacion_politica": "Convergencia Social",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D27",
+      "profesion": "Profesora de lenguaje y comunicación",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Harboe, Felipe",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1972-07-20",
+      "afiliacion_politica": "Partido por la Democracia",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D19",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Subsecretario de Carabineros (2002-2006); Subsecretario del Interior (2006-2008); Diputado (2009-2014); Senador (2014-2021)"
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Felipe_Harboe",
+      "genero": "M",
+      "fecha_nacimiento": "1972-07-20",
+      "afiliacion_politica": "Partido por la Democracia",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D19",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Subsecretario de Carabineros (2002-2006); Subsecretario del Interior (2006-2008); Diputado (2009-2014); Senador (2014-2021)"
+    }
+  }
+]

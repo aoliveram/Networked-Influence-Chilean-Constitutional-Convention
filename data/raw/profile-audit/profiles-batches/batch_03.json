@@ -1,0 +1,170 @@
+[
+  {
+    "nombre": "Baranda, Benito",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1959-01-01",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Independientes No Neutrales",
+      "distrito": "D12",
+      "profesion": "Psicólogo",
+      "es_abogado": false,
+      "grado_academico_nivel": 3,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "M",
+      "fecha_nacimiento": "1959-01-01",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Independientes No Neutrales",
+      "distrito": "D12",
+      "profesion": "Psicólogo",
+      "es_abogado": false,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Benito_Baranda"
+    }
+  },
+  {
+    "nombre": "Barcelo, Luis",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1953-11-10",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D21",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Gobernador de la Provincia del Biobío (2014-2018)"
+    },
+    "wikipedia": {
+      "genero": "M",
+      "fecha_nacimiento": "1953-11-10",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D21",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Gobernador de la Provincia del Biobío (2014-2018)",
+      "url": "https://es.wikipedia.org/wiki/Luis_Barcel%C3%B3"
+    }
+  },
+  {
+    "nombre": "Barraza, Marcos",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1973-03-25",
+      "afiliacion_politica": "Partido Comunista de Chile",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D13",
+      "profesion": "Psicólogo",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Subsecretario de Previsión Social (2014-2015); Ministro de Desarrollo Social (2015-2018)"
+    },
+    "wikipedia": {
+      "genero": "M",
+      "fecha_nacimiento": "1973-03-25",
+      "afiliacion_politica": "Partido Comunista de Chile",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D13",
+      "profesion": "Psicólogo",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Subsecretario de Previsión Social (2014-2015); Ministro de Desarrollo Social (2015-2018)",
+      "url": "https://es.wikipedia.org/wiki/Marcos_Barraza"
+    }
+  },
+  {
+    "nombre": "Bassa, Jaime",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1977-03-31",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D7",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 3,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "M",
+      "fecha_nacimiento": "1977-03-31",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D7",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 3,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Jaime_Bassa"
+    }
+  },
+  {
+    "nombre": "Botto, Miguel Angel",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1968-11-14",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Independientes No Neutrales",
+      "distrito": "D6",
+      "profesion": "Ingeniero comercial",
+      "es_abogado": false,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": null,
+      "fecha_nacimiento": null,
+      "afiliacion_politica": null,
+      "lista_electoral": null,
+      "distrito": null,
+      "profesion": null,
+      "es_abogado": null,
+      "grado_academico_nivel": null,
+      "experiencia_previa_institucional": null,
+      "experiencia_detalle": null,
+      "url": null
+    }
+  },
+  {
+    "nombre": "Bown, Carol",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1978-09-30",
+      "afiliacion_politica": "Unión Demócrata Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D15",
+      "profesion": "Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Subsecretaria de Carabineros (2010-2011); Subsecretaria de la Niñez (2018-2021)"
+    },
+    "wikipedia": {
+      "genero": "F",
+      "fecha_nacimiento": "1978-09-30",
+      "afiliacion_politica": "Unión Demócrata Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D15",
+      "profesion": "Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Subsecretaria de Carabineros (2010-2011); Subsecretaria de la Niñez (2018-2021)",
+      "url": "https://es.wikipedia.org/wiki/Carol_Bown"
+    }
+  }
+]

@@ -1,0 +1,170 @@
+[
+  {
+    "nombre": "Valenzuela, Paulina",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1984-11-23",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Independientes por la Nueva Constitución",
+      "distrito": "D14",
+      "profesion": "Profesora de Educación General Básica",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": null,
+      "fecha_nacimiento": null,
+      "afiliacion_politica": null,
+      "lista_electoral": null,
+      "distrito": null,
+      "profesion": null,
+      "es_abogado": null,
+      "grado_academico_nivel": null,
+      "experiencia_previa_institucional": null,
+      "experiencia_detalle": null,
+      "url": null
+    }
+  },
+  {
+    "nombre": "Vallejos, Loreto",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1980-02-09",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "La Lista del Pueblo 100% Independientes",
+      "distrito": "D15",
+      "profesion": "Profesora de Historia y Geografía",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "F",
+      "fecha_nacimiento": "1980-02-09",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "La Lista del Pueblo",
+      "distrito": "D15",
+      "profesion": "Profesora",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Loreto_Vallejos"
+    }
+  },
+  {
+    "nombre": "Vargas, Margarita",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1969-10-30",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Escaños reservados",
+      "distrito": "Escaño reservado: Pueblo Kawashkar",
+      "profesion": "Ingeniera en Administración Pública",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "F",
+      "fecha_nacimiento": "1969-10-30",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Escaños reservados",
+      "distrito": "Escaño reservado: Pueblo Kawésqar",
+      "profesion": "Ingeniera",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Margarita_Vargas_L%C3%B3pez"
+    }
+  },
+  {
+    "nombre": "Vargas, Mario",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1963-02-07",
+      "afiliacion_politica": "Partido Socialista de Chile",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D25",
+      "profesion": "Profesor",
+      "es_abogado": false,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "M",
+      "fecha_nacimiento": "1963-02-07",
+      "afiliacion_politica": "Partido Socialista",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D25",
+      "profesion": "Profesor",
+      "es_abogado": false,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Mario_Vargas_Vidal"
+    }
+  },
+  {
+    "nombre": "Vega, Roberto",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1978-02-01",
+      "afiliacion_politica": "Renovación Nacional",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D5",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Secretario Regional Ministerial de Minería de la Región de Coquimbo (2018-2020)"
+    },
+    "wikipedia": {
+      "genero": "M",
+      "fecha_nacimiento": "1978-02-01",
+      "afiliacion_politica": "Renovación Nacional",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D5",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Seremi de Minería de la Región de Coquimbo (2018-2020)",
+      "url": "https://es.wikipedia.org/wiki/Roberto_Vega"
+    }
+  },
+  {
+    "nombre": "Veloso, Paulina",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1987-07-21",
+      "afiliacion_politica": "Renovación Nacional",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D21",
+      "profesion": "Licenciada en derecho",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": null,
+      "fecha_nacimiento": null,
+      "afiliacion_politica": null,
+      "lista_electoral": null,
+      "distrito": null,
+      "profesion": null,
+      "es_abogado": null,
+      "grado_academico_nivel": null,
+      "experiencia_previa_institucional": null,
+      "experiencia_detalle": null,
+      "url": null
+    }
+  }
+]

@@ -1,0 +1,170 @@
+[
+  {
+    "nombre": "Dorador, Cristina",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1980-02-28",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Movimiento Independientes del Norte",
+      "distrito": "D3",
+      "profesion": "Bióloga",
+      "es_abogado": false,
+      "grado_academico_nivel": 3,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "F",
+      "fecha_nacimiento": "1980-02-28",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Movimiento Independientes del Norte",
+      "distrito": "D3",
+      "profesion": "Bióloga",
+      "es_abogado": false,
+      "grado_academico_nivel": 3,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Cristina_Dorador"
+    }
+  },
+  {
+    "nombre": "Fernandez, Patricio",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1969-09-21",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D11",
+      "profesion": "Escritor",
+      "es_abogado": false,
+      "grado_academico_nivel": null,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "M",
+      "fecha_nacimiento": "1969-09-21",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D11",
+      "profesion": "Escritor",
+      "es_abogado": false,
+      "grado_academico_nivel": null,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Patricio_Fern%C3%A1ndez"
+    }
+  },
+  {
+    "nombre": "Flores, Alejandra",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1961-03-10",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Independientes De Tarapacá",
+      "distrito": "D2",
+      "profesion": "Profesora de Castellano",
+      "es_abogado": false,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": null,
+      "fecha_nacimiento": null,
+      "afiliacion_politica": null,
+      "lista_electoral": null,
+      "distrito": null,
+      "profesion": null,
+      "es_abogado": null,
+      "grado_academico_nivel": null,
+      "experiencia_previa_institucional": null,
+      "experiencia_detalle": null,
+      "url": null
+    }
+  },
+  {
+    "nombre": "Fontaine, Bernardo",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1964-06-10",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D11",
+      "profesion": "Ingeniero Comercial",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "M",
+      "fecha_nacimiento": "1964-06-10",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D11",
+      "profesion": "Ingeniero Comercial",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Bernardo_Fontaine"
+    }
+  },
+  {
+    "nombre": "Fuchslocher, Javier",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1988-10-14",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Independientes por una nueva Constitución",
+      "distrito": "D21",
+      "profesion": "Profesor",
+      "es_abogado": false,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "M",
+      "fecha_nacimiento": "1988-10-14",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Independientes por una Nueva Constitución",
+      "distrito": "D21",
+      "profesion": "Profesor",
+      "es_abogado": false,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Javier_Fuchslocher"
+    }
+  },
+  {
+    "nombre": "Gallardo, Bessy",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1984-12-31",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D8",
+      "profesion": "Egresada de Derecho",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "F",
+      "fecha_nacimiento": "1984-12-31",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D8",
+      "profesion": "Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Bessy_Gallardo"
+    }
+  }
+]

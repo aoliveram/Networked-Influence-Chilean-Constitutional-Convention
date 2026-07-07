@@ -1,0 +1,170 @@
+[
+  {
+    "nombre": "Rebolledo, Barbara",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1973-01-22",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D17",
+      "profesion": "Periodista",
+      "es_abogado": false,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "F",
+      "fecha_nacimiento": "1973-01-22",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D17",
+      "profesion": "Periodista",
+      "es_abogado": false,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/B%C3%A1rbara_Rebolledo"
+    }
+  },
+  {
+    "nombre": "Reyes, Maria Ramona",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1967-04-02",
+      "afiliacion_politica": "Partido Socialista de Chile",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D24",
+      "profesion": "Matrona",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Concejala de Paillaco (2004-2008), Alcaldesa de Paillaco (2008-2020)"
+    },
+    "wikipedia": {
+      "genero": "F",
+      "fecha_nacimiento": "1967",
+      "afiliacion_politica": "Partido Socialista",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D24",
+      "profesion": "Matrona",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Concejala de Paillaco (2004-2008), Alcaldesa de Paillaco (2008-2021)",
+      "url": "https://es.wikipedia.org/wiki/Ramona_Reyes"
+    }
+  },
+  {
+    "nombre": "Rivera, Maria Magdalena",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1958-01-28",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "La Lista del Pueblo",
+      "distrito": "D8",
+      "profesion": "Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "F",
+      "fecha_nacimiento": "1958-01-28",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "La Lista del Pueblo",
+      "distrito": "D8",
+      "profesion": "Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Mar%C3%ADa_Rivera_Iribarren"
+    }
+  },
+  {
+    "nombre": "Rivera, Pollyana",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1974-11-26",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D1",
+      "profesion": "Periodista",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "F",
+      "fecha_nacimiento": "1974-11-26",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D1",
+      "profesion": "Periodista",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Pollyana_Rivera"
+    }
+  },
+  {
+    "nombre": "Roa, Giovanna",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1986-11-20",
+      "afiliacion_politica": "Revolución Democrática",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D10",
+      "profesion": "Diseñadora",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "F",
+      "fecha_nacimiento": "1986-11-20",
+      "afiliacion_politica": "Revolución Democrática",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D10",
+      "profesion": "Diseñadora",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Giovanna_Roa"
+    }
+  },
+  {
+    "nombre": "Royo, Manuela",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1982-12-12",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D23",
+      "profesion": "Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "F",
+      "fecha_nacimiento": "1982-12-27",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D23",
+      "profesion": "Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Manuela_Royo"
+    }
+  }
+]

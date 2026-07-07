@@ -1,0 +1,170 @@
+[
+  {
+    "nombre": "Galleguillos, Felix",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1986-03-23",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Escaños reservados",
+      "distrito": "Escaño reservado: Pueblo Atacameño",
+      "profesion": "Ingeniero Civil Ambiental",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "M",
+      "fecha_nacimiento": "1986-03-23",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Escaños reservados",
+      "distrito": "Escaño reservado: Pueblo Atacameño",
+      "profesion": "Ingeniero Civil Ambiental",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/F%C3%A9lix_Galleguillos_Aymani"
+    }
+  },
+  {
+    "nombre": "Garin, Renato",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1986-05-30",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "La Lista del Apruebo",
+      "distrito": "D14",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Diputado (2018-2021)"
+    },
+    "wikipedia": {
+      "genero": "M",
+      "fecha_nacimiento": "1986-05-30",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "La Lista del Apruebo",
+      "distrito": "D14",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Diputado (2018-2021)",
+      "url": "https://es.wikipedia.org/wiki/Renato_Gar%C3%ADn"
+    }
+  },
+  {
+    "nombre": "Giustinianovich, Elisa",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1984-11-23",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Coordinadora Social de Magallanes",
+      "distrito": "D28",
+      "profesion": "Bioingeniera",
+      "es_abogado": false,
+      "grado_academico_nivel": 3,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "F",
+      "fecha_nacimiento": "1984-11-23",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Coordinadora Social de Magallanes",
+      "distrito": "D28",
+      "profesion": "Bioingeniera",
+      "es_abogado": false,
+      "grado_academico_nivel": 3,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Elisa_Giustinianovich"
+    }
+  },
+  {
+    "nombre": "Godoy, Isabel",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1967-12-03",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Escaños reservados",
+      "distrito": "Escaño reservado: Pueblo Colla",
+      "profesion": "Técnico en Contabilidad Tributaria",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "F",
+      "fecha_nacimiento": "1967-12-03",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Escaños reservados",
+      "distrito": "Escaño reservado: Pueblo Colla",
+      "profesion": "Contadora",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Isabel_Godoy"
+    }
+  },
+  {
+    "nombre": "Gonzalez, Dayana",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1987-10-31",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "La Lista del Pueblo",
+      "distrito": "D3",
+      "profesion": "Profesora de Historia y Geografía",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "F",
+      "fecha_nacimiento": "1987-10-31",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "La Lista del Pueblo",
+      "distrito": "D3",
+      "profesion": "Profesora de Historia y Geografía",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Dayyana_Gonz%C3%A1lez"
+    }
+  },
+  {
+    "nombre": "Gonzalez, Lidia",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1967-04-27",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Escaños reservados",
+      "distrito": "Escaño reservado: Pueblo Yagán",
+      "profesion": "Artesana",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Concejala de Cabo de Hornos (2008-2016)"
+    },
+    "wikipedia": {
+      "genero": "F",
+      "fecha_nacimiento": "1967-04-27",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Escaños reservados",
+      "distrito": "Escaño reservado: Pueblo Yagán",
+      "profesion": "Artesana",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Concejala de Cabo de Hornos (2008-2016)",
+      "url": "https://es.wikipedia.org/wiki/Lidia_Gonz%C3%A1lez"
+    }
+  }
+]

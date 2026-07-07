@@ -1,0 +1,170 @@
+[
+  {
+    "nombre": "Mella, Jeniffer",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1981-01-10",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D5",
+      "profesion": "Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "F",
+      "fecha_nacimiento": "1981-01-10",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D5",
+      "profesion": "Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Jeniffer_Mella"
+    }
+  },
+  {
+    "nombre": "Mena, Felipe",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1982-08-18",
+      "afiliacion_politica": "Unión Demócrata Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D24",
+      "profesion": "Ingeniero Agrónomo",
+      "es_abogado": false,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Director Regional del Instituto Nacional de la Juventud (2010-2012); Director Regional del Fondo de Solidaridad e Inversión Social (2012-2013); Director Regional del Instituto Nacional del Deporte; Consejero regional por la Región de Los Ríos"
+    },
+    "wikipedia": {
+      "genero": null,
+      "fecha_nacimiento": null,
+      "afiliacion_politica": null,
+      "lista_electoral": null,
+      "distrito": null,
+      "profesion": null,
+      "es_abogado": null,
+      "grado_academico_nivel": null,
+      "experiencia_previa_institucional": null,
+      "experiencia_detalle": null,
+      "url": null
+    }
+  },
+  {
+    "nombre": "Meneses, Janis",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1989-07-04",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Movimientos Independientes",
+      "distrito": "D6",
+      "profesion": "Trabajadora Social",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": null,
+      "fecha_nacimiento": null,
+      "afiliacion_politica": null,
+      "lista_electoral": null,
+      "distrito": null,
+      "profesion": null,
+      "es_abogado": null,
+      "grado_academico_nivel": null,
+      "experiencia_previa_institucional": null,
+      "experiencia_detalle": null,
+      "url": null
+    }
+  },
+  {
+    "nombre": "Millabur, Adolfo",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1966-08-30",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Escaños reservados",
+      "distrito": "Escaño reservado: Pueblo Mapuche",
+      "profesion": null,
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Concejal de Tirúa (1992-1996); Alcalde de Tirúa (1996-2021)"
+    },
+    "wikipedia": {
+      "genero": "M",
+      "fecha_nacimiento": "1966-08-30",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Escaños reservados",
+      "distrito": "Escaño reservado: Pueblo Mapuche",
+      "profesion": "Político",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Concejal de Tirúa (1992-1996); Alcalde de Tirúa (1996-2021)",
+      "url": "https://es.wikipedia.org/wiki/Adolfo_Millabur"
+    }
+  },
+  {
+    "nombre": "Miranda, Valentina",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "2000-03-19",
+      "afiliacion_politica": "Partido Comunista de Chile",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D8",
+      "profesion": "Estudiante de Administración Pública",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "F",
+      "fecha_nacimiento": "2000-03-19",
+      "afiliacion_politica": "Partido Comunista de Chile",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D8",
+      "profesion": "Estudiante",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Valentina_Miranda"
+    }
+  },
+  {
+    "nombre": "Monckeberg, Cristian",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1968-05-12",
+      "afiliacion_politica": "Renovación Nacional",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D10",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Concejal de Ñuñoa (1992-1996); Diputado (2006-2018); Ministro de Vivienda y Urbanismo (2018-2020); Ministro de Desarrollo Social y Familia (2020); Ministro Secretario General de la Presidencia (2020-2021)"
+    },
+    "wikipedia": {
+      "genero": "M",
+      "fecha_nacimiento": "1968-05-12",
+      "afiliacion_politica": "Renovación Nacional",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D10",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Concejal de Ñuñoa (1992-1996); Diputado (2006-2018); Ministro de Vivienda y Urbanismo (2018-2020); Ministro de Desarrollo Social y Familia (2020); Ministro Secretario General de la Presidencia (2020-2021)",
+      "url": "https://es.wikipedia.org/wiki/Cristi%C3%A1n_Monckeberg"
+    }
+  }
+]

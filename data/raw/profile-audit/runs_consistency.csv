@@ -1,0 +1,38 @@
+nombre,fuente,campo,valor_v1,valor_v2,estado
+"Abarca, Damaris",bcn,grado_academico_nivel,0,,solo_una_corrida
+"Abarca, Damaris",wikipedia,grado_academico_nivel,0,,solo_una_corrida
+"Aguilera, Tiare",bcn,afiliacion_politica,Independiente,,solo_una_corrida
+"Alvarez, Rodrigo",wikipedia,afiliacion_politica,Unión Demócrata Identitaria,Unión Demócrata Independiente,distinto
+"Ampuero, Adriana",wikipedia,es_abogado,True,False,distinto
+"Antilef, Victorino",bcn,afiliacion_politica,,Independiente,solo_una_corrida
+"Arancibia, Jorge",wikipedia,grado_academico_nivel,0,2,distinto
+"Arrau, Martin",bcn,afiliacion_politica,Partido Republicano de Chile,Unión Demócrata Independiente,distinto
+"Chinga, Eric",bcn,afiliacion_politica,,Independiente,solo_una_corrida
+"Cubillos, Marcela",wikipedia,afiliacion_politica,Independiente,Unión Demócrata Independiente,distinto
+"Cespedes, Lorena",wikipedia,lista_electoral,Independientes No Neutrales,Independientes por la Nueva Constitución,distinto
+"Dominguez, Gaspar",wikipedia,lista_electoral,Independientes No Neutrales,Independientes por la Nueva Constitución,distinto
+"Fernandez, Patricio",bcn,grado_academico_nivel,0,,solo_una_corrida
+"Fernandez, Patricio",wikipedia,grado_academico_nivel,0,,solo_una_corrida
+"Galleguillos, Felix",bcn,afiliacion_politica,,Independiente,solo_una_corrida
+"Godoy, Isabel",bcn,afiliacion_politica,,Independiente,solo_una_corrida
+"Hurtado, Maximiliano",bcn,grado_academico_nivel,0,,solo_una_corrida
+"Linconao, Francisca",bcn,afiliacion_politica,,Independiente,solo_una_corrida
+"Llanquileo, Natividad",bcn,afiliacion_politica,,Independiente,solo_una_corrida
+"Logan, Rodrigo",bcn,lista_electoral,,Independiente,solo_una_corrida
+"Loncon, Elisa",bcn,afiliacion_politica,,Independiente,solo_una_corrida
+"Mamani, Isabella",bcn,afiliacion_politica,,Independiente,solo_una_corrida
+"Martin, Juan Jose",wikipedia,lista_electoral,Independientes por una Nueva Constitución,Independientes No Neutrales,distinto
+"Millabur, Adolfo",bcn,afiliacion_politica,Pueblo Mapuche,Independiente,distinto
+"Moreno, Alfredo",wikipedia,afiliacion_politica,Independiente,Unión Demócrata Independiente,distinto
+"Moreno, Alfredo",wikipedia,grado_academico_nivel,0,,solo_una_corrida
+"Munoz, Pedro",wikipedia,grado_academico_nivel,0,,solo_una_corrida
+"Ossandon, Manuel",wikipedia,afiliacion_politica,Renovación Nacional,Independiente,distinto
+"Pinto, Malucha",bcn,grado_academico_nivel,0,,solo_una_corrida
+"Pinto, Malucha",wikipedia,grado_academico_nivel,0,,solo_una_corrida
+"Politzer, Patricia",wikipedia,lista_electoral,Independientes por la Nueva Constitución,Independientes por una Nueva Constitución,distinto
+"Saldana, Alvin",wikipedia,lista_electoral,Movimientos Sociales Autónomos,Movimientos Sociales y Autónomos,distinto
+"Salinas, Fernando",bcn,grado_academico_nivel,1,1,distinto
+"Schonhaut, Constanza",bcn,afiliacion_politica,Partido Convergencia Social,Convergencia Social,distinto
+"Tirado, Fernando",bcn,afiliacion_politica,Independiente,,solo_una_corrida
+"Toloza, Pablo",wikipedia,lista_electoral,Vamos por Chile,,solo_una_corrida
+"Vargas, Margarita",bcn,afiliacion_politica,,Independiente,solo_una_corrida

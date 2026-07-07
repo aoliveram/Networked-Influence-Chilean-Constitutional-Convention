@@ -1,0 +1,170 @@
+[
+  {
+    "nombre": "Carrillo, Alondra",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1991-06-23",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Voces Constituyentes",
+      "distrito": "D12",
+      "profesion": "Psicóloga",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "F",
+      "fecha_nacimiento": "1991-06-23",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Voces Constituyentes",
+      "distrito": "D12",
+      "profesion": "Psicóloga",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Alondra_Carrillo"
+    }
+  },
+  {
+    "nombre": "Castillo, Eduardo",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1950-06-25",
+      "afiliacion_politica": "Partido Por la Democracia",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D23",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Concejal por Temuco (1992-1996), Concejal por Padre las Casas (1996-2004)"
+    },
+    "wikipedia": {
+      "genero": null,
+      "fecha_nacimiento": null,
+      "afiliacion_politica": null,
+      "lista_electoral": null,
+      "distrito": null,
+      "profesion": null,
+      "es_abogado": null,
+      "grado_academico_nivel": null,
+      "experiencia_previa_institucional": null,
+      "experiencia_detalle": null,
+      "url": null
+    }
+  },
+  {
+    "nombre": "Castillo, Maria Trinidad",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1956-10-04",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Lista Independientes por la Región de Coquimbo",
+      "distrito": "D5",
+      "profesion": "Profesora de Biología",
+      "es_abogado": false,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": null,
+      "fecha_nacimiento": null,
+      "afiliacion_politica": null,
+      "lista_electoral": null,
+      "distrito": null,
+      "profesion": null,
+      "es_abogado": null,
+      "grado_academico_nivel": null,
+      "experiencia_previa_institucional": null,
+      "experiencia_detalle": null,
+      "url": null
+    }
+  },
+  {
+    "nombre": "Castro, Claudia",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1968-04-28",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D14",
+      "profesion": "Diseñadora de Vestuario",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": null,
+      "fecha_nacimiento": null,
+      "afiliacion_politica": null,
+      "lista_electoral": null,
+      "distrito": null,
+      "profesion": null,
+      "es_abogado": null,
+      "grado_academico_nivel": null,
+      "experiencia_previa_institucional": null,
+      "experiencia_detalle": null,
+      "url": null
+    }
+  },
+  {
+    "nombre": "Catrileo, Rosa",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1981-09-23",
+      "afiliacion_politica": null,
+      "lista_electoral": "Escaños reservados",
+      "distrito": "Escaño reservado: Pueblo Mapuche",
+      "profesion": "Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "F",
+      "fecha_nacimiento": "1981-09-23",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Escaños reservados",
+      "distrito": "Escaño reservado: Pueblo Mapuche",
+      "profesion": "Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Rosa_Catrileo"
+    }
+  },
+  {
+    "nombre": "Celedon, Roberto",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1947-01-31",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D17",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "M",
+      "fecha_nacimiento": "1947-01-31",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D17",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Roberto_Celed%C3%B3n_Fern%C3%A1ndez"
+    }
+  }
+]

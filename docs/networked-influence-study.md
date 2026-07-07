@@ -1,5 +1,5 @@
 ---
-title: "Networked Influence in a Tabula Rasa Legislature — Reporte del estudio v1"
+title: "Networked Influence in a Tabula Rasa Legislature — Reporte del estudio"
 subtitle: "Redes de co-patrocinio, dinámicas ideológicas y éxito político en la Convención Constitucional de Chile (2021--2022)"
 author: "A. Olivera, J. Fábrega"
 date: \today
@@ -58,8 +58,8 @@ El co-patrocinio es, por tanto, un **proxy observable, costoso y fechado de cola
 ## 2.4 Diseño: tres modelos
 
 **M1 — Formación (Valued ERGM).** Red pooled de co-patrocinio con pesos $w_{ij}$ = nº de documentos co-firmados. ERGM valuado con referencia Poisson:
-$$P(W = w) \propto \exp\{\theta^\top g(w)\}, \qquad g = (\text{sum},\ \text{nodematch}_{\text{afiliación, abogado, experiencia, género}},\ \text{absdiff}_{\text{edad}},\ \text{nodecov}_{\text{edad}})$$
-Los términos `nodematch` capturan homofilia (H1a) y su reverso (H1b).
+$$P(W = w) \propto \exp\{\theta^\top g(w)\}, \qquad g = (\text{sum},\ \text{nodematch}_{\text{afiliación, abogado, experiencia, género}},\ \text{absdiff}_{\text{edad, grado}},\ \text{nodecov}_{\text{edad}})$$
+Los términos `nodematch` capturan homofilia (H1a) y su reverso (H1b). El término `absdiff` sobre el **grado académico** (escala ordinal 0--3: sin estudios universitarios terminados / educación superior terminada / magíster / doctorado; decisión 2026-07-07) prueba estratificación por credenciales educativas: un coeficiente negativo indica que la distancia educativa inhibe la co-firma.
 
 **M2 — Dinámica ideológica (panel FE).** Sobre ondas temporales por comisión:
 $$\Delta\theta_{i,t} = \alpha_i + \beta_1 \theta_{i,t-1} + \beta_3\, \text{NetExp}_{i,t-1} + \varepsilon_{it}, \qquad \text{NetExp}_{i,t-1} = \frac{\sum_{j \neq i} w_{ij,t-1}\,\theta_{j,t-1}}{\sum_{j \neq i} w_{ij,t-1}}$$
@@ -81,7 +81,7 @@ Se compara OLS/SAR/SEM/SDM (AIC, Moran's $I$) y se descomponen efectos directos/
 | Borrador final | `.../C{k}_BORRADOR_final.json` | Artículos del borrador del 14-05-2022, por comisión | 498 |
 | Mapeo maestro | `CPT/coincidencias_comisiones.csv` (UTF-8) | 498 artículos finales → fuente(s) por comisión, estatus identical/similar, fuentes secundarias/terciarias | 498 |
 | Nombres canónicos | `data/raw/convention_members.json` | Referencia oficial "Apellido, Nombre" | 154 |
-| Perfiles BCN | `CPT/conventionals-bcn-webscrapping/conventional-profiles.json` | Covariables: género, afiliación, distrito, abogado, edad, grado, experiencia | 154 |
+| Perfiles curados | `data/raw/conventional-profiles.json` (imputado dual-fuente; ver P5) | Covariables: género, afiliación, distrito, abogado, edad, grado (0--3), experiencia | 154 |
 | Puntos ideales | `data/raw/emirt/` | Salidas dynIRT: $\Theta$ 154×91, metadata, posiciones resumen | 154×91 |
 
 Desglose por comisión de los `dataverse-final` (conteo de registros):
@@ -178,7 +178,7 @@ Esta sección es el inventario completo de defectos, deudas y decisiones pendien
 
 **Solución.** Módulo compartido de normalización (Python + R) que (i) aplique correcciones, (ii) **valide todo autor contra los 154 canónicos** de `data/raw/convention_members.json`, y (iii) emita reporte de no-matcheados en cada corrida. Con los datos nuevos (autores ya estandarizados por el PR #4) el mapa de correcciones debería encogerse, pero la validación queda como invariante del pipeline.
 
-## P5 — Perfiles BCN incompletos **[PARCIAL — scraper resuelto y auditoría dual-fuente ejecutada 2026-07-06; validación humana pendiente]**
+## P5 — Perfiles BCN incompletos **[RESUELTO 2026-07-07]**
 
 **Situación original.** `conventional-profiles.json` tenía **147/154** perfiles. Los 7 ausentes (Botto, Castillo M.T., González D., Reyes M.R., Rivera M.M., Tepper, Zúñiga L.A.) recibían valores por defecto (edad 45, flags 0, afiliación "Desconocida") en los scripts.
 
@@ -192,7 +192,9 @@ Esta sección es el inventario completo de defectos, deudas y decisiones pendien
 4. **Distrito "Desconocido" (9/154).** Aguilera, Bacián, Chinga, Galleguillos, Godoy, González L., Jiménez, Tirado, Vargas M. — todos **escaños reservados de pueblos originarios no mapuche**: no es dato faltante; recodificar como "Escaño reservado".
 5. **Edad (1/154).** Renato Garín sin fecha de nacimiento en BCN; completar a mano.
 
-**Auditoría dual-fuente ejecutada (2026-07-06).** `code/0b-audit-profiles-dual-source.py` consulta `gemini-3.5-flash` (API Gemini con *search grounding*) en lotes de 5 convencionales: para cada uno extrae las características dos veces, de forma independiente — desde el texto BCN ya scrapeado y desde su artículo de Wikipedia en español — referidas al período de la Convención. Outputs en `data/raw/profile-audit/`: tabla de símbolos 154×8 ($=$ coinciden, $\neq$ discrepan, B/W una sola fuente, $\varnothing$ ninguna), valores por fuente, y `discrepancias_pipeline.csv`. Resultados: 154/154 auditados, ~124 con artículo de Wikipedia; entre fuentes duales el acuerdo es alto (género 124/124) con **34 conflictos $\neq$** a revisar (afiliación 12, fecha de nacimiento 8, grado 6, abogado 4, experiencia 2, distrito 1, lista 1); contra el pipeline hay **135 discrepancias**: afiliación 62 (resuelve las 33 "Desconocida" — Monckeberg→RN, Larraín→Evópoli, etc. — y detecta falsos "Independiente": Zúñiga→UDI), grado académico 29, experiencia previa 24, distrito 17 (incluye los 9 escaños reservados), género 1, edad 1 (Garín: 35), abogado 1. **Queda pendiente la validación humana** de `discrepancias_pipeline.csv`, con foco en los 12 conflictos de afiliación donde BCN y Wikipedia contradicen (p. ej. Chahin: BCN "Independiente" vs. Wikipedia "Demócrata Cristiano"); recién entonces se regeneran las covariables.
+**Auditoría dual-fuente ejecutada (2026-07-06).** `code/0b-audit-profiles-dual-source.py` consulta `gemini-3.5-flash` (API Gemini con *search grounding*): para cada convencional extrae las características dos veces, de forma independiente — desde el texto BCN ya scrapeado y desde su artículo de Wikipedia en español — referidas al período de la Convención. Outputs en `data/raw/profile-audit/`: tabla de símbolos 154×8 ($=$ coinciden, $\neq$ discrepan, B/W una sola fuente, $\varnothing$ ninguna), valores por fuente, y `discrepancias_pipeline.csv`. Resultados de la corrida v1 (lotes de 5): 154/154 auditados, ~124 con artículo de Wikipedia; **135 discrepancias** con el pipeline: afiliación 62 (resuelve las 33 "Desconocida" — Monckeberg→RN, Larraín→Evópoli, etc. — y detecta falsos "Independiente": Zúñiga→UDI), grado académico 29, experiencia previa 24, distrito 17 (incluye los 9 escaños reservados), género 1, edad 1 (Garín: 35), abogado 1.
+
+**Cierre (2026-07-07).** Tras la validación manual del usuario sobre las primeras ~36 discrepancias (registrada en `manual_validations.json`), se ejecutó la **corrida v2** (lotes de 6, grado académico en escala 0--3; carpeta `profiles-batches/`) y se automatizó la **imputación** con la regla del usuario: *BCN es ground truth; si BCN no informa, Wikipedia; si ninguna, valor base; las validaciones manuales siempre prevalecen*. Chequeo de consistencia v1 vs. v2 (`runs_consistency.csv`): 100% de acuerdo en género, fecha, distrito y experiencia; 99.6% abogado; 97.5% lista; 96.0% grado (mapeando escalas); 93.5% afiliación — los desacuerdos residuales quedan listados para inspección. Las 6 validaciones de grado hechas bajo la escala antigua (1 = magíster) se recodificaron a 2 en la escala nueva (ambas corridas corroboran magíster); los distritos de escaños reservados se estandarizaron a "Escaño reservado: \<pueblo\>". Resultado vigente en `data/raw/conventional-profiles.json`: **154 perfiles** (incluye a Botto y los otros 6 recuperados), **0 afiliaciones "Desconocida"**, 0 edades faltantes, grado 0--3 = \{0: 18, 1: 81, 2: 41, 3: 14\}. Validaciones manuales en conflicto con la regla automática que se preservaron: Chahin→DC (BCN decía "Independiente") y Arrau→Republicano (la v2-BCN leyó UDI). Nuevas correcciones futuras se agregan a `manual_validations.json` y se re-corre `--impute`.
 
 ## P6 — Selección sobre la variable dependiente en M3 (ART-FALLIDO) **[ABIERTO — decisión tomada]**
 
@@ -262,11 +264,13 @@ En la robustez vigente, los Valued ERGM de C3 y C5 no convergieron plenamente (m
 | 2026-07-06 | Scraper BCN corregido y re-ejecutado: 154/154 perfiles (P5). |
 | 2026-07-06 | Auditoría P5 vía `gemini-3.5-flash` (BCN + Wikipedia independientes, lotes de 5, situación al momento de la CC); símbolos $=$/$\neq$/B/W/$\varnothing$ por celda; validación humana antes de regenerar covariables. |
 | 2026-07-06 | Arreglos que corresponden al repo CPT registrados en `CPT-arreglos-pendientes.txt` (raíz); se abordarán en ese repositorio. |
+| 2026-07-07 | Grado académico pasa a escala ordinal **0--3** (sin estudios universitarios terminados / educación superior terminada / magíster / doctorado) y entra a M1 como **absdiff** (distancia educativa). |
+| 2026-07-07 | Imputación automatizada de covariables: BCN ground truth → Wikipedia → base; `manual_validations.json` siempre prevalece. `data/raw/conventional-profiles.json` es el archivo curado canónico (154). |
 
 # 7. Plan de actualización
 
 - **Fase 0 — Infraestructura** *(branch dedicado)*: copiar `dataverse-final` a `data/raw/dataverse-final/`; snapshot de perfiles 154; módulo de configuración de rutas; módulo compartido de normalización/validación de nombres. *(Cierra P3, P4, P14.)*
-- **Fase 0b — Calidad de covariables**: ~~planilla de auditoría pre-llenada~~ → **hecho** vía auditoría dual-fuente (`data/raw/profile-audit/`); queda la validación humana de las 135 discrepancias (foco: 12 conflictos $\neq$ de afiliación) y la regeneración de covariables (incl. recodificación "Escaño reservado"). *(Cierra P5.)*
+- **Fase 0b — Calidad de covariables**: **completada** (2026-07-07): auditoría dual-fuente v1+v2, validación manual, e imputación automática con capa de validaciones humanas; `data/raw/conventional-profiles.json` regenerado con 154 perfiles curados. *(P5 cerrado.)*
 - **Fase 1 — Loader unificado**: lector GENESIS (2 esquemas), lector TRACK_full (clasificación artículo/indicación-suelta/título, dedup, timestamps), tests de conteos contra §3.1. *(Cierra P8.)*
 - **Fase 2 — Redes**: red génesis pooled 7 comisiones (M1); ondas acumuladas por comisión ×7 (M2); variantes de robustez. *(Cierra P1-red, P2.)*
 - **Fase 3 — Modelos**: M1 ERGM (pooled + por comisión); M2 realineación emIRT + panel ampliado + robusteces de ventana; M3 con `coincidencias` + BORRADOR_final + DV nueva + $W$-génesis. *(Cierra P1, P6, P7, P9; revisita P11.)*
@@ -274,5 +278,6 @@ En la robustez vigente, los Valued ERGM de C3 y C5 no convergieron plenamente (m
 
 # 8. Registro de cambios de este documento
 
+- **v1.2 (2026-07-07).** P5 cerrado: corrida v2 de la auditoría (lotes de 6, grado 0--3, `profiles-batches/`), chequeo de consistencia v1 vs. v2, e imputación automatizada (BCN → Wikipedia → base, con `manual_validations.json` prevaleciendo); `data/raw/conventional-profiles.json` regenerado (154 perfiles curados, 0 "Desconocida"). Decisión de modelo: `absdiff(grado académico 0--3)` se agrega a M1.
 - **v1.1 (2026-07-06).** P5: auditoría dual-fuente BCN+Wikipedia ejecutada con `gemini-3.5-flash` (154/154; 135 discrepancias con el pipeline; tablas en `data/raw/profile-audit/`). Nuevo `CPT-arreglos-pendientes.txt` en la raíz con los arreglos que corresponden al repositorio de datos (P8, higiene, documentación).
 - **v1 (2026-07-06).** Versión inicial: objetivos y marco teórico (§2), inventario de datos nuevos (§3), pipeline y resultados vigentes (§4), registro detallado de problemas P1--P14 (§5), decisiones confirmadas (§6) y plan por fases (§7). Incluye el fix del scraper BCN (P5) aplicado en esta fecha.

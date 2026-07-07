@@ -1,0 +1,170 @@
+[
+  {
+    "nombre": "Henriquez, Natalia",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1985-07-09",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "La Lista del Pueblo",
+      "distrito": "D9",
+      "profesion": "Médica internista",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": null,
+      "fecha_nacimiento": null,
+      "afiliacion_politica": null,
+      "lista_electoral": null,
+      "distrito": null,
+      "profesion": null,
+      "es_abogado": null,
+      "grado_academico_nivel": null,
+      "experiencia_previa_institucional": null,
+      "experiencia_detalle": null,
+      "url": null
+    }
+  },
+  {
+    "nombre": "Hoppe, Vanessa",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1979-12-27",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D21",
+      "profesion": "Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "F",
+      "fecha_nacimiento": "1981",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D21",
+      "profesion": "Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Vanessa_Hoppe"
+    }
+  },
+  {
+    "nombre": "Hube, Constanza",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1986-03-10",
+      "afiliacion_politica": "Unión Demócrata Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D11",
+      "profesion": "Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "F",
+      "fecha_nacimiento": "1986-03-10",
+      "afiliacion_politica": "Unión Demócrata Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D11",
+      "profesion": "Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Constanza_Hube"
+    }
+  },
+  {
+    "nombre": "Hurtado, Maximiliano",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1984-09-27",
+      "afiliacion_politica": "Partido Socialista de Chile",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D4",
+      "profesion": null,
+      "es_abogado": false,
+      "grado_academico_nivel": null,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": null,
+      "fecha_nacimiento": null,
+      "afiliacion_politica": null,
+      "lista_electoral": null,
+      "distrito": null,
+      "profesion": null,
+      "es_abogado": null,
+      "grado_academico_nivel": null,
+      "experiencia_previa_institucional": null,
+      "experiencia_detalle": null,
+      "url": null
+    }
+  },
+  {
+    "nombre": "Hurtado, Ruth",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1981-10-08",
+      "afiliacion_politica": "Partido Republicano de Chile",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D22",
+      "profesion": null,
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "F",
+      "fecha_nacimiento": "1981-10-08",
+      "afiliacion_politica": "Partido Republicano",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D22",
+      "profesion": "Trabajadora social",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Ruth_Hurtado"
+    }
+  },
+  {
+    "nombre": "Jimenez, Luis",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1983-09-10",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Escaños reservados",
+      "distrito": "Escaño reservado: Pueblo Aymara",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "M",
+      "fecha_nacimiento": "1983-09-10",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Escaños reservados",
+      "distrito": "Escaño reservado: Pueblo Aymara",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Luis_Jim%C3%A9nez_C%C3%A1ceres"
+    }
+  }
+]

@@ -1,0 +1,170 @@
+[
+  {
+    "nombre": "Cubillos, Marcela",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1967-02-02",
+      "afiliacion_politica": "Unión Demócrata Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D11",
+      "profesion": "Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Diputada por el Distrito Nº 21 (2002-2010), Ministra de Medio Ambiente (2018), Ministra de Educación (2018-2020)"
+    },
+    "wikipedia": {
+      "genero": "F",
+      "fecha_nacimiento": "1967-02-02",
+      "afiliacion_politica": "Unión Demócrata Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D11",
+      "profesion": "Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Diputada por el Distrito N.º 21 (2002-2010), Ministra del Medio Ambiente (2018), Ministra de Educación (2018-2020)",
+      "url": "https://es.wikipedia.org/wiki/Marcela_Cubillos"
+    }
+  },
+  {
+    "nombre": "Cespedes, Lorena",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1973-07-18",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Independientes por la Nueva Constitución",
+      "distrito": "D23",
+      "profesion": "Profesora de Física",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "F",
+      "fecha_nacimiento": "1973",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Independientes por la Nueva Constitución",
+      "distrito": "D23",
+      "profesion": "Física y educadora",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Lorena_C%C3%A9spedes"
+    }
+  },
+  {
+    "nombre": "Daza, Mauricio",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1972-03-21",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Regionalismo Ciudadano Independiente",
+      "distrito": "D28",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "M",
+      "fecha_nacimiento": "1972-03-21",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Regionalismo Ciudadano Independiente",
+      "distrito": "D28",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Mauricio_Daza"
+    }
+  },
+  {
+    "nombre": "De la Maza, Bernardo",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1946-01-03",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D8",
+      "profesion": "Periodista",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "M",
+      "fecha_nacimiento": "1946-01-03",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D8",
+      "profesion": "Periodista",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Bernardo_de_la_Maza"
+    }
+  },
+  {
+    "nombre": "Delgado, Aurora",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1964-07-31",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D24",
+      "profesion": "Matrona",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": null,
+      "fecha_nacimiento": null,
+      "afiliacion_politica": null,
+      "lista_electoral": null,
+      "distrito": null,
+      "profesion": null,
+      "es_abogado": null,
+      "grado_academico_nivel": null,
+      "experiencia_previa_institucional": null,
+      "experiencia_detalle": null,
+      "url": null
+    }
+  },
+  {
+    "nombre": "Dominguez, Gaspar",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1988-10-27",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Independientes No Neutrales",
+      "distrito": "D26",
+      "profesion": "Médico Cirujano",
+      "es_abogado": false,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "M",
+      "fecha_nacimiento": "1988-10-27",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Independientes por la Nueva Constitución",
+      "distrito": "D26",
+      "profesion": "Médico",
+      "es_abogado": false,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Gaspar_Dom%C3%ADnguez"
+    }
+  }
+]

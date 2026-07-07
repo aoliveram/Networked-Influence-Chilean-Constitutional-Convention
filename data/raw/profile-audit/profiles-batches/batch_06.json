@@ -1,0 +1,170 @@
+[
+  {
+    "nombre": "Celis, Raul",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1962-09-05",
+      "afiliacion_politica": "Renovación Nacional",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D7",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Intendente de la Región de Valparaíso (2010-2014)"
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Ra%C3%BAl_Celis_Montt",
+      "genero": "M",
+      "fecha_nacimiento": "1962-09-05",
+      "afiliacion_politica": "Renovación Nacional",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D7",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Intendente de la Región de Valparaíso (2010-2014)"
+    }
+  },
+  {
+    "nombre": "Chahin, Fuad",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1976-12-01",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D22",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Secretario Ministerial de Gobierno en la Región de la Araucanía (2002-2003), Director de la División de Organizaciones Sociales (2003-2006), Diputado (2010-2018)"
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Fuad_Chah%C3%ADn",
+      "genero": "M",
+      "fecha_nacimiento": "1976-12-01",
+      "afiliacion_politica": "Partido Demócrata Cristiano",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D22",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Secretario Regional Ministerial de Gobierno de Región de La Araucanía (2002-2003), Director de la División de Organizaciones Sociales (2003-2006), Diputado (2010-2018)"
+    }
+  },
+  {
+    "nombre": "Chinga, Eric",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1970-07-31",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Escaños reservados",
+      "distrito": "Escaño reservado: Pueblo Diaguita",
+      "profesion": "Dirigente sindical",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Eric_Chinga",
+      "genero": "M",
+      "fecha_nacimiento": "1970-07-31",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Escaños reservados",
+      "distrito": "Escaño reservado: Pueblo Diaguita",
+      "profesion": "Dirigente sindical",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Cozzi, Ruggero",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1986-12-09",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D6",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Ruggero_Cozzi",
+      "genero": "M",
+      "fecha_nacimiento": "1986-12-09",
+      "afiliacion_politica": "Renovación Nacional",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D6",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Cretton, Eduardo",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1995-11-23",
+      "afiliacion_politica": "Unión Demócrata Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D22",
+      "profesion": "Licenciado en Ciencias Jurídicas",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Eduardo_Cretton",
+      "genero": "M",
+      "fecha_nacimiento": "1995-11-23",
+      "afiliacion_politica": "Unión Demócrata Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D22",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Cruz, Andres",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1973-06-04",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D20",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 3,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Andr%C3%A9s_Cruz",
+      "genero": "M",
+      "fecha_nacimiento": "1973-06-04",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D20",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 3,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  }
+]

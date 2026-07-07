@@ -1,0 +1,170 @@
+[
+  {
+    "nombre": "Larrain, Hernan",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1974-12-24",
+      "afiliacion_politica": "Evolución Política",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D11",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Hern%C3%A1n_Larra%C3%ADn_Matte",
+      "genero": "M",
+      "fecha_nacimiento": "1974-12-24",
+      "afiliacion_politica": "Evolución Política",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D11",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Letelier, Margarita",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1953-10-30",
+      "afiliacion_politica": "Unión Demócrata Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D19",
+      "profesion": "Médica veterinaria",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": null,
+      "genero": null,
+      "fecha_nacimiento": null,
+      "afiliacion_politica": null,
+      "lista_electoral": null,
+      "distrito": null,
+      "profesion": null,
+      "es_abogado": null,
+      "grado_academico_nivel": null,
+      "experiencia_previa_institucional": null,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Linconao, Francisca",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1956-09-18",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Escaños reservados",
+      "distrito": "Escaño reservado: Pueblo Mapuche",
+      "profesion": null,
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Francisca_Linconao",
+      "genero": "F",
+      "fecha_nacimiento": "1958-09-18",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Escaños reservados",
+      "distrito": "Escaño reservado: Pueblo Mapuche",
+      "profesion": null,
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Llanquileo, Natividad",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1984-07-14",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Escaños reservados",
+      "distrito": "Escaño reservado: Pueblo Mapuche",
+      "profesion": "Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Natividad_Llanquileo",
+      "genero": "F",
+      "fecha_nacimiento": "1984-07-14",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Escaños reservados",
+      "distrito": "Escaño reservado: Pueblo Mapuche",
+      "profesion": "Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Logan, Rodrigo",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1980-02-01",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Independiente",
+      "distrito": "D9",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": null,
+      "genero": null,
+      "fecha_nacimiento": null,
+      "afiliacion_politica": null,
+      "lista_electoral": null,
+      "distrito": null,
+      "profesion": null,
+      "es_abogado": null,
+      "grado_academico_nivel": null,
+      "experiencia_previa_institucional": null,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Loncon, Elisa",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1963-01-23",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Escaños reservados",
+      "distrito": "Escaño reservado: Pueblo Mapuche",
+      "profesion": "Profesora de Inglés",
+      "es_abogado": false,
+      "grado_academico_nivel": 3,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Elisa_Loncon",
+      "genero": "F",
+      "fecha_nacimiento": "1963-01-23",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Escaños reservados",
+      "distrito": "Escaño reservado: Pueblo Mapuche",
+      "profesion": "Profesora de Inglés",
+      "es_abogado": false,
+      "grado_academico_nivel": 3,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  }
+]

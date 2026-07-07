@@ -1,0 +1,170 @@
+[
+  {
+    "nombre": "Montealegre, Katerine",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1992-02-23",
+      "afiliacion_politica": "Unión Demócrata Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D26",
+      "profesion": "Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Katerine_Montealegre",
+      "genero": "F",
+      "fecha_nacimiento": "1992-02-23",
+      "afiliacion_politica": "Unión Demócrata Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D26",
+      "profesion": "Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Montero, Ricardo",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1983-06-12",
+      "afiliacion_politica": "Partido Socialista de Chile",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D18",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Ricardo_Montero_Allende",
+      "genero": "M",
+      "fecha_nacimiento": "1983-06-12",
+      "afiliacion_politica": "Partido Socialista",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D18",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Moreno, Alfredo",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1982-02-11",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D17",
+      "profesion": "Ingeniero Comercial",
+      "es_abogado": false,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Alfredo_Moreno_Echeverr%C3%ADa",
+      "genero": "M",
+      "fecha_nacimiento": "1982-02-11",
+      "afiliacion_politica": "Unión Demócrata Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D17",
+      "profesion": "jinete y político",
+      "es_abogado": false,
+      "grado_academico_nivel": null,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Munoz, Pedro",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1987-11-24",
+      "afiliacion_politica": "Partido Socialista de Chile",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D24",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Concejal por Valdivia (2016-2020)"
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Pedro_Mu%C3%B1oz_Leiva",
+      "genero": "M",
+      "fecha_nacimiento": "1987-11-24",
+      "afiliacion_politica": "Partido Socialista",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D24",
+      "profesion": "Político y activista",
+      "es_abogado": false,
+      "grado_academico_nivel": null,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Concejal de Valdivia (2016-2021)"
+    }
+  },
+  {
+    "nombre": "Namor, Guillermo",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1996-11-27",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Independientes por la Nueva Constitución",
+      "distrito": "D4",
+      "profesion": null,
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": null,
+      "genero": null,
+      "fecha_nacimiento": null,
+      "afiliacion_politica": null,
+      "lista_electoral": null,
+      "distrito": null,
+      "profesion": null,
+      "es_abogado": null,
+      "grado_academico_nivel": null,
+      "experiencia_previa_institucional": null,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Navarrete, Geoconda",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1969-09-08",
+      "afiliacion_politica": "Evolución Política",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D27",
+      "profesion": "Asistente social",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Intendenta de la Región de Aysén (2018-2021)"
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Geoconda_Navarrete",
+      "genero": "F",
+      "fecha_nacimiento": "1969-09-08",
+      "afiliacion_politica": "Evolución Política",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D27",
+      "profesion": "Asistente Social",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Seremi de Desarrollo Social de Aysén (2010-2014), Intendenta de la Región de Aysén (2018-2021)"
+    }
+  }
+]

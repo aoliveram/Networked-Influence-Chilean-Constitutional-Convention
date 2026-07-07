@@ -1,0 +1,170 @@
+[
+  {
+    "nombre": "Pinto, Malucha",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1955-04-16",
+      "afiliacion_politica": "Partido Socialista de Chile",
+      "lista_electoral": "La Lista del Apruebo",
+      "distrito": "D13",
+      "profesion": "Actriz",
+      "es_abogado": false,
+      "grado_academico_nivel": null,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "F",
+      "fecha_nacimiento": "1955-04-16",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D13",
+      "profesion": "Actriz",
+      "es_abogado": false,
+      "grado_academico_nivel": null,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Malucha_Pinto"
+    }
+  },
+  {
+    "nombre": "Politzer, Patricia",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1952-02-28",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Independientes por la Nueva Constitución",
+      "distrito": "D10",
+      "profesion": "Periodista",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Directora de la Secretaría de Comunicación y Cultura del Ministerio Secretaría General de la Presidencia (2000-2001); Presidenta del Consejo Nacional de Televisión (2001)"
+    },
+    "wikipedia": {
+      "genero": "F",
+      "fecha_nacimiento": "1952-02-28",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Independientes por una Nueva Constitución",
+      "distrito": "D10",
+      "profesion": "Periodista",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Directora de la Secretaría de Comunicación y Cultura del Ministerio Secretaría General de la Presidencia (2000-2001); Presidenta del Consejo Nacional de Televisión (2001-2006)",
+      "url": "https://es.wikipedia.org/wiki/Patricia_Politzer"
+    }
+  },
+  {
+    "nombre": "Portilla, Ericka",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1985-01-04",
+      "afiliacion_politica": "Partido Comunista de Chile",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D4",
+      "profesion": "Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Secretaria Regional Ministerial de Transportes y Telecomunicaciones de Atacama (2014-2016); Gobernadora Provincial de Copiapó (2016-2018)"
+    },
+    "wikipedia": {
+      "genero": "F",
+      "fecha_nacimiento": "1985-01-04",
+      "afiliacion_politica": "Partido Comunista de Chile",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D4",
+      "profesion": "Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Secretaria Regional Ministerial de Transportes y Telecomunicaciones de Atacama (2014-2016); Gobernadora de la Provincia de Copiapó (2016-2018)",
+      "url": "https://es.wikipedia.org/wiki/Ericka_Portilla"
+    }
+  },
+  {
+    "nombre": "Pustilnick, Tammy",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1986-11-28",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Independientes del Bío Bío por una Nueva Constitución",
+      "distrito": "D20",
+      "profesion": "Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": null,
+      "fecha_nacimiento": null,
+      "afiliacion_politica": null,
+      "lista_electoral": null,
+      "distrito": null,
+      "profesion": null,
+      "es_abogado": null,
+      "grado_academico_nivel": null,
+      "experiencia_previa_institucional": null,
+      "experiencia_detalle": null,
+      "url": null
+    }
+  },
+  {
+    "nombre": "Perez, Alejandra",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1977-10-25",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "La Lista del Pueblo",
+      "distrito": "D9",
+      "profesion": null,
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "F",
+      "fecha_nacimiento": "1977-10-25",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "La Lista del Pueblo",
+      "distrito": "D9",
+      "profesion": null,
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Alejandra_P%C3%A9rez_Espina"
+    }
+  },
+  {
+    "nombre": "Quinteros, Maria Elisa",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1981-12-20",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Asamblea Popular por la Dignidad",
+      "distrito": "D17",
+      "profesion": "Odontóloga",
+      "es_abogado": false,
+      "grado_academico_nivel": 3,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "F",
+      "fecha_nacimiento": "1981-12-20",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Asamblea Popular por la Dignidad",
+      "distrito": "D17",
+      "profesion": "Odontóloga",
+      "es_abogado": false,
+      "grado_academico_nivel": 3,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Mar%C3%ADa_Elisa_Quinteros"
+    }
+  }
+]

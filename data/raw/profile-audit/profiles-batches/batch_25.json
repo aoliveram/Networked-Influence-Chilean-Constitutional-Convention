@@ -1,0 +1,114 @@
+[
+  {
+    "nombre": "Villena, Ingrid",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1990-06-05",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "La Lista del Pueblo",
+      "distrito": "D13",
+      "profesion": "Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "F",
+      "fecha_nacimiento": "1990-06-05",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "La Lista del Pueblo",
+      "distrito": "D13",
+      "profesion": "Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Ingrid_Villena"
+    }
+  },
+  {
+    "nombre": "Woldarsky, Manuel",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1984-03-11",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "La Lista del Pueblo",
+      "distrito": "D10",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "M",
+      "fecha_nacimiento": "1984-03-11",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "La Lista del Pueblo",
+      "distrito": "D10",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Manuel_Woldarsky"
+    }
+  },
+  {
+    "nombre": "Zarate, Camila",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1992-01-04",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "La Lista del Pueblo",
+      "distrito": "D7",
+      "profesion": "Egresada de Derecho",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "F",
+      "fecha_nacimiento": "1992-01-04",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "La Lista del Pueblo",
+      "distrito": "D7",
+      "profesion": "Egresada de Derecho",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Camila_Z%C3%A1rate_Z%C3%A1rate"
+    }
+  },
+  {
+    "nombre": "Zuniga, Luis Arturo",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1982-12-01",
+      "afiliacion_politica": "Unión Demócrata Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D9",
+      "profesion": "Ingeniero comercial",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Subsecretario de Redes Asistenciales (2019-2020)"
+    },
+    "wikipedia": {
+      "genero": "M",
+      "fecha_nacimiento": "1982-12-01",
+      "afiliacion_politica": "Unión Demócrata Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D9",
+      "profesion": "Ingeniero comercial",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Subsecretario de Redes Asistenciales (2019-2020)",
+      "url": "https://es.wikipedia.org/wiki/Arturo_Z%C3%BA%C3%B1iga"
+    }
+  }
+]

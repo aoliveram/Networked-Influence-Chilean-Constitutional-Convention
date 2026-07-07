@@ -1,0 +1,170 @@
+[
+  {
+    "nombre": "Abarca, Damaris",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1990-02-27",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D15",
+      "profesion": "Ajedrecista",
+      "es_abogado": false,
+      "grado_academico_nivel": null,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Damaris_Abarca",
+      "genero": "F",
+      "fecha_nacimiento": "1990-02-27",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D15",
+      "profesion": "Ajedrecista",
+      "es_abogado": false,
+      "grado_academico_nivel": null,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Abarca, Jorge",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1967-01-08",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D1",
+      "profesion": "Profesor de Biología",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": null,
+      "genero": null,
+      "fecha_nacimiento": null,
+      "afiliacion_politica": null,
+      "lista_electoral": null,
+      "distrito": null,
+      "profesion": null,
+      "es_abogado": null,
+      "grado_academico_nivel": null,
+      "experiencia_previa_institucional": null,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Achurra, Ignacio",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1979-10-17",
+      "afiliacion_politica": "Convergencia Social",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D14",
+      "profesion": "Actor",
+      "es_abogado": false,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Ignacio_Achurra",
+      "genero": "M",
+      "fecha_nacimiento": "1979-10-19",
+      "afiliacion_politica": "Convergencia Social",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D14",
+      "profesion": "Actor",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Aguilera, Tiare",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1982-02-13",
+      "afiliacion_politica": null,
+      "lista_electoral": "Escaños reservados",
+      "distrito": "Escaño reservado: Rapa Nui",
+      "profesion": "Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Tiare_Aguilera",
+      "genero": "F",
+      "fecha_nacimiento": "1982-02-13",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Escaños reservados",
+      "distrito": "Escaño reservado: Rapa Nui",
+      "profesion": "Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Alvarado, Gloria",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1963-03-23",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Corrientes Independientes",
+      "distrito": "D16",
+      "profesion": "Técnico de Nivel Superior en Administración y Gestión de Empresas",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": null,
+      "genero": null,
+      "fecha_nacimiento": null,
+      "afiliacion_politica": null,
+      "lista_electoral": null,
+      "distrito": null,
+      "profesion": null,
+      "es_abogado": null,
+      "grado_academico_nivel": null,
+      "experiencia_previa_institucional": null,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Alvarez, Julio",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1964-09-10",
+      "afiliacion_politica": "Partido Socialista de Chile",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D26",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Concejal por la comuna de Castro (2008-2012, 2016-2021)"
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Julio_Álvarez_Pinto",
+      "genero": "M",
+      "fecha_nacimiento": "1964-09-10",
+      "afiliacion_politica": "Partido Socialista de Chile",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D26",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Concejal por la comuna de Castro (2004-2012, 2016-2021)"
+    }
+  }
+]

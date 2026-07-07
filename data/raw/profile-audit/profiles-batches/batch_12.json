@@ -1,0 +1,170 @@
+[
+  {
+    "nombre": "Jofre, Alvaro",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1971-10-16",
+      "afiliacion_politica": "Renovación Nacional",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D2",
+      "profesion": "Egresado de Ingeniería en Administración de Empresas",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Concejal de Iquique (2004-2008, 2012-2016), Consejero Regional de Tarapacá (2017), Gobernador Provincial de Iquique (2018-2021), Seremi de Economía de Tarapacá"
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Álvaro_Jofré",
+      "genero": "M",
+      "fecha_nacimiento": "1971-10-16",
+      "afiliacion_politica": "Renovación Nacional",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D2",
+      "profesion": "Ingeniero en administración de empresas",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Concejal de Iquique (2012-2016), Consejero Regional de Tarapacá (2018), Gobernador de la Provincia de Iquique (2018-2020)"
+    }
+  },
+  {
+    "nombre": "Jurgensen, Harry",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1942-05-30",
+      "afiliacion_politica": "Renovación Nacional",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D25",
+      "profesion": "Contador General",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Diputado (1994-1998), Intendente de la Región de Los Lagos (2018-2021)"
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Harry_Jürgensen_Caesar",
+      "genero": "M",
+      "fecha_nacimiento": "1942-05-30",
+      "afiliacion_politica": "Renovación Nacional",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D25",
+      "profesion": "Contador general",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Diputado de la República (1994-1998), Intendente de la Región de Los Lagos (2018-2021)"
+    }
+  },
+  {
+    "nombre": "Labbe, Bastian",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1990-05-06",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Asamblea Popular Constituyente",
+      "distrito": "D20",
+      "profesion": "Profesor de Historia y Geografía",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Bastián_Labbé",
+      "genero": "M",
+      "fecha_nacimiento": "1990-05-06",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Asamblea Popular Constituyente",
+      "distrito": "D20",
+      "profesion": "Profesor",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Labra, Patricia",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1986-04-25",
+      "afiliacion_politica": "Renovación Nacional",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D18",
+      "profesion": "Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Coordinadora regional del Servicio Nacional del Adulto Mayor en el Maule (2018-2020)"
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Patricia_Labra",
+      "genero": "F",
+      "fecha_nacimiento": "1986-04-25",
+      "afiliacion_politica": "Renovación Nacional",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D18",
+      "profesion": "Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Coordinadora regional del Servicio Nacional del Adulto Mayor en el Maule (2018-2021)"
+    }
+  },
+  {
+    "nombre": "Labrana, Elsa",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1974-09-19",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "La Lista del Pueblo",
+      "distrito": "D17",
+      "profesion": "Asistente Social",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Elsa_Labraña",
+      "genero": "F",
+      "fecha_nacimiento": "1974-09-19",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "La Lista del Pueblo",
+      "distrito": "D17",
+      "profesion": "Trabajadora social",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Laibe, Tomas",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1990-09-28",
+      "afiliacion_politica": "Partido Socialista de Chile",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D27",
+      "profesion": "Cientista Político",
+      "es_abogado": false,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Tomás_Laibe",
+      "genero": "M",
+      "fecha_nacimiento": "1990-09-28",
+      "afiliacion_politica": "Partido Socialista",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D27",
+      "profesion": "Politólogo",
+      "es_abogado": false,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  }
+]

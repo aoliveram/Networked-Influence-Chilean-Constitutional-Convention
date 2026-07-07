@@ -1,0 +1,170 @@
+[
+  {
+    "nombre": "Alvarez, Rodrigo",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1966-07-30",
+      "afiliacion_politica": "Unión Demócrata Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D28",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 3,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Diputado (1998-2010), Subsecretario de Hacienda (2010-2011), Ministro de Energía (2011-2012)"
+    },
+    "wikipedia": {
+      "genero": "M",
+      "fecha_nacimiento": "1966-07-30",
+      "afiliacion_politica": "Unión Demócrata Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D28",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 3,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Diputado (1998-2010), Subsecretario de Hacienda (2010-2011), Ministro de Energía (2011-2012)",
+      "url": "https://es.wikipedia.org/wiki/Rodrigo_%C3%81lvarez_Zenteno"
+    }
+  },
+  {
+    "nombre": "Alvez, Amaya",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1971-04-03",
+      "afiliacion_politica": "Revolución Democrática",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D20",
+      "profesion": "Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 3,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "F",
+      "fecha_nacimiento": "1971-04-03",
+      "afiliacion_politica": "Revolución Democrática",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D20",
+      "profesion": "Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 3,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Amaya_Alvez"
+    }
+  },
+  {
+    "nombre": "Ampuero, Adriana",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1986-12-01",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "La Lista del Pueblo",
+      "distrito": "D26",
+      "profesion": "Egresada de derecho",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "F",
+      "fecha_nacimiento": "1986-12-01",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "La Lista del Pueblo",
+      "distrito": "D26",
+      "profesion": "Egresada de derecho",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Adriana_Ampuero"
+    }
+  },
+  {
+    "nombre": "Andrade, Cristobal",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1988-09-30",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "La Lista del Pueblo",
+      "distrito": "D6",
+      "profesion": "Mecánico Automotriz",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "M",
+      "fecha_nacimiento": "1988-09-30",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "La Lista del Pueblo",
+      "distrito": "D6",
+      "profesion": "Mecánico automotriz",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Crist%C3%B3bal_Andrade"
+    }
+  },
+  {
+    "nombre": "Antilef, Victorino",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1969-09-20",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Escaños reservados",
+      "distrito": "Escaño reservado: Pueblo Mapuche",
+      "profesion": "Profesor Educación General Básica",
+      "es_abogado": false,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "M",
+      "fecha_nacimiento": "1969-09-20",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Escaños reservados",
+      "distrito": "Escaño reservado: Pueblo Mapuche",
+      "profesion": "Educador",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Victorino_Antilef"
+    }
+  },
+  {
+    "nombre": "Arancibia, Jorge",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1939-09-17",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D7",
+      "profesion": "Ingeniero de Armas, Almirante (r)",
+      "es_abogado": false,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Comandante en Jefe de la Armada (1997-2001), Senador (2002-2010)"
+    },
+    "wikipedia": {
+      "genero": "M",
+      "fecha_nacimiento": "1939-09-17",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D7",
+      "profesion": "Marino, político y diplomático",
+      "es_abogado": false,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Comandante en Jefe de la Armada (1997-2001), Senador (2002-2010), Embajador de Chile en Turquía (2011-2013)",
+      "url": "https://es.wikipedia.org/wiki/Jorge_Arancibia"
+    }
+  }
+]
