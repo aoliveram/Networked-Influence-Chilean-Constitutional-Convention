@@ -1,0 +1,142 @@
+[
+  {
+    "nombre": "Caamano, Francisco",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1989-12-11",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "La Lista del Pueblo",
+      "distrito": "D14",
+      "profesion": "Ingeniero en Administración de Empresas",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Francisco_Caama%C3%B1o_Rojas",
+      "genero": "M",
+      "fecha_nacimiento": "1989-12-11",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "La Lista del Pueblo",
+      "distrito": "D14",
+      "profesion": "Ingeniero en administración de empresas",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Caiguan, Alexis",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1975-08-18",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Escaños reservados",
+      "distrito": "Escaño reservado: Pueblo Mapuche",
+      "profesion": "Músico y educador tradicional",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Alexis_Caiguan",
+      "genero": "M",
+      "fecha_nacimiento": "1975-08-18",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Escaños reservados",
+      "distrito": "Escaño reservado: Pueblo Mapuche",
+      "profesion": "Educador",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Calvo, Carlos",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1946-03-07",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D5",
+      "profesion": "Profesor de filosofía",
+      "es_abogado": false,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Carlos_Calvo_Mu%C3%B1oz",
+      "genero": "M",
+      "fecha_nacimiento": "1946-03-07",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D5",
+      "profesion": "Profesor de filosofía",
+      "es_abogado": false,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Cancino, Adriana",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1962-06-22",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D16",
+      "profesion": "Profesora",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Adriana_Cancino",
+      "genero": "F",
+      "fecha_nacimiento": "1962-06-22",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D16",
+      "profesion": "Profesora",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Cantuarias, Rocio",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1978-06-20",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D20",
+      "profesion": "Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Roc%C3%ADo_Cantuarias",
+      "genero": "F",
+      "fecha_nacimiento": "1979",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D20",
+      "profesion": "Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  }
+]

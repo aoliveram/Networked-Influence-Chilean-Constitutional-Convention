@@ -1,0 +1,142 @@
+[
+  {
+    "nombre": "Namor, Guillermo",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1996-11-27",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Independientes por la Nueva Constitución",
+      "distrito": "D4",
+      "profesion": "Egresado de Derecho",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": null,
+      "genero": null,
+      "fecha_nacimiento": null,
+      "afiliacion_politica": null,
+      "lista_electoral": null,
+      "distrito": null,
+      "profesion": null,
+      "es_abogado": null,
+      "grado_academico_nivel": null,
+      "experiencia_previa_institucional": null,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Navarrete, Geoconda",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1969-09-08",
+      "afiliacion_politica": "Evolución Política",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D27",
+      "profesion": "Asistente social",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Intendenta de la Región de Aysén (2018-2021)"
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Geoconda_Navarrete",
+      "genero": "F",
+      "fecha_nacimiento": "1969-09-08",
+      "afiliacion_politica": "Evolución Política",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D27",
+      "profesion": "Asistente social",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Secretaria Regional Ministerial de Desarrollo Social de Aysén (2010-2014), Intendenta de la Región de Aysén (2018-2021)"
+    }
+  },
+  {
+    "nombre": "Neumann, Ricardo",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1987-12-13",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D16",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Ricardo_Neumann",
+      "genero": "M",
+      "fecha_nacimiento": "1987-12-13",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D16",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Nunez, Nicolas",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1987-09-28",
+      "afiliacion_politica": "Federación Regionalista Verde Social",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D16",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Nicol%C3%A1s_N%C3%BA%C3%B1ez_Gangas",
+      "genero": "M",
+      "fecha_nacimiento": "1987-09-28",
+      "afiliacion_politica": "Federación Regionalista Verde Social",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D16",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Olivares, Ivanna",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1990-07-11",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "La Lista del Pueblo",
+      "distrito": "D5",
+      "profesion": "Profesora de Historia",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": null,
+      "genero": null,
+      "fecha_nacimiento": null,
+      "afiliacion_politica": null,
+      "lista_electoral": null,
+      "distrito": null,
+      "profesion": null,
+      "es_abogado": null,
+      "grado_academico_nivel": null,
+      "experiencia_previa_institucional": null,
+      "experiencia_detalle": null
+    }
+  }
+]

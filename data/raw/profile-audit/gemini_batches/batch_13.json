@@ -1,0 +1,142 @@
+[
+  {
+    "nombre": "Harboe, Felipe",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1972-07-20",
+      "afiliacion_politica": "Partido por la Democracia",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D19",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Subsecretario de Carabineros (2002-2006), Subsecretario del Interior (2006), Diputado (2009-2014), Senador (2014-2021)"
+    },
+    "wikipedia": {
+      "genero": "M",
+      "fecha_nacimiento": "1972-07-20",
+      "afiliacion_politica": "Partido por la Democracia",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D19",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Subsecretario de Carabineros (2002-2006), Subsecretario del Interior (2006-2008), Diputado (2009-2014), Senador (2014-2021)",
+      "url": "https://es.wikipedia.org/wiki/Felipe_Harboe"
+    }
+  },
+  {
+    "nombre": "Henriquez, Natalia",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1985-07-09",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "La Lista del Pueblo",
+      "distrito": "D9",
+      "profesion": "Médica internista",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": null,
+      "fecha_nacimiento": null,
+      "afiliacion_politica": null,
+      "lista_electoral": null,
+      "distrito": null,
+      "profesion": null,
+      "es_abogado": null,
+      "grado_academico_nivel": null,
+      "experiencia_previa_institucional": null,
+      "experiencia_detalle": null,
+      "url": null
+    }
+  },
+  {
+    "nombre": "Hoppe, Vanessa",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1979-12-27",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D21",
+      "profesion": "Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "F",
+      "fecha_nacimiento": "1981",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D21",
+      "profesion": "Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Vanessa_Hoppe"
+    }
+  },
+  {
+    "nombre": "Hube, Constanza",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1986-03-10",
+      "afiliacion_politica": "Unión Demócrata Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D11",
+      "profesion": "Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "F",
+      "fecha_nacimiento": "1986-03-10",
+      "afiliacion_politica": "Unión Demócrata Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D11",
+      "profesion": "Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Constanza_Hube"
+    }
+  },
+  {
+    "nombre": "Hurtado, Maximiliano",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1984-09-27",
+      "afiliacion_politica": "Partido Socialista de Chile",
+      "lista_electoral": "La Lista del Apruebo",
+      "distrito": "D4",
+      "profesion": null,
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": null,
+      "fecha_nacimiento": null,
+      "afiliacion_politica": null,
+      "lista_electoral": null,
+      "distrito": null,
+      "profesion": null,
+      "es_abogado": null,
+      "grado_academico_nivel": null,
+      "experiencia_previa_institucional": null,
+      "experiencia_detalle": null,
+      "url": null
+    }
+  }
+]

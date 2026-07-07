@@ -1,0 +1,142 @@
+[
+  {
+    "nombre": "De la Maza, Bernardo",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1946-01-03",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D8",
+      "profesion": "Periodista",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "M",
+      "fecha_nacimiento": "1946-01-03",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D8",
+      "profesion": "Periodista",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Bernardo_de_la_Maza"
+    }
+  },
+  {
+    "nombre": "Delgado, Aurora",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1964-07-31",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D24",
+      "profesion": "Matrona",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": null,
+      "fecha_nacimiento": null,
+      "afiliacion_politica": null,
+      "lista_electoral": null,
+      "distrito": null,
+      "profesion": null,
+      "es_abogado": null,
+      "grado_academico_nivel": null,
+      "experiencia_previa_institucional": null,
+      "experiencia_detalle": null,
+      "url": null
+    }
+  },
+  {
+    "nombre": "Dominguez, Gaspar",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1988-10-27",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Independientes No Neutrales",
+      "distrito": "D26",
+      "profesion": "Médico",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "M",
+      "fecha_nacimiento": "1988-10-27",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Independientes No Neutrales",
+      "distrito": "D26",
+      "profesion": "Médico",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Gaspar_Dom%C3%ADnguez"
+    }
+  },
+  {
+    "nombre": "Dorador, Cristina",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1980-02-28",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Movimiento Independientes del Norte",
+      "distrito": "D3",
+      "profesion": "Bióloga",
+      "es_abogado": false,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "F",
+      "fecha_nacimiento": "1980-02-28",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Movimiento Independientes del Norte",
+      "distrito": "D3",
+      "profesion": "Bióloga",
+      "es_abogado": false,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Cristina_Dorador"
+    }
+  },
+  {
+    "nombre": "Fernandez, Patricio",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1969-09-21",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D11",
+      "profesion": "Escritor",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "M",
+      "fecha_nacimiento": "1969-09-21",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D11",
+      "profesion": "Escritor",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Patricio_Fern%C3%ADndez"
+    }
+  }
+]

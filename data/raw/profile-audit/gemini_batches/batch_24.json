@@ -1,0 +1,142 @@
+[
+  {
+    "nombre": "Saldana, Alvin",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1976-07-05",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Movimientos Sociales Autónomos",
+      "distrito": "D15",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "M",
+      "fecha_nacimiento": "1976-07-05",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Movimientos Sociales Autónomos",
+      "distrito": "D15",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Alvin_Salda%C3%B1a"
+    }
+  },
+  {
+    "nombre": "Salinas, Fernando",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1956-03-02",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "La Lista del Pueblo",
+      "distrito": "D18",
+      "profesion": "Ingeniero Civil",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": null,
+      "fecha_nacimiento": null,
+      "afiliacion_politica": null,
+      "lista_electoral": null,
+      "distrito": null,
+      "profesion": null,
+      "es_abogado": null,
+      "grado_academico_nivel": null,
+      "experiencia_previa_institucional": null,
+      "experiencia_detalle": null,
+      "url": null
+    }
+  },
+  {
+    "nombre": "San Juan, Constanza",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1985-09-18",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Asamblea Constituyente Atacama",
+      "distrito": "D4",
+      "profesion": "Licenciada en Historia",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "F",
+      "fecha_nacimiento": "1985-09-18",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Asamblea Constituyente Atacama",
+      "distrito": "D4",
+      "profesion": "Licenciada en Historia",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Constanza_San_Juan"
+    }
+  },
+  {
+    "nombre": "Schonhaut, Constanza",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1989-01-31",
+      "afiliacion_politica": "Partido Convergencia Social",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D11",
+      "profesion": "Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "F",
+      "fecha_nacimiento": "1989-01-31",
+      "afiliacion_politica": "Convergencia Social",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D11",
+      "profesion": "Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Constanza_Sch%C3%B6nhaut"
+    }
+  },
+  {
+    "nombre": "Sepulveda, Barbara",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1985-07-19",
+      "afiliacion_politica": "Partido Comunista de Chile",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D9",
+      "profesion": "Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "F",
+      "fecha_nacimiento": "1985-07-19",
+      "afiliacion_politica": "Partido Comunista de Chile",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D9",
+      "profesion": "Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/B%C3%A1rbara_Sep%C3%BAlveda"
+    }
+  }
+]

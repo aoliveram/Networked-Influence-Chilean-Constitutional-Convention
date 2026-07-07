@@ -1,0 +1,142 @@
+[
+  {
+    "nombre": "Hurtado, Ruth",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1981-10-08",
+      "afiliacion_politica": "Partido Republicano de Chile",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D22",
+      "profesion": "Bachiller en Trabajo Social",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "F",
+      "fecha_nacimiento": "1981-10-08",
+      "afiliacion_politica": "Partido Republicano",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D22",
+      "profesion": "Trabajadora social",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Ruth_Hurtado"
+    }
+  },
+  {
+    "nombre": "Jimenez, Luis",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1983-09-10",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Escaños reservados",
+      "distrito": "Escaño reservado: Pueblo Aymara",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "M",
+      "fecha_nacimiento": "1983-09-10",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Escaños reservados",
+      "distrito": "Escaño reservado: Pueblo Aymara",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Luis_Jim%C3%A9nez_C%C3%A1ceres"
+    }
+  },
+  {
+    "nombre": "Jofre, Alvaro",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1971-10-16",
+      "afiliacion_politica": "Renovación Nacional",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D2",
+      "profesion": "Egresado de Ingeniería en Administración de Empresas",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Concejal de Iquique (2004-2008, 2012-2016); Consejero Regional de Tarapacá (2017-2018); Gobernador Provincial de Iquique (2018-2021); Seremi de Economía de Tarapacá"
+    },
+    "wikipedia": {
+      "genero": "M",
+      "fecha_nacimiento": "1971-10-16",
+      "afiliacion_politica": "Renovación Nacional",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D2",
+      "profesion": "Ingeniero en administración de empresas",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Concejal de Iquique (2012-2016); Consejero Regional de Tarapacá (2018); Gobernador de la Provincia de Iquique (2018-2020)",
+      "url": "https://es.wikipedia.org/wiki/%C3%81lvaro_Jofr%C3%A9"
+    }
+  },
+  {
+    "nombre": "Jurgensen, Harry",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1942-05-30",
+      "afiliacion_politica": "Renovación Nacional",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D25",
+      "profesion": "Contador General",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Diputado por el Distrito N° 56 (1994-1998); Intendente de la Región de Los Lagos (2018-2021)"
+    },
+    "wikipedia": {
+      "genero": "M",
+      "fecha_nacimiento": "1942-05-30",
+      "afiliacion_politica": "Renovación Nacional",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D25",
+      "profesion": "Contador general",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Diputado de la República (1994-1998); Intendente de la Región de Los Lagos (2018-2021)",
+      "url": "https://es.wikipedia.org/wiki/Harry_J%C3%BCrgensen_Caesar"
+    }
+  },
+  {
+    "nombre": "Labbe, Bastian",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1990-05-06",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Asamblea Popular Constituyente",
+      "distrito": "D20",
+      "profesion": "Profesor de Historia y Geografía",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "M",
+      "fecha_nacimiento": "1990-05-06",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Asamblea Popular Constituyente",
+      "distrito": "D20",
+      "profesion": "Profesor de historia y geografía",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Basti%C3%A1n_Labb%C3%A9"
+    }
+  }
+]

@@ -1,0 +1,142 @@
+[
+  {
+    "nombre": "Monckeberg, Cristian",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1968-05-12",
+      "afiliacion_politica": "Renovación Nacional",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D10",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Concejal de Ñuñoa (1992-1996), Diputado (2006-2018), Ministro de Vivienda y Urbanismo (2018-2020), Ministro de Desarrollo Social y Familia (2020), Ministro Secretario General de la Presidencia (2020-2021)"
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Cristi%C3%A1n_Monckeberg",
+      "genero": "M",
+      "fecha_nacimiento": "1968-05-12",
+      "afiliacion_politica": "Renovación Nacional",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D10",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Concejal de Ñuñoa (1992-1996), Diputado (2006-2018), Ministro de Vivienda y Urbanismo (2018-2020), Ministro de Desarrollo Social y Familia (2020), Ministro Secretario General de la Presidencia (2020-2021)"
+    }
+  },
+  {
+    "nombre": "Montealegre, Katerine",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1992-02-23",
+      "afiliacion_politica": "Unión Demócrata Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D26",
+      "profesion": "Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Katerine_Montealegre",
+      "genero": "F",
+      "fecha_nacimiento": "1992-02-23",
+      "afiliacion_politica": "Unión Demócrata Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D26",
+      "profesion": "Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Montero, Ricardo",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1983-06-12",
+      "afiliacion_politica": "Partido Socialista de Chile",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D18",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Ricardo_Montero_Allende",
+      "genero": "M",
+      "fecha_nacimiento": "1983-06-12",
+      "afiliacion_politica": "Partido Socialista",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D18",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Moreno, Alfredo",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1982-02-11",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D17",
+      "profesion": "Ingeniero Comercial",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Alfredo_Moreno_Echeverr%C3%ADa",
+      "genero": "M",
+      "fecha_nacimiento": "1982-02-11",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D17",
+      "profesion": "Político y jinete de rodeo",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Munoz, Pedro",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1987-11-24",
+      "afiliacion_politica": "Partido Socialista de Chile",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D24",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Concejal de Valdivia (2016-2020)"
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Pedro_Mu%C3%B1oz_Leiva",
+      "genero": "M",
+      "fecha_nacimiento": "1987-11-24",
+      "afiliacion_politica": "Partido Socialista",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D24",
+      "profesion": "Político y activista",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Concejal de Valdivia (2016-2021)"
+    }
+  }
+]

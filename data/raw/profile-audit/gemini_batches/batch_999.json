@@ -1,0 +1,142 @@
+[
+  {
+    "nombre": "Zuniga, Luis Arturo",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1982-12-01",
+      "afiliacion_politica": "Unión Demócrata Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D9",
+      "profesion": "Ingeniero comercial",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Subsecretario de Redes Asistenciales (2019-2020)"
+    },
+    "wikipedia": {
+      "genero": "M",
+      "fecha_nacimiento": "1982-12-01",
+      "afiliacion_politica": "Unión Demócrata Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D9",
+      "profesion": "Ingeniero comercial",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Subsecretario de Redes Asistenciales (2019-2020)",
+      "url": "https://es.wikipedia.org/wiki/Arturo_Z%C3%BA%C3%B1iga"
+    }
+  },
+  {
+    "nombre": "Tepper, Maria Angelica",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1961-03-23",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D23",
+      "profesion": null,
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": null,
+      "fecha_nacimiento": null,
+      "afiliacion_politica": null,
+      "lista_electoral": null,
+      "distrito": null,
+      "profesion": null,
+      "es_abogado": null,
+      "grado_academico_nivel": null,
+      "experiencia_previa_institucional": null,
+      "experiencia_detalle": null,
+      "url": null
+    }
+  },
+  {
+    "nombre": "Garin, Renato",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1986-05-30",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "La Lista del Apruebo",
+      "distrito": "D14",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Diputado (2018-2021)"
+    },
+    "wikipedia": {
+      "genero": "M",
+      "fecha_nacimiento": "1986-05-30",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "La Lista del Apruebo",
+      "distrito": "D14",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Diputado (2018-2021)",
+      "url": "https://es.wikipedia.org/wiki/Renato_Gar%C3%ADn"
+    }
+  },
+  {
+    "nombre": "Chahin, Fuad",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1976-12-01",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D22",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Seremi de Gobierno (2002-2003), Director de la DOS (2003-2006), Diputado (2010-2018)"
+    },
+    "wikipedia": {
+      "genero": "M",
+      "fecha_nacimiento": "1976-12-01",
+      "afiliacion_politica": "Partido Demócrata Cristiano",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D22",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Seremi de Gobierno (2002-2003), Director de la DOS (2003-2006), Diputado (2010-2018)",
+      "url": "https://es.wikipedia.org/wiki/Fuad_Ch%C3%ADn"
+    }
+  },
+  {
+    "nombre": "Gonzalez, Dayana",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1987-10-31",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "La Lista del Pueblo",
+      "distrito": "D3",
+      "profesion": "Profesora de Historia y Geografía",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "genero": "F",
+      "fecha_nacimiento": "1987-10-31",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "La Lista del Pueblo",
+      "distrito": "D3",
+      "profesion": "Profesora de historia y geografía",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null,
+      "url": "https://es.wikipedia.org/wiki/Dayyana_Gonz%C3%A1lez"
+    }
+  }
+]

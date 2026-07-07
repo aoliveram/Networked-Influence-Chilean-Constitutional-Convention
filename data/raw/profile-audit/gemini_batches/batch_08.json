@@ -1,0 +1,142 @@
+[
+  {
+    "nombre": "Cretton, Eduardo",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1995-11-23",
+      "afiliacion_politica": "Unión Demócrata Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D22",
+      "profesion": "Licenciado en ciencias jurídicas",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Eduardo_Cretton",
+      "genero": "M",
+      "fecha_nacimiento": "1995-11-23",
+      "afiliacion_politica": "Unión Demócrata Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D22",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Cruz, Andres",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1973-06-04",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D20",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Andr%C3%A9s_Cruz",
+      "genero": "M",
+      "fecha_nacimiento": "1973-06-04",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D20",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Cubillos, Marcela",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1967-02-02",
+      "afiliacion_politica": "Unión Demócrata Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D11",
+      "profesion": "Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Diputada (2002-2010), Ministra de Medio Ambiente (2018), Ministra de Educación (2018-2020)"
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Marcela_Cubillos",
+      "genero": "F",
+      "fecha_nacimiento": "1967-02-02",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D11",
+      "profesion": "Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Diputada (2002-2010), Ministra del Medio Ambiente (2018), Ministra de Educación (2018-2020)"
+    }
+  },
+  {
+    "nombre": "Cespedes, Lorena",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1973-07-18",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Independientes por la Nueva Constitución",
+      "distrito": "D23",
+      "profesion": "Profesora de física",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Lorena_C%C3%A9spedes",
+      "genero": "F",
+      "fecha_nacimiento": "1973",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Independientes No Neutrales",
+      "distrito": "D23",
+      "profesion": "Física, educadora",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Daza, Mauricio",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1972-03-21",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Regionalismo Ciudadano Independiente",
+      "distrito": "D28",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Mauricio_Daza",
+      "genero": "M",
+      "fecha_nacimiento": "1972-03-21",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Regionalismo Ciudadano Independiente",
+      "distrito": "D28",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  }
+]

@@ -1,0 +1,142 @@
+[
+  {
+    "nombre": "Sepulveda, Carolina",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1980-06-06",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Independientes de Ñuble por la Nueva Constitución",
+      "distrito": "D19",
+      "profesion": "Ingeniera Civil Química",
+      "es_abogado": false,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": null,
+      "genero": null,
+      "fecha_nacimiento": null,
+      "afiliacion_politica": null,
+      "lista_electoral": null,
+      "distrito": null,
+      "profesion": null,
+      "es_abogado": null,
+      "grado_academico_nivel": null,
+      "experiencia_previa_institucional": null,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Serey, Mariela",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1980-12-22",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D6",
+      "profesion": "Profesora de Educación General Básica",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": null,
+      "genero": null,
+      "fecha_nacimiento": null,
+      "afiliacion_politica": null,
+      "lista_electoral": null,
+      "distrito": null,
+      "profesion": null,
+      "es_abogado": null,
+      "grado_academico_nivel": null,
+      "experiencia_previa_institucional": null,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Silva, Luciano",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1971-02-03",
+      "afiliacion_politica": "Renovación Nacional",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D20",
+      "profesion": "Profesor de Educación General Básica",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": null,
+      "genero": null,
+      "fecha_nacimiento": null,
+      "afiliacion_politica": null,
+      "lista_electoral": null,
+      "distrito": null,
+      "profesion": null,
+      "es_abogado": null,
+      "grado_academico_nivel": null,
+      "experiencia_previa_institucional": null,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Squella, Agustin",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1944-04-26",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D7",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Rector de la Universidad de Valparaíso (1990-1998); Asesor Cultural de la Presidencia (2000-2003)"
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Agust%C3%ADn_Squella",
+      "genero": "M",
+      "fecha_nacimiento": "1944-04-26",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D7",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Rector de la Universidad de Valparaíso (1990-1998); Asesor Cultural de la Presidencia (2000-2003)"
+    }
+  },
+  {
+    "nombre": "Stingo, Daniel",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1965-11-03",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D8",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Daniel_Stingo",
+      "genero": "M",
+      "fecha_nacimiento": "1965-11-03",
+      "afiliacion_politica": "Revolución Democrática",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D8",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  }
+]

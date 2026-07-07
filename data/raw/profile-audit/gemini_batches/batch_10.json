@@ -1,0 +1,142 @@
+[
+  {
+    "nombre": "Flores, Alejandra",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1961-03-10",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Independientes De Tarapacá",
+      "distrito": "D2",
+      "profesion": "Profesora de Castellano",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": null,
+      "genero": null,
+      "fecha_nacimiento": null,
+      "afiliacion_politica": null,
+      "lista_electoral": null,
+      "distrito": null,
+      "profesion": null,
+      "es_abogado": null,
+      "grado_academico_nivel": null,
+      "experiencia_previa_institucional": null,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Fontaine, Bernardo",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1964-06-10",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D11",
+      "profesion": "Ingeniero Comercial",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Bernardo_Fontaine",
+      "genero": "M",
+      "fecha_nacimiento": "1964-06-10",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D11",
+      "profesion": "Ingeniero Comercial",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Fuchslocher, Javier",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1988-10-14",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Independientes por una nueva Constitución",
+      "distrito": "D21",
+      "profesion": "Profesor de Historia y Geografía",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Javier_Fuchslocher",
+      "genero": "M",
+      "fecha_nacimiento": "1988-10-14",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Independientes por una Nueva Constitución",
+      "distrito": "D21",
+      "profesion": "Profesor de Historia y Geografía",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Gallardo, Bessy",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1984-12-31",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D8",
+      "profesion": "Egresada de Derecho",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Bessy_Gallardo",
+      "genero": "F",
+      "fecha_nacimiento": "1984-12-31",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D8",
+      "profesion": "Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Galleguillos, Felix",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1986-03-23",
+      "afiliacion_politica": null,
+      "lista_electoral": "Escaños reservados",
+      "distrito": "Escaño reservado: Pueblo Atacameño",
+      "profesion": "Ingeniero Civil Ambiental",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/F%C3%A9lix_Galleguillos_Aymani",
+      "genero": "M",
+      "fecha_nacimiento": "1986-03-23",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Escaños reservados",
+      "distrito": "Escaño reservado: Pueblo Atacameño",
+      "profesion": "Ingeniero Civil Ambiental",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  }
+]

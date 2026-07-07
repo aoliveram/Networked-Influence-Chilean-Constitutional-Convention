@@ -1,0 +1,142 @@
+[
+  {
+    "nombre": "Mamani, Isabella",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1988-01-07",
+      "afiliacion_politica": null,
+      "lista_electoral": "Escaños reservados",
+      "distrito": "Escaño reservado: Pueblo Aymara",
+      "profesion": "Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Isabella_Mamani",
+      "genero": "F",
+      "fecha_nacimiento": "1988-01-07",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Escaños reservados",
+      "distrito": "Escaño reservado: Pueblo Aymara",
+      "profesion": "Abogada",
+      "es_abogado": true,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Marinovic, Teresa",
+    "bcn": {
+      "genero": "F",
+      "fecha_nacimiento": "1973-02-03",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D10",
+      "profesion": "Licenciada en Filosofía",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Teresa_Marinovic",
+      "genero": "F",
+      "fecha_nacimiento": "1973-02-03",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D10",
+      "profesion": "Licenciada en filosofía",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Martin, Juan Jose",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1995-10-27",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Independientes por una Nueva Constitución",
+      "distrito": "D12",
+      "profesion": null,
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Juan_Jos%C3%A9_Martin",
+      "genero": "M",
+      "fecha_nacimiento": "1995-10-27",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Independientes por una Nueva Constitución",
+      "distrito": "D12",
+      "profesion": "Ingeniero",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Martinez, Helmuth",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1986-10-15",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Lista del Pueblo",
+      "distrito": "D23",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Helmuth_Mart%C3%ADnez_Llancap%C3%A1n",
+      "genero": "M",
+      "fecha_nacimiento": "1987-10-15",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "La Lista del Pueblo",
+      "distrito": "D23",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Mayol, Luis",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1952-11-27",
+      "afiliacion_politica": "Renovación Nacional",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D23",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Ministro de Agricultura (2011-2014), Intendente de la Región de la Araucanía (2018)"
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Luis_Mayol",
+      "genero": "M",
+      "fecha_nacimiento": "1952-11-27",
+      "afiliacion_politica": "Renovación Nacional",
+      "lista_electoral": "Vamos por Chile",
+      "distrito": "D23",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Ministro de Agricultura de Chile (2011-2014), Intendente de la Región de la Araucanía (2018)"
+    }
+  }
+]

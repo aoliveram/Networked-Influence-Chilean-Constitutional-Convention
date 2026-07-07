@@ -1,0 +1,142 @@
+[
+  {
+    "nombre": "Atria, Fernando",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1968-10-30",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D10",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Fernando_Atria",
+      "genero": "M",
+      "fecha_nacimiento": "1968-10-30",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Apruebo Dignidad",
+      "distrito": "D10",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Bacian, Wilfredo",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1975-09-27",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Escaños reservados",
+      "distrito": "Escaño reservado: Pueblo Quechua",
+      "profesion": "Gestor cultural",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Concejal por la comuna de Pozo Almonte (2004-2008)"
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Wilfredo_Bacian",
+      "genero": "M",
+      "fecha_nacimiento": "1976",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Escaños reservados",
+      "distrito": "Escaño reservado: Pueblo Quechua",
+      "profesion": "Gestor cultural",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Baradit, Jorge",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1969-06-11",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D10",
+      "profesion": "Diseñador gráfico",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Jorge_Baradit",
+      "genero": "M",
+      "fecha_nacimiento": "1969-06-11",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D10",
+      "profesion": "Diseñador gráfico",
+      "es_abogado": false,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Baranda, Benito",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1959-01-01",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Independientes No Neutrales",
+      "distrito": "D12",
+      "profesion": "Psicólogo",
+      "es_abogado": false,
+      "grado_academico_nivel": 2,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Benito_Baranda",
+      "genero": "M",
+      "fecha_nacimiento": "1959-01-01",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Independientes No Neutrales",
+      "distrito": "D12",
+      "profesion": "Psicólogo",
+      "es_abogado": false,
+      "grado_academico_nivel": 1,
+      "experiencia_previa_institucional": false,
+      "experiencia_detalle": null
+    }
+  },
+  {
+    "nombre": "Barcelo, Luis",
+    "bcn": {
+      "genero": "M",
+      "fecha_nacimiento": "1953-11-10",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D21",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Gobernador de la Provincia del Biobío (2014-2018)"
+    },
+    "wikipedia": {
+      "url": "https://es.wikipedia.org/wiki/Luis_Barcel%C3%B3",
+      "genero": "M",
+      "fecha_nacimiento": "1953-11-10",
+      "afiliacion_politica": "Independiente",
+      "lista_electoral": "Lista del Apruebo",
+      "distrito": "D21",
+      "profesion": "Abogado",
+      "es_abogado": true,
+      "grado_academico_nivel": 0,
+      "experiencia_previa_institucional": true,
+      "experiencia_detalle": "Gobernador de la Provincia del Biobío (2014-2018)"
+    }
+  }
+]
