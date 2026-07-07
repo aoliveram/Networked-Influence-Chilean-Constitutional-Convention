@@ -68,6 +68,22 @@ Case and accents are part of the raw identifier. For joins, preserve the exact v
 | `C6_X_ART3` | Commission 6, special/manual provenance marker, article 3. |
 | `C7_GEN_CH01_ART01.1` | Commission 7, Genesis-derived record, chapter 1, article 1.1. |
 
+## `authors`
+
+`authors` is a list of convention members in "Surname, Name" format, harmonized against the canonical roster of 154 members (`convention_members.json`). Only natural persons from the roster appear in this field.
+
+**Provenance rule.** For genesis-derived records, `authors` corresponds to the matched signatories (`firmantes_matched`) of the constituent initiative(s) referenced in `sources`, taking the union when a record has several sources. This rule was validated against the commissions where both fields coexist (C3, C5, C6, C7): 1,252 of 1,253 GENESIS records match the signatory list of their source initiatives exactly. In C4 the initiative reference lives in `icc_id` instead of `sources` (bare number, `N-C`, a list, or `ICC N°X`; the prefixes `IPC`, `ICI`, and `IPN` denote citizen popular or indigenous initiatives); the same rule validated 163 of 163 resolvable C4 records (133 in the master file, 30 in the block-3 intermediate). C2, whose custom reconstruction pipeline had lost this linkage, and the C4 records skipped by a partially-run enrichment step were populated ex post with the same rule (C2: 235 in `C2_GENESIS_master`, 149 in `C2_TRACK_full`, 17 in `C2_TRACK_articles`; C4: 15, 15, and 9 respectively).
+
+**Records without authors.** In the seven `TRACK_full` files, 134 of 2,019 records carry no non-empty `authors` list, in three documented classes:
+
+| Class | Count | Meaning |
+|---|---|---|
+| Source is a citizen popular or indigenous initiative | 65 | `sources`/`icc_id` points to a popular or indigenous initiative (strings such as `Iniciativa Popular 40-2`, `Iniciativa Popular Indígena 201-2`, `IPC N°15`, `ICI N°56-4`, `IPN-04`), which has no convention-member signatories by design. |
+| Unrecovered constituent initiative | 45 | The reference points to one of the 39 constituent-initiative numbers absent from `submitted_initiatives/` (e.g., 487, 639, 816, 963) — initiatives whose PDF was not available on the Convention's open-data site. |
+| No source reference | 24 | The record carries neither `sources` nor a resolvable `icc_id`, so no signatory list can be derived. |
+
+Sponsorship information for citizen initiatives remains available at the initiative level (`sources` strings and the metadata in `submitted_initiatives/`); it is deliberately not mixed into `authors`.
+
 ## `timestamp`
 
 `timestamp` records the session/report label under which a record (or an amendment snapshot inside `history[]`) was extracted. It is a documentary label taken from the source report, not a full calendar date.
@@ -78,9 +94,9 @@ Case and accents are part of the raw identifier. For joins, preserve the exact v
 |---|---|---|
 | `MM-DD` | Month and day of the source report/session. The year is implicit: all observed values fall between January and May, within the 2022 commission reporting period. | 1,634 |
 | `MM-DD-{block}` | Same as `MM-DD`, plus a block ordinal distinguishing multiple reports or voting blocks issued on the same day (e.g., `04-01-2` is the second block of 1 April 2022). This `{block}` component is the same one used by the `IND{MM}_{DD}_{block}` origin token of `article_uid`. | 319 |
-| `NA` | The source report did not provide a usable session date label. All 55 such records belong to C6 (17) and C7 (38). | 55 |
+| `NA` or key absent | The source report did not provide a usable session date label. 55 records carry an explicit `"NA"` (C6: 17, C7: 38) and 11 records omit the key altogether (C1: 4, C3: 2, C5: 5); both forms should be treated alike as "undated". | 66 |
 
-The same convention applies to `timestamp` values inside `history[]` snapshots (observed months: February–May, implicit year 2022).
+The same convention applies to `timestamp` values inside `history[]` snapshots (observed months: February–May, implicit year 2022); 5 nested snapshots are undated (C2: 1, C3: 2, C7: 2).
 
 ### Cautions
 

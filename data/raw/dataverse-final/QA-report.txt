@@ -4,15 +4,14 @@ C1:
   timestamps NA (top-level): 4
 C2:
   conteos ok (genesis=312, borrador=41, track_articles=24, track_full=182)
-  clasificación: 182 artículos, 0 ind. sueltas | authors: artículos 0/182, sueltas utilizables 0/0, history utilizables 33/54
-  [AVISO] C2: NINGÚN artículo con authors — no aporta a la red de co-patrocinio (P15)
+  clasificación: 182 artículos, 0 ind. sueltas | authors: artículos 149/182, sueltas utilizables 0/0, history utilizables 33/54
 C3:
   conteos ok (genesis=222, borrador=96, track_articles=72, track_full=234)
   clasificación: 222 artículos, 12 ind. sueltas | authors: artículos 222/222, sueltas utilizables 10/12, history utilizables 400/402
   timestamps NA (top-level): 2
 C4:
   conteos ok (genesis=167, borrador=58, track_articles=58, track_full=175)
-  clasificación: 167 artículos, 8 ind. sueltas | authors: artículos 135/167, sueltas utilizables 8/8, history utilizables 436/436
+  clasificación: 167 artículos, 8 ind. sueltas | authors: artículos 150/167, sueltas utilizables 8/8, history utilizables 436/436
 C5:
   conteos ok (genesis=464, borrador=43, track_articles=36, track_full=484)
   clasificación: 464 artículos, 20 ind. sueltas | authors: artículos 420/464, sueltas utilizables 20/20, history utilizables 252/559
@@ -27,7 +26,7 @@ C7:
   timestamps NA (top-level): 38
 coincidencias_comisiones.csv: 498 filas
 
-Totales: 1809 artículos, 210 indicaciones sueltas, 70043 menciones de autor
+Totales: 1809 artículos, 210 indicaciones sueltas, 75616 menciones de autor
 Validación de nombres: todos los autores-persona resuelven a los 154 canónicos.
 
 RESULTADO: OK

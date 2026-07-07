@@ -2,7 +2,7 @@
 
 Copia versionada de los datos limpios del repositorio CPT
 (`constitutional-proposal-tracking`), branch `paper-draft`, commit
-**`5852519ea2bfa222deb498b4952b8e05d57e39ef`** (2026-07-07). Regla del proyecto
+**`6fac4c4cc933dbb4702a1ad5c1d966dc10c7ef8c`** (2026-07-07, ronda 2: authors de C2/C4 poblados). Regla del proyecto
 (P14): ningún script lee de CPT en runtime; para actualizar los datos se copia un
 snapshot nuevo desde CPT y se corre el test de aceptación:
 
@@ -25,11 +25,15 @@ TRACK_full = **2.019** registros: **1.809 artículos** + **210 indicaciones suel
 (top-level, con `action`; sin anclar a artículo) + 0 títulos. `article_uid` y
 `final_status` al 100%. GENESIS = 1.892 iniciativas; BORRADOR = 498 artículos.
 
-Cobertura de `authors` en artículos TRACK_full (base de la red de co-patrocinio):
-C1 99/99, **C2 0/182 (P15 — pendiente en CPT)**, C3 222/222, C4 135/167,
-C5 420/464, C6 418/447, C7 218/228. Indicaciones sueltas utilizables para ondas
-(authors + timestamp): 205/210. Timestamps NA top-level: 66 (C1 4, C3 2, C5 5,
-C6 17, C7 38).
+Cobertura de `authors` en artículos TRACK_full (base de la red de co-patrocinio),
+tras la ronda 2 (C2 poblado vía `sources`→firmantes, C4 vía `icc_id`; reglas
+validadas 1.415/1.416): C1 99/99, C2 149/182, C3 222/222, C4 150/167, C5 420/464,
+C6 418/447, C7 218/228 → **1.676 artículos con ≥2 autores-persona**. Residuo
+documentado en el codebook: 134/2.019 sin autores = 65 de iniciativas
+populares/indígenas + 45 de ICC no recuperadas + 24 sin referencia de fuente.
+Indicaciones sueltas utilizables para ondas (authors + timestamp): 205/210.
+Timestamps sin fecha ("undated", no se imputan): 66 top-level (C1 4, C3 2, C5 5,
+C6 17, C7 38) + 5 anidados en history[].
 
 Los strings de autor incluyen referencias a **iniciativas populares** (números
 tipo `7-2`, "Iniciativa Popular Indígena 21-2"): `code/lib_names.py` las clasifica

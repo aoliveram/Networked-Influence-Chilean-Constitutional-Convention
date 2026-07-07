@@ -92,13 +92,15 @@ Desglose por comisión del snapshot (TRACK_full = artículos + indicaciones suel
 | Comisión | Nombre oficial (corto) | GENESIS | BORRADOR | TRACK_articles | TRACK_full | Artículos (con authors) | Ind. sueltas |
 |:-:|:---|---:|---:|---:|---:|:-:|---:|
 | C1 | Sistema Político | 96 | 100 | 131 | 202 | 99 (99) | 103 |
-| C2 | Principios Constitucionales | 312 | 41 | 24 | 182 | 182 **(0)** | 0 |
+| C2 | Principios Constitucionales | 312 | 41 | 24 | 182 | 182 (149) | 0 |
 | C3 | Forma de Estado | 222 | 96 | 72 | 234 | 222 (222) | 12 |
-| C4 | Derechos Fundamentales | 167 | 58 | 58 | 175 | 167 (135) | 8 |
+| C4 | Derechos Fundamentales | 167 | 58 | 58 | 175 | 167 (150) | 8 |
 | C5 | Medio Ambiente | 464 | 43 | 36 | 484 | 464 (420) | 20 |
 | C6 | Sistemas de Justicia | 440 | 119 | 117 | 491 | 447 (418) | 44 |
 | C7 | Sistemas de Conocimientos | 191 | 41 | 40 | 251 | 228 (218) | 23 |
-| **Total** | | **1.892** | **498** | **478** | **2.019** | **1.809 (1.512)** | **210** |
+| **Total** | | **1.892** | **498** | **478** | **2.019** | **1.809 (1.676)** | **210** |
+
+*(Cifras post-ronda 2 de CPT (`6fac4c4`): `authors` de C2 poblado vía `sources`→firmantes de las iniciativas y de C4 vía `icc_id`, reglas validadas 1.415/1.416; el residuo de 134 registros sin autores queda documentado en el codebook — 65 de iniciativas populares/indígenas, 45 de ICC no recuperadas, 24 sin referencia de fuente.)*
 
 Nombres oficiales completos de las comisiones (verificados 2026-07-06 contra el registro oficial `cconstituyente.cl`, Wikipedia y UNESCO; ver P13):
 
@@ -119,7 +121,7 @@ Hechos estructurales que el pipeline absorbe (detalle en P8/P15):
 - El esquema del GENESIS sigue **heterogéneo** entre comisiones (C1/C2/C3 sin `article_uid`; C4 sin `article`/`sources`; `authors` intermitente) — homogeneización pendiente en CPT; el loader unifica.
 - Todos los `TRACK_full` salvo C2 contienen **"indicaciones sueltas"** (210 en total): registros de indicación al nivel superior con `action`, sin anclar a un artículo; 205/210 traen `authors` + `timestamp` y alimentan las ondas de M2. Los títulos de capítulo de C1 fueron eliminados aguas arriba (2026-07-07).
 - `step` está normalizado a `"Indicacion"` (2.763 menciones; C2 conserva sus etiquetas de etapa propias). `timestamp` es `MM-DD[-bloque]` con año implícito 2022; hay 66 NA a nivel superior (C1 4, C3 2, C5 5, C6 17, C7 38) y 5 anidados.
-- Los `authors` incluyen referencias a **iniciativas populares** ("7-2", "Iniciativa Popular Indígena 21-2"): `code/lib_names.py` las clasifica como no-persona y las excluye de la red. Con esas reglas, las **70.043 menciones de autor-persona resuelven al 100%** contra los 154 canónicos (QA 0a).
+- Los `authors` incluyen referencias a **iniciativas populares** ("7-2", "Iniciativa Popular Indígena 21-2"): `code/lib_names.py` las clasifica como no-persona y las excluye de la red. Con esas reglas, las **75.616 menciones de autor-persona resuelven al 100%** contra los 154 canónicos (QA 0a, post-ronda 2).
 
 ## 3.3 Datos usados por la versión vigente (pre-actualización)
 
@@ -224,7 +226,7 @@ Estado tras la revisión del usuario en CPT (`paper-draft` @ `5852519`) y el QA 
 1. **[RESUELTO aguas arriba]** Títulos de capítulo de C1 eliminados (TRACK_full 230 → 202; typo `"tite"` desapareció con ellos); `article_uid` y `final_status` al **100%** tras la armonización de ids (`f8b9ddc`); `step` normalizado a `"Indicacion"` en todos los niveles (3.205 reemplazos; C2 conserva sus etiquetas propias); nombres de archivo GENESIS unificados a `C{k}_GENESIS_master.json`; semántica de `timestamp` documentada en el codebook (MM-DD, año implícito 2022, sufijo `-{bloque}` = n-ésimo informe del día).
 2. **[ABIERTO — CPT]** Esquema GENESIS aún heterogéneo (C1/C2/C3 sin `article_uid`; C4 sin `article`/`sources`; `authors` intermitente); asignado en CPT con la instrucción de heredar los uids de TRACK/crosswalk. El loader de este repo lo absorbe mientras tanto.
 3. **[ABIERTO — loader]** Indicaciones sueltas (210): se mantiene la decisión — alimentan las ondas de M2 (205/210 con `authors`+`timestamp`), no entran a M1 ni a M3. Falta la aserción de no-duplicación contra `history[]` en el loader.
-4. **[ABIERTO — menor]** Timestamps NA: 66 a nivel superior (C1 4, C3 2, C5 5, C6 17, C7 38 — el codebook documenta solo los 55 de C6/C7) y 5 anidados en `history[]` (C2 1, C3 2, C7 2). Las indicaciones sin timestamp no pueden asignarse a onda; se reportan y excluyen de M2.
+4. **[RESUELTO aguas arriba — ronda 2]** Timestamps sin fecha: los 66 top-level + 5 anidados quedaron documentados como *undated* en el codebook (`49e394e`); no se imputan (recuperarlos exigiría volver a los PDF de origen). En M2, los registros sin fecha se reportan y se excluyen de las ondas.
 
 ## P9 — $W$ y centralidades de M3 medidas sobre la red posterior al resultado **[ABIERTO — decisión tomada]**
 
@@ -255,13 +257,13 @@ En la robustez vigente, los Valued ERGM de C3 y C5 no convergieron plenamente (m
 
 Regla instaurada: **este repo consume snapshots versionados de CPT; ningún script lee de CPT en runtime.** El snapshot `data/raw/dataverse-final/` (CPT `paper-draft` @ `5852519`) incluye README de procedencia, codebook y `QA-report.txt`; se refresca copiando desde CPT y corriendo `code/0a-verify-dataverse-snapshot.py`. Los perfiles curados viven en `data/raw/conventional-profiles.json` (P5). Las carpetas `data/raw/commissions/` y `data/raw/network-visualization/` quedan como legacy de solo-lectura para comparación con los resultados pre-actualización.
 
-## P15 — C2 sin autores: no puede entrar a la red de co-patrocinio **[ABIERTO — bloqueado en CPT]**
+## P15 — C2 sin autores: no podía entrar a la red de co-patrocinio **[RESUELTO aguas arriba 2026-07-07, ronda 2]**
 
-**Situación (QA 2026-07-07).** La comisión C2 (Principios Constitucionales) no tiene `authors` en ninguna parte utilizable: 0/312 registros del GENESIS, 0/182 artículos del TRACK_full, y solo 33/54 entradas de `history[]` con autor+fecha. C4 tiene además un hueco parcial (135/167 artículos con autores y ningún `sources` para hacer el join), y C5/C6/C7 huecos menores (420/464, 418/447, 218/228).
+**Situación original (QA 2026-07-07 a.m.).** C2 no tenía `authors` en ninguna parte utilizable (0/312 GENESIS, 0/182 artículos TRACK_full); C4 tenía un hueco parcial (135/167, sin `sources` para el join).
 
-**Consecuencia.** Mientras no se repueble, la actualización de M1/M2 será efectivamente de **6 comisiones + C2 pendiente** (M3 no se afecta igual: `coincidencias` traza C2→borrador, pero sin autores no hay a quién acreditar el éxito de C2). Los conteos exactos quedan en `data/raw/dataverse-final/QA-report.txt`.
+**Resolución (CPT `paper-draft` 55fae5d → 6fac4c4).** `authors` poblado con la misma regla con que se construyó el resto del dataset — autores = firmantes de la(s) iniciativa(s) en `sources` (C2, 401 registros; regla validada 1.252/1.253 contra C3/C5/C6/C7) y vía `icc_id` (C4, 39 registros; validada 163/163). Verificado en el snapshot refrescado: C2 149/182 y C4 150/167 artículos con autores; **1.676 artículos con ≥2 autores-persona** para la red génesis, con las 7 comisiones aportando; las 75.616 menciones siguen resolviendo al 100% (los nuevos autores vienen en formato canónico). Residuo irrecuperable documentado en el codebook: 134/2.019 (65 populares/indígenas — patrocinio institucional, no de convencionales —, 45 de ICC ausentes del pool de PDF, 24 sin referencia de fuente).
 
-**Solución.** Aguas arriba en CPT (registrado en `CPT-arreglos-pendientes.txt`, punto 1): poblar `authors` desde las iniciativas originales vía `sources` (C2) / `icc_id` (C4) contra el registro de iniciativas. Al llegar el snapshot corregido, `0a-verify` valida y el pipeline incorpora C2 sin cambios de código.
+**Nota de alcance para M2.** El `history[]` de C2 sigue delgado (33/54 entradas utilizables) y C2 no tiene indicaciones sueltas: C2 entra plenamente a M1 (génesis) y M3 (éxito), pero sus ondas en M2 aportarán poca variación intra-comisión — esperable y no bloqueante.
 
 # 6. Decisiones de diseño confirmadas
 
@@ -280,19 +282,21 @@ Regla instaurada: **este repo consume snapshots versionados de CPT; ningún scri
 | 2026-07-07 | Imputación automatizada de covariables: BCN ground truth → Wikipedia → base; `manual_validations.json` siempre prevalece. `data/raw/conventional-profiles.json` es el archivo curado canónico (154). |
 | 2026-07-07 | Snapshot `dataverse-final` ingerido (CPT `paper-draft` @ `5852519`) con test de aceptación 0a; regla P14 instaurada. Infraestructura de Fase 0 creada: `paths.py`/`paths.R`, `lib_names.py`/`lib_names.R`. |
 | 2026-07-07 | Las referencias a iniciativas populares en `authors` se clasifican como no-persona y quedan fuera de la red de co-patrocinio. |
-| 2026-07-07 | Actualización de modelos procede con C1, C3--C7; **C2 entra cuando CPT repueble sus `authors`** (P15). |
+| 2026-07-07 | ~~Actualización con C1, C3--C7~~ → **ronda 2 de CPT resolvió P15: las 7 comisiones entran a la actualización** (snapshot @ `6fac4c4`). |
+| 2026-07-07 | Registros sin fecha ("undated") y residuo de 134 sin autores: documentados, no imputados; se excluyen de las ondas / de la red según corresponda. |
 
 # 7. Plan de actualización
 
 - **Fase 0 — Infraestructura**: **completada** (2026-07-07): snapshot `dataverse-final` versionado + QA de aceptación (`0a-verify-dataverse-snapshot.py`); perfiles curados 154; `paths.py`/`paths.R`; `lib_names.py`/`lib_names.R` con validación al 100%. *(P14 cerrado; P3 y P4 quedan en su mitad de recableado de scripts.)*
 - **Fase 0b — Calidad de covariables**: **completada** (2026-07-07): auditoría dual-fuente v1+v2, validación manual, e imputación automática con capa de validaciones humanas; `data/raw/conventional-profiles.json` regenerado con 154 perfiles curados. *(P5 cerrado.)*
 - **Fase 1 — Loader unificado**: lector GENESIS (2 esquemas), lector TRACK_full (clasificación artículo/indicación-suelta/título, dedup, timestamps), tests de conteos contra §3.1. *(Cierra P8.)*
-- **Fase 2 — Redes**: red génesis pooled (C1, C3--C7 mientras C2 espera; ver P15) para M1; ondas acumuladas por comisión para M2 con bins derivados de los timestamps observados; variantes de robustez. Decisión a tomar al construirla: unidad de co-firma por **artículo** (compatible con la versión anterior) vs. por **iniciativa** (dedupe vía `sources`/`icc_id`; una iniciativa multi-artículo cuenta una vez) — propuesta: artículo como principal, iniciativa como robustez. *(Cierra P1-red, P2.)*
+- **Fase 2 — Redes**: red génesis pooled de las **7 comisiones** (P15 resuelto; 1.676 eventos de co-firma) para M1; ondas acumuladas por comisión para M2 con bins derivados de los timestamps observados; variantes de robustez. Decisión a tomar al construirla: unidad de co-firma por **artículo** (compatible con la versión anterior) vs. por **iniciativa** (dedupe vía `sources`/`icc_id`; una iniciativa multi-artículo cuenta una vez) — propuesta: artículo como principal, iniciativa como robustez. *(Cierra P1-red, P2.)*
 - **Fase 3 — Modelos**: M1 ERGM (pooled + por comisión); M2 realineación emIRT + panel ampliado + robusteces de ventana; M3 con `coincidencias` + BORRADOR_final + DV nueva + $W$-génesis. *(Cierra P1, P6, P7, P9; revisita P11.)*
 - **Fase 4 — Integración y paper**: `integrated_dataset` de exactamente 154 filas; suite de robustez; exportación automatizada a `results/`; actualización del extended abstract (cifras, rótulos, "ongoing work") y README (métodos). *(Cierra P12, P13.)*
 
 # 8. Registro de cambios de este documento
 
+- **v1.4 (2026-07-07).** Ronda 2 de CPT ingerida (snapshot @ `6fac4c4`): P15 resuelto (authors de C2 vía `sources`→firmantes y C4 vía `icc_id`; 1.676 artículos con ≥2 autores; residuo 134 documentado), timestamps *undated* documentados (P8.4). QA re-ejecutado: 75.616 menciones, 100% resueltas. Las 7 comisiones entran a la actualización; luz verde para reescribir el pipeline.
 - **v1.3 (2026-07-07).** Fase 0 completada: snapshot `dataverse-final` ingerido (CPT `paper-draft` @ `5852519`; TRACK_full 2.019, 210 indicaciones sueltas, uid/final_status 100%), test de aceptación 0a, módulos `paths` y `lib_names` (70.043 menciones de autor validadas al 100%, con filtro de iniciativas populares). P14 cerrado; P3/P4/P8 avanzados a parcial; **nuevo P15**: C2 sin `authors` (bloqueado en CPT). §3 reescrita con las cifras del snapshot.
 - **v1.2 (2026-07-07).** P5 cerrado: corrida v2 de la auditoría (lotes de 6, grado 0--3, `profiles-batches/`), chequeo de consistencia v1 vs. v2, e imputación automatizada (BCN → Wikipedia → base, con `manual_validations.json` prevaleciendo); `data/raw/conventional-profiles.json` regenerado (154 perfiles curados, 0 "Desconocida"). Decisión de modelo: `absdiff(grado académico 0--3)` se agrega a M1.
 - **v1.1 (2026-07-06).** P5: auditoría dual-fuente BCN+Wikipedia ejecutada con `gemini-3.5-flash` (154/154; 135 discrepancias con el pipeline; tablas en `data/raw/profile-audit/`). Nuevo `CPT-arreglos-pendientes.txt` en la raíz con los arreglos que corresponden al repositorio de datos (P8, higiene, documentación).
