@@ -156,7 +156,9 @@ Pipeline v2 (2026-07-07): todos los scripts derivan rutas de `code/paths.{py,R}`
 | 05 | `code/05-nlp-text-similarity.py` | Retención léxica TF-IDF + SBERT; DV $y'$ con fracasos = 0 | `article_similarity_scores.csv`, `author_success_scores.csv` |
 | 06 | `code/06-build-integrated-dataset.py` | Merge roster-driven (154 filas por construcción) | `integrated_dataset.{csv,json}` |
 | 07 | `code/07-model-spatial-durbin.R` | **M3**: $W$ génesis-iniciativa; Moran; OLS/SAR/SEM/SDM; impactos | `sdm_results.rds`, `tables/M3_*.csv` |
-| 08 | `code/08-robustness-checks.R` | Robustez M1 (por comisión ×7, unidad artículo, perfiles pre-auditoría) y M3 (DV antigua, W binaria, W artículo, SBERT) | `robustness_results.rds`, `tables/M{1,3}_robustness.csv` |
+| 08 | `code/08-robustness-checks.R` | Robustez M1 (por comisión ×7, unidad artículo, perfiles pre-auditoría) y M3 (DV antigua, W binaria, W artículo, SBERT); **ERGMs en paralelo** (`mclapply`, hasta 8 P-cores) con cronómetro por modelo | `robustness_results.rds`, `tables/M{1,3}_robustness.csv` |
+| 09 | `code/09-figures.py` | Figuras F1--F3 (PDF + PNG 300 dpi, inglés) | `results/figures/*` |
+| 10 | `code/10-pilot-retention-dynamics.py` | Piloto: dinámica de retención post-indicaciones (C3) | `pilot_retention_dynamics_C3.csv`, figura |
 
 ## 4.2 Resultados de la versión anterior (extended abstract, abril 2026 — 5 comisiones, red mixta, perfiles heurísticos)
 
@@ -164,9 +166,10 @@ Pipeline v2 (2026-07-07): todos los scripts derivan rutas de `code/paths.{py,R}`
 - **M2.** OLS agrupado: $\hat\beta_3 = +0.033$ ($p<0.001$); efectos fijos: $\hat\beta_3 = +0.0004$ ($p = 0.91$); Hausman $\chi^2 = 784.96$ ($p<0.001$) → FE. Falsificación con *lead* significativa ($p<0.001$) → **selección, no influencia** (H2 confirmada).
 - **M3.** Moran's $I = 0.155$ ($p<10^{-6}$). AIC: OLS $-338.5$ < SEM $-354.8$ ($\lambda=0.81$) < SAR $-355.3$ ($\rho=0.89$) < **SDM $-383.4$ ($\hat\rho = 0.997$)**. En OLS: `theta_mean` $+0.012$ ($p=0.008$), `theta_sd` $-0.103$ ($p=0.015$), `ego_heterophily` $-0.063$ ($p=0.027$); centralidades n.s. Validación de medida: artículos "idénticos" puntúan 0.979 en TF-IDF. Robustez: SBERT preserva signos; con $W$ binaria $\rho$ cae a 0.374 manteniendo significancias clave (H3 confirmada).
 
-## 4.3 Resultados actualizados (v2 — julio 2026: 7 comisiones, red génesis-iniciativa, perfiles curados)
+## 4.3 Insumos construidos (v2 — julio 2026)
 
-### 4.3.1 Insumos construidos
+
+![Constitutional initiatives per commission (F1).](../results/figures/initiatives_per_commission.pdf){width=88%}
 
 **Registro de iniciativas** (`initiative_registry.csv`): **528 iniciativas** con $\geq 2$ firmantes-persona — C1: 29, C2: 56, C3: 41, C4: 68, C5: 148, C6: 78, C7: 108 (las iniciativas populares/indígenas quedan fuera de la red de personas). **Red génesis-iniciativa** (principal): 154 nodos (sin aislados), **7.731 aristas**, peso total 53.391, peso máximo 76. **Red génesis-artículo** (robustez): 1.676 eventos de co-firma, 8.020 aristas, peso 175.316.
 
@@ -186,8 +189,28 @@ Las indicaciones son mayoritariamente unipersonales en varias comisiones (C5: to
 
 **Mapeo y DV de éxito**: 484 pares génesis$\to$final (480 vía `coincidencias` + 4 rescatados parseando `final_status`; 2 uids de indicación no encontrados). Desenlaces de los 1.809 artículos: 223 idéntico, 136 similar, 275 ART-FALLIDO, 1.175 eliminado (fracaso = fallido + eliminado, sim = 0). **Validación del emparejamiento**: similitud alineada 0.554 vs. 0.032 con pares barajados; 96.5% de los pares supera su baseline. TF-IDF idéntico 0.570 / similar 0.565; SBERT 0.857 / 0.872. *Nota sobre el ancla de validación*: la v1 reportaba 0.979 en "idénticos" porque comparaba el texto **post-indicaciones** con el borrador; la v2 usa el texto **génesis verdadero** (la operacionalización correcta de "retención de lo que el delegado propuso"), y la etiqueta idéntico/similar — que refiere al estado *final* del artículo — deja de ordenar la similitud génesis$\to$final; la validación pasa a ser el contraste alineado-vs-barajado. Media de $y'$: 0.094; tasa de supervivencia media: 0.211; **154/154 convencionales con score** (el dataset integrado tiene 154 casos completos: por primera vez el roster entero entra a M3).
 
-### 4.3.2 M1 — Formación (Valued ERGM, red génesis-iniciativa)
 
+![Genesis co-sponsorship as a bipartite network, initiative unit (F2a). Documents on top (colored by commission), delegates below (sorted and colored by ideal point).](../results/figures/bipartite_initiative.pdf){width=100%}
+
+![Genesis co-sponsorship as a bipartite network, article unit (F2b) — the robustness specification.](../results/figures/bipartite_article.pdf){width=100%}
+## 4.4 Limitaciones de datos (transversales)
+
+1. **Cobertura de autores.** 134/2.019 registros TRACK sin autores (65 de iniciativas populares/indígenas — patrocinio institucional —, 45 de ICC no recuperadas, 24 sin referencia); 54 artículos del borrador final quedaron `not_traced` en `coincidencias`; 66 + 5 registros *undated* se excluyen de las ondas.
+2. **dynIRT sin errores estándar** (P10, abierto): la incertidumbre de $\theta$ no se propaga a M2/M3.
+
+Las limitaciones específicas de cada modelo están al final de su sección (§5.4, §6.5, §7.5).
+
+# 5. Modelo 1 — Formación de la red (Valued ERGM)
+
+## 5.1 Especificación
+
+La red observada es $W = [w_{ij}]$, no dirigida, con $w_{ij} \in \{0, 1, 2, \dots\}$ = nº de **iniciativas** co-firmadas por $i$ y $j$ (unidad principal; §8.1). El ERGM valuado con referencia Poisson modela
+$$P(W = w) = \frac{\exp\{\theta^\top g(w)\}}{\kappa(\theta)} \prod_{i<j} \frac{1}{w_{ij}!},$$
+con estadísticas de cambio
+$$g(w) = \Big(\underbrace{\textstyle\sum_{i<j} w_{ij}}_{\text{sum}},\ \underbrace{\textstyle\sum_{i<j} w_{ij}\,\mathbf{1}\{X_i = X_j\}}_{\text{nodematch}_X},\ \underbrace{\textstyle\sum_{i<j} w_{ij}\,|X_i - X_j|}_{\text{absdiff}_X},\ \underbrace{\textstyle\sum_{i<j} w_{ij}(X_i + X_j)}_{\text{nodecov}_X}\Big)$$
+para $X \in$ \{afiliación, experiencia previa, abogado, mujer\} (nodematch), \{edad, grado académico 0--3\} (absdiff) y edad (nodecov). Estimación MCMLE (`ergm.count`, semilla 42), 154 nodos (roster completo, sin aislados). Un coeficiente nodematch positivo indica homofilia; `absdiff` negativo indica que la **distancia** en el atributo inhibe la co-firma.
+
+## 5.2 Resultados
 | Término | Estimación | EE | $p$ |
 |:---|---:|---:|:--|
 | sum | $+1.498$ | 0.027 | $<10^{-4}$ |
@@ -201,31 +224,9 @@ Las indicaciones son mayoritariamente unipersonales en varias comisiones (C5: to
 
 **Cambio sustantivo respecto de la v1: H1b se invierte.** Con la red génesis limpia y los perfiles curados, abogados y delegados con experiencia institucional muestran homofilia **positiva** (antes: $-0.09$ y $-0.12$) — el hallazgo de "gatekeeping estratégico" de la v1 no sobrevive a la corrección de datos. H1a se refuerza (afiliación $+0.577$ vs. $+0.41$). El término nuevo `absdiff(grado)` es negativo y significativo: la **distancia educativa inhibe la co-firma** (estratificación por credenciales), y `nodecov(edad)` negativo indica que los mayores co-firman menos en volumen. *Caveat técnico*: el MCMLE del ERGM pooled converge al 95% pero no al 99% de confianza (p = 0.014 del test de convergencia tras 60 iteraciones); los coeficientes son estables entre corridas pero el caveat queda registrado.
 
-### 4.3.3 M2 — Selección vs. influencia (panel, 7 comisiones)
 
-Panel: **4.278 observaciones** delegado-onda (antes 2.926), 154 delegados, 7 comisiones; 1.078 celdas cuyo paso comparte período emIRT con el anterior ($\Delta\theta \equiv 0$ mecánico) se excluyen. Coeficiente de exposición ($\hat\beta_3$), EE agrupados por delegado:
-
-| Modelo | $\hat\beta_3$ | EE | $p$ |
-|:---|---:|---:|:--|
-| OLS agrupado | $+0.0356$ | 0.0099 | $3.1\times10^{-4}$ |
-| **Efectos fijos (within)** | $-0.0007$ | 0.0045 | $0.88$ |
-| OLS + FE de comisión | $+0.0364$ | 0.0095 | $1.4\times10^{-4}$ |
-| Falsificación (*lead*) | $+0.0552$ | 0.0116 | $2.2\times10^{-6}$ |
-| FE, exposición con decaimiento ($\lambda=0.5$) | $+0.0017$ | 0.0045 | $0.71$ |
-| FE, exposición solo-última-onda | $+0.0068$ | 0.0128 | $0.60$ |
-| FE, $\Delta\theta$ por día | $-0.0001$ | 0.0004 | $0.83$ |
-
-Hausman $\chi^2 = 1973.9$ ($p \approx 0$) $\to$ FE. **El resultado central de la v1 se replica y blinda**: la correlación positiva desaparece bajo efectos fijos, la exposición futura "predice" el cambio pasado (falsificación falla $\to$ selección endógena), y el nulo bajo FE sobrevive las tres ventanas alternativas de exposición. H2 confirmada con el doble de observaciones y las 7 comisiones.
-
-### 4.3.4 M3 — Éxito legislativo (SDM, $W$ génesis-iniciativa, DV $y'$)
-
-$N = 154$ (casos completos). Moran's $I = 0.380$ ($p \approx 10^{-194}$; antes 0.155). Comparación (AIC): OLS $-448.9$ < SEM $-529.5$ ($\lambda = 0.981$) < SAR $-539.3$ ($\rho = 0.979$) < **SDM $-575.5$ ($\hat\rho = 0.943$)**. En OLS, con la DV nueva la **posición de red predice éxito**: `degree` $+0.0012$ ($p = 0.002$), `betweenness` $-0.0011$ ($p = 0.004$) — en la v1 las centralidades eran n.s. En el SDM los efectos directos individuales se disipan y los términos **contextuales** son los significativos (`lag.degree` $+0.009$, `lag.betweenness` $-0.008$, `lag.es_mujer` $-0.175$, `lag.theta_mean` $+0.093$): el éxito propio depende de los atributos de los co-firmantes. H3 confirmada y amplificada. *Nota*: con $\rho$ cercano a 1, la descomposición directo/indirecto de los impactos es numéricamente inestable (SEs simuladas explotan); se reportan coeficientes y $\rho$, y los impactos quedan en el `.rds`. Parte del derrame es mecánica — los co-firmantes comparten artículos y por tanto componentes de $y'$ — lo que refuerza la lectura "el éxito es colectivo" pero impide interpretar $\rho$ como influencia pura (ver Limitaciones).
-
-Robustez M3 (tabla `M3_robustness.csv`): la dependencia espacial sobrevive todas las variantes — DV condicional antigua ($I = 0.140$, $\rho = 0.840$), $W$ binaria ($\rho = 0.794$), $W$ artículo ($I = 0.408$, $\rho = 0.934$), DV SBERT ($\rho = 0.937$).
-
-### 4.3.5 Robustez M1 y descomposición del vuelco de H1b
-
-Los **9 ERGMs de robustez convergieron** (los 7 por comisión — antes C3 y C5 no convergían: P11 resuelto — más las dos variantes pooled). Coeficientes clave (`M1_robustness.csv`; \*\*\* $p<0.001$, \*\* $p<0.01$, \* $p<0.05$):
+## 5.3 Robustez y descomposición del vuelco de H1b
+Los **9 ERGMs de robustez convergieron** (los 7 por comisión — antes C3 y C5 no convergían: P11 resuelto — más las dos variantes pooled). Desde la v2.1 corren **en paralelo** (`mclapply` sobre 8 P-cores del M4 Pro, un modelo por worker, semilla fija por modelo): **10.2 min de pared vs. 24.0 min de suma secuencial**; el techo es el modelo individual más pesado (pooled unidad artículo, 10.2 min), de modo que la ganancia adicional requeriría paralelizar las cadenas MCMC dentro de ese fit. Coeficientes clave (`M1_robustness.csv`; \*\*\* $p<0.001$, \*\* $p<0.01$, \* $p<0.05$):
 
 | Modelo | nodematch afiliación | nodematch experiencia | nodematch abogado | absdiff grado |
 |:---|:-:|:-:|:-:|:-:|
@@ -241,21 +242,188 @@ Los **9 ERGMs de robustez convergieron** (los 7 por comisión — antes C3 y C5 
 
 **Descomposición del vuelco.** Con los perfiles *antiguos* (pre-auditoría) sobre la red nueva, la homofilia de experiencia y abogados **sigue siendo positiva**: el vuelco de H1b **no** proviene de la corrección de covariables sino del **cambio de red** — génesis puro (sin indicaciones) y cobertura de 7 comisiones. La corrección de perfiles sí explica otra cosa: la homofilia de afiliación salta de $+0.181$ (con 33 "Desconocida" y falsos independientes) a $+0.577$ (curada) — el ruido de medición diluía el clivaje político.
 
-**El patrón fino es heterogéneo y sustantivamente rico**: la homofilia *negativa* de experiencia sobrevive **exactamente en C1 (Sistema Político) y C3 (Forma de Estado)** — las comisiones donde se diseñaba la arquitectura del poder, dominantes en la muestra antigua — mientras en las otras cinco es fuertemente positiva. La lectura de gatekeeping de la v1 no era un fantasma: es un fenómeno **específico de las comisiones de diseño institucional**, no una estrategia general. La unidad iniciativa vs. artículo no altera ninguna conclusión (§6.1).
+**El patrón fino es heterogéneo y sustantivamente rico**: la homofilia *negativa* de experiencia sobrevive **exactamente en C1 (Sistema Político) y C3 (Forma de Estado)** — las comisiones donde se diseñaba la arquitectura del poder, dominantes en la muestra antigua — mientras en las otras cinco es fuertemente positiva. La lectura de gatekeeping de la v1 no era un fantasma: es un fenómeno **específico de las comisiones de diseño institucional**, no una estrategia general. La unidad iniciativa vs. artículo no altera ninguna conclusión (§8.1).
 
-## 4.4 Limitaciones
+## 5.4 Limitaciones
 
-1. **C2 delgada en la dinámica (M2).** Por la naturaleza distinta de la comisión y de su registro, C2 aporta solo 3 ondas con 1 evento de co-firma de indicaciones (52 unipersonales) y su génesis cubre 149/182 artículos. Decisión del usuario (2026-07-07): **se usa de todas formas**; su contribución a M2 es mínima y así debe leerse.
-2. **Ondas planas en C5.** Todas sus indicaciones con autor son unipersonales: la red de C5 no cambia después de T0, y su aporte a M2 proviene de la variación temporal de $\theta$, no de cambios de red (igual que en la v1).
-3. **Cobertura de autores.** 134/2.019 registros TRACK sin autores (65 de iniciativas populares/indígenas — patrocinio institucional —, 45 de ICC no recuperadas, 24 sin referencia); 54 artículos del borrador final quedaron `not_traced` en `coincidencias`; 66 + 5 registros *undated* se excluyen de las ondas.
-4. **Convergencia del ERGM pooled.** MCMLE al 95% pero no al 99% (ver §4.3.2).
-5. **Ancla de validación NLP.** El cambio de texto post-indicaciones $\to$ texto génesis hace incomparables las medias de similitud v1 vs. v2 (0.979 vs. 0.570 en "idénticos"); la validez del emparejamiento se establece ahora por el contraste alineado-vs-barajado (0.554 vs. 0.032).
-6. **Derrame parcialmente mecánico en M3.** $y'$ de co-firmantes comparte artículos por construcción; $\rho$ combina interdependencia real y composición compartida del DV. La extensión artículo-onda (M4 futura) es el camino para separarlas.
-7. **dynIRT sin errores estándar** (P10, abierto): la incertidumbre de $\theta$ no se propaga a M2/M3.
+1. **Convergencia del ERGM pooled**: MCMLE al 95% pero no al 99% de confianza ($p = 0.014$ del test tras 60 iteraciones); coeficientes estables entre corridas.
+2. **Unidad de co-firma**: iniciativa como principal es una decisión interpretativa (§8.1); los resultados son cualitativamente iguales con unidad artículo (§5.3).
 
-# 5. Problemas identificados (registro detallado)
+# 6. Modelo 2 — Selección vs. influencia (panel con efectos fijos)
 
-Esta sección es el inventario completo de defectos, deudas y decisiones pendientes detectados en la auditoría de julio 2026 (previa a la actualización). Es la lista de control contra la cual se ejecutará el plan de la §7.
+## 6.1 Especificación
+
+Sobre las ondas por comisión (T0 génesis + fechas de informes de indicaciones; figura F3), la exposición de red de $i$ en la onda $t$ de la comisión $c$ usa la red **acumulada** $W^{c}_{t}$:
+$$\text{NetExp}_{i,t} = \frac{\sum_{j \neq i} w_{ij,t}\,\theta_{j,t}}{\sum_{j \neq i} w_{ij,t}},$$
+y el modelo principal es el panel con efectos fijos individuales
+$$\Delta\theta_{i,t} = \alpha_i + \beta_1\,\theta_{i,t-1} + \beta_3\,\text{NetExp}_{i,t-1} + \varepsilon_{it},$$
+con errores agrupados por delegado y test de Hausman contra efectos aleatorios. **Falsificación**: se reemplaza el rezago por el *lead* ($\text{NetExp}_{i,t+1}$); si el efecto contemporáneo fuera influencia causal, el lead debería ser nulo. **Ventanas alternativas de exposición** (robustez): decaimiento exponencial $W^{dec}_{t} = \sum_{s \le t} \lambda^{t-s}\,\Delta W_s$ con $\lambda = 0.5$; solo-última-onda $W^{last}_{t} = \Delta W_t$; y $\Delta\theta$ estandarizado por días transcurridos entre ondas. Los pasos que comparten período emIRT con el anterior ($\Delta\theta \equiv 0$ mecánico) se excluyen (1.078 celdas).
+
+![Wave construction for Model 2, by commission (F3).](../results/figures/m2_waves_summary.pdf){width=100%}
+
+## 6.2 Motivación descriptiva (propuesta — no ejecutada)
+
+Para animar la pregunta del modelo ("las posiciones cambian y la red cambia: ¿influencia o selección?") se propone una figura descriptiva de dos paneles, aún no construida: (a) **la red cambia** — proporción de los lazos finales de cada comisión formados después de T0, similitud de Jaccard entre ondas consecutivas y curva de densidad acumulada; (b) **las posiciones cambian** — distribución de $|\Delta\theta|$ por onda y proporción de delegados que cruzan la mediana ideológica. Ambos insumos ya existen (`C{k}_dynamic_networks.json`, `network_exposure_panel.csv`); queda pendiente de decisión (§8.1).
+
+## 6.3 Resultados
+Panel: **4.278 observaciones** delegado-onda (antes 2.926), 154 delegados, 7 comisiones; 1.078 celdas cuyo paso comparte período emIRT con el anterior ($\Delta\theta \equiv 0$ mecánico) se excluyen. Coeficiente de exposición ($\hat\beta_3$), EE agrupados por delegado:
+
+| Modelo | $\hat\beta_3$ | EE | $p$ |
+|:---|---:|---:|:--|
+| OLS agrupado | $+0.0356$ | 0.0099 | $3.1\times10^{-4}$ |
+| **Efectos fijos (within)** | $-0.0007$ | 0.0045 | $0.88$ |
+| OLS + FE de comisión | $+0.0364$ | 0.0095 | $1.4\times10^{-4}$ |
+| Falsificación (*lead*) | $+0.0552$ | 0.0116 | $2.2\times10^{-6}$ |
+| FE, exposición con decaimiento ($\lambda=0.5$) | $+0.0017$ | 0.0045 | $0.71$ |
+| FE, exposición solo-última-onda | $+0.0068$ | 0.0128 | $0.60$ |
+| FE, $\Delta\theta$ por día | $-0.0001$ | 0.0004 | $0.83$ |
+
+Hausman $\chi^2 = 1973.9$ ($p \approx 0$) $\to$ FE. **El resultado central de la v1 se replica y blinda**: la correlación positiva desaparece bajo efectos fijos, la exposición futura "predice" el cambio pasado (falsificación falla $\to$ selección endógena), y el nulo bajo FE sobrevive las tres ventanas alternativas de exposición. H2 confirmada con el doble de observaciones y las 7 comisiones.
+
+
+Coeficientes completos (`M2_full_models.csv`; EE agrupados por delegado en OLS/FE/lead; \*\*\* $p<0.001$, \*\* $p<0.01$, \* $p<0.05$):
+
+| Término | OLS agrupado | Efectos fijos | Efectos aleatorios | Falsificación (lead) |
+|:---|:-:|:-:|:-:|:-:|
+| Intercepto | $0.032$ (0.016)\* | — | $0.007$ (0.019) | $0.013$ (0.011) |
+| $\theta_{t-1}$ | $-0.038$ (0.008)\*\*\* | $-0.656$ (0.022)\*\*\* | $-0.074$ (0.006)\*\*\* | $-0.059$ (0.009)\*\*\* |
+| NetExp$_{t-1}$ | $+0.036$ (0.010)\*\*\* | $-0.001$ (0.005) | $+0.051$ (0.006)\*\*\* | — |
+| NetExp$_{t+1}$ (lead) | — | — | — | $+0.055$ (0.012)\*\*\* |
+| Abogado | $0.020$ (0.019) | — | $0.032$ (0.021) | — |
+| Experiencia previa | $-0.015$ (0.021) | — | $0.037$ (0.026) | — |
+| Mujer | $-0.019$ (0.018) | — | $-0.030$ (0.020) | — |
+
+## 6.5 Limitaciones
+
+1. **C2 delgada.** Por la naturaleza distinta de la comisión y de su registro, C2 aporta solo 3 ondas con 1 evento de co-firma de indicaciones (52 unipersonales). Decisión del usuario (2026-07-07): **se usa de todas formas**; su contribución a M2 es mínima y así debe leerse.
+2. **Ondas planas en C5.** Todas sus indicaciones con autor son unipersonales: la red de C5 no cambia después de T0 y su aporte proviene de la variación temporal de $\theta$ (igual que en la v1).
+3. **Pasos con el mismo período emIRT** (sin votaciones intermedias) se excluyen del panel: 1.078 celdas.
+4. La incertidumbre de $\theta$ (dynIRT sin SEs, P10) no se propaga.
+
+# 7. Modelo 3 — Éxito legislativo (Spatial Durbin Model)
+
+## 7.1 Especificación
+
+La DV principal es la **retención esperada por artículo presentado** (decisión ART-FALLIDO, P6): con $A_i$ = artículos génesis co-firmados por $i$ y $M_i \subseteq A_i$ los trazados al borrador,
+$$y_i' = \frac{1}{|A_i|}\sum_{a \in A_i} \text{sim}(a) = \underbrace{\frac{|M_i|}{|A_i|}}_{\hat{s}_i} \times \underbrace{\overline{\text{sim}}_{M_i}}_{\bar{r}_i}, \qquad \text{sim}(a) = 0 \text{ si } a \text{ fallido/eliminado},$$
+donde $\text{sim}(a)$ es el coseno TF-IDF entre el texto génesis de $a$ y su artículo del borrador final (máximo sobre sus pares si mapea a varios; SBERT como medida alternativa). El modelo espacial es
+$$y' = \rho\,\tilde{W} y' + X\beta + \tilde{W} X\gamma + \varepsilon,$$
+con $\tilde{W}$ = red génesis-iniciativa **row-normalizada** (la estructura precede al resultado, P9), estimado por máxima verosimilitud; se compara con OLS, SAR ($\gamma = 0$) y SEM (error espacial) vía AIC, y la dependencia se diagnostica con el $I$ de Moran. Los efectos marginales del SDM se descomponen con $(I - \rho \tilde{W})^{-1}(I\beta_k + \tilde{W}\gamma_k)$ en directo/indirecto/total.
+
+## 7.2 Resultados
+$N = 154$ (casos completos). Moran's $I = 0.380$ ($p \approx 10^{-194}$; antes 0.155). Comparación (AIC): OLS $-448.9$ < SEM $-529.5$ ($\lambda = 0.981$) < SAR $-539.3$ ($\rho = 0.979$) < **SDM $-575.5$ ($\hat\rho = 0.943$)**. En OLS, con la DV nueva la **posición de red predice éxito**: `degree` $+0.0012$ ($p = 0.002$), `betweenness` $-0.0011$ ($p = 0.004$) — en la v1 las centralidades eran n.s. En el SDM los efectos directos individuales se disipan y los términos **contextuales** son los significativos (`lag.degree` $+0.009$, `lag.betweenness` $-0.008$, `lag.es_mujer` $-0.175$, `lag.theta_mean` $+0.093$): el éxito propio depende de los atributos de los co-firmantes. H3 confirmada y amplificada. *Nota*: con $\rho$ cercano a 1, la descomposición directo/indirecto de los impactos es numéricamente inestable (SEs simuladas explotan); se reportan coeficientes y $\rho$, y los impactos quedan en el `.rds`. Parte del derrame es mecánica — los co-firmantes comparten artículos y por tanto componentes de $y'$ — lo que refuerza la lectura "el éxito es colectivo" pero impide interpretar $\rho$ como influencia pura (ver Limitaciones).
+
+Robustez M3 (tabla `M3_robustness.csv`): la dependencia espacial sobrevive todas las variantes — DV condicional antigua ($I = 0.140$, $\rho = 0.840$), $W$ binaria ($\rho = 0.794$), $W$ artículo ($I = 0.408$, $\rho = 0.934$), DV SBERT ($\rho = 0.937$).
+
+
+Comparación de modelos y parámetros espaciales:
+
+| Modelo | AIC | Parámetro espacial |
+|:---|---:|:---|
+| OLS | $-448.9$ | — |
+| SEM | $-529.5$ | $\lambda = 0.981$ (0.012)\*\*\* |
+| SAR | $-539.3$ | $\rho = 0.979$ (0.014)\*\*\* |
+| **SDM** | $\mathbf{-575.5}$ | $\rho = 0.943$ (0.037)\*\*\* |
+
+Coeficientes completos de OLS y SDM (`M3_full_models.csv`; \*\*\* $p<0.001$, \*\* $p<0.01$, \* $p<0.05$, $\dagger$ $p<0.1$):
+
+| Término | OLS | SDM (directo) | SDM (lag espacial $\tilde{W}X$) |
+|:---|:-:|:-:|:-:|
+| Intercepto | $-0.020$ (0.039) | $-0.532$ (0.253)\* | — |
+| Degree | $+0.00125$ (0.0004)\*\* | $+0.00048$ (0.0003) | $+0.0092$ (0.0022)\*\*\* |
+| Betweenness | $-0.00110$ (0.0004)\*\* | $-0.00018$ (0.0002) | $-0.0081$ (0.0019)\*\*\* |
+| Abogado | $0.0125$ (0.010) | $0.0093$ (0.006) | $0.102$ (0.091) |
+| Experiencia previa | $0.0050$ (0.013) | $0.0089$ (0.008) | $-0.078$ (0.109) |
+| Mujer | $-0.0163$ (0.009)$\dagger$ | $-0.0013$ (0.006) | $-0.175$ (0.063)\*\* |
+| Edad | $-0.0001$ (0.0004) | $-0.0001$ (0.0002) | $-0.0025$ (0.0029) |
+| Grado académico (0--3) | $0.0093$ (0.006) | $0.0026$ (0.004) | $-0.0083$ (0.048) |
+| $\theta$ medio | $0.0020$ (0.004) | $-0.0034$ (0.004) | $+0.0925$ (0.021)\*\*\* |
+| $\theta$ desv. est. | $0.0270$ (0.031) | $0.0088$ (0.019) | $0.158$ (0.164) |
+| Heterofilia del ego | $0.0026$ (0.017) | $-0.0081$ (0.012) | $-0.047$ (0.086) |
+
+## 7.3 Robustez
+
+La dependencia espacial sobrevive todas las variantes (`M3_robustness.csv`):
+
+| Variante | $N$ | Moran $I$ | $\rho$ (SDM) | AIC OLS | AIC SDM |
+|:---|:-:|:-:|:-:|---:|---:|
+| $y'$, $\tilde{W}$ iniciativa (**principal**) | 154 | 0.380 | 0.943 | $-448.9$ | $-575.5$ |
+| $y$ condicional (DV antigua), $\tilde{W}$ iniciativa | 154 | 0.140 | 0.840 | $-224.9$ | $-239.5$ |
+| $y'$, $\tilde{W}$ binaria | 154 | 0.185 | 0.794 | $-448.9$ | $-512.6$ |
+| $y'$, $\tilde{W}$ artículo | 154 | 0.408 | 0.934 | $-448.9$ | $-581.3$ |
+| $y'$ SBERT, $\tilde{W}$ iniciativa | 154 | 0.399 | 0.937 | $-329.2$ | $-489.0$ |
+
+## 7.4 Piloto: dinámica de la retención a lo largo de las indicaciones (C3)
+
+La comparación génesis$\to$final es el extremo de una **trayectoria**: cada artículo pasa por estados intermedios (`content_snapshot` tras cada indicación). El piloto reconstruye esa trayectoria para la comisión con mejor cobertura — **C3: 100% de las 206 entradas de history en artículos trazados traen snapshot + fecha** (C6 y C4/C5 también están al 100%; C1 al 79%) — y mide la similitud de cada estado contra el texto del borrador (`code/10-pilot-retention-dynamics.py`).
+
+![Amendment trajectories toward the final text — pilot on Commission 3.](../results/figures/pilot_retention_dynamics_C3.pdf){width=88%}
+
+Resultados (67 artículos trazados, 206 pasos): la similitud media al borrador sube de **0.473 en génesis a 0.919 tras la última indicación**; la trayectoria es monótonamente creciente en el **71%** de los artículos con indicaciones, con ganancia media $+0.452$ (rango $-0.077$ a $+0.977$). Dos lecturas: (i) el proceso de indicaciones es, en lo textual, **convergente hacia el borrador** — las enmiendas acercan sistemáticamente los artículos a su forma final; (ii) el piloto confirma empíricamente la nota del ancla de validación (§7.5): el estado post-indicaciones ($\approx 0.92$) es lo que la v1 medía como "retención" ($0.979$), mientras la retención génesis verdadera es mucho menor. **Extensión natural**: correr las 7 comisiones y construir el dataset artículo-onda (base del futuro M4 de supervivencia).
+
+## 7.5 Limitaciones
+
+1. **Derrame parcialmente mecánico.** $y'$ de co-firmantes comparte artículos por construcción; $\rho$ combina interdependencia real y composición compartida del DV. La extensión artículo-onda (M4 futura; §7.4) es el camino para separarlas.
+2. **Impactos inestables con $\rho \to 1$.** La descomposición directo/indirecto vía $(I-\rho\tilde{W})^{-1}$ explota numéricamente (SEs simuladas enormes); se reportan coeficientes y $\rho$; los impactos quedan en `sdm_results.rds`.
+3. **Ancla de validación NLP.** La v1 (0.979 en "idénticos") comparaba el texto post-indicaciones; la v2 usa el génesis verdadero, y la etiqueta idéntico/similar (que refiere al estado final) deja de ordenar la similitud génesis$\to$final. La validez del emparejamiento se establece por el contraste alineado-vs-barajado (0.554 vs. 0.032; 96.5% de pares sobre su baseline) y por el piloto (§7.4).
+
+# 8. Decisiones de diseño confirmadas
+
+| Fecha | Decisión |
+|:---|:---|
+| 2026-07-06 | `coincidencias_comisiones.csv` (UTF-8) es la fuente de verdad del mapeo génesis→borrador final (P7). |
+| 2026-07-06 | **M1 = red génesis pura**, 7 comisiones. Indicaciones solo en las ondas de M2. Génesis+indicaciones como robustez (P2). |
+| 2026-07-06 | **M3**: DV principal con ART-FALLIDO = 0 ($y' = \hat{s}\cdot\bar{r}$); DV condicional antigua como robustez (P6). $W$ y centralidades sobre la red génesis (P9). |
+| 2026-07-06 | **M2**: exposición acumulada desde T0 hasta $t-1$ como especificación principal; robustez con decaimiento exponencial y con ventana solo-última-onda; sensibilidad estandarizando $\Delta\theta$ por días entre ondas. |
+| 2026-07-06 | Indicaciones sueltas: entran a las ondas de M2 (timestamp+authors), no a M1 ni a M3; títulos se descartan (P8). |
+| 2026-07-06 | Numeración oficial de comisiones confirmada; rótulos temáticos del paper a corregir (P13.1). |
+| 2026-07-06 | Scraper BCN corregido y re-ejecutado: 154/154 perfiles (P5). |
+| 2026-07-06 | Auditoría P5 vía `gemini-3.5-flash` (BCN + Wikipedia independientes, lotes de 5, situación al momento de la CC); símbolos $=$/$\neq$/B/W/$\varnothing$ por celda; validación humana antes de regenerar covariables. |
+| 2026-07-06 | Arreglos que corresponden al repo CPT registrados en `CPT-arreglos-pendientes.txt` (raíz); se abordarán en ese repositorio. |
+| 2026-07-07 | Grado académico pasa a escala ordinal **0--3** (sin estudios universitarios terminados / educación superior terminada / magíster / doctorado) y entra a M1 como **absdiff** (distancia educativa). |
+| 2026-07-07 | Imputación automatizada de covariables: BCN ground truth → Wikipedia → base; `manual_validations.json` siempre prevalece. `data/raw/conventional-profiles.json` es el archivo curado canónico (154). |
+| 2026-07-07 | Snapshot `dataverse-final` ingerido (CPT `paper-draft` @ `5852519`) con test de aceptación 0a; regla P14 instaurada. Infraestructura de Fase 0 creada: `paths.py`/`paths.R`, `lib_names.py`/`lib_names.R`. |
+| 2026-07-07 | Las referencias a iniciativas populares en `authors` se clasifican como no-persona y quedan fuera de la red de co-patrocinio. |
+| 2026-07-07 | ~~Actualización con C1 y C3 a C7~~ → **ronda 2 de CPT resolvió P15: las 7 comisiones entran a la actualización** (snapshot @ `6fac4c4`). |
+| 2026-07-07 | Registros sin fecha ("undated") y residuo de 134 sin autores: documentados, no imputados; se excluyen de las ondas / de la red según corresponda. |
+| 2026-07-07 | **Unidad de co-firma: INICIATIVA como especificación principal, artículo como robustez** (preferencia del usuario; ver §8.1). |
+| 2026-07-07 | **C2 se usa en M2 pese a sus ondas delgadas** (naturaleza distinta de la comisión); documentado como limitación §6.5. |
+| 2026-07-07 | Indicaciones repetidas en el `history[]` de varios artículos se colapsan a **un** acto de co-firma (dedup por autores+fecha+contenido). |
+| 2026-07-07 | Pipeline v2 ejecutado completo (00--08); resultados en §5--§7 y `results/tables/`. |
+
+## 8.1 Puntos a revisar (no son problemas P)
+
+1. **Unidad de co-firma iniciativa vs. artículo.** La especificación principal usa iniciativa (cada documento co-firmado cuenta una vez); la de artículo pondera por el número de artículos de la iniciativa. Los resultados de M1 son cualitativamente iguales bajo ambas (ver `M1_robustness.csv`) y M3 mantiene $\rho \approx 0.93$ con $W$-artículo, pero conviene revisitar la elección al escribir el paper (interpretación del peso $w_{ij}$).
+2. **Interpretación del vuelco de H1b.** Con datos corregidos, la homofilia de abogados/experimentados pasó de negativa a positiva (§5.2): decidir cómo narrarlo en el paper (corrección de un artefacto de medición de la v1) y si mantener el marco de *gatekeeping* como hipótesis rechazada o reformularlo.
+3. **$\lambda = 0.5$ del decaimiento en M2** es una elección de conveniencia; si la robustez de ventana entra al paper, barrer $\lambda \in \{0.25, 0.5, 0.75\}$.
+
+# 9. Plan de actualización
+
+- **Fase 0 — Infraestructura**: **completada** (2026-07-07): snapshot `dataverse-final` versionado + QA de aceptación (`0a-verify-dataverse-snapshot.py`); perfiles curados 154; `paths.py`/`paths.R`; `lib_names.py`/`lib_names.R` con validación al 100%. *(P14 cerrado; P3 y P4 quedan en su mitad de recableado de scripts.)*
+- **Fase 0b — Calidad de covariables**: **completada** (2026-07-07): auditoría dual-fuente v1+v2, validación manual, e imputación automática con capa de validaciones humanas; `data/raw/conventional-profiles.json` regenerado con 154 perfiles curados. *(P5 cerrado.)*
+- **Fase 1 — Loader unificado**: **completada** (2026-07-07) dentro del script 00 v2: lector GENESIS (2 esquemas), clasificación artículo/indicación-suelta, dedup de indicaciones repetidas, parseo de timestamps. *(P8 cerrado en su parte de loader.)*
+- **Fase 2 — Redes**: **completada** (2026-07-07): red génesis-iniciativa pooled (528 iniciativas, decisión §6.1) + red artículo de robustez + ondas ×7 con bins observados. *(P1-red y P2 cerrados.)*
+- **Fase 3 — Modelos**: **completada** (2026-07-07): M1 ERGM (iniciativa + robusteces), M2 panel de 4.278 obs con falsificación y ventanas, M3 SDM con `coincidencias`, DV $y'$ y $W$-génesis. Resultados en §5--§7. *(P1, P6, P7, P9 cerrados; P11 re-evaluado con la robustez por comisión.)*
+- **Fase 4 — Integración y paper**: **parcial**: `integrated_dataset` con exactamente 154 filas, suite de robustez y tablas exportadas a `results/tables/` (hechos); **pendiente**: la actualización del extended abstract y README (cifras nuevas, rótulos oficiales, narrativa del vuelco de H1b, eliminar "ongoing work"). *(P12 cerrado — tablas y figuras F1--F3 exportadas; P13 abierto.)*
+
+# 10. Registro de cambios de este documento
+
+- **v2.1 (2026-07-08).** Reestructura: resultados en secciones independientes por modelo (§5 M1, §6 M2, §7 M3) con especificación matemática, tablas completas de coeficientes (`M2_full_models.csv`, `M3_full_models.csv`) y robustez/limitaciones por sección; "Problemas" pasa a **Anexo** al final (con hoja en blanco previa). Figuras F1--F3 (iniciativas por comisión, bipartitas iniciativa/artículo, construcción de ondas) y **piloto de dinámica de retención en C3** (§7.4: génesis 0.473 $\to$ 0.919 post-indicaciones; 71% monótono). 08 paralelizado (`mclapply`) con cronómetro. Propuesta de motivación descriptiva para M2 en §6.2 (no ejecutada).
+- **v2.0 (2026-07-07).** **Re-ejecución completa del estudio con las 7 comisiones** (pipeline v2, scripts 00--08 reescritos sobre paths/lib_names): red génesis-INICIATIVA (528 iniciativas; decisión §6.1), panel M2 de 4.278 obs, M3 con DV $y'$ y N = 154 completos. Nuevas §3.4 (regla de perfiles), §4.3 (resultados v2), §4.4 (limitaciones, incl. C2 delgada) y §6.1 (puntos a revisar). Hallazgos: H1a reforzada; **H1b invertida** (homofilia positiva de abogados/experiencia; el gatekeeping de la v1 no sobrevive la corrección de datos); nueva estratificación educativa (absdiff grado $-0.048$); H2 replicada y blindada (FE nulo + falsificación + 3 ventanas); H3 amplificada (Moran 0.38, $\rho$ 0.94, robusta a 4 variantes). P1--P4, P6, P7, P9 cerrados; P12 parcial.
+- **v1.4 (2026-07-07).** Ronda 2 de CPT ingerida (snapshot @ `6fac4c4`): P15 resuelto (authors de C2 vía `sources`→firmantes y C4 vía `icc_id`; 1.676 artículos con $\geq 2$ autores; residuo 134 documentado), timestamps *undated* documentados (P8.4). QA re-ejecutado: 75.616 menciones, 100% resueltas. Las 7 comisiones entran a la actualización; luz verde para reescribir el pipeline.
+- **v1.3 (2026-07-07).** Fase 0 completada: snapshot `dataverse-final` ingerido (CPT `paper-draft` @ `5852519`; TRACK_full 2.019, 210 indicaciones sueltas, uid/final_status 100%), test de aceptación 0a, módulos `paths` y `lib_names` (70.043 menciones de autor validadas al 100%, con filtro de iniciativas populares). P14 cerrado; P3/P4/P8 avanzados a parcial; **nuevo P15**: C2 sin `authors` (bloqueado en CPT). §3 reescrita con las cifras del snapshot.
+- **v1.2 (2026-07-07).** P5 cerrado: corrida v2 de la auditoría (lotes de 6, grado 0--3, `profiles-batches/`), chequeo de consistencia v1 vs. v2, e imputación automatizada (BCN → Wikipedia → base, con `manual_validations.json` prevaleciendo); `data/raw/conventional-profiles.json` regenerado (154 perfiles curados, 0 "Desconocida"). Decisión de modelo: `absdiff(grado académico 0--3)` se agrega a M1.
+- **v1.1 (2026-07-06).** P5: auditoría dual-fuente BCN+Wikipedia ejecutada con `gemini-3.5-flash` (154/154; 135 discrepancias con el pipeline; tablas en `data/raw/profile-audit/`). Nuevo `CPT-arreglos-pendientes.txt` en la raíz con los arreglos que corresponden al repositorio de datos (P8, higiene, documentación).
+- **v1 (2026-07-06).** Versión inicial: objetivos y marco teórico (§2), inventario de datos nuevos (§3), pipeline y resultados vigentes (§4), registro detallado de problemas P1--P14 (§5), decisiones confirmadas (§6) y plan por fases (§7). Incluye el fix del scraper BCN (P5) aplicado en esta fecha.
+
+\clearpage
+\thispagestyle{empty}
+\mbox{}
+\clearpage
+
+# Anexo — Problemas a abordar
+
+Esta sección es el inventario completo de defectos, deudas y decisiones pendientes detectados en la auditoría de julio 2026 (previa a la actualización). Es la lista de control contra la cual se ejecutó el plan de la §9.
 
 ## P1 — Cobertura incompleta de comisiones **[RESUELTO 2026-07-07 — pipeline v2 con las 7 comisiones; resultados §4.3]**
 
@@ -346,7 +514,7 @@ No existe `emIRT_bootstrap_output.rds`; `theta_se` queda NA en el pipeline (el s
 
 En la robustez vigente, los Valued ERGM de C3 y C5 no convergieron plenamente (muestras chicas a nivel de comisión). Con 7 comisiones el problema puede repetirse en las nuevas; plan: reintentar con los datos nuevos y, si persiste, reportar solo el pooled + los que converjan, documentándolo.
 
-## P12 — Sin exportación de figuras ni tablas **[PARCIAL — tablas exportadas a results/tables/ (M1--M3 + robustez); figuras pendientes]**
+## P12 — Sin exportación de figuras ni tablas **[RESUELTO 2026-07-08 — tablas en results/tables/ y figuras F1--F3 + piloto en results/figures/ (script 09/10)]**
 
 `results/figures/` y `results/tables/` están vacíos; las tablas del extended abstract están escritas a mano en el `.tex`. Riesgo de divergencia silenciosa entre resultados y paper (ya ocurrió: el abstract dice "max weight > 300" cuando el máximo real es 480; ver P13.3). Plan: cada script de modelo exporta sus tablas (CSV + LaTeX) y figuras a `results/`, y el `.tex` las incluye en vez de duplicarlas.
 
@@ -369,50 +537,3 @@ Regla instaurada: **este repo consume snapshots versionados de CPT; ningún scri
 
 **Nota de alcance para M2.** El `history[]` de C2 sigue delgado (33/54 entradas utilizables) y C2 no tiene indicaciones sueltas: C2 entra plenamente a M1 (génesis) y M3 (éxito), pero sus ondas en M2 aportarán poca variación intra-comisión — esperable y no bloqueante.
 
-# 6. Decisiones de diseño confirmadas
-
-| Fecha | Decisión |
-|:---|:---|
-| 2026-07-06 | `coincidencias_comisiones.csv` (UTF-8) es la fuente de verdad del mapeo génesis→borrador final (P7). |
-| 2026-07-06 | **M1 = red génesis pura**, 7 comisiones. Indicaciones solo en las ondas de M2. Génesis+indicaciones como robustez (P2). |
-| 2026-07-06 | **M3**: DV principal con ART-FALLIDO = 0 ($y' = \hat{s}\cdot\bar{r}$); DV condicional antigua como robustez (P6). $W$ y centralidades sobre la red génesis (P9). |
-| 2026-07-06 | **M2**: exposición acumulada desde T0 hasta $t-1$ como especificación principal; robustez con decaimiento exponencial y con ventana solo-última-onda; sensibilidad estandarizando $\Delta\theta$ por días entre ondas. |
-| 2026-07-06 | Indicaciones sueltas: entran a las ondas de M2 (timestamp+authors), no a M1 ni a M3; títulos se descartan (P8). |
-| 2026-07-06 | Numeración oficial de comisiones confirmada; rótulos temáticos del paper a corregir (P13.1). |
-| 2026-07-06 | Scraper BCN corregido y re-ejecutado: 154/154 perfiles (P5). |
-| 2026-07-06 | Auditoría P5 vía `gemini-3.5-flash` (BCN + Wikipedia independientes, lotes de 5, situación al momento de la CC); símbolos $=$/$\neq$/B/W/$\varnothing$ por celda; validación humana antes de regenerar covariables. |
-| 2026-07-06 | Arreglos que corresponden al repo CPT registrados en `CPT-arreglos-pendientes.txt` (raíz); se abordarán en ese repositorio. |
-| 2026-07-07 | Grado académico pasa a escala ordinal **0--3** (sin estudios universitarios terminados / educación superior terminada / magíster / doctorado) y entra a M1 como **absdiff** (distancia educativa). |
-| 2026-07-07 | Imputación automatizada de covariables: BCN ground truth → Wikipedia → base; `manual_validations.json` siempre prevalece. `data/raw/conventional-profiles.json` es el archivo curado canónico (154). |
-| 2026-07-07 | Snapshot `dataverse-final` ingerido (CPT `paper-draft` @ `5852519`) con test de aceptación 0a; regla P14 instaurada. Infraestructura de Fase 0 creada: `paths.py`/`paths.R`, `lib_names.py`/`lib_names.R`. |
-| 2026-07-07 | Las referencias a iniciativas populares en `authors` se clasifican como no-persona y quedan fuera de la red de co-patrocinio. |
-| 2026-07-07 | ~~Actualización con C1 y C3 a C7~~ → **ronda 2 de CPT resolvió P15: las 7 comisiones entran a la actualización** (snapshot @ `6fac4c4`). |
-| 2026-07-07 | Registros sin fecha ("undated") y residuo de 134 sin autores: documentados, no imputados; se excluyen de las ondas / de la red según corresponda. |
-| 2026-07-07 | **Unidad de co-firma: INICIATIVA como especificación principal, artículo como robustez** (preferencia del usuario; ver §6.1). |
-| 2026-07-07 | **C2 se usa en M2 pese a sus ondas delgadas** (naturaleza distinta de la comisión); documentado como limitación §4.4. |
-| 2026-07-07 | Indicaciones repetidas en el `history[]` de varios artículos se colapsan a **un** acto de co-firma (dedup por autores+fecha+contenido). |
-| 2026-07-07 | Pipeline v2 ejecutado completo (00--08); resultados en §4.3 y `results/tables/`. |
-
-## 6.1 Puntos a revisar (no son problemas P)
-
-1. **Unidad de co-firma iniciativa vs. artículo.** La especificación principal usa iniciativa (cada documento co-firmado cuenta una vez); la de artículo pondera por el número de artículos de la iniciativa. Los resultados de M1 son cualitativamente iguales bajo ambas (ver `M1_robustness.csv`) y M3 mantiene $\rho \approx 0.93$ con $W$-artículo, pero conviene revisitar la elección al escribir el paper (interpretación del peso $w_{ij}$).
-2. **Interpretación del vuelco de H1b.** Con datos corregidos, la homofilia de abogados/experimentados pasó de negativa a positiva (§4.3.2): decidir cómo narrarlo en el paper (corrección de un artefacto de medición de la v1) y si mantener el marco de *gatekeeping* como hipótesis rechazada o reformularlo.
-3. **$\lambda = 0.5$ del decaimiento en M2** es una elección de conveniencia; si la robustez de ventana entra al paper, barrer $\lambda \in \{0.25, 0.5, 0.75\}$.
-
-# 7. Plan de actualización
-
-- **Fase 0 — Infraestructura**: **completada** (2026-07-07): snapshot `dataverse-final` versionado + QA de aceptación (`0a-verify-dataverse-snapshot.py`); perfiles curados 154; `paths.py`/`paths.R`; `lib_names.py`/`lib_names.R` con validación al 100%. *(P14 cerrado; P3 y P4 quedan en su mitad de recableado de scripts.)*
-- **Fase 0b — Calidad de covariables**: **completada** (2026-07-07): auditoría dual-fuente v1+v2, validación manual, e imputación automática con capa de validaciones humanas; `data/raw/conventional-profiles.json` regenerado con 154 perfiles curados. *(P5 cerrado.)*
-- **Fase 1 — Loader unificado**: **completada** (2026-07-07) dentro del script 00 v2: lector GENESIS (2 esquemas), clasificación artículo/indicación-suelta, dedup de indicaciones repetidas, parseo de timestamps. *(P8 cerrado en su parte de loader.)*
-- **Fase 2 — Redes**: **completada** (2026-07-07): red génesis-iniciativa pooled (528 iniciativas, decisión §6.1) + red artículo de robustez + ondas ×7 con bins observados. *(P1-red y P2 cerrados.)*
-- **Fase 3 — Modelos**: **completada** (2026-07-07): M1 ERGM (iniciativa + robusteces), M2 panel de 4.278 obs con falsificación y ventanas, M3 SDM con `coincidencias`, DV $y'$ y $W$-génesis. Resultados en §4.3. *(P1, P6, P7, P9 cerrados; P11 re-evaluado con la robustez por comisión.)*
-- **Fase 4 — Integración y paper**: **parcial**: `integrated_dataset` con exactamente 154 filas, suite de robustez y tablas exportadas a `results/tables/` (hechos); **pendiente**: figuras y la actualización del extended abstract y README (cifras nuevas, rótulos oficiales, narrativa del vuelco de H1b, eliminar "ongoing work"). *(P12 parcial; P13 abierto.)*
-
-# 8. Registro de cambios de este documento
-
-- **v2.0 (2026-07-07).** **Re-ejecución completa del estudio con las 7 comisiones** (pipeline v2, scripts 00--08 reescritos sobre paths/lib_names): red génesis-INICIATIVA (528 iniciativas; decisión §6.1), panel M2 de 4.278 obs, M3 con DV $y'$ y N = 154 completos. Nuevas §3.4 (regla de perfiles), §4.3 (resultados v2), §4.4 (limitaciones, incl. C2 delgada) y §6.1 (puntos a revisar). Hallazgos: H1a reforzada; **H1b invertida** (homofilia positiva de abogados/experiencia; el gatekeeping de la v1 no sobrevive la corrección de datos); nueva estratificación educativa (absdiff grado $-0.048$); H2 replicada y blindada (FE nulo + falsificación + 3 ventanas); H3 amplificada (Moran 0.38, $\rho$ 0.94, robusta a 4 variantes). P1--P4, P6, P7, P9 cerrados; P12 parcial.
-- **v1.4 (2026-07-07).** Ronda 2 de CPT ingerida (snapshot @ `6fac4c4`): P15 resuelto (authors de C2 vía `sources`→firmantes y C4 vía `icc_id`; 1.676 artículos con $\geq 2$ autores; residuo 134 documentado), timestamps *undated* documentados (P8.4). QA re-ejecutado: 75.616 menciones, 100% resueltas. Las 7 comisiones entran a la actualización; luz verde para reescribir el pipeline.
-- **v1.3 (2026-07-07).** Fase 0 completada: snapshot `dataverse-final` ingerido (CPT `paper-draft` @ `5852519`; TRACK_full 2.019, 210 indicaciones sueltas, uid/final_status 100%), test de aceptación 0a, módulos `paths` y `lib_names` (70.043 menciones de autor validadas al 100%, con filtro de iniciativas populares). P14 cerrado; P3/P4/P8 avanzados a parcial; **nuevo P15**: C2 sin `authors` (bloqueado en CPT). §3 reescrita con las cifras del snapshot.
-- **v1.2 (2026-07-07).** P5 cerrado: corrida v2 de la auditoría (lotes de 6, grado 0--3, `profiles-batches/`), chequeo de consistencia v1 vs. v2, e imputación automatizada (BCN → Wikipedia → base, con `manual_validations.json` prevaleciendo); `data/raw/conventional-profiles.json` regenerado (154 perfiles curados, 0 "Desconocida"). Decisión de modelo: `absdiff(grado académico 0--3)` se agrega a M1.
-- **v1.1 (2026-07-06).** P5: auditoría dual-fuente BCN+Wikipedia ejecutada con `gemini-3.5-flash` (154/154; 135 discrepancias con el pipeline; tablas en `data/raw/profile-audit/`). Nuevo `CPT-arreglos-pendientes.txt` en la raíz con los arreglos que corresponden al repositorio de datos (P8, higiene, documentación).
-- **v1 (2026-07-06).** Versión inicial: objetivos y marco teórico (§2), inventario de datos nuevos (§3), pipeline y resultados vigentes (§4), registro detallado de problemas P1--P14 (§5), decisiones confirmadas (§6) y plan por fases (§7). Incluye el fix del scraper BCN (P5) aplicado en esta fecha.

@@ -13,10 +13,15 @@
 
 cat("=== 08-robustness-checks.R (v2) ===\n")
 suppressPackageStartupMessages({
-  library(jsonlite); library(statnet); library(spdep); library(spatialreg)
+  library(jsonlite); library(statnet); library(spdep); library(spatialreg); library(parallel)
 })
 set.seed(42)
 source("code/paths.R")
+
+T_START <- Sys.time()
+# los 9 ERGMs son independientes: se reparten entre los P-cores (fork)
+N_CORES <- max(1, min(8, detectCores() - 2))
+cat(sprintf("  Núcleos detectados: %d | workers ERGM: %d\n", detectCores(), N_CORES))
 
 profiles <- fromJSON(PROFILES)
 roster <- sort(fromJSON(MEMBERS))
@@ -43,9 +48,9 @@ TERMS <- paste("sum + nodematch('afiliacion_agrupada') +",
                "absdiff('grado_academico_nivel') + nodecov('edad_al_asumir')")
 
 fit_ergm <- function(net, label) {
-  cat(sprintf("\n[ERGM] %s ...\n", label))
+  t0 <- Sys.time()
   f <- as.formula(paste("net ~", TERMS), env = environment())
-  tryCatch({
+  out <- tryCatch({
     fit <- ergm(f, response = "weight", reference = ~Poisson,
                 control = control.ergm(seed = 42))
     sm <- summary(fit)
@@ -53,31 +58,29 @@ fit_ergm <- function(net, label) {
                estimate = sm$coefficients[, 1], se = sm$coefficients[, 2],
                p = sm$coefficients[, ncol(sm$coefficients)], row.names = NULL)
   }, error = function(e) {
-    cat(sprintf("  ERROR: %s\n", conditionMessage(e)))
-    data.frame(model = label, term = "ERROR", estimate = NA, se = NA, p = NA)
+    data.frame(model = label, term = paste("ERROR:", conditionMessage(e)),
+               estimate = NA, se = NA, p = NA)
   })
+  out$secs <- round(as.numeric(difftime(Sys.time(), t0, units = "secs")), 1)
+  out
 }
 
-ergm_tabs <- list()
-
-# (a) por comisión: T0 génesis de cada dynamic_networks.json
+# --- construir las 9 tareas ERGM y repartirlas entre los workers ---
+tasks <- list()
 for (k in 1:7) {
   nd <- fromJSON(file.path(DATA_PROCESSED, sprintf("C%d_dynamic_networks.json", k)),
                  simplifyVector = FALSE)
   t0 <- nd[["T0_Genesis"]]
   edges_df <- do.call(rbind, lapply(t0, function(e)
     data.frame(source = e$source, target = e$target, weight = e$weight)))
-  ergm_tabs[[length(ergm_tabs) + 1]] <- fit_ergm(build_net(edges_df, profiles),
-                                                 sprintf("C%d (génesis-iniciativa)", k))
+  tasks[[length(tasks) + 1]] <- list(edges = edges_df, prof = profiles,
+                                     label = sprintf("C%d (génesis-iniciativa)", k))
 }
-
-# (b) pooled, unidad artículo
 edges_art <- read.csv(file.path(DATA_PROCESSED, "genesis_network_article.csv"),
                       stringsAsFactors = FALSE)
-ergm_tabs[[length(ergm_tabs) + 1]] <- fit_ergm(build_net(edges_art, profiles),
-                                               "Pooled (unidad artículo)")
+tasks[[length(tasks) + 1]] <- list(edges = edges_art, prof = profiles,
+                                   label = "Pooled (unidad artículo)")
 
-# (c) pooled iniciativa con perfiles ANTIGUOS (pre-auditoría, git 8b5a990)
 old_json <- tryCatch(
   system2("git", c("show", "8b5a990:data/raw/conventional-profiles.json"),
           stdout = TRUE, stderr = FALSE),
@@ -96,13 +99,21 @@ if (!is.null(old_json) && length(old_json) > 0) {
   old_prof$edad_al_asumir[is.na(old_prof$edad_al_asumir)] <- 45
   edges_init <- read.csv(file.path(DATA_PROCESSED, "genesis_network_initiative.csv"),
                          stringsAsFactors = FALSE)
-  ergm_tabs[[length(ergm_tabs) + 1]] <- fit_ergm(build_net(edges_init, old_prof),
-                                                 "Pooled iniciativa (perfiles PRE-auditoría)")
+  tasks[[length(tasks) + 1]] <- list(edges = edges_init, prof = old_prof,
+                                     label = "Pooled iniciativa (perfiles PRE-auditoría)")
 } else {
   cat("  (no se pudo extraer el perfil antiguo desde git; variante omitida)\n")
 }
 
+cat(sprintf("  Lanzando %d ERGMs en %d workers (mclapply/fork)...\n", length(tasks), N_CORES))
+ergm_tabs <- mclapply(tasks, function(t) fit_ergm(build_net(t$edges, t$prof), t$label),
+                      mc.cores = N_CORES, mc.set.seed = FALSE)
 ergm_tab <- do.call(rbind, ergm_tabs)
+timing <- unique(ergm_tab[, c("model", "secs")])
+cat("  Tiempo por modelo (s):\n")
+print(timing, row.names = FALSE)
+cat(sprintf("  ERGMs listos en %.1f min de pared (suma secuencial habría sido %.1f min)\n",
+            as.numeric(difftime(Sys.time(), T_START, units = "mins")), sum(timing$secs) / 60))
 write.csv(ergm_tab, file.path(RESULTS_TABLES, "M1_robustness.csv"), row.names = FALSE)
 cat("\nM1 robustez -> results/tables/M1_robustness.csv\n")
 
@@ -155,4 +166,5 @@ m3 <- rbind(
 print(m3, row.names = FALSE, digits = 4)
 write.csv(m3, file.path(RESULTS_TABLES, "M3_robustness.csv"), row.names = FALSE)
 saveRDS(list(ergm = ergm_tab, m3 = m3), file.path(DATA_PROCESSED, "robustness_results.rds"))
-cat("--- Done ---\n")
+cat(sprintf("--- Done (total: %.1f min) ---\n",
+            as.numeric(difftime(Sys.time(), T_START, units = "mins"))))
