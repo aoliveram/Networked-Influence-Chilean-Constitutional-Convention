@@ -158,7 +158,7 @@ Pipeline v2 (2026-07-07): todos los scripts derivan rutas de `code/paths.{py,R}`
 | 07 | `code/07-model-spatial-durbin.R` | **M3**: $W$ génesis-iniciativa; Moran; OLS/SAR/SEM/SDM; impactos | `sdm_results.rds`, `tables/M3_*.csv` |
 | 08 | `code/08-robustness-checks.R` | Robustez M1 (por comisión ×7, unidad artículo, perfiles pre-auditoría) y M3 (DV antigua, W binaria, W artículo, SBERT); **ERGMs en paralelo** (`mclapply`, hasta 8 P-cores) con cronómetro por modelo | `robustness_results.rds`, `tables/M{1,3}_robustness.csv` |
 | 09 | `code/09-figures.py` | Figuras F1--F3 (PDF + PNG 300 dpi, inglés) | `results/figures/*` |
-| 10 | `code/10-pilot-retention-dynamics.py` | Piloto: dinámica de retención post-indicaciones (C3) | `pilot_retention_dynamics_C3.csv`, figura |
+| 10 | `code/10-retention-dynamics.py` | Dinámica de retención sobre ondas de comisión, 7 comisiones, con LOCF | `retention_dynamics_locf.csv`, figura |
 
 ## 4.2 Resultados de la versión anterior (extended abstract, abril 2026 — 5 comisiones, red mixta, perfiles heurísticos)
 
@@ -169,7 +169,7 @@ Pipeline v2 (2026-07-07): todos los scripts derivan rutas de `code/paths.{py,R}`
 ## 4.3 Insumos construidos (v2 — julio 2026)
 
 
-![Constitutional initiatives per commission (F1).](../results/figures/initiatives_per_commission.pdf){width=88%}
+![Constitutional initiatives (solid) over genesis articles (faded) per commission (F1) — la brecha entre ambas barras es el nº de artículos por iniciativa.](../results/figures/initiatives_per_commission.pdf){width=88%}
 
 **Registro de iniciativas** (`initiative_registry.csv`): **528 iniciativas** con $\geq 2$ firmantes-persona — C1: 29, C2: 56, C3: 41, C4: 68, C5: 148, C6: 78, C7: 108 (las iniciativas populares/indígenas quedan fuera de la red de personas). **Red génesis-iniciativa** (principal): 154 nodos (sin aislados), **7.731 aristas**, peso total 53.391, peso máximo 76. **Red génesis-artículo** (robustez): 1.676 eventos de co-firma, 8.020 aristas, peso 175.316.
 
@@ -190,9 +190,9 @@ Las indicaciones son mayoritariamente unipersonales en varias comisiones (C5: to
 **Mapeo y DV de éxito**: 484 pares génesis$\to$final (480 vía `coincidencias` + 4 rescatados parseando `final_status`; 2 uids de indicación no encontrados). Desenlaces de los 1.809 artículos: 223 idéntico, 136 similar, 275 ART-FALLIDO, 1.175 eliminado (fracaso = fallido + eliminado, sim = 0). **Validación del emparejamiento**: similitud alineada 0.554 vs. 0.032 con pares barajados; 96.5% de los pares supera su baseline. TF-IDF idéntico 0.570 / similar 0.565; SBERT 0.857 / 0.872. *Nota sobre el ancla de validación*: la v1 reportaba 0.979 en "idénticos" porque comparaba el texto **post-indicaciones** con el borrador; la v2 usa el texto **génesis verdadero** (la operacionalización correcta de "retención de lo que el delegado propuso"), y la etiqueta idéntico/similar — que refiere al estado *final* del artículo — deja de ordenar la similitud génesis$\to$final; la validación pasa a ser el contraste alineado-vs-barajado. Media de $y'$: 0.094; tasa de supervivencia media: 0.211; **154/154 convencionales con score** (el dataset integrado tiene 154 casos completos: por primera vez el roster entero entra a M3).
 
 
-![Genesis co-sponsorship as a bipartite network, initiative unit (F2a). Documents on top (colored by commission), delegates below (sorted and colored by ideal point).](../results/figures/bipartite_initiative.pdf){width=100%}
+![Genesis co-sponsorship as a bipartite network, initiative unit (F2a). Documentos arriba (color por comisión); convencionales abajo, ordenados y coloreados por punto ideal — **rojo = izquierda** ($\theta<0$; Baradit $-1.4$), **azul = derecha** ($\theta>0$; Marinovic $+4.3$), con colorbar.](../results/figures/bipartite_initiative.pdf){width=100%}
 
-![Genesis co-sponsorship as a bipartite network, article unit (F2b) — the robustness specification.](../results/figures/bipartite_article.pdf){width=100%}
+![Genesis co-sponsorship as a bipartite network, article unit (F2b) — la especificación de robustez, mismas convenciones.](../results/figures/bipartite_article.pdf){width=100%}
 ## 4.4 Limitaciones de datos (transversales)
 
 1. **Cobertura de autores.** 134/2.019 registros TRACK sin autores (65 de iniciativas populares/indígenas — patrocinio institucional —, 45 de ICC no recuperadas, 24 sin referencia); 54 artículos del borrador final quedaron `not_traced` en `coincidencias`; 66 + 5 registros *undated* se excluyen de las ondas.
@@ -259,11 +259,33 @@ y el modelo principal es el panel con efectos fijos individuales
 $$\Delta\theta_{i,t} = \alpha_i + \beta_1\,\theta_{i,t-1} + \beta_3\,\text{NetExp}_{i,t-1} + \varepsilon_{it},$$
 con errores agrupados por delegado y test de Hausman contra efectos aleatorios. **Falsificación**: se reemplaza el rezago por el *lead* ($\text{NetExp}_{i,t+1}$); si el efecto contemporáneo fuera influencia causal, el lead debería ser nulo. **Ventanas alternativas de exposición** (robustez): decaimiento exponencial $W^{dec}_{t} = \sum_{s \le t} \lambda^{t-s}\,\Delta W_s$ con $\lambda = 0.5$; solo-última-onda $W^{last}_{t} = \Delta W_t$; y $\Delta\theta$ estandarizado por días transcurridos entre ondas. Los pasos que comparten período emIRT con el anterior ($\Delta\theta \equiv 0$ mecánico) se excluyen (1.078 celdas).
 
-![Wave construction for Model 2, by commission (F3).](../results/figures/m2_waves_summary.pdf){width=100%}
+![Wave construction for Model 2, by commission (F3; archivo `C#_waves_summary`).](../results/figures/C%23_waves_summary.pdf){width=100%}
 
-## 6.2 Motivación descriptiva (propuesta — no ejecutada)
+## 6.2 Motivación descriptiva (diseño en curso)
 
-Para animar la pregunta del modelo ("las posiciones cambian y la red cambia: ¿influencia o selección?") se propone una figura descriptiva de dos paneles, aún no construida: (a) **la red cambia** — proporción de los lazos finales de cada comisión formados después de T0, similitud de Jaccard entre ondas consecutivas y curva de densidad acumulada; (b) **las posiciones cambian** — distribución de $|\Delta\theta|$ por onda y proporción de delegados que cruzan la mediana ideológica. Ambos insumos ya existen (`C{k}_dynamic_networks.json`, `network_exposure_panel.csv`); queda pendiente de decisión (§8.1).
+Para animar la pregunta del modelo ("las posiciones cambian y la red cambia: ¿influencia o selección?") se acordó una batería descriptiva en tres piezas:
+
+**(a) La red cambia — análisis de pertinencia (2026-07-08, ejecutado).** Distribución de los eventos multi-autor por onda (¿lazos nuevos solo al inicio?):
+
+| Comisión | Eventos por onda (fecha: n) | % eventos con 3+ autores |
+|:-:|:---|:-:|
+| C1 | 03-17: 145 · 04-01: 66 · 04-18: 38 · 04-30: 17 | 97% |
+| C2 | 03-02: 1 · resto: 0 | — |
+| C3 | 02-14: 81 · 03-01: 15 · 03-14: 4 · 04-04: 4 · 04-06: 80 · 04-26: 28 | 98% |
+| C4 | 03-07: 44 · 03-24: 27 · 04-08: 60 · 04-25: 21 · 05-05: 2 | 74% |
+| C5 | 0 en todas | — |
+| C6 | 02-08: 19 · 02-23: 8 · 03-07: 42 · 04-01: 98 · 04-27: 91 · 05-08: 59 | 88% |
+| C7 | 02-19: 42 · resto: 4, 5, 0, 1, 1, 0, 0 | 83% |
+
+Lectura: la formación de lazos post-génesis es **sostenida en C1, C3, C4 y C6** (C6 incluso crece hacia el final; C3 es bimodal), **de un solo golpe en C7** (42/54 en una onda) y **ausente en C2/C5**. Los eventos de exactamente 2 autores — potencialmente problemáticos — son minoría (2--3% en C1/C3; 26% en C4). **Comisiones pertinentes para el panel (a): C1, C3, C4, C6; C7 con nota; C2/C5 se excluyen.**
+
+**(b) Las posiciones cambian (diseño acordado, pendiente de construir).** Dos piezas: la dinámica temporal de las posiciones (spaghetti de $\theta_{i,t}$ con medias por bloque, siguiendo el estilo del proyecto `Z-conv-const-dynamics` que grafica W-Nominate/Ideal por votante y coalición) y la distribución de $|\Delta\theta|$ por onda.
+
+**(c) Preview construido (2026-07-08).** Correlación transversal entre la exposición y la posición propia, por comisión y onda, contra el efecto within:
+
+![Selection, not influence — preview del mini-panel (c).](../results/figures/m2_selection_vs_influence_preview.pdf){width=92%}
+
+Lectura: en **cada comisión y cada onda**, la posición ponderada de los co-firmantes sigue de cerca la propia ($r$ transversal 0.83--0.97, estable en el tiempo — la firma de la selección homofílica), mientras el efecto *within* de la exposición rezagada sobre $\Delta\theta$ es exactamente cero. La brecha entre esas dos cantidades **es** el resultado de M2 en una imagen.
 
 ## 6.3 Resultados
 Panel: **4.278 observaciones** delegado-onda (antes 2.926), 154 delegados, 7 comisiones; 1.078 celdas cuyo paso comparte período emIRT con el anterior ($\Delta\theta \equiv 0$ mecánico) se excluyen. Coeficiente de exposición ($\hat\beta_3$), EE agrupados por delegado:
@@ -353,13 +375,13 @@ La dependencia espacial sobrevive todas las variantes (`M3_robustness.csv`):
 | $y'$, $\tilde{W}$ artículo | 154 | 0.408 | 0.934 | $-448.9$ | $-581.3$ |
 | $y'$ SBERT, $\tilde{W}$ iniciativa | 154 | 0.399 | 0.937 | $-329.2$ | $-489.0$ |
 
-## 7.4 Piloto: dinámica de la retención a lo largo de las indicaciones (C3)
+## 7.4 Dinámica de la retención sobre las ondas de comisión (7 comisiones, LOCF)
 
-La comparación génesis$\to$final es el extremo de una **trayectoria**: cada artículo pasa por estados intermedios (`content_snapshot` tras cada indicación). El piloto reconstruye esa trayectoria para la comisión con mejor cobertura — **C3: 100% de las 206 entradas de history en artículos trazados traen snapshot + fecha** (C6 y C4/C5 también están al 100%; C1 al 79%) — y mide la similitud de cada estado contra el texto del borrador (`code/10-pilot-retention-dynamics.py`).
+La comparación génesis$\to$final es el extremo de una **trayectoria**: cada artículo pasa por estados intermedios (`content_snapshot` tras cada indicación, almacenados en el dataset — no se reconstruyen). El análisis (`code/10-retention-dynamics.py`, generalización del piloto C3) mide, para los **359 artículos trazados**, la similitud de su estado vigente en **cada onda de su comisión** contra su artículo del borrador; si un artículo deja de modificarse antes de la última onda, su valor **se propaga hacia adelante** (LOCF, decisión 2026-07-08). Cobertura de snapshots en artículos trazados: 100% en C3/C4/C5/C6, 97% en C2/C7, 79% en C1.
 
-![Amendment trajectories toward the final text — pilot on Commission 3.](../results/figures/pilot_retention_dynamics_C3.pdf){width=88%}
+![Amendment trajectories toward the final text — all commissions (LOCF).](../results/figures/retention_dynamics_all_commissions.pdf){width=100%}
 
-Resultados (67 artículos trazados, 206 pasos): la similitud media al borrador sube de **0.473 en génesis a 0.919 tras la última indicación**; la trayectoria es monótonamente creciente en el **71%** de los artículos con indicaciones, con ganancia media $+0.452$ (rango $-0.077$ a $+0.977$). Dos lecturas: (i) el proceso de indicaciones es, en lo textual, **convergente hacia el borrador** — las enmiendas acercan sistemáticamente los artículos a su forma final; (ii) el piloto confirma empíricamente la nota del ancla de validación (§7.5): el estado post-indicaciones ($\approx 0.92$) es lo que la v1 medía como "retención" ($0.979$), mientras la retención génesis verdadera es mucho menor. **Extensión natural**: correr las 7 comisiones y construir el dataset artículo-onda (base del futuro M4 de supervivencia).
+Similitud media al borrador, génesis $\to$ última onda: C1 $0.65 \to 0.82$; C2 $0.39 \to 0.88$; C3 $0.50 \to 0.92$; C4 $0.49 \to 0.94$; C5 $0.15 \to 0.95$; C6 $0.40 \to 0.98$; C7 $0.33 \to 0.89$. Tres lecturas: (i) el proceso de indicaciones es **convergente hacia el borrador en las 7 comisiones**; (ii) la heterogeneidad de partida es enorme — C5 nace lejísimos de su forma final (0.15) y se reescribe casi por completo vía indicaciones (unipersonales: por eso su red no cambia aunque su texto sí); C1 nace cerca (0.65) y se mueve poco; (iii) el estado post-última-indicación ($\approx 0.9$) es lo que la v1 medía como "retención" (0.979), confirmando la nota del ancla (§7.5). **Extensión natural**: el dataset artículo-onda (`retention_dynamics_locf.csv`) es la base del futuro M4 de supervivencia.
 
 ## 7.5 Limitaciones
 
@@ -408,6 +430,7 @@ Resultados (67 artículos trazados, 206 pasos): la similitud media al borrador s
 
 # 10. Registro de cambios de este documento
 
+- **v2.2 (2026-07-08).** Iteración de figuras: F1 con artículos translúcidos detrás de las iniciativas; bipartitas con gradiente ideológico **rojo = izquierda** / azul = derecha (verificado: $\theta$ negativo = izquierda; Baradit $-1.4$), colorbar y títulos sin paréntesis; F3 con separador de columnas, subtítulo "$\geq$ 2 delegate signers" y renombrada a `C#_waves_summary`. §6.2 con el **análisis de pertinencia** por onda (panel (a): C1/C3/C4/C6 pertinentes, C7 marginal, C2/C5 excluidas) y el **preview del mini-panel (c)** (correlación transversal 0.83--0.97 vs. within = 0). §7.4 generalizado: dinámica de retención de las 7 comisiones sobre ondas de comisión con **LOCF** (359 artículos; convergencia al borrador en todas; C5 se reescribe casi por completo: $0.15 \to 0.95$); script 10 renombrado a `10-retention-dynamics.py`.
 - **v2.1 (2026-07-08).** Reestructura: resultados en secciones independientes por modelo (§5 M1, §6 M2, §7 M3) con especificación matemática, tablas completas de coeficientes (`M2_full_models.csv`, `M3_full_models.csv`) y robustez/limitaciones por sección; "Problemas" pasa a **Anexo** al final (con hoja en blanco previa). Figuras F1--F3 (iniciativas por comisión, bipartitas iniciativa/artículo, construcción de ondas) y **piloto de dinámica de retención en C3** (§7.4: génesis 0.473 $\to$ 0.919 post-indicaciones; 71% monótono). 08 paralelizado (`mclapply`) con cronómetro. Propuesta de motivación descriptiva para M2 en §6.2 (no ejecutada).
 - **v2.0 (2026-07-07).** **Re-ejecución completa del estudio con las 7 comisiones** (pipeline v2, scripts 00--08 reescritos sobre paths/lib_names): red génesis-INICIATIVA (528 iniciativas; decisión §6.1), panel M2 de 4.278 obs, M3 con DV $y'$ y N = 154 completos. Nuevas §3.4 (regla de perfiles), §4.3 (resultados v2), §4.4 (limitaciones, incl. C2 delgada) y §6.1 (puntos a revisar). Hallazgos: H1a reforzada; **H1b invertida** (homofilia positiva de abogados/experiencia; el gatekeeping de la v1 no sobrevive la corrección de datos); nueva estratificación educativa (absdiff grado $-0.048$); H2 replicada y blindada (FE nulo + falsificación + 3 ventanas); H3 amplificada (Moran 0.38, $\rho$ 0.94, robusta a 4 variantes). P1--P4, P6, P7, P9 cerrados; P12 parcial.
 - **v1.4 (2026-07-07).** Ronda 2 de CPT ingerida (snapshot @ `6fac4c4`): P15 resuelto (authors de C2 vía `sources`→firmantes y C4 vía `icc_id`; 1.676 artículos con $\geq 2$ autores; residuo 134 documentado), timestamps *undated* documentados (P8.4). QA re-ejecutado: 75.616 menciones, 100% resueltas. Las 7 comisiones entran a la actualización; luz verde para reescribir el pipeline.

@@ -1,30 +1,33 @@
 """
 09-figures.py — Figuras del estudio (PDF + PNG 300 dpi, en inglés).
 
-F1  initiatives_per_commission   barra corta y ancha: iniciativas por comisión
-F2a bipartite_initiative         red bipartita documento(arriba)-convencional(abajo), unidad iniciativa
+F1  initiatives_per_commission   iniciativas (sólido) sobre artículos (alpha 0.5)
+F2a bipartite_initiative         bipartita documento-convencional, unidad iniciativa
 F2b bipartite_article            ídem, unidad artículo
-F3  m2_waves_summary             construcción de ondas M2: 2x2, comisiones en eje x
+F3  C#_waves_summary             construcción de ondas M2: 2x2 con separador de columnas
 
-Paleta: instancia de referencia del skill dataviz (orden categórico fijo 1-7,
-validada; regla de alivio -> etiquetas directas). Convencionales ordenados por
-posición ideológica (theta medio); documentos agrupados por comisión y ordenados
-por la posición media de sus firmantes.
+Convenciones: paleta categórica de referencia (orden fijo C1-C7); gradiente
+ideológico ROJO = izquierda (theta negativo; Baradit -1.38) a AZUL = derecha
+(theta positivo; Marinovic +4.34), con blanco neutro en theta = 0 y colorbar.
 """
 
 import csv
 import importlib.util
+import json
 import os
 import sys
 
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from matplotlib.cm import ScalarMappable
 from matplotlib.collections import LineCollection
+from matplotlib.colors import TwoSlopeNorm
+from matplotlib.lines import Line2D
 from matplotlib.patches import Patch
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from paths import DATA_PROCESSED, RESULTS_FIGURES, COMMISSIONS  # noqa: E402
+from paths import DATA_PROCESSED, RESULTS_FIGURES, COMMISSIONS, track_full_path  # noqa: E402
 
 # --- paleta (referencia dataviz, modo claro) ---
 CAT = {1: "#2a78d6", 2: "#1baf7a", 3: "#eda100", 4: "#008300",
@@ -35,6 +38,9 @@ COMM_LABELS = {k: f"C{k}" for k in COMMISSIONS}
 COMM_NAMES = {1: "Political System", 2: "Constitutional Principles", 3: "Form of the State",
               4: "Fundamental Rights", 5: "Environment", 6: "Justice Systems",
               7: "Knowledge Systems"}
+# rojo = izquierda (theta bajo), azul = derecha (theta alto), neutro en 0
+IDEO_CMAP = plt.get_cmap("coolwarm_r")
+IDEO_NORM = TwoSlopeNorm(vcenter=0.0, vmin=-3.7, vmax=5.1)
 
 plt.rcParams.update({
     "font.family": "sans-serif",
@@ -71,37 +77,44 @@ theta = {r["nombre_armonizado"]: float(r["theta_mean"])
                                       encoding="utf-8"))}
 
 # =============================================================================
-# F1 — iniciativas por comisión (barra corta y ancha)
+# F1 — iniciativas (sólido) sobre artículos (translúcido), por comisión
 # =============================================================================
-counts = {k: sum(1 for r in registry if r["commission"] == f"C{k}" and int(r["n_firmantes"]) >= 2)
-          for k in COMMISSIONS}
-fig, ax = plt.subplots(figsize=(6.8, 1.9))
-xs = list(COMMISSIONS)
-ax.bar([COMM_LABELS[k] for k in xs], [counts[k] for k in xs],
-       color=[CAT[k] for k in xs], width=0.62, zorder=3)
-for i, k in enumerate(xs):
-    ax.text(i, counts[k] + 3, str(counts[k]), ha="center", va="bottom",
-            fontsize=8.5, color=INK)
-ax.set_ylim(0, max(counts.values()) * 1.22)
+init_counts = {k: sum(1 for r in registry if r["commission"] == f"C{k}" and int(r["n_firmantes"]) >= 2)
+               for k in COMMISSIONS}
+art_counts = {k: sum(1 for r in outcomes if r["commission"] == f"C{k}" and int(r["n_authors"]) >= 2)
+              for k in COMMISSIONS}
+
+fig, ax = plt.subplots(figsize=(6.8, 2.3))
+xs = list(range(len(COMMISSIONS)))
+top = max(art_counts.values())
+ax.bar(xs, [art_counts[k] for k in COMMISSIONS], color=[CAT[k] for k in COMMISSIONS],
+       width=0.72, alpha=0.5, zorder=2)
+ax.bar(xs, [init_counts[k] for k in COMMISSIONS], color=[CAT[k] for k in COMMISSIONS],
+       width=0.46, zorder=3)
+for i, k in enumerate(COMMISSIONS):
+    ax.text(i, art_counts[k] + top * 0.03, str(art_counts[k]), ha="center", va="bottom",
+            fontsize=7.5, color=MUTED)
+    ax.text(i, init_counts[k] + top * 0.03, str(init_counts[k]), ha="center", va="bottom",
+            fontsize=8.5, color=INK, fontweight="bold")
+ax.set_xticks(xs)
+ax.set_xticklabels([COMM_LABELS[k] for k in COMMISSIONS], fontsize=9)
+ax.set_ylim(0, top * 1.18)
 ax.set_yticks([])
 despine(ax, keep_y=False)
 ax.spines["bottom"].set_color(BASE)
-ax.tick_params(axis="x", length=0, labelsize=9)
-ax.set_title("Constitutional initiatives per commission (≥ 2 delegate signers)",
-             fontsize=10, color=INK, loc="left", pad=8)
+ax.tick_params(axis="x", length=0)
+ax.set_title("Constitutional initiatives (solid, bold) and genesis articles (faded) per commission "
+             "— $\\geq$ 2 delegate signers", fontsize=9.8, color=INK, loc="left", pad=8)
 save(fig, "initiatives_per_commission")
 
 # =============================================================================
 # F2 — bipartitas documento-convencional (dos niveles)
 # =============================================================================
 def bipartite(doc_rows, title, name):
-    """doc_rows: lista de (commission_int, [firmantes])."""
-    # convencionales ordenados por ideología (izquierda -> derecha)
     delegates = sorted({a for _, aus in doc_rows for a in aus})
-    delegates.sort(key=lambda d: theta.get(d, 0.0))
+    delegates.sort(key=lambda d: theta.get(d, 0.0))  # izquierda política a la izquierda
     dx = {d: i / (len(delegates) - 1) for i, d in enumerate(delegates)}
 
-    # documentos agrupados por comisión, ordenados por posición media de firmantes
     def doc_key(row):
         k, aus = row
         pos = [theta.get(a, 0.0) for a in aus]
@@ -109,7 +122,7 @@ def bipartite(doc_rows, title, name):
     docs = sorted(doc_rows, key=doc_key)
     n_docs = len(docs)
 
-    fig, ax = plt.subplots(figsize=(11, 4.6))
+    fig, ax = plt.subplots(figsize=(11, 4.8))
     segs, colors = [], []
     for j, (k, aus) in enumerate(docs):
         x_doc = j / (n_docs - 1)
@@ -123,16 +136,23 @@ def bipartite(doc_rows, title, name):
     for j, (k, _) in enumerate(docs):
         ax.plot(j / (n_docs - 1), 1.0, "o", ms=2.4, color=CAT[k], mec="none", zorder=3)
     ax.scatter([dx[d] for d in delegates], [0.0] * len(delegates), s=13,
-               c=[theta.get(d, 0.0) for d in delegates], cmap="coolwarm",
-               vmin=-2.2, vmax=2.2, edgecolors=SURFACE, linewidths=0.4, zorder=3)
+               c=[theta.get(d, 0.0) for d in delegates], cmap=IDEO_CMAP, norm=IDEO_NORM,
+               edgecolors=SURFACE, linewidths=0.4, zorder=3)
 
     ax.text(-0.015, 1.0, f"Documents (n = {n_docs:,})", ha="right", va="center",
             fontsize=9, color=INK2)
     ax.text(-0.015, 0.0, "Delegates (n = 154)\nsorted by ideal point", ha="right",
             va="center", fontsize=9, color=INK2)
     handles = [Patch(facecolor=CAT[k], label=f"C{k} {COMM_NAMES[k]}") for k in COMMISSIONS]
-    ax.legend(handles=handles, loc="upper center", bbox_to_anchor=(0.5, -0.06),
+    ax.legend(handles=handles, loc="upper left", bbox_to_anchor=(0.02, -0.05),
               ncol=4, frameon=False, fontsize=8, handlelength=1.1, handleheight=0.9)
+    # leyenda del gradiente ideológico
+    cax = fig.add_axes([0.735, 0.085, 0.145, 0.022])
+    cb = fig.colorbar(ScalarMappable(norm=IDEO_NORM, cmap=IDEO_CMAP), cax=cax,
+                      orientation="horizontal", ticks=[-3.7, 0, 5.1])
+    cb.ax.set_xticklabels(["Left", "0", "Right"], fontsize=7.5, color=INK2)
+    cb.outline.set_edgecolor(BASE)
+    cb.ax.set_title("Delegate ideal point ($\\theta$)", fontsize=8, color=INK2, pad=3)
     ax.set_xlim(-0.22, 1.01)
     ax.set_ylim(-0.12, 1.10)
     ax.axis("off")
@@ -142,30 +162,22 @@ def bipartite(doc_rows, title, name):
 
 init_rows = [(int(r["commission"][1]), r["firmantes"].split("; "))
              for r in registry if int(r["n_firmantes"]) >= 2]
-bipartite(init_rows,
-          "Genesis co-sponsorship as a bipartite network — initiative unit "
-          "(each document = one constitutional initiative)",
+bipartite(init_rows, "Genesis co-sponsorship as a bipartite network — initiative unit",
           "bipartite_initiative")
 
 art_rows = [(int(r["commission"][1]), r["authors"].split("; "))
             for r in outcomes if int(r["n_authors"]) >= 2]
-bipartite(art_rows,
-          "Genesis co-sponsorship as a bipartite network — article unit "
-          "(each document = one genesis article)",
+bipartite(art_rows, "Genesis co-sponsorship as a bipartite network — article unit",
           "bipartite_article")
 
 # =============================================================================
-# F3 — construcción de ondas M2 (2x2)
+# F3 — construcción de ondas M2 (2x2, separador entre columnas)
 # =============================================================================
-# recalcular los conteos desde el snapshot con las funciones del script 00
 spec = importlib.util.spec_from_file_location(
     "build00", os.path.join(os.path.dirname(os.path.abspath(__file__)),
                             "00-build_dynamic_networks.py"))
 b00 = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(b00)
-
-import json  # noqa: E402
-from paths import track_full_path  # noqa: E402
 
 waves_stats = {}
 for k in COMMISSIONS:
@@ -175,10 +187,10 @@ for k in COMMISSIONS:
                       "solo": n_solo, "dups": d_dup}
 
 panels = [("waves", "Indication waves (report dates)"),
-          ("edges", "Multi-author indication events (add ties)"),
+          ("edges", "Multi-author indication events ($\\geq$ 2 delegate signers; add ties)"),
           ("solo", "Single-author indications (no ties)"),
           ("dups", "Cross-article duplicates collapsed")]
-fig, axes = plt.subplots(2, 2, figsize=(8.4, 5.2))
+fig, axes = plt.subplots(2, 2, figsize=(8.6, 5.2))
 for ax, (key, subtitle) in zip(axes.flat, panels):
     vals = [waves_stats[k][key] for k in COMMISSIONS]
     ax.bar([COMM_LABELS[k] for k in COMMISSIONS], vals,
@@ -191,10 +203,12 @@ for ax, (key, subtitle) in zip(axes.flat, panels):
     despine(ax, keep_y=False)
     ax.spines["bottom"].set_color(BASE)
     ax.tick_params(axis="x", length=0, labelsize=8.5)
-    ax.set_title(subtitle, fontsize=9.5, color=INK, loc="left", pad=5)
+    ax.set_title(subtitle, fontsize=9.3, color=INK, loc="left", pad=5)
 fig.suptitle("Wave construction for Model 2, by commission", fontsize=11.5,
              color=INK, x=0.02, ha="left")
 fig.tight_layout(rect=(0, 0, 1, 0.95))
-save(fig, "m2_waves_summary")
+fig.add_artist(Line2D([0.515, 0.515], [0.03, 0.90], transform=fig.transFigure,
+                      color=BASE, lw=1.0))
+save(fig, "C#_waves_summary")
 
 print("--- Done ---")
