@@ -80,13 +80,34 @@ def to_date(mmdd):
     return _date(2022, int(mmdd[:2]), int(mmdd[3:5]))
 
 
+def earliest_genesis_ts(k):
+    """Etiqueta GEN (MM-DD) más temprana a nivel top-level de la comisión; None si
+    ninguna es parseable. Es una etiqueta de informe, no la fecha legal de envío
+    (que es aún más temprana y no está en los datos)."""
+    best = None
+    for r in json.load(open(track_full_path(k), encoding="utf-8")):
+        if "action" in r or "titleuid" in r:
+            continue
+        tk = ts_key(r.get("timestamp"))
+        if tk:
+            d = _date(2022, tk[0], tk[1])
+            best = d if best is None or d < best else best
+    return best
+
+
 genesis_date = {}
 for k in COMMISSIONS:
-    # nominal: 10 días antes del primer informe de indicaciones — solo conocemos
-    # fechas de informes, no de envío; garantiza génesis < primera onda (los
-    # timestamps top-level no sirven: en C3/C5/C6 su moda es POSTERIOR a las
-    # primeras ondas)
-    genesis_date[k] = to_date(waves[k][0]) - _timedelta(days=10)
+    # génesis = min(etiqueta GEN más temprana observada, primera onda − 10 días).
+    # Usa la evidencia real donde existe (C2 02-16, C3 01-27, C6 01-25, anteriores
+    # a la regla −10d) y conserva el respaldo conservador −10d donde la primera
+    # etiqueta GEN coincide con la primera onda (C1/C4/C5/C7). Verificado por el
+    # agente genesis-verify (2026-07-08). Solo afecta la POSICIÓN del punto de
+    # génesis en el eje calendario; no toca la similitud ni el LOCF.
+    fallback = to_date(waves[k][0]) - _timedelta(days=10)
+    earliest = earliest_genesis_ts(k)
+    genesis_date[k] = min(earliest, fallback) if earliest else fallback
+    print(f"  C{k}: génesis = {genesis_date[k]} "
+          f"(GEN más temprano {earliest}, 1a onda-10d {fallback})")
 
 # --- trayectorias por (comisión, artículo): estado por onda con LOCF ---
 records = []   # (k, uid, [state_idx por onda 0..n_k]) con índices al corpus
@@ -191,8 +212,8 @@ import matplotlib.dates as mdates
 ax.xaxis.set_major_locator(mdates.MonthLocator())
 ax.xaxis.set_major_formatter(mdates.DateFormatter("%b 2022"))
 ax.tick_params(axis="x", labelsize=8.5)
-ax.set_xlabel("Report date — genesis (dots) placed 10 days before each first report (nominal); "
-              "last observed state carried forward", fontsize=9, color=INK2)
+ax.set_xlabel("Report date — genesis (dots) = earliest observed genesis report, or first report − 10d "
+              "where none is earlier; last observed state carried forward", fontsize=9, color=INK2)
 ax.set_ylabel("TF-IDF cosine similarity to final draft", fontsize=9, color=INK2)
 ax.set_ylim(0, 1.02)
 ax.grid(axis="y", color=GRID, lw=0.6)
