@@ -71,6 +71,23 @@ orders = {r["article_uid"]: int(r["final_orders"].split(";")[0])
           for r in csv.DictReader(open(f"{DATA_PROCESSED}/track_article_outcomes.csv", encoding="utf-8"))
           if r["outcome_class"] in ("identico", "similar") and r["final_orders"]}
 
+# --- fecha génesis por comisión: moda del timestamp top-level de sus artículos ---
+from collections import Counter as _Counter
+from datetime import date as _date, timedelta as _timedelta
+
+
+def to_date(mmdd):
+    return _date(2022, int(mmdd[:2]), int(mmdd[3:5]))
+
+
+genesis_date = {}
+for k in COMMISSIONS:
+    # nominal: 10 días antes del primer informe de indicaciones — solo conocemos
+    # fechas de informes, no de envío; garantiza génesis < primera onda (los
+    # timestamps top-level no sirven: en C3/C5/C6 su moda es POSTERIOR a las
+    # primeras ondas)
+    genesis_date[k] = to_date(waves[k][0]) - _timedelta(days=10)
+
 # --- trayectorias por (comisión, artículo): estado por onda con LOCF ---
 records = []   # (k, uid, [state_idx por onda 0..n_k]) con índices al corpus
 corpus = []
@@ -155,9 +172,10 @@ plt.rcParams.update({"font.family": "sans-serif",
                      "font.sans-serif": ["Helvetica Neue", "Helvetica", "Arial", "DejaVu Sans"],
                      "figure.facecolor": SURF, "axes.facecolor": SURF, "savefig.facecolor": SURF})
 
-fig, ax = plt.subplots(figsize=(7.6, 4.2))
+fig, ax = plt.subplots(figsize=(8.2, 4.2))
+date_axis = {k: [genesis_date[k]] + [to_date(d) for d in waves[k]] for k in COMMISSIONS}
 for (k, uid), t in traj.items():
-    ax.plot(range(len(t)), t, color=CAT[k], lw=0.5, alpha=0.13, zorder=2, rasterized=True)
+    ax.plot(date_axis[k][:len(t)], t, color=CAT[k], lw=0.5, alpha=0.13, zorder=2, rasterized=True)
 n_by_k = {}
 for k in COMMISSIONS:
     tk = [v for (kk, _), v in traj.items() if kk == k]
@@ -166,13 +184,15 @@ for k in COMMISSIONS:
         continue
     n_w = len(tk[0])
     mean_line = [np.mean([t[w] for t in tk]) for w in range(n_w)]
-    ax.plot(range(n_w), mean_line, color=CAT[k], lw=2.4, zorder=4,
-            solid_capstyle="round",
-            label=f"C{k} (n = {len(tk)})")
-ax.set_xticks(range(0, 9))
-ax.set_xticklabels(["Genesis"] + [str(i) for i in range(1, 9)], fontsize=8.5)
-ax.set_xlabel("Commission indication wave (last observed state carried forward)",
-              fontsize=9, color=INK2)
+    ax.plot(date_axis[k][:n_w], mean_line, color=CAT[k], lw=2.4, zorder=4,
+            solid_capstyle="round", label=f"C{k} (n = {len(tk)})")
+    ax.plot(date_axis[k][0], mean_line[0], "o", ms=5, color=CAT[k], zorder=5)
+import matplotlib.dates as mdates
+ax.xaxis.set_major_locator(mdates.MonthLocator())
+ax.xaxis.set_major_formatter(mdates.DateFormatter("%b 2022"))
+ax.tick_params(axis="x", labelsize=8.5)
+ax.set_xlabel("Report date — genesis (dots) placed 10 days before each first report (nominal); "
+              "last observed state carried forward", fontsize=9, color=INK2)
 ax.set_ylabel("TF-IDF cosine similarity to final draft", fontsize=9, color=INK2)
 ax.set_ylim(0, 1.02)
 ax.grid(axis="y", color=GRID, lw=0.6)

@@ -88,9 +88,9 @@ fig, ax = plt.subplots(figsize=(6.8, 2.3))
 xs = list(range(len(COMMISSIONS)))
 top = max(art_counts.values())
 ax.bar(xs, [art_counts[k] for k in COMMISSIONS], color=[CAT[k] for k in COMMISSIONS],
-       width=0.72, alpha=0.5, zorder=2)
+       width=0.62, alpha=0.5, zorder=2)
 ax.bar(xs, [init_counts[k] for k in COMMISSIONS], color=[CAT[k] for k in COMMISSIONS],
-       width=0.46, zorder=3)
+       width=0.62, zorder=3)
 for i, k in enumerate(COMMISSIONS):
     ax.text(i, art_counts[k] + top * 0.03, str(art_counts[k]), ha="center", va="bottom",
             fontsize=7.5, color=MUTED)
@@ -207,8 +207,60 @@ for ax, (key, subtitle) in zip(axes.flat, panels):
 fig.suptitle("Wave construction for Model 2, by commission", fontsize=11.5,
              color=INK, x=0.02, ha="left")
 fig.tight_layout(rect=(0, 0, 1, 0.95))
-fig.add_artist(Line2D([0.515, 0.515], [0.03, 0.90], transform=fig.transFigure,
-                      color=BASE, lw=1.0))
+fig.subplots_adjust(wspace=0.30)
 save(fig, "C#_waves_summary")
+
+# =============================================================================
+# F4 — timeline de eventos multi-autor por comisión (niveles apilados, fechas 2022)
+# =============================================================================
+from datetime import date as _date
+
+def to_date(mmdd):
+    return _date(2022, int(mmdd[:2]), int(mmdd[3:5]))
+
+events_by_day = {}
+for k in COMMISSIONS:
+    track = json.load(open(track_full_path(k), encoding="utf-8"))
+    days, edge_events, _, _, _ = b00.indication_events(track)
+    per_day = {d: 0 for d in days}
+    for d, _au in edge_events:
+        per_day[d] += 1
+    events_by_day[k] = {to_date(d): n for d, n in sorted(per_day.items())}
+
+VMAX = max(max(v.values()) for v in events_by_day.values() if v)  # 145
+fig, ax = plt.subplots(figsize=(8.6, 5.4))
+all_dates = sorted({d for v in events_by_day.values() for d in v})
+x0, x1 = min(all_dates), max(all_dates)
+span = (x1 - x0).days
+LEVEL_H = 1.0
+for row, k in enumerate(COMMISSIONS):           # C1 arriba
+    base = (7 - row) * LEVEL_H
+    ax.hlines(base, x0, x1, color=GRID, lw=0.8, zorder=1)
+    ax.text(x0 - __import__("datetime").timedelta(days=9), base + 0.30, f"C{k}",
+            ha="center", va="center", fontsize=9.5,
+            color=CAT[k], fontweight="bold", transform=ax.transData)
+    for d, n in events_by_day[k].items():
+        if n == 0:
+            ax.plot(d, base, "o", ms=2.6, color=MUTED, mec="none", zorder=3)
+        else:
+            h = 0.88 * n / VMAX
+            ax.vlines(d, base, base + h, color=CAT[k], lw=3.4, zorder=3)
+            ax.text(d, base + h + 0.05, str(n), ha="center", va="bottom",
+                    fontsize=7, color=INK2)
+import matplotlib.dates as mdates
+ax.xaxis.set_major_locator(mdates.MonthLocator())
+ax.xaxis.set_major_formatter(mdates.DateFormatter("%b 2022"))
+ax.set_xlim(x0 - __import__("datetime").timedelta(days=13),
+            x1 + __import__("datetime").timedelta(days=4))
+ax.set_ylim(0.6, 8.2)
+ax.set_yticks([])
+for side in ("top", "right", "left"):
+    ax.spines[side].set_visible(False)
+ax.spines["bottom"].set_color(BASE)
+ax.tick_params(axis="x", labelsize=8.5)
+ax.set_title("Multi-author indication events per report date, by commission\n"
+             f"(bar height $\\propto$ events, shared scale 0–{VMAX}; dots = reports with zero multi-author events)",
+             fontsize=10.3, color=INK, loc="left", pad=8)
+save(fig, "indication_events_timeline")
 
 print("--- Done ---")
