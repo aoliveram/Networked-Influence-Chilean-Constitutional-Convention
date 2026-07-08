@@ -1,17 +1,22 @@
 """
-05-nlp-text-similarity.py
-Compute lexical retention rates via text similarity.
+05-nlp-text-similarity.py  (v2)
+Retención léxica génesis -> borrador final y agregación por convencional.
 
-Primary: TF-IDF cosine similarity
-Robustness: Sentence-BERT embeddings (multilingual)
+Similitud primaria: coseno TF-IDF (uni+bigramas). Robustez: Sentence-BERT.
+DV por artículo: para artículos trazados, el máximo de similitud sobre sus pares;
+para fallido/eliminado, 0 (decisión ART-FALLIDO, 2026-07-06).
 
-Validation: articles labeled "identical" should score near 1.0
-Attribution: aggregate per-convencional success scores.
+Scores por convencional (i sobre sus artículos génesis co-firmados A_i):
+  retention_all  (y' PRINCIPAL) = media de sim con fracasos = 0
+                                = tasa de supervivencia x retención condicional
+  retention_traced (y_cond, robustez) = media solo sobre artículos trazados
+
+Outputs (data/processed/): article_similarity_scores.csv, author_success_scores.csv
 """
 
+import csv
 import json
 import os
-import csv
 import re
 import unicodedata
 from collections import defaultdict
@@ -20,218 +25,120 @@ import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
-base_dir = "/Users/anibaloliveramorales/Desktop/Doctorado/-Projects-/B - constitutional-proposal-tracking"
-data_dir = os.path.join(base_dir, "playground/research-proposal-implementation/data")
+from paths import DATA_PROCESSED, MEMBERS
+
+csv.field_size_limit(10_000_000)
 
 
 def normalize_text(text):
-    """Normalize Spanish text for comparison: lowercase, remove punctuation, collapse whitespace."""
-    text = text.lower()
-    # Normalize unicode (keep accented characters for Spanish)
+    text = (text or "").lower()
     text = unicodedata.normalize("NFC", text)
-    # Remove article numbering patterns like "Artículo 1.", "Artículo x1.-"
     text = re.sub(r"art[ií]culo\s+[\dx]+[\w]*\.?\s*-?\s*", "", text)
-    # Remove ordinal markers
     text = re.sub(r"°", "", text)
-    # Remove punctuation except hyphens within words
     text = re.sub(r"[^\w\sáéíóúüñ-]", " ", text)
-    # Collapse whitespace
-    text = re.sub(r"\s+", " ", text).strip()
-    return text
+    return re.sub(r"\s+", " ", text).strip()
 
 
-# =============================================================================
-# 1. Load article mapping
-# =============================================================================
+# --- pares y desenlaces ---
+pairs = list(csv.DictReader(open(os.path.join(DATA_PROCESSED, "article_mapping_unified.csv"), encoding="utf-8")))
+outcomes = list(csv.DictReader(open(os.path.join(DATA_PROCESSED, "track_article_outcomes.csv"), encoding="utf-8")))
+print(f"Pares: {len(pairs)} | artículos TRACK: {len(outcomes)}")
 
-print("--- Step 1: Loading article mapping ---")
-with open(os.path.join(data_dir, "article_mapping_unified.json"), "r", encoding="utf-8") as f:
-    mapping = json.load(f)
-print(f"  Articles to compare: {len(mapping)}")
+gen_texts = [normalize_text(p["genesis_text"]) for p in pairs]
+fin_texts = [normalize_text(p["final_text"]) for p in pairs]
 
-# Extract texts
-genesis_texts = []
-final_texts = []
-for entry in mapping:
-    genesis_texts.append(normalize_text(entry["genesis_text"]))
-    final_texts.append(normalize_text(entry["final_text"]))
+vec = TfidfVectorizer(analyzer="word", ngram_range=(1, 2), sublinear_tf=True,
+                      max_features=20000, min_df=2)
+M = vec.fit_transform(gen_texts + fin_texts)
+n = len(pairs)
+tfidf = np.array([cosine_similarity(M[i], M[n + i])[0, 0] for i in range(n)])
 
-# =============================================================================
-# 2. TF-IDF Cosine Similarity
-# =============================================================================
-
-print("\n--- Step 2: TF-IDF Cosine Similarity ---")
-
-# Fit TF-IDF on all texts together (shared vocabulary)
-all_texts = genesis_texts + final_texts
-vectorizer = TfidfVectorizer(
-    analyzer="word",
-    ngram_range=(1, 2),       # unigrams + bigrams
-    sublinear_tf=True,
-    max_features=20000,
-    min_df=2,
-)
-tfidf_matrix = vectorizer.fit_transform(all_texts)
-
-n = len(mapping)
-genesis_tfidf = tfidf_matrix[:n]
-final_tfidf = tfidf_matrix[n:]
-
-# Compute pairwise cosine similarity (each genesis vs its matched final)
-tfidf_scores = []
-for i in range(n):
-    sim = cosine_similarity(genesis_tfidf[i], final_tfidf[i])[0, 0]
-    tfidf_scores.append(sim)
-
-tfidf_scores = np.array(tfidf_scores)
-
-# Validation: check identical articles
-identical_mask = np.array([e["format_label"] == "identical" for e in mapping])
-similar_mask = np.array([e["format_label"] == "similar" for e in mapping])
-
-print(f"  TF-IDF scores (all):       mean={tfidf_scores.mean():.3f}, "
-      f"median={np.median(tfidf_scores):.3f}, "
-      f"min={tfidf_scores.min():.3f}, max={tfidf_scores.max():.3f}")
-print(f"  TF-IDF scores (identical): mean={tfidf_scores[identical_mask].mean():.3f}, "
-      f"median={np.median(tfidf_scores[identical_mask]):.3f}")
-print(f"  TF-IDF scores (similar):   mean={tfidf_scores[similar_mask].mean():.3f}, "
-      f"median={np.median(tfidf_scores[similar_mask]):.3f}")
-
-# =============================================================================
-# 3. Sentence-BERT Embeddings (robustness)
-# =============================================================================
-
-print("\n--- Step 3: Sentence-BERT Embeddings ---")
+ident = np.array([p["status"] == "identical" for p in pairs])
+simil = np.array([p["status"] == "similar" for p in pairs])
+print(f"TF-IDF: media global {tfidf.mean():.3f} | identical {tfidf[ident].mean():.3f} "
+      f"| similar {tfidf[simil].mean():.3f}  (validación de medida)")
 
 try:
     from sentence_transformers import SentenceTransformer
-
     model = SentenceTransformer("paraphrase-multilingual-MiniLM-L12-v2")
-
-    # Encode all texts
-    print("  Encoding genesis texts...")
-    genesis_emb = model.encode(genesis_texts, show_progress_bar=False, batch_size=32)
-    print("  Encoding final texts...")
-    final_emb = model.encode(final_texts, show_progress_bar=False, batch_size=32)
-
-    # Compute cosine similarity
-    embedding_scores = []
-    for i in range(n):
-        g = genesis_emb[i].reshape(1, -1)
-        f = final_emb[i].reshape(1, -1)
-        sim = cosine_similarity(g, f)[0, 0]
-        embedding_scores.append(sim)
-
-    embedding_scores = np.array(embedding_scores)
-
-    print(f"  Embedding scores (all):       mean={embedding_scores.mean():.3f}, "
-          f"median={np.median(embedding_scores):.3f}")
-    print(f"  Embedding scores (identical): mean={embedding_scores[identical_mask].mean():.3f}, "
-          f"median={np.median(embedding_scores[identical_mask]):.3f}")
-    print(f"  Embedding scores (similar):   mean={embedding_scores[similar_mask].mean():.3f}, "
-          f"median={np.median(embedding_scores[similar_mask]):.3f}")
-
-    has_embeddings = True
-
+    ge = model.encode(gen_texts, show_progress_bar=False, batch_size=32)
+    fe = model.encode(fin_texts, show_progress_bar=False, batch_size=32)
+    sbert = np.array([cosine_similarity(ge[i].reshape(1, -1), fe[i].reshape(1, -1))[0, 0]
+                      for i in range(n)])
+    has_sbert = True
+    print(f"SBERT:  media global {sbert.mean():.3f} | identical {sbert[ident].mean():.3f} "
+          f"| similar {sbert[simil].mean():.3f}")
 except Exception as e:
-    print(f"  Sentence-BERT failed: {e}")
-    print("  Continuing with TF-IDF only")
-    embedding_scores = np.full(n, np.nan)
-    has_embeddings = False
+    print(f"SBERT no disponible ({e}); solo TF-IDF")
+    sbert = np.full(n, np.nan)
+    has_sbert = False
 
-# =============================================================================
-# 4. Save per-article similarity scores
-# =============================================================================
+# --- score por artículo: máx sobre sus pares; fracaso = 0 ---
+by_uid = defaultdict(list)
+for i, p in enumerate(pairs):
+    by_uid[p["source_uid"]].append(i)
 
-print("\n--- Step 4: Saving per-article scores ---")
+art_rows = []
+for o in outcomes:
+    uid, cls = o["article_uid"], o["outcome_class"]
+    idxs = by_uid.get(uid, [])
+    if cls in ("identico", "similar") and idxs:
+        s_tfidf = float(tfidf[idxs].max())
+        s_sbert = float(np.nanmax(sbert[idxs])) if has_sbert else None
+    elif cls in ("fallido", "eliminado"):
+        s_tfidf, s_sbert = 0.0, (0.0 if has_sbert else None)
+    else:  # trazado sin par de texto u "otro": sin score
+        s_tfidf, s_sbert = None, None
+    art_rows.append({**o, "sim_tfidf": s_tfidf, "sim_sbert": s_sbert})
 
-article_scores_path = os.path.join(data_dir, "article_similarity_scores.csv")
-with open(article_scores_path, "w", newline="", encoding="utf-8") as f:
-    writer = csv.writer(f)
-    writer.writerow([
-        "commission", "article_uid", "final_article_id", "format_label",
-        "tfidf_cosine", "embedding_cosine",
-        "genesis_text_length", "final_text_length", "n_authors"
-    ])
-    for i, entry in enumerate(mapping):
-        writer.writerow([
-            entry["commission"],
-            entry["article_uid"],
-            entry["final_article_id"],
-            entry["format_label"],
-            f"{tfidf_scores[i]:.6f}",
-            f"{embedding_scores[i]:.6f}" if not np.isnan(embedding_scores[i]) else "",
-            entry["genesis_text_length"],
-            entry["final_text_length"],
-            entry["n_authors"],
-        ])
-print(f"  Saved: {article_scores_path} ({n} articles)")
+with open(os.path.join(DATA_PROCESSED, "article_similarity_scores.csv"), "w", newline="", encoding="utf-8") as fh:
+    wr = csv.DictWriter(fh, fieldnames=list(art_rows[0].keys()))
+    wr.writeheader()
+    wr.writerows(art_rows)
+n_scored = sum(1 for r in art_rows if r["sim_tfidf"] is not None)
+print(f"Artículos con score: {n_scored}/{len(art_rows)}")
 
-# =============================================================================
-# 5. Aggregate per-convencional success scores
-# =============================================================================
+# --- agregación por convencional (roster completo) ---
+members = json.load(open(MEMBERS, encoding="utf-8"))
+rows_by_author = defaultdict(list)
+for r in art_rows:
+    if r["sim_tfidf"] is None:
+        continue
+    for a in (r["authors"].split("; ") if r["authors"] else []):
+        rows_by_author[a].append(r)
 
-print("\n--- Step 5: Computing per-convencional success scores ---")
-
-author_articles = defaultdict(list)
-for i, entry in enumerate(mapping):
-    for author in entry["authors"]:
-        author_articles[author].append(i)
-
-author_scores = []
-for author in sorted(author_articles.keys()):
-    indices = author_articles[author]
-    n_arts = len(indices)
-    tfidf_vals = tfidf_scores[indices]
-    n_identical = sum(1 for idx in indices if mapping[idx]["format_label"] == "identical")
-    n_similar = sum(1 for idx in indices if mapping[idx]["format_label"] == "similar")
-
+out = []
+for m in sorted(members):
+    arts = rows_by_author.get(m, [])
+    n_arts = len(arts)
+    traced = [r for r in arts if r["outcome_class"] in ("identico", "similar")]
+    vals_all = [r["sim_tfidf"] for r in arts]
+    vals_traced = [r["sim_tfidf"] for r in traced]
     row = {
-        "nombre_armonizado": author,
+        "nombre_armonizado": m,
         "n_articles": n_arts,
-        "mean_tfidf_retention": float(tfidf_vals.mean()),
-        "median_tfidf_retention": float(np.median(tfidf_vals)),
-        "min_tfidf_retention": float(tfidf_vals.min()),
-        "max_tfidf_retention": float(tfidf_vals.max()),
-        "n_identical": n_identical,
-        "n_similar": n_similar,
-        "pct_identical": n_identical / n_arts if n_arts > 0 else 0,
+        "n_traced": len(traced),
+        "n_failed": n_arts - len(traced),
+        "survival_rate": len(traced) / n_arts if n_arts else None,
+        "retention_all": float(np.mean(vals_all)) if vals_all else None,      # y' principal
+        "retention_traced": float(np.mean(vals_traced)) if vals_traced else None,  # robustez
+        "n_identical": sum(1 for r in traced if r["outcome_class"] == "identico"),
+        "n_similar": sum(1 for r in traced if r["outcome_class"] == "similar"),
     }
+    if has_sbert:
+        sb_all = [r["sim_sbert"] for r in arts if r["sim_sbert"] is not None]
+        sb_tr = [r["sim_sbert"] for r in traced if r["sim_sbert"] is not None]
+        row["retention_all_sbert"] = float(np.mean(sb_all)) if sb_all else None
+        row["retention_traced_sbert"] = float(np.mean(sb_tr)) if sb_tr else None
+    out.append(row)
 
-    if has_embeddings:
-        emb_vals = embedding_scores[indices]
-        row["mean_embedding_retention"] = float(emb_vals.mean())
-        row["median_embedding_retention"] = float(np.median(emb_vals))
-    else:
-        row["mean_embedding_retention"] = None
-        row["median_embedding_retention"] = None
+with open(os.path.join(DATA_PROCESSED, "author_success_scores.csv"), "w", newline="", encoding="utf-8") as fh:
+    wr = csv.DictWriter(fh, fieldnames=list(out[0].keys()))
+    wr.writeheader()
+    wr.writerows(out)
 
-    author_scores.append(row)
-
-# Save
-success_path = os.path.join(data_dir, "author_success_scores.csv")
-fieldnames = list(author_scores[0].keys())
-with open(success_path, "w", newline="", encoding="utf-8") as f:
-    writer = csv.DictWriter(f, fieldnames=fieldnames)
-    writer.writeheader()
-    writer.writerows(author_scores)
-
-print(f"  Saved: {success_path} ({len(author_scores)} convencionales)")
-print(f"  Mean TF-IDF retention across authors: {np.mean([s['mean_tfidf_retention'] for s in author_scores]):.3f}")
-
-# Top 10 most successful
-print("\n  Top 10 by mean TF-IDF retention:")
-sorted_authors = sorted(author_scores, key=lambda x: x["mean_tfidf_retention"], reverse=True)
-for s in sorted_authors[:10]:
-    print(f"    {s['nombre_armonizado']:30s} | articles={s['n_articles']:3d} | "
-          f"tfidf={s['mean_tfidf_retention']:.3f} | "
-          f"identical={s['n_identical']}/{s['n_articles']}")
-
-# Bottom 10
-print("\n  Bottom 10 by mean TF-IDF retention:")
-for s in sorted_authors[-10:]:
-    print(f"    {s['nombre_armonizado']:30s} | articles={s['n_articles']:3d} | "
-          f"tfidf={s['mean_tfidf_retention']:.3f} | "
-          f"identical={s['n_identical']}/{s['n_articles']}")
-
-print("\n--- Done ---")
+with_score = [r for r in out if r["retention_all"] is not None]
+print(f"Convencionales con score: {len(with_score)}/154 | "
+      f"y' medio: {np.mean([r['retention_all'] for r in with_score]):.3f} | "
+      f"supervivencia media: {np.mean([r['survival_rate'] for r in with_score]):.3f}")
+print("--- Done ---")

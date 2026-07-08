@@ -1,287 +1,158 @@
 # =============================================================================
-# 08-robustness-checks.R
-# Robustness checks across all three models.
+# 08-robustness-checks.R  (v2, actualización 7 comisiones)
+# Robustez de M1 y M3 (las robusteces de ventana de M2 viven en 03):
 #
-# Model 1: ERGM per commission (C1, C3, C5 separately)
-# Model 2: Alternative lags, falsification test
-# Model 3: Embedding similarity, binary W, alternative specifications
+# M1: (a) ERGM por comisión (red génesis-iniciativa T0 de cada una),
+#     (b) ERGM pooled con unidad ARTÍCULO (punto a revisar: iniciativa vs artículo),
+#     (c) ERGM pooled iniciativa con los PERFILES ANTIGUOS pre-auditoría
+#         (git 8b5a990) — descompone si el vuelco de H1b viene de las
+#         covariables corregidas o de la definición de red.
+# M3: (d) DV antigua condicional (retention_traced), (e) W binaria,
+#     (f) W con red artículo, (g) DV SBERT (y').
 # =============================================================================
 
-cat("=== 08-robustness-checks.R ===\n")
-cat("Robustness Checks\n\n")
-
-if (!requireNamespace("jsonlite", quietly = TRUE)) install.packages("jsonlite", repos = "http://cran.us.r-project.org")
-if (!requireNamespace("statnet", quietly = TRUE)) install.packages("statnet", repos = "http://cran.us.r-project.org")
-if (!requireNamespace("spdep", quietly = TRUE)) install.packages("spdep", repos = "http://cran.us.r-project.org")
-if (!requireNamespace("spatialreg", quietly = TRUE)) install.packages("spatialreg", repos = "http://cran.us.r-project.org")
-
-library(jsonlite)
-library(statnet)
-library(spdep)
-library(spatialreg)
-
+cat("=== 08-robustness-checks.R (v2) ===\n")
+suppressPackageStartupMessages({
+  library(jsonlite); library(statnet); library(spdep); library(spatialreg)
+})
 set.seed(42)
+source("code/paths.R")
 
-repo_dir <- "/Users/anibaloliveramorales/Desktop/Doctorado/-Projects-/B - Networked-Influence-Chilean-Constitutional-Convention"
-data_dir <- file.path(repo_dir, "data/processed")
+profiles <- fromJSON(PROFILES)
+roster <- sort(fromJSON(MEMBERS))
+dir.create(RESULTS_TABLES, recursive = TRUE, showWarnings = FALSE)
 
-profiles <- fromJSON(file.path(repo_dir, "data/raw/conventional-profiles.json"))
+ATTRS <- c("afiliacion_agrupada", "es_abogado", "es_mujer", "edad_al_asumir",
+           "experiencia_previa_institucional", "grado_academico_nivel")
 
-get_attr <- function(name, attr_col, default_val) {
-  idx <- match(name, profiles$nombre_armonizado)
-  if (!is.na(idx) && !is.na(profiles[[attr_col]][idx])) return(profiles[[attr_col]][idx])
-  return(default_val)
-}
-
-# #############################################################################
-# ROBUSTNESS 1: Per-Commission Valued ERGMs
-# #############################################################################
-
-cat("=== ROBUSTNESS 1: Per-Commission Valued ERGMs ===\n\n")
-
-comm_results <- list()
-
-for (comm in c("C1", "C3", "C5")) {
-  cat(sprintf("--- %s ---\n", comm))
-
-  # Load per-commission network
-  net_file <- file.path(repo_dir, "data/raw/network-visualization",
-                        paste0(comm, "_dynamic_networks.json"))
-  net_data <- fromJSON(net_file, simplifyVector = FALSE)
-
-  # Use the final wave (last cumulative snapshot)
-  wave_names <- names(net_data)
-  final_wave <- net_data[[wave_names[length(wave_names)]]]
-
-  # Extract edges
-  sources <- sapply(final_wave, function(e) e$source)
-  targets <- sapply(final_wave, function(e) e$target)
-  weights <- sapply(final_wave, function(e) e$weight)
-
-  all_nodes <- sort(unique(c(sources, targets)))
-  n_nodes <- length(all_nodes)
-
-  # Build network
-  net <- network.initialize(n_nodes, directed = FALSE)
-  network.vertex.names(net) <- all_nodes
-
-  set.vertex.attribute(net, "afiliacion_agrupada",
-                       sapply(all_nodes, function(n) get_attr(n, "afiliacion_agrupada", "Desconocida")))
-  set.vertex.attribute(net, "es_abogado",
-                       sapply(all_nodes, function(n) get_attr(n, "es_abogado", 0)))
-  set.vertex.attribute(net, "es_mujer",
-                       sapply(all_nodes, function(n) get_attr(n, "es_mujer", 0)))
-  set.vertex.attribute(net, "edad_al_asumir",
-                       sapply(all_nodes, function(n) get_attr(n, "edad_al_asumir", 45)))
-  set.vertex.attribute(net, "experiencia_previa_institucional",
-                       sapply(all_nodes, function(n) get_attr(n, "experiencia_previa_institucional", 0)))
-
-  add.edges(net, tail = match(sources, all_nodes), head = match(targets, all_nodes))
-  set.edge.attribute(net, "weight", weights)
-
-  cat(sprintf("  Nodes: %d, Edges: %d\n", n_nodes, network.edgecount(net)))
-
-  tryCatch({
-    fit <- ergm(net ~ sum +
-                  nodematch("afiliacion_agrupada") +
-                  nodematch("experiencia_previa_institucional") +
-                  nodematch("es_abogado") +
-                  nodematch("es_mujer") +
-                  absdiff("edad_al_asumir") +
-                  nodecov("edad_al_asumir"),
-                response = "weight",
-                reference = ~Poisson,
-                control = control.ergm(seed = 42))
-
-    cat("  Coefficients:\n")
-    coefs <- coef(summary(fit))
-    print(round(coefs, 4))
-    comm_results[[comm]] <- coefs
-  }, error = function(e) {
-    cat("  ERGM failed:", e$message, "\n")
-  })
-  cat("\n")
-}
-
-# Compare coefficients across commissions
-cat("\n--- Coefficient Comparison Across Commissions ---\n")
-if (length(comm_results) >= 2) {
-  terms <- rownames(comm_results[[1]])
-  cat(sprintf("%-50s %10s %10s %10s\n", "Term", "C1", "C3", "C5"))
-  for (term in terms) {
-    vals <- sapply(names(comm_results), function(c) {
-      if (term %in% rownames(comm_results[[c]])) {
-        sprintf("%.4f", comm_results[[c]][term, "Estimate"])
-      } else "NA"
-    })
-    cat(sprintf("%-50s %10s %10s %10s\n", term, vals[1], vals[2],
-                ifelse(length(vals) >= 3, vals[3], "NA")))
+build_net <- function(edges_df, prof) {
+  nodes <- roster
+  net <- network.initialize(length(nodes), directed = FALSE)
+  network.vertex.names(net) <- nodes
+  for (col in ATTRS) {
+    set.vertex.attribute(net, col, prof[[col]][match(nodes, prof$nombre_armonizado)])
   }
+  add.edges(net, tail = match(edges_df$source, nodes), head = match(edges_df$target, nodes))
+  set.edge.attribute(net, "weight", edges_df$weight)
+  net
 }
 
-# #############################################################################
-# ROBUSTNESS 2: Model 2 — Falsification test
-# #############################################################################
+TERMS <- paste("sum + nodematch('afiliacion_agrupada') +",
+               "nodematch('experiencia_previa_institucional') + nodematch('es_abogado') +",
+               "nodematch('es_mujer') + absdiff('edad_al_asumir') +",
+               "absdiff('grado_academico_nivel') + nodecov('edad_al_asumir')")
 
-cat("\n\n=== ROBUSTNESS 2: Model 2 Falsification ===\n")
-cat("Test: Does FUTURE network predict PAST ideology change? (Should be null)\n\n")
+fit_ergm <- function(net, label) {
+  cat(sprintf("\n[ERGM] %s ...\n", label))
+  f <- as.formula(paste("net ~", TERMS), env = environment())
+  tryCatch({
+    fit <- ergm(f, response = "weight", reference = ~Poisson,
+                control = control.ergm(seed = 42))
+    sm <- summary(fit)
+    data.frame(model = label, term = rownames(sm$coefficients),
+               estimate = sm$coefficients[, 1], se = sm$coefficients[, 2],
+               p = sm$coefficients[, ncol(sm$coefficients)], row.names = NULL)
+  }, error = function(e) {
+    cat(sprintf("  ERROR: %s\n", conditionMessage(e)))
+    data.frame(model = label, term = "ERROR", estimate = NA, se = NA, p = NA)
+  })
+}
 
-panel <- read.csv(file.path(data_dir, "network_exposure_panel.csv"),
-                  stringsAsFactors = FALSE)
+ergm_tabs <- list()
 
-# Compute "lead" exposure: net_exposure at t+1 instead of t-1
-panel$net_exposure_lead <- NA
-for (comm in c("C1", "C3", "C5")) {
-  for (leg in unique(panel$legislator)) {
-    idx <- which(panel$legislator == leg & panel$commission == comm)
-    if (length(idx) < 2) next
-    sub <- panel[idx, ]
-    for (j in 1:(length(idx) - 1)) {
-      panel$net_exposure_lead[idx[j]] <- sub$network_exposure[j + 1]
+# (a) por comisión: T0 génesis de cada dynamic_networks.json
+for (k in 1:7) {
+  nd <- fromJSON(file.path(DATA_PROCESSED, sprintf("C%d_dynamic_networks.json", k)),
+                 simplifyVector = FALSE)
+  t0 <- nd[["T0_Genesis"]]
+  edges_df <- do.call(rbind, lapply(t0, function(e)
+    data.frame(source = e$source, target = e$target, weight = e$weight)))
+  ergm_tabs[[length(ergm_tabs) + 1]] <- fit_ergm(build_net(edges_df, profiles),
+                                                 sprintf("C%d (génesis-iniciativa)", k))
+}
+
+# (b) pooled, unidad artículo
+edges_art <- read.csv(file.path(DATA_PROCESSED, "genesis_network_article.csv"),
+                      stringsAsFactors = FALSE)
+ergm_tabs[[length(ergm_tabs) + 1]] <- fit_ergm(build_net(edges_art, profiles),
+                                               "Pooled (unidad artículo)")
+
+# (c) pooled iniciativa con perfiles ANTIGUOS (pre-auditoría, git 8b5a990)
+old_json <- tryCatch(
+  system2("git", c("show", "8b5a990:data/raw/conventional-profiles.json"),
+          stdout = TRUE, stderr = FALSE),
+  error = function(e) NULL)
+if (!is.null(old_json) && length(old_json) > 0) {
+  old_prof <- fromJSON(paste(old_json, collapse = "\n"))
+  # esquema antiguo: 147 perfiles, defaults para los 7 ausentes, grado 0-2
+  missing <- setdiff(roster, old_prof$nombre_armonizado)
+  if (length(missing) > 0) {
+    defaults <- data.frame(nombre_armonizado = missing, es_mujer = 0,
+                           afiliacion_agrupada = "Desconocida", distrito = "Desconocido",
+                           es_abogado = 0, edad_al_asumir = 45,
+                           grado_academico_nivel = 0, experiencia_previa_institucional = 0)
+    old_prof <- rbind(old_prof[, names(defaults)], defaults)
+  }
+  old_prof$edad_al_asumir[is.na(old_prof$edad_al_asumir)] <- 45
+  edges_init <- read.csv(file.path(DATA_PROCESSED, "genesis_network_initiative.csv"),
+                         stringsAsFactors = FALSE)
+  ergm_tabs[[length(ergm_tabs) + 1]] <- fit_ergm(build_net(edges_init, old_prof),
+                                                 "Pooled iniciativa (perfiles PRE-auditoría)")
+} else {
+  cat("  (no se pudo extraer el perfil antiguo desde git; variante omitida)\n")
+}
+
+ergm_tab <- do.call(rbind, ergm_tabs)
+write.csv(ergm_tab, file.path(RESULTS_TABLES, "M1_robustness.csv"), row.names = FALSE)
+cat("\nM1 robustez -> results/tables/M1_robustness.csv\n")
+
+# ---------------------------- M3: variantes -------------------------------
+dataset <- read.csv(file.path(DATA_PROCESSED, "integrated_dataset.csv"), stringsAsFactors = FALSE)
+edges_init <- read.csv(file.path(DATA_PROCESSED, "genesis_network_initiative.csv"),
+                       stringsAsFactors = FALSE)
+
+build_listw <- function(sample_names, edges_df, binary = FALSE) {
+  n <- length(sample_names)
+  W <- matrix(0, n, n, dimnames = list(sample_names, sample_names))
+  for (i in seq_len(nrow(edges_df))) {
+    s <- edges_df$source[i]; t <- edges_df$target[i]
+    if (s %in% sample_names && t %in% sample_names) {
+      w <- if (binary) 1 else edges_df$weight[i]
+      W[s, t] <- w; W[t, s] <- w
     }
   }
+  rs <- rowSums(W); rs[rs == 0] <- 1
+  mat2listw(W / rs, style = "W")
 }
-
-# Falsification regression: delta_theta ~ theta_lag + net_exposure_LEAD
-falsi_df <- panel[!is.na(panel$delta_theta) &
-                  !is.na(panel$net_exposure_lead) &
-                  !is.na(panel$theta_lag), ]
-
-if (nrow(falsi_df) > 10) {
-  cat(sprintf("  Falsification sample: %d observations\n", nrow(falsi_df)))
-  mod_falsi <- lm(delta_theta ~ theta_lag + net_exposure_lead, data = falsi_df)
-  cat("  Coefficients:\n")
-  print(round(coef(summary(mod_falsi)), 4))
-  cat(sprintf("\n  net_exposure_lead p-value: %.4f\n",
-              coef(summary(mod_falsi))["net_exposure_lead", "Pr(>|t|)"]))
-  cat("  Interpretation: ", ifelse(
-    coef(summary(mod_falsi))["net_exposure_lead", "Pr(>|t|)"] > 0.05,
-    "Not significant -> falsification passes (future network doesn't predict past change)",
-    "Significant -> potential concern (reverse causality or confounding)"), "\n")
-} else {
-  cat("  Insufficient observations for falsification test\n")
-}
-
-# #############################################################################
-# ROBUSTNESS 3: Model 3 — Alternative specifications
-# #############################################################################
-
-cat("\n\n=== ROBUSTNESS 3: Model 3 Alternative Specifications ===\n")
-
-dataset <- read.csv(file.path(data_dir, "integrated_dataset.csv"),
-                    stringsAsFactors = FALSE)
-edges <- read.csv(file.path(data_dir, "pooled_cumulative_network.csv"),
-                  stringsAsFactors = FALSE)
-
-# Complete cases
-complete <- dataset[!is.na(dataset$mean_tfidf_retention) &
-                    !is.na(dataset$theta_mean) &
-                    !is.na(dataset$theta_sd) &
-                    !is.na(dataset$es_mujer) &
-                    !is.na(dataset$es_abogado) &
-                    !is.na(dataset$experiencia_previa_institucional) &
-                    !is.na(dataset$edad_al_asumir) &
-                    !is.na(dataset$ego_heterophily) &
-                    dataset$degree > 0, ]
-
-sample_names <- complete$nombre_armonizado
-n <- length(sample_names)
-
-# --- 3A: Embedding-based similarity as DV ---
-cat("\n  [3A] Embedding-based similarity as dependent variable:\n")
-if (!is.null(complete$mean_embedding_retention) &&
-    sum(!is.na(complete$mean_embedding_retention)) > 50) {
-
-  mod_emb_ols <- lm(mean_embedding_retention ~ degree + betweenness +
-                       es_abogado + experiencia_previa_institucional + es_mujer +
-                       edad_al_asumir + theta_mean + theta_sd + ego_heterophily,
-                     data = complete)
-  cat("  OLS with embedding retention:\n")
-  print(round(coef(summary(mod_emb_ols)), 4))
-} else {
-  cat("  Insufficient embedding data\n")
-}
-
-# --- 3B: Binary (unweighted) W matrix ---
-cat("\n  [3B] SAR with binary W matrix:\n")
-
-W_binary <- matrix(0, nrow = n, ncol = n,
-                   dimnames = list(sample_names, sample_names))
-for (i in seq_len(nrow(edges))) {
-  s <- edges$source[i]
-  t <- edges$target[i]
-  if (s %in% sample_names && t %in% sample_names) {
-    W_binary[s, t] <- 1
-    W_binary[t, s] <- 1
-  }
-}
-
-# Row-normalize binary W
-row_sums_b <- rowSums(W_binary)
-row_sums_b[row_sums_b == 0] <- 1
-W_binary_norm <- W_binary / row_sums_b
-
 set.ZeroPolicyOption(TRUE)
-W_binary_listw <- mat2listw(W_binary_norm, style = "W")
 
-formula_base <- mean_tfidf_retention ~ degree + betweenness +
-  es_abogado + experiencia_previa_institucional + es_mujer +
-  edad_al_asumir + theta_mean + theta_sd + ego_heterophily
-
-tryCatch({
-  mod_sar_binary <- lagsarlm(formula_base, data = complete, listw = W_binary_listw)
-  cat("  SAR (binary W) rho:", mod_sar_binary$rho, "\n")
-  cat("  SAR (binary W) AIC:", AIC(mod_sar_binary), "\n")
-  cat("  Coefficients:\n")
-  print(round(coef(summary(mod_sar_binary)), 4))
-}, error = function(e) cat("  Error:", e$message, "\n"))
-
-# --- 3C: Reduced specification (fewer covariates) ---
-cat("\n  [3C] Reduced specification (key variables only):\n")
-
-W_raw <- matrix(0, nrow = n, ncol = n,
-                dimnames = list(sample_names, sample_names))
-for (i in seq_len(nrow(edges))) {
-  s <- edges$source[i]
-  t <- edges$target[i]
-  w <- edges$weight[i]
-  if (s %in% sample_names && t %in% sample_names) {
-    W_raw[s, t] <- w
-    W_raw[t, s] <- w
-  }
+run_sdm <- function(dv, edges_df, label, binary = FALSE) {
+  d <- dataset[!is.na(dataset[[dv]]) & !is.na(dataset$theta_mean) &
+                 !is.na(dataset$es_mujer) & !is.na(dataset$grado_academico_nivel) &
+                 dataset$degree > 0, ]
+  lw <- build_listw(d$nombre_armonizado, edges_df, binary = binary)
+  f <- as.formula(paste(dv, "~ degree + betweenness + es_abogado +",
+                        "experiencia_previa_institucional + es_mujer + edad_al_asumir +",
+                        "grado_academico_nivel + theta_mean + theta_sd + ego_heterophily"))
+  ols <- lm(f, data = d)
+  sdm <- tryCatch(lagsarlm(f, data = d, listw = lw, type = "mixed"),
+                  error = function(e) NULL)
+  mor <- moran.test(d[[dv]], lw)
+  data.frame(variant = label, N = nrow(d),
+             moran_I = mor$estimate[1], moran_p = mor$p.value,
+             rho = if (!is.null(sdm)) sdm$rho else NA,
+             AIC_ols = AIC(ols), AIC_sdm = if (!is.null(sdm)) AIC(sdm) else NA)
 }
-row_sums <- rowSums(W_raw)
-row_sums[row_sums == 0] <- 1
-W_norm <- W_raw / row_sums
-W_listw <- mat2listw(W_norm, style = "W")
 
-formula_reduced <- mean_tfidf_retention ~ betweenness +
-  theta_mean + theta_sd + ego_heterophily
-
-tryCatch({
-  mod_sar_reduced <- lagsarlm(formula_reduced, data = complete, listw = W_listw)
-  cat("  SAR (reduced) rho:", mod_sar_reduced$rho, "\n")
-  cat("  SAR (reduced) AIC:", AIC(mod_sar_reduced), "\n")
-  cat("  Coefficients:\n")
-  print(round(coef(summary(mod_sar_reduced)), 4))
-}, error = function(e) cat("  Error:", e$message, "\n"))
-
-# =============================================================================
-# Save results
-# =============================================================================
-
-cat("\n\n--- Saving Robustness Results ---\n")
-
-robustness <- list(
-  commission_ergms = comm_results,
-  falsification_sample_n = nrow(falsi_df)
+m3 <- rbind(
+  run_sdm("retention_all", edges_init, "y' | W iniciativa (principal)"),
+  run_sdm("retention_traced", edges_init, "y condicional (DV antigua) | W iniciativa"),
+  run_sdm("retention_all", edges_init, "y' | W binaria", binary = TRUE),
+  run_sdm("retention_all", edges_art, "y' | W artículo"),
+  if ("retention_all_sbert" %in% names(dataset) && any(!is.na(dataset$retention_all_sbert)))
+    run_sdm("retention_all_sbert", edges_init, "y' SBERT | W iniciativa") else NULL
 )
-if (exists("mod_falsi")) robustness$falsification_model <- mod_falsi
-if (exists("mod_emb_ols")) robustness$embedding_ols <- mod_emb_ols
-if (exists("mod_sar_binary")) robustness$sar_binary <- mod_sar_binary
-if (exists("mod_sar_reduced")) robustness$sar_reduced <- mod_sar_reduced
-
-saveRDS(robustness, file.path(data_dir, "robustness_results.rds"))
-cat(sprintf("  Saved: %s\n", file.path(data_dir, "robustness_results.rds")))
-
-cat("\n--- Done ---\n")
+print(m3, row.names = FALSE, digits = 4)
+write.csv(m3, file.path(RESULTS_TABLES, "M3_robustness.csv"), row.names = FALSE)
+saveRDS(list(ergm = ergm_tab, m3 = m3), file.path(DATA_PROCESSED, "robustness_results.rds"))
+cat("--- Done ---\n")

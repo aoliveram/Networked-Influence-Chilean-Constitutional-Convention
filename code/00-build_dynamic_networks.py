@@ -1,233 +1,257 @@
 """
-00-build_dynamic_networks.py
-Build co-authorship networks from genesis entries across all 5 commissions.
+00-build_dynamic_networks.py  (v2, actualización 7 comisiones)
+Construye las redes de co-patrocinio desde el snapshot dataverse-final.
 
-Model 1 uses ALL commissions (C1, C3, C5, C6, C7) for the pooled network.
-Per-commission temporal networks (with history-based waves) are built for C1, C3, C5 only
-(used in Model 2).
+Unidad de co-firma (decisión 2026-07-07, "a revisar" en el reporte):
+  - PRINCIPAL: INICIATIVA — cada iniciativa convencional (id de `sources`, o
+    `icc_id` en C4) cuenta UNA vez, aunque se divida en varios artículos.
+  - ROBUSTEZ: ARTÍCULO — cada artículo de TRACK_full con >=2 autores cuenta +1
+    (compatible con la versión de abril 2026).
 
-Only top-level `authors` fields are used for genesis network construction.
-History entries add edges in subsequent temporal waves (C1, C3, C5 only).
+Ondas temporales (M2), las 7 comisiones: T0 = red génesis (iniciativas) de la
+comisión; T1..Tn acumulan la co-firma de INDICACIONES (entradas de history[] +
+indicaciones sueltas) agrupadas por fecha MM-DD (sufijo -bloque colapsado al día).
+Registros sin timestamp o con <2 autores-persona se excluyen y se reportan.
+
+Outputs (data/processed/):
+  genesis_network_initiative.csv   red pooled, unidad iniciativa  [PRINCIPAL]
+  genesis_network_article.csv      red pooled, unidad artículo    [robustez]
+  initiative_registry.csv          registro de iniciativas y firmantes
+  C{k}_dynamic_networks.json       ondas acumuladas por comisión (x7)
+  commission_waves.csv             fechas de onda por comisión (insumo de 02)
 """
 
+import csv
+import hashlib
+import itertools
 import json
 import os
-import csv
-import itertools
-from collections import defaultdict
+import re
+from collections import Counter, defaultdict
 
-repo_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-output_dir = os.path.join(repo_dir, "data/raw/network-visualization")
-data_dir = os.path.join(repo_dir, "data/processed")
+from lib_names import clean_authors
+from paths import (COMMISSIONS, DATA_PROCESSED, genesis_path, track_full_path)
 
-# --- Commission file paths ---
-COMMISSION_FILES = {
-    "C1": os.path.join(repo_dir, "data/raw/commissions/C1_texto-sistematizado_enriched_manual.json"),
-    "C3": os.path.join(repo_dir, "data/raw/commissions/C3_historial_manual.json"),
-    "C5": os.path.join(repo_dir, "data/raw/commissions/C5_historial_manual.json"),
-    "C6": os.path.join(repo_dir, "data/raw/commissions/C6_historial_manual.json"),
-    "C7": os.path.join(repo_dir, "data/raw/commissions/C7_GENESIS_texto-sistematizado-02-17_enriched_manual.json"),
-}
-
-# --- Name normalization map (applied before edge construction) ---
-# Maps raw names from JSON source files to canonical harmonized names.
-# Fixes: accent inconsistencies and typos introduced during data entry.
-NAME_CORRECTIONS = {
-    "Muñoz, Pedro":       "Munoz, Pedro",
-    "Sepúlveda, Barbara": "Sepulveda, Barbara",
-    "Sepúlveda, Carolina":"Sepulveda, Carolina",
-    "Vargas, Margaritfa": "Vargas, Margarita",
-    "Chinga":             "Chinga, Eric",
-}
-
-# Temporal bins for per-commission dynamic networks (C1, C3, C5 only)
-COMMISSION_BINS = {
-    "C1": ["03-17", "04-01", "04-18", "04-30"],
-    "C3": ["02-14", "03-01", "03-14", "03-24", "04-06", "04-19", "04-26"],
-    "C5": ["03-01", "03-16", "03-17", "04-09", "05-04"],
-}
+TS_RE = re.compile(r"^(\d{2}-\d{2})(-\d+)?$")
 
 
-def load_data(filepath):
-    if not os.path.exists(filepath):
-        print(f"  File not found: {filepath}")
-        return []
-    with open(filepath, "r", encoding="utf-8") as f:
-        return json.load(f)
+def classify(record):
+    if "titleuid" in record or "tite" in record:
+        return "titulo"
+    return "suelta" if "action" in record else "articulo"
 
 
-def normalize_name(name):
-    """Apply canonical name corrections before edge construction."""
-    return NAME_CORRECTIONS.get(name, name)
+def ts_day(ts):
+    """'04-01-2' -> '04-01'; None/'NA'/mal formado -> None."""
+    m = TS_RE.match(str(ts or ""))
+    return m.group(1) if m else None
 
 
-def clean_authors(authors_list):
-    """Extract, clean, and normalize author names from a list (may contain nested lists)."""
-    out = []
-    if not authors_list:
-        return out
-    for a in authors_list:
-        if isinstance(a, list):
-            out.extend([normalize_name(str(x).strip()) for x in a if x])
-        elif a:
-            out.append(normalize_name(str(a).strip()))
-    return sorted(set(x for x in out if len(x) > 3 and "S/I" not in x))
+def event_hash(authors, ts, content):
+    key = "|".join(sorted(authors)) + "|" + str(ts) + "|" + str(content or "")[:400]
+    return hashlib.md5(key.encode()).hexdigest()
 
 
-def get_bin(timestamp, bins):
-    """Match a timestamp string to the appropriate bin via prefix matching."""
-    if not timestamp:
-        return None
-    for b in bins:
-        if timestamp.startswith(b):
-            return b
-    return None
+def add_clique(edges, authors, w=1):
+    for a, b in itertools.combinations(sorted(authors), 2):
+        edges[(a, b)] += w
 
 
-def build_genesis_edges(data):
-    """Build co-authorship edges from top-level authors (genesis entries only)."""
-    edges = defaultdict(int)
-    for item in data:
-        authors = clean_authors(item.get("authors", []))
-        if len(authors) >= 2:
-            for pair in itertools.combinations(authors, 2):
-                edges[pair] += 1
-    return edges
+def save_edges(edges, path):
+    with open(path, "w", newline="", encoding="utf-8") as fh:
+        wr = csv.writer(fh)
+        wr.writerow(["source", "target", "weight"])
+        for (s, t), w in sorted(edges.items()):
+            wr.writerow([s, t, w])
 
 
-def build_temporal_networks(data, bins):
-    """Build per-commission temporal networks: T0 = genesis, T1..N = history waves."""
-    G_cumulative = defaultdict(int)
-
-    # T0: Genesis (top-level authors)
-    for item in data:
-        authors = clean_authors(item.get("authors", []))
-        if len(authors) >= 2:
-            for pair in itertools.combinations(authors, 2):
-                G_cumulative[pair] += 1
-
-    waves = {"T0_Genesis": dict(G_cumulative)}
-
-    # Collect history entries per bin
-    bin_data = {b: [] for b in bins}
-    for item in data:
-        for h in item.get("history", []):
-            ts = h.get("timestamp", "")
-            target_bin = get_bin(ts, bins)
-            if target_bin:
-                authors = clean_authors(h.get("authors", []))
-                if len(authors) >= 2:
-                    bin_data[target_bin].append(authors)
-
-    # Build waves sequentially (cumulative)
-    for step_num, b in enumerate(bins, start=1):
-        for authors in bin_data[b]:
-            for pair in itertools.combinations(authors, 2):
-                G_cumulative[pair] += 1
-        waves[f"T{step_num}_{b}"] = dict(G_cumulative)
-
-    return waves
-
-
-def save_dynamic_network_json(waves, filepath):
-    """Save temporal network waves to JSON."""
-    serializable = {}
-    for t_label, edges in waves.items():
-        serializable[t_label] = [
-            {"source": k[0], "target": k[1], "weight": w}
-            for k, w in edges.items()
-        ]
-    with open(filepath, "w", encoding="utf-8") as f:
-        json.dump(serializable, f, ensure_ascii=False, indent=4)
-
-
-def save_pooled_network_csv(edges, filepath):
-    """Save pooled network as CSV edge list."""
-    with open(filepath, "w", newline="", encoding="utf-8") as f:
-        writer = csv.writer(f)
-        writer.writerow(["source", "target", "weight"])
-        for (src, tgt), weight in sorted(edges.items()):
-            writer.writerow([src, tgt, weight])
+def net_stats(edges):
+    nodes = {n for e in edges for n in e}
+    return len(nodes), len(edges), sum(edges.values())
 
 
 # =============================================================================
-# Main execution
+# 1. Registro de iniciativas (unidad principal de co-firma)
+# =============================================================================
+
+def build_initiative_registry():
+    """(comisión, iniciativa_id) -> set de autores-persona canónicos.
+
+    C1-C3, C5-C7: id = cada elemento de `sources` (GENESIS y artículos TRACK).
+    C4: id = `icc_id` del GENESIS (los artículos TRACK joinean vía article_uid).
+    Registros mono-fuente asignan primero (autores = firmantes de esa iniciativa,
+    regla de proveniencia del dataset); los multi-fuente solo rellenan iniciativas
+    aún no vistas (sus autores son la unión de firmantes) y se cuentan aparte.
+    """
+    registry = {}
+    multi_assigned = 0
+    conflicts = 0
+
+    for k in COMMISSIONS:
+        track = json.load(open(track_full_path(k), encoding="utf-8"))
+        genesis = json.load(open(genesis_path(k), encoding="utf-8"))
+        arts = [r for r in track if classify(r) == "articulo"]
+
+        if k == 4:
+            uid2icc = {g.get("article_uid"): str(g.get("icc_id")).strip()
+                       for g in genesis if g.get("icc_id")}
+            records = [(uid2icc.get(r.get("article_uid")), clean_authors(r.get("authors") or []))
+                       for r in arts]
+            records += [(str(g["icc_id"]).strip(), clean_authors(g.get("authors") or []))
+                        for g in genesis if g.get("icc_id")]
+            singles = [([iid], au) for iid, au in records if iid]
+            multis = []
+        else:
+            pool = [(r.get("sources") or [], clean_authors(r.get("authors") or []))
+                    for r in arts + genesis]
+            singles = [(src, au) for src, au in pool if len(src) == 1]
+            multis = [(src, au) for src, au in pool if len(src) > 1]
+
+        for src, au in singles:
+            if not au:
+                continue
+            key = (k, str(src[0]).strip())
+            if key in registry:
+                if registry[key] != frozenset(au):
+                    registry[key] = registry[key] | frozenset(au)
+                    conflicts += 1
+            else:
+                registry[key] = frozenset(au)
+        for src, au in multis:
+            if not au:
+                continue
+            for s in src:
+                key = (k, str(s).strip())
+                if key not in registry:
+                    registry[key] = frozenset(au)
+                    multi_assigned += 1
+    return registry, multi_assigned, conflicts
+
+
+# =============================================================================
+# 2. Eventos de indicación (para las ondas de M2)
+# =============================================================================
+
+def indication_events(track):
+    """Eventos de indicación de history[] + sueltas.
+
+    Devuelve (days, edge_events, contadores): `days` son TODOS los días MM-DD
+    observados en timestamps válidos de indicaciones (definen las ondas aunque
+    la indicación sea unipersonal — la fecha del informe es real); `edge_events`
+    son los eventos con >=2 autores-persona (los únicos que agregan lazos),
+    deduplicados por hash de autores+día+contenido (una indicación repetida en
+    el history de varios artículos cuenta una sola vez como acto de co-firma).
+    """
+    seen = set()
+    days = set()
+    edge_events, dropped_dup, dropped_na, solo_events = [], 0, 0, 0
+    for r in track:
+        cls = classify(r)
+        pool = []
+        if cls == "articulo":
+            pool = [(h.get("timestamp"), h.get("authors"), h.get("content"))
+                    for h in r.get("history", [])]
+        elif cls == "suelta":
+            pool = [(r.get("timestamp"), r.get("authors"), r.get("content"))]
+        for ts, authors, content in pool:
+            day = ts_day(ts)
+            if day is None:
+                dropped_na += 1
+                continue
+            days.add(day)
+            au = clean_authors(authors or [])
+            if len(au) < 2:
+                solo_events += 1
+                continue
+            h = event_hash(au, day, content)
+            if h in seen:
+                dropped_dup += 1
+                continue
+            seen.add(h)
+            edge_events.append((day, au))
+    return sorted(days), edge_events, dropped_dup, dropped_na, solo_events
+
+
+# =============================================================================
+# Main
 # =============================================================================
 
 if __name__ == "__main__":
-    pooled_edges = defaultdict(int)
-    commission_stats = {}
+    os.makedirs(DATA_PROCESSED, exist_ok=True)
 
-    # --- Step 1: Build per-commission temporal networks (C1, C3, C5) ---
-    for c_name in ["C1", "C3", "C5"]:
-        filepath = COMMISSION_FILES[c_name]
-        print(f"Processing {c_name} (temporal network)...")
-        data = load_data(filepath)
-        if not data:
-            continue
+    registry, multi_assigned, conflicts = build_initiative_registry()
+    per_comm = Counter(k for k, _ in registry)
+    usable = {key: au for key, au in registry.items() if len(au) >= 2}
+    print("=== Registro de iniciativas ===")
+    for k in COMMISSIONS:
+        n_u = sum(1 for (c, _), au in usable.items() if c == k)
+        print(f"  C{k}: {per_comm[k]} iniciativas, {n_u} con >=2 firmantes-persona")
+    print(f"  Total: {len(registry)} iniciativas ({len(usable)} utilizables); "
+          f"{multi_assigned} asignadas desde registros multi-fuente, {conflicts} sets de autores fusionados")
 
-        bins = COMMISSION_BINS[c_name]
-        waves = build_temporal_networks(data, bins)
+    with open(os.path.join(DATA_PROCESSED, "initiative_registry.csv"), "w", newline="", encoding="utf-8") as fh:
+        wr = csv.writer(fh)
+        wr.writerow(["commission", "initiative_id", "n_firmantes", "firmantes"])
+        for (k, iid), au in sorted(registry.items()):
+            wr.writerow([f"C{k}", iid, len(au), "; ".join(sorted(au))])
 
-        out_file = os.path.join(output_dir, f"{c_name}_dynamic_networks.json")
-        save_dynamic_network_json(waves, out_file)
+    # --- red génesis pooled: unidad INICIATIVA (principal) ---
+    pooled_init = defaultdict(int)
+    genesis_by_comm = {k: defaultdict(int) for k in COMMISSIONS}
+    for (k, _), au in usable.items():
+        add_clique(pooled_init, au)
+        add_clique(genesis_by_comm[k], au)
+    n, e, w = net_stats(pooled_init)
+    print(f"\n=== Red génesis (iniciativa) === nodos={n}, aristas={e}, peso total={w}, "
+          f"peso máx={max(pooled_init.values())}")
+    save_edges(pooled_init, os.path.join(DATA_PROCESSED, "genesis_network_initiative.csv"))
 
-        # Use the final cumulative wave for the pooled network
-        final_wave_key = list(waves.keys())[-1]
-        for (src, tgt), w in waves[final_wave_key].items():
-            pooled_edges[(src, tgt)] += w
+    # --- red génesis pooled: unidad ARTÍCULO (robustez) ---
+    pooled_art = defaultdict(int)
+    n_art_events = 0
+    for k in COMMISSIONS:
+        track = json.load(open(track_full_path(k), encoding="utf-8"))
+        for r in track:
+            if classify(r) == "articulo":
+                au = clean_authors(r.get("authors") or [])
+                if len(au) >= 2:
+                    add_clique(pooled_art, au)
+                    n_art_events += 1
+    n, e, w = net_stats(pooled_art)
+    print(f"=== Red génesis (artículo, robustez) === eventos={n_art_events}, nodos={n}, "
+          f"aristas={e}, peso total={w}")
+    save_edges(pooled_art, os.path.join(DATA_PROCESSED, "genesis_network_article.csv"))
 
-        n_nodes = len(set(
-            n for edge_list in waves.values()
-            for e in edge_list
-            for n in (e if isinstance(e, tuple) else (None,))
-        ))
-        genesis_edges = waves["T0_Genesis"]
-        commission_stats[c_name] = {
-            "total_items": len(data),
-            "waves": len(waves),
-            "genesis_edges": len(genesis_edges),
-            "final_edges": len(waves[final_wave_key]),
-        }
-        print(f"  Saved {c_name} with {len(waves)} waves, {len(genesis_edges)} genesis edges, {len(waves[final_wave_key])} final edges")
+    # --- ondas por comisión ---
+    print("\n=== Ondas por comisión (T0 génesis-iniciativa + indicaciones) ===")
+    waves_rows = []
+    for k in COMMISSIONS:
+        track = json.load(open(track_full_path(k), encoding="utf-8"))
+        days, edge_events, d_dup, d_na, n_solo = indication_events(track)
+        cumulative = dict(genesis_by_comm[k])
+        waves = {"T0_Genesis": dict(cumulative)}
+        by_day = defaultdict(list)
+        for d, au in edge_events:
+            by_day[d].append(au)
+        for step, d in enumerate(days, start=1):
+            cum = defaultdict(int, cumulative)
+            for au in by_day[d]:
+                add_clique(cum, au)
+            cumulative = dict(cum)
+            waves[f"T{step}_{d}"] = dict(cumulative)
+            waves_rows.append([f"C{k}", step, d])
+        out = {label: [{"source": s, "target": t, "weight": w} for (s, t), w in ed.items()]
+               for label, ed in waves.items()}
+        path = os.path.join(DATA_PROCESSED, f"C{k}_dynamic_networks.json")
+        json.dump(out, open(path, "w", encoding="utf-8"), ensure_ascii=False)
+        n_fin, e_fin, w_fin = net_stats(cumulative)
+        print(f"  C{k}: {len(days)} ondas ({len(edge_events)} eventos con lazos, {n_solo} unipersonales; "
+              f"descartados: {d_dup} duplicados, {d_na} sin fecha); "
+              f"onda final: {n_fin} nodos, {e_fin} aristas, peso {w_fin}")
 
-    # --- Step 2: Build genesis-only networks for C6, C7 (no temporal waves) ---
-    for c_name in ["C6", "C7"]:
-        filepath = COMMISSION_FILES[c_name]
-        print(f"Processing {c_name} (genesis only)...")
-        data = load_data(filepath)
-        if not data:
-            continue
+    with open(os.path.join(DATA_PROCESSED, "commission_waves.csv"), "w", newline="", encoding="utf-8") as fh:
+        wr = csv.writer(fh)
+        wr.writerow(["commission", "step", "date_mmdd"])
+        wr.writerows(waves_rows)
 
-        genesis_edges = build_genesis_edges(data)
-        for pair, w in genesis_edges.items():
-            pooled_edges[pair] += w
-
-        commission_stats[c_name] = {
-            "total_items": len(data),
-            "waves": 1,
-            "genesis_edges": len(genesis_edges),
-            "final_edges": len(genesis_edges),
-        }
-        print(f"  {c_name}: {len(genesis_edges)} genesis edges from {len(data)} items")
-
-    # --- Step 3: Save pooled cumulative network ---
-    pooled_path = os.path.join(data_dir, "pooled_cumulative_network.csv")
-    save_pooled_network_csv(pooled_edges, pooled_path)
-
-    # Compute pooled stats
-    all_nodes = set()
-    for (src, tgt) in pooled_edges:
-        all_nodes.add(src)
-        all_nodes.add(tgt)
-
-    print(f"\n{'='*60}")
-    print(f"POOLED CUMULATIVE NETWORK")
-    print(f"  Nodes: {len(all_nodes)}")
-    print(f"  Edges: {len(pooled_edges)}")
-    print(f"  Total weight: {sum(pooled_edges.values())}")
-    print(f"  Saved to: {pooled_path}")
-
-    print(f"\nPer-commission breakdown:")
-    for c_name, stats in commission_stats.items():
-        print(f"  {c_name}: {stats['total_items']} items, {stats['genesis_edges']} genesis edges, {stats['final_edges']} final edges, {stats['waves']} waves")
+    print("\n--- Done ---")

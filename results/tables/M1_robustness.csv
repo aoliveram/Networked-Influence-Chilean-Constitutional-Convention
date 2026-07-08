@@ -1,0 +1,73 @@
+"model","term","estimate","se","p"
+"C1 (génesis-iniciativa)","sum",-0.472158582453527,0.142668216829764,0.000934671683193239
+"C1 (génesis-iniciativa)","nodematch.sum.afiliacion_agrupada",0.51140408695786,0.0492360252322652,2.84786633570098e-25
+"C1 (génesis-iniciativa)","nodematch.sum.experiencia_previa_institucional",-0.175047123889369,0.0561077519209376,0.0018095022760474
+"C1 (génesis-iniciativa)","nodematch.sum.es_abogado",-0.0176074757410459,0.0465732856759664,0.705386351480729
+"C1 (génesis-iniciativa)","nodematch.sum.es_mujer",0.241354319365623,0.0466215597188672,2.25624659915822e-07
+"C1 (génesis-iniciativa)","absdiff.sum.edad_al_asumir",0.00605583893628357,0.00233381212236338,0.00946385141857568
+"C1 (génesis-iniciativa)","absdiff.sum.grado_academico_nivel",0.191974126059644,0.0306468422615846,3.7504434789777e-10
+"C1 (génesis-iniciativa)","nodecov.sum.edad_al_asumir",-0.0209777754678649,0.00157948569645285,2.96807470795184e-40
+"C2 (génesis-iniciativa)","sum",-1.33977973005743,0.0897528941969462,2.18538895697967e-50
+"C2 (génesis-iniciativa)","nodematch.sum.afiliacion_agrupada",0.42758806133656,0.0294887147580401,1.21048348613669e-47
+"C2 (génesis-iniciativa)","nodematch.sum.experiencia_previa_institucional",0.65518327516451,0.0374172351980641,1.19772324520414e-68
+"C2 (génesis-iniciativa)","nodematch.sum.es_abogado",0.298142956262171,0.0285747156562758,1.73790086269741e-25
+"C2 (génesis-iniciativa)","nodematch.sum.es_mujer",0.274629189620815,0.0284262976306171,4.41119156137295e-22
+"C2 (génesis-iniciativa)","absdiff.sum.edad_al_asumir",-0.00456888193934251,0.0014551395416797,0.0016904940953662
+"C2 (génesis-iniciativa)","absdiff.sum.grado_academico_nivel",0.0322782849665555,0.0188313629745477,0.0865157670139079
+"C2 (génesis-iniciativa)","nodecov.sum.edad_al_asumir",-0.00561701625543184,0.00092122597313699,1.07856555974646e-09
+"C3 (génesis-iniciativa)","sum",-0.315894057408006,0.111886848190115,0.0047526878636253
+"C3 (génesis-iniciativa)","nodematch.sum.afiliacion_agrupada",0.50540392739777,0.0429429385549373,5.62570768258379e-32
+"C3 (génesis-iniciativa)","nodematch.sum.experiencia_previa_institucional",-0.206740226177658,0.0441368395473187,2.81228288846096e-06
+"C3 (génesis-iniciativa)","nodematch.sum.es_abogado",-0.0711472166313835,0.0351319805844646,0.0428528810886176
+"C3 (génesis-iniciativa)","nodematch.sum.es_mujer",0.12601193786976,0.037500343226024,0.000778613773866664
+"C3 (génesis-iniciativa)","absdiff.sum.edad_al_asumir",-0.0103136294971459,0.0019224811311506,8.10616831782996e-08
+"C3 (génesis-iniciativa)","absdiff.sum.grado_academico_nivel",-0.0265210495611243,0.0237585963205307,0.264305836096396
+"C3 (génesis-iniciativa)","nodecov.sum.edad_al_asumir",-0.0113376436176099,0.00120274667040968,4.24162076559993e-21
+"C4 (génesis-iniciativa)","sum",-0.402274131638414,0.0712299746048908,1.62759962563277e-08
+"C4 (génesis-iniciativa)","nodematch.sum.afiliacion_agrupada",0.502304474914901,0.0222482848237274,7.25683830664561e-113
+"C4 (génesis-iniciativa)","nodematch.sum.experiencia_previa_institucional",0.529812526861805,0.028539041482804,6.22846926530605e-77
+"C4 (génesis-iniciativa)","nodematch.sum.es_abogado",0.26652411694297,0.0203783833597051,4.35449245047332e-39
+"C4 (génesis-iniciativa)","nodematch.sum.es_mujer",0.222643991994234,0.0219875093555083,4.23927052905714e-24
+"C4 (génesis-iniciativa)","absdiff.sum.edad_al_asumir",0.00825306815497736,0.0010881535324384,3.33848115015265e-14
+"C4 (génesis-iniciativa)","absdiff.sum.grado_academico_nivel",0.105102350084212,0.0136612736505735,1.43217697376665e-14
+"C4 (génesis-iniciativa)","nodecov.sum.edad_al_asumir",-0.0110995953111501,0.000750443656580487,1.68167717245714e-49
+"C5 (génesis-iniciativa)","sum",0.878232171501398,0.0547225032015841,5.82514769344038e-58
+"C5 (génesis-iniciativa)","nodematch.sum.afiliacion_agrupada",0.811952461895553,0.0199367329199162,0
+"C5 (génesis-iniciativa)","nodematch.sum.experiencia_previa_institucional",0.398655440108636,0.0242624271110786,1.14789898235522e-60
+"C5 (génesis-iniciativa)","nodematch.sum.es_abogado",0.170930144063616,0.0174315663070404,1.06319952281351e-22
+"C5 (génesis-iniciativa)","nodematch.sum.es_mujer",0.0740169391975263,0.0171055613764237,1.51106843385805e-05
+"C5 (génesis-iniciativa)","absdiff.sum.edad_al_asumir",2.65715518679777e-05,0.000909274586851783,0.976686895059123
+"C5 (génesis-iniciativa)","absdiff.sum.grado_academico_nivel",-0.237404208322765,0.0114838349594148,6.07498319930164e-95
+"C5 (génesis-iniciativa)","nodecov.sum.edad_al_asumir",-0.0157941745955085,0.00058785791486013,5.29172590713197e-159
+"C6 (génesis-iniciativa)","sum",-0.113838897376868,0.067584584208881,0.0921060375546032
+"C6 (génesis-iniciativa)","nodematch.sum.afiliacion_agrupada",0.673191467036016,0.0227796020379446,6.12050044461357e-192
+"C6 (génesis-iniciativa)","nodematch.sum.experiencia_previa_institucional",0.404735334349154,0.0282409248876131,1.39046916574343e-46
+"C6 (génesis-iniciativa)","nodematch.sum.es_abogado",0.000767873858785478,0.0213929263121479,0.971367023154881
+"C6 (génesis-iniciativa)","nodematch.sum.es_mujer",0.148103634993695,0.020441815094901,4.3202037882864e-13
+"C6 (génesis-iniciativa)","absdiff.sum.edad_al_asumir",-0.00380751918588309,0.00112518359679042,0.000714616177921093
+"C6 (génesis-iniciativa)","absdiff.sum.grado_academico_nivel",-0.0513889933196001,0.013550013960727,0.000149113185951536
+"C6 (génesis-iniciativa)","nodecov.sum.edad_al_asumir",-0.00816313841498008,0.000679740577919509,3.17917518812585e-33
+"C7 (génesis-iniciativa)","sum",-1.43991733230614,0.0610284392430391,4.42025866941292e-123
+"C7 (génesis-iniciativa)","nodematch.sum.afiliacion_agrupada",0.345413108422745,0.0213128689001988,4.51573904813566e-59
+"C7 (génesis-iniciativa)","nodematch.sum.experiencia_previa_institucional",0.672152373598804,0.0257375677926922,2.42381661283749e-150
+"C7 (génesis-iniciativa)","nodematch.sum.es_abogado",0.216800933112086,0.02051087662014,4.102882731284e-26
+"C7 (génesis-iniciativa)","nodematch.sum.es_mujer",0.0696999189453542,0.0204708577746337,0.000662037354463891
+"C7 (génesis-iniciativa)","absdiff.sum.edad_al_asumir",-0.000834940842839624,0.000953368853674166,0.381149948067515
+"C7 (génesis-iniciativa)","absdiff.sum.grado_academico_nivel",-0.0202195003485922,0.0138440644818982,0.144147863812758
+"C7 (génesis-iniciativa)","nodecov.sum.edad_al_asumir",0.0053082392403847,0.000603463289365548,1.41411454767436e-18
+"Pooled (unidad artículo)","sum",2.37572619521718,0.0267898462538297,0
+"Pooled (unidad artículo)","nodematch.sum.afiliacion_agrupada",0.843708518743544,0.011177591787175,0
+"Pooled (unidad artículo)","nodematch.sum.experiencia_previa_institucional",0.53088636987945,0.0164714439487668,6.5556311196476e-228
+"Pooled (unidad artículo)","nodematch.sum.es_abogado",0.187238647120055,0.0105542283977129,2.03643778163255e-70
+"Pooled (unidad artículo)","nodematch.sum.es_mujer",0.180207976755386,0.0087275791878302,1.0152342027924e-94
+"Pooled (unidad artículo)","absdiff.sum.edad_al_asumir",-0.00220565080394824,0.000457313221766114,1.4136979080332e-06
+"Pooled (unidad artículo)","absdiff.sum.grado_academico_nivel",-0.0412903406141774,0.00490524574094673,3.84312622211855e-17
+"Pooled (unidad artículo)","nodecov.sum.edad_al_asumir",-0.00992675086317171,0.00030677354429888,1.05135998442352e-229
+"Pooled iniciativa (perfiles PRE-auditoría)","sum",1.87736191185206,0.0410311969078482,0
+"Pooled iniciativa (perfiles PRE-auditoría)","nodematch.sum.afiliacion_agrupada",0.181023208994384,0.0120187280045413,2.88985457302778e-51
+"Pooled iniciativa (perfiles PRE-auditoría)","nodematch.sum.experiencia_previa_institucional",0.370385340859129,0.0141968039025275,4.81613994035572e-150
+"Pooled iniciativa (perfiles PRE-auditoría)","nodematch.sum.es_abogado",0.211768020257088,0.0156413059658424,9.2002906169722e-42
+"Pooled iniciativa (perfiles PRE-auditoría)","nodematch.sum.es_mujer",0.138006421122776,0.0102975615829604,5.89710391088259e-41
+"Pooled iniciativa (perfiles PRE-auditoría)","absdiff.sum.edad_al_asumir",-0.000412230764266517,0.000782624308092472,0.598381931434219
+"Pooled iniciativa (perfiles PRE-auditoría)","absdiff.sum.grado_academico_nivel",0.0086109761859492,0.00851027574612715,0.311618001512769
+"Pooled iniciativa (perfiles PRE-auditoría)","nodecov.sum.edad_al_asumir",-0.0107013242128257,0.000448628803016703,9.33532449909006e-126
