@@ -1,0 +1,3 @@
+"model","term","estimate","se","p","aic","secs"
+"B: sin ideología","ERROR: Unconstrained MCMC sampling did not mix at all. Optimization cannot continue.",NA,NA,NA,NA,1429.9
+"A: + quintiles theta1","ERROR: Unconstrained MCMC sampling did not mix at all. Optimization cannot continue.",NA,NA,NA,NA,1524.3

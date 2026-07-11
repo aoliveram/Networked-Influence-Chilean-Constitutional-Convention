@@ -1,0 +1,10 @@
+"metric","value"
+"EI_grupal",0.673395162756865
+"EI_perm_media",0.891328538987232
+"EI_perm_p5",0.858253166611219
+"EI_perm_p95",0.9169819232379
+"p_enclave",0
+"EI_nodo_mediana",0.411111111111111
+"constraint_ppoo_mediana",0.0490352455214783
+"constraint_resto_mediana",0.050673460207252
+"wilcoxon_p",0.353276853070517
