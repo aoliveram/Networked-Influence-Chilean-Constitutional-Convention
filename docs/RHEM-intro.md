@@ -195,3 +195,49 @@ El snapshot trae el **autor principal** de cada ICC (`autor_matched`). Eso habil
 ## 9.5 Costo esperado y entregables
 
 Por el piloto (§6): **~4 min por estimación** (8 cores), **~40 min** el protocolo completo de 10 re-muestreos por especificación; con las dos memorias ($w \equiv 1$ y $T_{1/2} = 30$) y la variante dirigida, la sesión completa cabe en **~2--3 horas**. Entregables: tabla de coeficientes estandarizados con estabilidad entre re-muestreos, comparación memoria corta/infinita, y la lectura conjunta homofilia-vs-historia para el reporte (sección nueva de M1/M2 unificados).
+
+# 10. El run real: resultados y lectura (2026-07-14)
+
+Ejecutado tal como especifica §9 (`code/28-rhem-run.R`). Ficha técnica: **448 eventos fechados** (39 excluidos sin fecha, 8%), tiempo en días desde 2021-11-01 con historia estricta por día; $m = 50$ controles por evento (25 uniformes + 25 con matching blando por comisión); features **estandarizadas** (los coeficientes se leen "por desviación estándar"); $B = 10$ re-muestreos de controles; **140/140 ajustes convergieron vía `amorem::rem(clogit)`** — sin fallback, sin cuasi-separación. Sanity superado: el motor propio de features (vectorizado: $|S_e \cap h|$ por producto matricial y $\binom{k}{r}$) coincide exactamente con `amorem::hyperedge_subrep` en memoria infinita. Nota honesta de costos: la estimación de §9.5 (~40 min) presumía el motor R del paquete; el motor matricial propio la colapsó a **~6 segundos el protocolo completo** — la sobre-estimación es el mejor error posible.
+
+## 10.1 La tabla principal
+
+Coeficientes estandarizados; media (y DE) sobre los 10 re-muestreos; `RHEM_summary.csv`:
+
+| Término | Memoria infinita | Semivida 30 días |
+|:---|:-:|:-:|
+| subrep$_2$ — familiaridad de pares | $\mathbf{+6.17}$ (0.69) | $+5.77$ (0.70) |
+| subrep$_1$ — actividad individual | $-6.02$ (0.73) | $-5.32$ (0.71) |
+| dispersión $\theta_1$ | $\mathbf{-2.35}$ (0.13) | $-2.37$ (0.12) |
+| subrep$_3$ — familiaridad de tríos | $-1.92$ (0.44) | $-1.72$ (0.38) |
+| prop. misma lista | $\mathbf{+0.89}$ (0.14) | $+0.95$ (0.13) |
+| dispersión $\theta_2$ | $-0.43$ (0.16), $p \approx 0.05$ | $-0.44$ (0.16) |
+| prop. comisión | $-0.34$ (n.s.) | $-0.29$ (n.s.) |
+
+Los coeficientes son estables entre re-muestreos (las DE son fracciones pequeñas de los efectos) y las dos memorias cuentan la misma historia; por log-verosimilitud en el mismo dataset **gana la memoria infinita** ($-68.0$ vs. $-73.1$): las coaliciones se construyen sobre el capital de co-firma *acumulado*, no solo sobre el del último mes — sensato en una ventana de apenas tres meses.
+
+## 10.2 Cómo leer los signos de las subrep (la parte que engaña)
+
+Las tres estadísticas de historia están fuertemente correlacionadas (sr$_1$--sr$_2$: 0.78; sr$_2$--sr$_3$: 0.84), y eso hace que los coeficientes *conjuntos* no se lean por separado. La prueba (`RHEM_aux.csv`): **cada una a solas es positiva** —
+
+| Modelo | subrep$_1$ | subrep$_2$ | subrep$_3$ | logLik |
+|:---|:-:|:-:|:-:|:-:|
+| solo sr$_1$ | $+1.26$\*\* | — | — | $-99.9$ |
+| solo sr$_2$ | — | $+1.45$\*\*\* | — | $-84.0$ |
+| solo sr$_3$ | — | — | $+0.81$\*\*\* | $-93.3$ |
+| las tres | $-6.87$ | $+6.89$ | $-2.55$ | $-68.0$ |
+
+Marginalmente, la actividad, la familiaridad de pares y la de tríos *todas* predicen a la coalición real. Juntas, sr$_2$ se lleva la señal y sr$_1$/sr$_3$ quedan negativas: es *partialling* clásico entre regresores casi colineales, no una paradoja. La lectura conjunta correcta: **lo que distingue a una coalición real de una falsa es específicamente la familiaridad de sus pares** — por encima de lo que implicarían la actividad individual de sus miembros ("gente ocupada junta") y el solapamiento de tríos. Condicional en pares familiares, un exceso de actividad individual sin familiaridad mutua es señal de coalición *falsa* (así se ven los controles hechos de firmantes seriales que no se conocen), y los tríos no agregan sobre los pares — las coaliciones de la Convención se tejieron **de a dos**, no reciclando equipos completos (coherente con la falta de "juego repetido" de D8).
+
+## 10.3 La lectura sustantiva: homofilia e historia coexisten
+
+El resultado que este modelo venía a buscar — M1 y M2 en la misma ecuación, con el mismo reloj:
+
+1. **La historia importa** (sr$_2$ es el efecto más grande del modelo): la co-firma pasada de los pares predice la coalición de hoy. Es la *selección/persistencia relacional* de M2, ahora en su unidad nativa.
+2. **La homofilia ideológica sobrevive a la historia**: dispersión de $\theta_1$ = $-2.35$\*\*\* *condicional* en las tres subrep. No era inercia relacional disfrazada de afinidad — es afinidad. ($\theta_2$ queda marginal, $p \approx 0.05$.)
+3. **La coordinación de lista persiste sobre ideología E historia** (prop. lista $+0.89$\*\*\*): la respuesta a la pregunta D2.3 que quedaba abierta — el sello de "partido embrionario" no es reducible ni a preferencias compartidas ni a haber firmado juntos antes; hay *organización* operando en cada nueva coalición.
+4. **Prop. comisión no se lee de esta tabla**: con la mitad de los controles muestreada *dentro* de la comisión del texto, la distribución de controles absorbe deliberadamente ese contraste (era el remedio a la cuasi-separación). El efecto comisión ya está establecido por el clogit de M1 (OR 3.4); aquí es parte del diseño, no un hallazgo.
+
+Caveats registrados: (i) los 39 eventos sin fecha quedan fuera como casos y fuera de la historia (8%; robustez de imputación pendiente si se promueve al paper); (ii) los EE de sr$_1$/sr$_2$ son grandes por colinealidad (aún así $p < 10^{-4}$) — para el paper conviene reportar la tabla conjunta *y* la de "a solas"; (iii) el bloque del deadline (156 eventos el 1-feb) se evalúa contra la historia al 31-ene, la convención correcta pero que comprime un tercio del riesgo en un solo instante.
+
+**Este resultado no entra aún al reporte principal** (`networked-influence-study`): la decisión de qué modelo encabeza M1 — y cómo se reparten clogit estático, Poisson diádica+boot y RHEM — se discute primero con el autor.
