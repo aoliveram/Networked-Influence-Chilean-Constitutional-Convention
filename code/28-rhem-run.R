@@ -80,6 +80,8 @@ congl <- listas$conglomerado[match(roster, listas$nombre_armonizado)]
 congl[congl == "REVISAR (lista local sin conglomerado)"] <- "Otras listas locales"
 congl <- setNames(congl, roster)
 comis <- setNames(memb$commission[match(roster, memb$nombre_armonizado)], roster)
+abog <- setNames(profiles$es_abogado[match(roster, profiles$nombre_armonizado)] == 1, roster)
+exper <- setNames(profiles$experiencia_previa_institucional[match(roster, profiles$nombre_armonizado)] == 1, roster)
 
 S_list <- lapply(registry$firmantes, function(s) {
   x <- strsplit(s, "; ", fixed = TRUE)[[1]]; x[x %in% roster]
@@ -106,15 +108,18 @@ features_stratum <- function(k, C_mask) {
       out[, r + 3] <- colSums(ch * w30) / choose(s, r)
     }
   }
-  # exógenas de composición
+  # exógenas de composición (incl. H1b: pares ambos-abogados / ambos-experiencia)
   exo <- t(apply(C_mask, 1, function(row) {
     cand <- roster[row == 1]
     p <- combn(length(cand), 2)
     th1 <- theta1[cand]; th2 <- theta2[cand]; cg <- congl[cand]
+    ab <- abog[cand]; ex <- exper[cand]
     c(disp_theta1 = mean(abs(th1[p[1, ]] - th1[p[2, ]])),
       disp_theta2 = mean(abs(th2[p[1, ]] - th2[p[2, ]])),
       prop_lista = mean(cg[p[1, ]] == cg[p[2, ]]),
-      prop_comision = mean(comis[cand] == registry$commission[k]))
+      prop_comision = mean(comis[cand] == registry$commission[k]),
+      pares_abogado = mean(ab[p[1, ]] & ab[p[2, ]]),
+      pares_exper = mean(ex[p[1, ]] & ex[p[2, ]]))
   }))
   cbind(out, exo)
 }
@@ -136,12 +141,11 @@ for (k in sample(dias_unicos[dias_unicos > 5], 4)) {
 cat("  Sanity: motor propio == amorem::hyperedge_subrep (memoria infinita) OK\n")
 
 # ------------------- caso-control + ajuste por re-muestreo -------------------
-FEATS <- c("sr1_inf", "sr2_inf", "sr3_inf", "sr1_30", "sr2_30", "sr3_30",
-           "disp_theta1", "disp_theta2", "prop_lista", "prop_comision")
-F_INF <- c("sr1_inf", "sr2_inf", "sr3_inf", "disp_theta1", "disp_theta2",
-           "prop_lista", "prop_comision")
-F_30 <- c("sr1_30", "sr2_30", "sr3_30", "disp_theta1", "disp_theta2",
-          "prop_lista", "prop_comision")
+EXO <- c("disp_theta1", "disp_theta2", "prop_lista", "prop_comision",
+         "pares_abogado", "pares_exper")
+FEATS <- c("sr1_inf", "sr2_inf", "sr3_inf", "sr1_30", "sr2_30", "sr3_30", EXO)
+F_INF <- c("sr1_inf", "sr2_inf", "sr3_inf", EXO)
+F_30 <- c("sr1_30", "sr2_30", "sr3_30", EXO)
 
 build_resample <- function(b) {
   strata_rows <- mclapply(seq_len(E), function(k) {
@@ -223,9 +227,9 @@ fit_ll <- function(feats) {
   clogit(f, data = df1, method = "efron")
 }
 solo <- list(
-  "sr1 sola" = c("sr1_inf", "disp_theta1", "disp_theta2", "prop_lista", "prop_comision"),
-  "sr2 sola" = c("sr2_inf", "disp_theta1", "disp_theta2", "prop_lista", "prop_comision"),
-  "sr3 sola" = c("sr3_inf", "disp_theta1", "disp_theta2", "prop_lista", "prop_comision"),
+  "sr1 sola" = c("sr1_inf", EXO),
+  "sr2 sola" = c("sr2_inf", EXO),
+  "sr3 sola" = c("sr3_inf", EXO),
   "las tres" = F_INF
 )
 cat("\n--- Cada subrep a solas vs juntas (memoria infinita, b = 1) ---\n")

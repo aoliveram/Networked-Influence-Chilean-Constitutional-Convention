@@ -196,48 +196,63 @@ El snapshot trae el **autor principal** de cada ICC (`autor_matched`). Eso habil
 
 Por el piloto (§6): **~4 min por estimación** (8 cores), **~40 min** el protocolo completo de 10 re-muestreos por especificación; con las dos memorias ($w \equiv 1$ y $T_{1/2} = 30$) y la variante dirigida, la sesión completa cabe en **~2--3 horas**. Entregables: tabla de coeficientes estandarizados con estabilidad entre re-muestreos, comparación memoria corta/infinita, y la lectura conjunta homofilia-vs-historia para el reporte (sección nueva de M1/M2 unificados).
 
-# 10. El run real: resultados y lectura (2026-07-14)
+# 10. El run real, contado en fácil (2026-07-14)
 
-Ejecutado tal como especifica §9 (`code/28-rhem-run.R`). Ficha técnica: **448 eventos fechados** (39 excluidos sin fecha, 8%), tiempo en días desde 2021-11-01 con historia estricta por día; $m = 50$ controles por evento (25 uniformes + 25 con matching blando por comisión); features **estandarizadas** (los coeficientes se leen "por desviación estándar"); $B = 10$ re-muestreos de controles; **140/140 ajustes convergieron vía `amorem::rem(clogit)`** — sin fallback, sin cuasi-separación. Sanity superado: el motor propio de features (vectorizado: $|S_e \cap h|$ por producto matricial y $\binom{k}{r}$) coincide exactamente con `amorem::hyperedge_subrep` en memoria infinita. Nota honesta de costos: la estimación de §9.5 (~40 min) presumía el motor R del paquete; el motor matricial propio la colapsó a **~6 segundos el protocolo completo** — la sobre-estimación es el mejor error posible.
+Esta sección reescribe los resultados como se los contaría a un compañero de doctorado que no ha seguido el proyecto. Los archivos: `code/28-rhem-run.R`, `results/tables/RHEM_summary.csv` (tabla principal), `RHEM_aux.csv` (lecturas auxiliares).
 
-## 10.1 La tabla principal
+## 10.1 Qué hicimos, en dos párrafos
 
-Coeficientes estandarizados; media (y DE) sobre los 10 re-muestreos; `RHEM_summary.csv`:
+Tomamos las **448 iniciativas con fecha de ingreso** (de las 487 del set de análisis; las 39 sin fecha quedaron fuera) y las tratamos como una **película**: el 3 de noviembre de 2021 entra la primera, el 1 de febrero de 2022 la última. Para cada iniciativa real le preguntamos al modelo: *"de todas las coaliciones de este mismo tamaño que se podrían haber formado ese día, ¿por qué se formó exactamente esta?"*. Como "todas" son un número astronómico ($\binom{154}{12} \approx 10^{17}$), comparamos contra una muestra: **50 coaliciones falsas** por cada real — 25 sorteadas entre los 154 convencionales y 25 sorteadas solo entre los miembros de la comisión del texto (controles "difíciles": obligan al modelo a discriminar entre coaliciones plausibles, no entre obviedades).
 
-| Término | Memoria infinita | Semivida 30 días |
-|:---|:-:|:-:|
-| subrep$_2$ — familiaridad de pares | $\mathbf{+6.17}$ (0.69) | $+5.77$ (0.70) |
-| subrep$_1$ — actividad individual | $-6.02$ (0.73) | $-5.32$ (0.71) |
-| dispersión $\theta_1$ | $\mathbf{-2.35}$ (0.13) | $-2.37$ (0.12) |
-| subrep$_3$ — familiaridad de tríos | $-1.92$ (0.44) | $-1.72$ (0.38) |
-| prop. misma lista | $\mathbf{+0.89}$ (0.14) | $+0.95$ (0.13) |
-| dispersión $\theta_2$ | $-0.43$ (0.16), $p \approx 0.05$ | $-0.44$ (0.16) |
-| prop. comisión | $-0.34$ (n.s.) | $-0.29$ (n.s.) |
+A cada coalición — real o falsa — le medimos dos familias de cosas. **Su composición**: qué tan compacta es ideológicamente, cuántos pares comparten lista, cuántos pares son ambos abogados, ambos con experiencia política, cuántos miembros son de la comisión. **Y su historia**: cuánto habían firmado antes sus miembros (individualmente, de a pares y de a tríos) *hasta el día anterior* — aquí es donde las fechas se ganan el sueldo: sin ellas no existe "antes". El modelo (un logit condicional gigante, ajustado con `amorem`) estima qué características separan a las 448 reales de las 22.400 falsas. Todo el protocolo — 10 re-sorteos de controles para verificar estabilidad, dos variantes de memoria — tomó ~6 segundos, porque reescribimos el conteo de historia como multiplicaciones de matrices (verificado idéntico al del paquete).
 
-Los coeficientes son estables entre re-muestreos (las DE son fracciones pequeñas de los efectos) y las dos memorias cuentan la misma historia; por log-verosimilitud en el mismo dataset **gana la memoria infinita** ($-68.0$ vs. $-73.1$): las coaliciones se construyen sobre el capital de co-firma *acumulado*, no solo sobre el del último mes — sensato en una ventana de apenas tres meses.
+## 10.2 La tabla principal (ahora con $p$-values)
 
-## 10.2 Cómo leer los signos de las subrep (la parte que engaña)
+Coeficientes **estandarizados**: cada uno responde "si esta característica sube una desviación estándar, ¿cuánto más se parece la coalición a una real?" — positivo = más real, negativo = más falsa. Media sobre los 10 re-sorteos; $p$ = mediana entre re-sorteos:
 
-Las tres estadísticas de historia están fuertemente correlacionadas (sr$_1$--sr$_2$: 0.78; sr$_2$--sr$_3$: 0.84), y eso hace que los coeficientes *conjuntos* no se lean por separado. La prueba (`RHEM_aux.csv`): **cada una a solas es positiva** —
+| Característica | Coef. (memoria infinita) | $p$ | ¿Y con memoria de 30 días? |
+|:---|:-:|:-:|:-:|
+| Historia: pares que ya firmaron juntos (sr$_2$) | $\mathbf{+6.22}$ | $4\times10^{-8}$ | $+5.84$ |
+| Historia: actividad individual (sr$_1$) | $-6.06$ (†) | $2\times10^{-5}$ | $-5.37$ |
+| Dispersión ideológica $\theta_1$ | $\mathbf{-2.34}$ | $2\times10^{-21}$ | $-2.37$ |
+| Historia: tríos que ya firmaron juntos (sr$_3$) | $-1.96$ (†) | $3\times10^{-4}$ | $-1.76$ |
+| Pares de la misma lista | $\mathbf{+0.91}$ | $1\times10^{-5}$ | $+0.96$ |
+| Dispersión ideológica $\theta_2$ | $-0.44$ | $0.051$ | $-0.46$ |
+| Proporción de la comisión del texto | $-0.33$ | $0.27$ (por diseño, ver abajo) | $-0.27$ |
+| **Pares ambos abogados** | $+0.06$ | $\mathbf{0.65}$ | $+0.11$ |
+| **Pares ambos con experiencia política** | $-0.04$ | $\mathbf{0.69}$ | $-0.05$ |
 
-| Modelo | subrep$_1$ | subrep$_2$ | subrep$_3$ | logLik |
+(†) Estos signos negativos NO se leen solos — son un efecto estadístico de meter tres variables casi gemelas juntas; §10.3 lo explica. Tres notas de lectura: (i) los 180 ajustes convergieron sin drama; (ii) los coeficientes casi no se mueven entre re-sorteos (por eso confiamos en ellos); (iii) "proporción de la comisión" **no es un hallazgo**: como la mitad de los controles se sortea *dentro* de la comisión, ese contraste lo apagamos nosotros a propósito — el efecto comisión real ya lo midió el clogit de M1 (OR 3.4).
+
+## 10.3 El truco de los signos: por qué "actividad" sale negativa
+
+Las tres estadísticas de historia son casi la misma variable con distinto zoom (correlaciones 0.78 y 0.84): la gente activa tiende a tener pares familiares, y los pares familiares componen tríos familiares. Cuando se meten juntas en una regresión, se reparten la señal de forma engañosa. La prueba está en ajustarlas **de a una**:
+
+| Modelo | sr$_1$ (actividad) | sr$_2$ (pares) | sr$_3$ (tríos) | logLik |
 |:---|:-:|:-:|:-:|:-:|
-| solo sr$_1$ | $+1.26$\*\* | — | — | $-99.9$ |
-| solo sr$_2$ | — | $+1.45$\*\*\* | — | $-84.0$ |
-| solo sr$_3$ | — | — | $+0.81$\*\*\* | $-93.3$ |
-| las tres | $-6.87$ | $+6.89$ | $-2.55$ | $-68.0$ |
+| solo actividad | $+1.23$\*\* | — | — | $-99.7$ |
+| solo pares | — | $+1.46$\*\*\* | — | $-84.0$ |
+| solo tríos | — | — | $+0.81$\*\*\* | $-93.2$ |
+| las tres juntas | $-6.89$ | $+6.87$ | $-2.55$ | $-67.8$ |
 
-Marginalmente, la actividad, la familiaridad de pares y la de tríos *todas* predicen a la coalición real. Juntas, sr$_2$ se lleva la señal y sr$_1$/sr$_3$ quedan negativas: es *partialling* clásico entre regresores casi colineales, no una paradoja. La lectura conjunta correcta: **lo que distingue a una coalición real de una falsa es específicamente la familiaridad de sus pares** — por encima de lo que implicarían la actividad individual de sus miembros ("gente ocupada junta") y el solapamiento de tríos. Condicional en pares familiares, un exceso de actividad individual sin familiaridad mutua es señal de coalición *falsa* (así se ven los controles hechos de firmantes seriales que no se conocen), y los tríos no agregan sobre los pares — las coaliciones de la Convención se tejieron **de a dos**, no reciclando equipos completos (coherente con la falta de "juego repetido" de D8).
+**De a una, las tres son positivas** — coaliciones reales tienen gente más activa, pares más familiares y tríos más familiares que las falsas. Juntas, la de pares se queda con todo y las otras dos se vuelven negativas. Eso es *partialling* de manual, no una paradoja. La traducción correcta del modelo conjunto es: **lo que de verdad distingue a una coalición real es la familiaridad de sus pares**. Condicional en eso, "mucha actividad individual sin familiaridad mutua" es marca de coalición falsa (así se ven los controles: firmantes seriales que no se conocen entre sí), y los tríos no agregan nada sobre los pares — o sea, **la Convención se tejió de a dos**: se reclutaban parejas que ya habían trabajado juntas, no se reciclaban equipos completos.
 
-## 10.3 La lectura sustantiva: homofilia e historia coexisten
+## 10.4 ¿Y los abogados? (la respuesta a H1b en la mejor lente)
 
-El resultado que este modelo venía a buscar — M1 y M2 en la misma ecuación, con el mismo reloj:
+Agregamos los términos que faltaban: proporción de pares *ambos abogados* y *ambos con experiencia política*. Resultado: **cero plano** ($+0.06$, $p = 0.65$ y $-0.04$, $p = 0.69$; igual con memoria de 30 días). Con esto las tres lentes del proyecto quedan alineadas y la historia completa de H1b es:
 
-1. **La historia importa** (sr$_2$ es el efecto más grande del modelo): la co-firma pasada de los pares predice la coalición de hoy. Es la *selección/persistencia relacional* de M2, ahora en su unidad nativa.
-2. **La homofilia ideológica sobrevive a la historia**: dispersión de $\theta_1$ = $-2.35$\*\*\* *condicional* en las tres subrep. No era inercia relacional disfrazada de afinidad — es afinidad. ($\theta_2$ queda marginal, $p \approx 0.05$.)
-3. **La coordinación de lista persiste sobre ideología E historia** (prop. lista $+0.89$\*\*\*): la respuesta a la pregunta D2.3 que quedaba abierta — el sello de "partido embrionario" no es reducible ni a preferencias compartidas ni a haber firmado juntos antes; hay *organización* operando en cada nueva coalición.
-4. **Prop. comisión no se lee de esta tabla**: con la mitad de los controles muestreada *dentro* de la comisión del texto, la distribución de controles absorbe deliberadamente ese contraste (era el remedio a la cuasi-separación). El efecto comisión ya está establecido por el clogit de M1 (OR 3.4); aquí es parte del diseño, no un hallazgo.
+1. **Poisson diádica + bootstrap** (co-ocurrencia marginal): los abogados *terminan* juntos en iniciativas algo más que el azar ($+0.10$, IC $[0.06, 0.14]$).
+2. **Clogit estático** (elección frente al menú): un abogado *no elige* coaliciones por su densidad de abogados ($p = 0.06$, marginal).
+3. **RHEM** (elección frente al menú + historia + fechas): los pares de abogados *no marcan* a las coaliciones reales en absoluto ($p = 0.65$).
 
-Caveats registrados: (i) los 39 eventos sin fecha quedan fuera como casos y fuera de la historia (8%; robustez de imputación pendiente si se promueve al paper); (ii) los EE de sr$_1$/sr$_2$ son grandes por colinealidad (aún así $p < 10^{-4}$) — para el paper conviene reportar la tabla conjunta *y* la de "a solas"; (iii) el bloque del deadline (156 eventos el 1-feb) se evalúa contra la historia al 31-ene, la convención correcta pero que comprime un tercio del riesgo en un solo instante.
+Conclusión sustantiva: los abogados coinciden porque **ciertos textos convocan abogados** (composición temática), no porque se busquen entre sí — y desde luego no hay gatekeeping. H1b, en cualquiera de sus versiones (dispersarse estratégicamente o agruparse), **no describe cómo se formó esta red**. Lo mismo para la experiencia política.
 
-**Este resultado no entra aún al reporte principal** (`networked-influence-study`): la decisión de qué modelo encabeza M1 — y cómo se reparten clogit estático, Poisson diádica+boot y RHEM — se discute primero con el autor.
+## 10.5 Qué memoria gana, y el resultado grande
+
+Corrimos el modelo con dos "memorias": una donde toda la historia cuenta igual (infinita) y una donde lo firmado hace un mes pesa la mitad (semivida 30 días). **Gana la infinita** (logLik $-67.8$ vs. $-72.8$): el capital de co-firma se *acumula*, no se evapora — razonable en una ventana de solo tres meses.
+
+Y el resultado grande, el que justificaba todo el aparato: **historia y homofilia coexisten en la misma ecuación**. La familiaridad de pares es el efecto más fuerte del modelo, *y aun así* la compacidad ideológica sobrevive entera ($-2.34$, $p = 10^{-21}$): la gente no firma con gente parecida "solo porque ya se conocían" — la afinidad ideológica opera por sí misma. Y la lista sigue coordinando por encima de ambas ($+0.91$, $p = 10^{-5}$): hay *organización* en cada coalición nueva que ni las preferencias ni la historia explican — la evidencia más fina hasta ahora de las listas como proto-partidos. Los tres resultados de formación del proyecto (ideología, lista, historia), por primera vez estimados juntos, con el reloj correcto, y sin pseudo-replicación.
+
+Caveats para tener a mano: los 39 eventos sin fecha quedan fuera (8%; robustez de imputación pendiente); los EE de sr$_1$/sr$_2$ son grandes por colinealidad (aun así $p < 10^{-4}$; para el paper, reportar la tabla conjunta *y* la de "a solas"); el bloque del deadline (156 iniciativas el 1-feb) se evalúa contra la historia al 31-ene — la convención correcta, pero comprime un tercio del riesgo en un día.
+
+**Nada de esto entra aún a `networked-influence-study`**: primero viene la discusión de qué modelo encabeza M1 (clogit estático, Poisson+boot, RHEM) y cómo se reparten los papeles.
