@@ -154,11 +154,11 @@ Estado vigente: **154/154 perfiles**, 0 afiliaciones desconocidas, 0 edades falt
 
 ## 3.1 Insumos construidos
 
-**Registro de iniciativas** (`initiative_registry.csv`): **528 iniciativas** con $\geq 2$ firmantes-persona — C1: 29, C2: 56, C3: 41, C4: 68, C5: 148, C6: 78, C7: 108 (las iniciativas populares/indígenas quedan fuera de la red de personas). La Figura F1 contrasta ese conteo de iniciativas con el de artículos génesis por comisión: la brecha entre ambas barras es el número de artículos por iniciativa (C5 es el caso extremo: 148 iniciativas → 420 artículos).
+**Registro de iniciativas** (`initiative_registry.csv`): **528 iniciativas** con $\geq 2$ firmantes-persona — C1: 29, C2: 56, C3: 41, C4: 68, C5: 148, C6: 78, C7: 108 (las iniciativas populares/indígenas quedan fuera de la red de personas). De ellas, **487 forman el conjunto de análisis**: las 41 con >16 firmantes (imposibles bajo la regla ICC; en auditoría como duplicaciones transversales, §4.1.5) quedan **excluidas de toda red y menú** por decisión del 2026-07-11 (`MAX_SIGNERS = 16` en `code/00`; el registro y F9 las siguen documentando). El tope **no** se aplica a las indicaciones, que legítimamente podían llevar >16 firmas (art. 95). La Figura F1 contrasta el conteo de iniciativas con el de artículos génesis por comisión: la brecha entre ambas barras es el número de artículos por iniciativa (C5 es el caso extremo: 148 iniciativas → 420 artículos).
 
 ![**F1.** Iniciativas constitucionales (barra sólida) sobre artículos génesis (barra translúcida) por comisión, ambos con $\geq 2$ firmantes.](../results/figures/initiatives_per_commission.pdf){width=80%}
 
-**Red génesis-iniciativa** (para descriptivos, W de M3 y brokerage): 154 nodos (sin aislados), **7.731 aristas**, peso total 53.391, peso máximo 76. **Red génesis-artículo** (robustez): 1.676 eventos de co-firma, 8.020 aristas, peso 175.316. La Figura F2 muestra ambas redes como grafos bipartitos documento–convencional, con los convencionales ordenados por punto ideal (rojo = izquierda, azul = derecha).
+**Red génesis-iniciativa** (para descriptivos, W de M3 y brokerage; ya con el filtro $\leq 16$): 154 nodos (sin aislados), **5.870 aristas**, peso total 34.857, peso máximo 68. **Red génesis-artículo** (robustez): 1.565 eventos de co-firma, 5.881 aristas, peso 119.469. El filtro no era cosmético: las 41 mega-iniciativas fabricaban ~35% del peso total de la red anterior (7.731 aristas / peso 53.391). La Figura F2 muestra ambas redes como grafos bipartitos documento–convencional, con los convencionales ordenados por punto ideal (rojo = izquierda, azul = derecha); *sus paneles corresponden al registro completo pre-filtro y se regenerarán tras la auditoría*.
 
 ![**F2a.** Co-patrocinio génesis como red bipartita, **unidad iniciativa** (principal). Documentos arriba (color por comisión); convencionales abajo, ordenados y coloreados por punto ideal — **rojo = izquierda** ($\theta<0$; Baradit $-1.4$), **azul = derecha** ($\theta>0$; Marinovic $+4.3$), con colorbar.](../results/figures/bipartite_initiative.pdf){width=100%}
 
@@ -186,7 +186,7 @@ Estado vigente: **154/154 perfiles**, 0 afiliaciones desconocidas, 0 edades falt
 
 1. **Cobertura de autores.** 134/2.019 registros TRACK sin autores (65 de iniciativas populares/indígenas — patrocinio institucional —, 45 de ICC no recuperadas, 24 sin referencia); 54 artículos del borrador final quedaron `not_traced` en `coincidencias`; 66 + 5 registros *undated* se excluyen de las ondas.
 2. **dynIRT sin errores estándar** (P10, abierto): la incertidumbre de $\theta$ no se propaga a M2/M3.
-3. **41 iniciativas con >16 firmantes** (imposible bajo la regla ICC): candidatas a duplicación transversal entre comisiones (la iniciativa 954 aparece con 83 firmantes en C4, C5 y C6 a la vez); en auditoría aguas arriba (§4.1.5).
+3. **41 iniciativas con >16 firmantes** (imposible bajo la regla ICC): candidatas a duplicación transversal entre comisiones (la iniciativa 954 aparece con 83 firmantes en C4, C5 y C6 a la vez). **Excluidas de todos los análisis desde v3.1** (decisión 2026-07-11); auditoría aguas arriba pendiente (§4.1.5).
 
 Las limitaciones específicas de cada modelo están al final de su sección (M1/M2/M3 — Limitaciones).
 
@@ -198,7 +198,7 @@ Las firmas vienen **en paquetes**: cada iniciativa aporta un conjunto de 8--16 f
 
 ## M1 — Especificación
 
-**Principal — logit condicional (McFadden).** Para el menú de la iniciativa $a$ con coalición firmante $S_a$ (81.312 decisiones = 528 × 154):
+**Principal — logit condicional (McFadden).** Para el menú de la iniciativa $a$ con coalición firmante $S_a$ (74.998 decisiones = 487 × 154, tras la exclusión $\leq 16$):
 $$U_{ia} = \beta_\theta\, d^{\theta_1}_{ia} + \beta_{\theta_2}\, d^{\theta_2}_{ia} + \kappa\, \text{comisión}_{ia} + \textstyle\sum_c \lambda_c\, L^c_{ia} + \boldsymbol{\pi}' A_{ia} + \alpha_a + \varepsilon_{ia},$$
 
 donde $d^{\theta}_{ia} = |\theta^{fm}_i - \bar\theta^{fm}_{S_a}|$ (distancia a la posición media de la coalición; *leave-one-out* para firmantes), $\text{comisión}_{ia} = \mathbf{1}\{i \in \text{comisión de } a\}$ (estructura de oportunidad), $L^c_{ia} = \mathbf{1}\{lista_i = lista\ modal\ de\ S_a = c\}$ (coordinación de lista, un $\lambda$ por conglomerado), y $A_{ia}$ = afinidades demográficas ($es\_X_i \times$ proporción de $X$ en $S_a$ para abogado/experiencia/mujer; $|grado_i - \overline{grado}_{S_a}|$). El efecto fijo $\alpha_a$ absorbe todo lo que hace atractivo al documento (tema, redactor, momento) y se elimina por strata; los EE se agrupan por convencional. La ideología es la **2D del primer mes** (pre-red, pre-comisiones, pre-2/3; §1.3e).
@@ -211,16 +211,16 @@ Logit condicional principal (`results/tables/M1_clogit.csv`; OR = $e^{\hat\beta}
 
 | Término | $\hat\beta$ | OR | $p$ |
 |:---|:-:|:-:|:-:|
-| $\lvert\Delta\theta_1\rvert$ a la coalición | $-3.09$ | 0.05 | $<10^{-70}$ |
-| $\lvert\Delta\theta_2\rvert$ a la coalición | $-1.23$ | 0.29 | $<10^{-22}$ |
-| misma comisión | $+1.21$ | 3.36 | $<10^{-125}$ |
-| misma lista modal (rango entre conglomerados) | $+0.61$ a $+1.79$ | 1.8--6.0 | $<10^{-4}$ |
-| afinidad abogado | $+0.27$ | 1.31 | 0.19 |
-| afinidad experiencia previa | $+0.27$ | 1.32 | 0.27 |
-| afinidad mujer | $+0.44$ | 1.56 | 0.010 |
-| $\lvert\Delta grado\rvert$ (0--3) | $-0.08$ | 0.92 | 0.25 |
+| $\lvert\Delta\theta_1\rvert$ a la coalición | $-3.46$ | 0.03 | $<10^{-52}$ |
+| $\lvert\Delta\theta_2\rvert$ a la coalición | $-1.20$ | 0.30 | $<10^{-19}$ |
+| misma comisión | $+1.21$ | 3.37 | $<10^{-117}$ |
+| misma lista modal (rango entre conglomerados) | $+0.78$ a $+2.00$ | 2.2--7.4 | $<10^{-5}$ |
+| afinidad abogado | $+0.37$ | 1.45 | 0.060 |
+| afinidad experiencia previa | $+0.27$ | 1.31 | 0.29 |
+| afinidad mujer | $+0.39$ | 1.47 | 0.029 |
+| $\lvert\Delta grado\rvert$ (0--3) | $-0.08$ | 0.93 | 0.32 |
 
-**Lectura.** (i) **La ideología domina la formación**: la distancia en $\theta_1$ es, por lejos, el mayor inhibidor de la firma (OR 0.05 por unidad de distancia), y la **segunda dimensión tiene efecto propio** ($-1.23$) — la co-firma también corre por el eje plurinacional. (ii) **La estructura de oportunidad importa** (D10 de la revisión): pertenecer a la comisión de la iniciativa multiplica las odds por 3.4. (iii) **La coordinación de lista sobrevive a la ideología** (sección siguiente). (iv) **Las afinidades profesionales no sobreviven al diseño honesto**: abogado y experiencia — que en la proyección aparecían con $p<10^{-50}$ — son indistinguibles de cero con el N real; la única afinidad demográfica en pie es el **género** (OR 1.56). Es la cuantificación exacta de lo que compraba la pseudo-replicación, y el cierre empírico del arco de H1b: ni gatekeeping (v1), ni homofilia profesional robusta (v2 proyectada) — en el modelo correcto, *el capital profesional no organiza la decisión de co-firma*.
+**Lectura.** (i) **La ideología domina la formación**: la distancia en $\theta_1$ es, por lejos, el mayor inhibidor de la firma (OR 0.03 por unidad de distancia) — y se *fortaleció* al excluir las mega-iniciativas (de $-3.09$ a $-3.46$: las coaliciones de 80+ firmantes eran ideológicamente anchas y diluían el efecto). La **segunda dimensión tiene efecto propio** ($-1.20$). (ii) **La estructura de oportunidad importa** (D10 de la revisión): pertenecer a la comisión de la iniciativa multiplica las odds por 3.4. (iii) **La coordinación de lista sobrevive a la ideología** (sección siguiente). (iv) **Las afinidades profesionales no organizan la decisión de firma**: la experiencia es indistinguible de cero y el abogado queda *marginal* ($p = 0.060$; en el ERGM proyectado ambas aparecían con $p<10^{-50}$ — la pseudo-replicación fabricaba esa certeza); las afinidades demográficas en pie son **género** (OR 1.47) y, débilmente, abogado. El arco de H1b se cierra así: ni gatekeeping (v1), ni homofilia profesional robusta (v2 proyectada) — a lo sumo una señal marginal de afinidad jurídica, un orden de magnitud menor que ideología, comisión y lista. *(La lectura complementaria de co-ocurrencia marginal — bootstrap por iniciativas — está en "M1 — Inferencia honesta"; ahí abogado y experiencia sí co-ocurren sobre el azar.)*
 
 ## M1 — Las listas como partidos embrionarios
 
@@ -230,14 +230,14 @@ Un partido, operacionalmente, hace dos cosas medibles aquí: ayuda a sus miembro
 
 | Conglomerado | $\hat\lambda$ | IC 95% |
 |:---|:-:|:-:|
-| Escaños Reservados PPOO | **1.79** | [1.42, 2.16] |
-| Vamos por Chile | 1.28 | [0.95, 1.60] |
-| Otras listas locales | 1.08 | [0.78, 1.37] |
-| Lista del Pueblo | 0.99 | [0.71, 1.28] |
-| Lista del Apruebo | 0.99 | [0.67, 1.30] |
-| Apruebo Dignidad | 0.61 | [0.36, 0.85] |
+| Escaños Reservados PPOO | **2.00** | [1.59, 2.40] |
+| Otras listas locales | 1.09 | [0.80, 1.39] |
+| Vamos por Chile | 1.04 | [0.61, 1.46] |
+| Lista del Pueblo | 1.02 | [0.73, 1.31] |
+| Lista del Apruebo | 0.99 | [0.66, 1.32] |
+| Apruebo Dignidad | 0.78 | [0.53, 1.03] |
 
-La lista ad hoc por excelencia (Lista del Pueblo) coordina **igual que el pacto tradicional de centro-izquierda** (0.99 = 0.99) y su IC se solapa con Vamos por Chile: en el eje organizacional, *las listas ad hoc funcionaron como partidos*. Los extremos informan: los **PPOO** son el grupo con más coordinación interna condicional (1.79), y **Apruebo Dignidad** — la coalición con partidos reales — la que menos agrega sobre la ideología (0.61): sus miembros ya están pegados por $\theta$.
+Con la red limpia ($\leq 16$) el resultado es aún más nítido que antes: **todos los conglomerados no-indígenas coordinan prácticamente igual** ($\hat\lambda \approx 0.8$--$1.1$, ICs mutuamente solapados) — la Lista del Pueblo (1.02) es indistinguible de Vamos por Chile (1.04) y de la Lista del Apruebo (0.99). En el eje organizacional, *las listas ad hoc funcionaron como partidos, y los pactos de partidos reales no coordinaron mejor que ellas*. La excepción son los **PPOO**, con el doble de coordinación interna condicional (2.00 — consistente con Q5).
 
 **(2) Cohesión de voto** (índice de Rice $R_{\ell v} = |Y_{\ell v} - N_{\ell v}|/(Y_{\ell v} + N_{\ell v})$ sobre los 4.707 roll-calls, contra 500 **pseudo-listas** del mismo tamaño y vecindad ideológica; `rice_summary.csv`):
 
@@ -259,9 +259,9 @@ La lista ad hoc por excelencia (Lista del Pueblo) coordina **igual que el pacto 
 
 Tres piezas (`code/20-reserved-seats.R` + interacciones del logit; responde también D12 de la revisión):
 
-1. **E-I de Krackhardt** (lazos ponderados de los 17 PPOO): $EI = +0.673$ observado — dos tercios del peso de sus lazos va hacia afuera — pero el azar (10.000 permutaciones de etiqueta) espera $+0.891$ [p5 0.858, p95 0.917]: **mucho más lazo interno que el azar** ($p < 10^{-4}$). Constraint de Burt: mediana PPOO 0.049 vs. resto 0.051 (Wilcoxon $p = 0.35$) — intermediación normal.
-2. **Interacciones en el logit condicional**: efecto base PPOO $-0.79$ ($p = 0.001$; firman menos iniciativas ajenas), interacción PPOO × $\lvert\Delta\theta_1\rvert$ = $\mathbf{+1.38}$ ($p = 0.005$), PPOO × $\lvert\Delta\theta_2\rvert$ n.s. La pendiente ideológica clásica de un PPOO es $-1.84$ contra $-3.22$ del resto: **cruzan distancias en $\theta_1$ que nadie más cruza**, con la misma sensibilidad a $\theta_2$ que todos.
-3. **Veredicto: ni enclave ni bisagra — las dos cosas, por diseño.** Máxima cohesión interna condicional ($\lambda = 1.79$, E-I bajo el azar) *y* los puentes más largos sobre el eje izquierda-derecha. Es la firma estructural de la segunda dimensión: su coordenada operativa no es $\theta_1$, así que el eje clásico no les ordena los aliados — coordinan adentro (agenda plurinacional) y contratan afuera a cualquier distancia de $\theta_1$ que sirva.
+1. **E-I de Krackhardt** (lazos ponderados de los 17 PPOO): $EI = +0.562$ observado — más de la mitad del peso de sus lazos va hacia afuera — pero el azar (10.000 permutaciones de etiqueta) espera $+0.891$ [p5 0.853, p95 0.920]: **mucho más lazo interno que el azar** ($p < 10^{-4}$; E-I individual mediana 0.27, rango $[-0.57, 0.70]$). Constraint de Burt: mediana PPOO 0.067 vs. resto 0.066 (Wilcoxon $p = 0.53$) — intermediación normal.
+2. **Interacciones en el logit condicional**: efecto base PPOO $-0.87$ ($p = 0.0015$; firman menos iniciativas ajenas), interacción PPOO × $\lvert\Delta\theta_1\rvert$ = $+1.28$ ($p = 0.044$), PPOO × $\lvert\Delta\theta_2\rvert$ n.s. La pendiente ideológica clásica de un PPOO es $-2.30$ contra $-3.59$ del resto: **cruzan distancias en $\theta_1$ que otros no cruzan** (el contraste se atenuó al excluir las mega-iniciativas — de $p = 0.005$ a $p = 0.044$ — porque parte de los "puentes largos" visibles pasaba por esos documentos transversales), con la misma sensibilidad a $\theta_2$ que todos.
+3. **Veredicto: ni enclave ni bisagra — las dos cosas, por diseño.** Máxima cohesión interna condicional ($\lambda = 2.00$, E-I bajo el azar) *y* puentes más largos sobre el eje izquierda-derecha. Es la firma estructural de la segunda dimensión: su coordenada operativa no es $\theta_1$, así que el eje clásico no les ordena los aliados — coordinan adentro (agenda plurinacional) y contratan afuera a mayor distancia de $\theta_1$ que el resto.
 
 ## M1 — Brokerage: H1b con la métrica de Burt
 
@@ -269,9 +269,9 @@ Tres piezas (`code/20-reserved-seats.R` + interacciones del logit; responde tamb
 $$c_i = \sum_{j \in N(i)} \Big(\underbrace{p_{ij}}_{\text{lazo directo}} + \underbrace{\textstyle\sum_{q} p_{iq}\, p_{qj}}_{\text{lazos indirectos vía } q}\Big)^2, \qquad p_{ij} = \frac{w_{ij}}{\sum_k w_{ik}}.$$
 $p_{ij}$ es la **proporción de la energía relacional** de $i$ invertida en $j$ (su peso de co-firma normalizado por todo lo que $i$ firma). El paréntesis suma dos caminos por los que $j$ "captura" a $i$: el lazo directo ($p_{ij}$) y los caminos indirectos ($\sum_q p_{iq} p_{qj}$: cuánta de la energía de $i$ pasa por terceros $q$ que a su vez invierten en $j$ — si mis otros socios también son socios de $j$, $j$ me tiene rodeado). Se eleva al cuadrado para castigar la concentración y se suma sobre los vecinos: $c_i$ alto = vecindario denso y redundante (sin agujeros estructurales alrededor de $i$); $c_i$ **bajo = broker** (sus contactos no se conocen entre sí, y ninguno lo monopoliza). Segunda DV: $\log(1 + betweenness_i)$.
 
-**Especificación y resultados** (`code/13`; regresión sobre abogado y experiencia con controles — género, edad, grado, $|\theta_1^{fm}|$ como extremismo, FE de conglomerado; HC1; $N = 154$; `M1_brokerage.csv`). H1b-Burt predice abogados/experimentados con menor constraint y mayor betweenness. Resultado: **ni abogados ni experimentados son brokers** (constraint: $+0.003$, $p = 0.40$ y $+0.005$, $p = 0.34$; betweenness: negativos y n.s.). El único predictor robusto es el **extremismo ideológico**: $|\theta_1|$ sube la constraint en $+0.017$ ($p = 0.02$) — **los moderados ocupan los agujeros estructurales**, no los expertos. En una asamblea sin partidos, los puentes los hacen los centristas, no los abogados. *(Caveat: la red subyacente es la proyección; se lee como descriptivo robusto, coherente con el clogit.)*
+**Especificación y resultados** (`code/13`; regresión sobre abogado y experiencia con controles — género, edad, grado, $|\theta_1^{fm}|$ como extremismo, FE de conglomerado; HC1; $N = 154$; `M1_brokerage.csv`). H1b-Burt predice abogados/experimentados con menor constraint y mayor betweenness. Resultado (red $\leq 16$): **ni abogados ni experimentados son brokers** (constraint: $+0.002$, $p = 0.63$ y $+0.010$, $p = 0.10$; betweenness: negativos y n.s.). El único predictor robusto es el **extremismo ideológico**, ahora significativo en *ambas* DV: $|\theta_1|$ sube la constraint en $+0.026$ ($p = 0.003$) y baja el log-betweenness en $-1.16$ ($p = 0.004$) — **los moderados ocupan los agujeros estructurales**, no los expertos. En una asamblea sin partidos, los puentes los hacen los centristas, no los abogados. *(Caveat: la red subyacente es la proyección; se lee como descriptivo robusto, coherente con el clogit.)*
 
-## M1 — Robustez estructural (ERGM bipartito): resultado negativo documentado
+## M1 — Robustez estructural (i): ERGM bipartito, resultado negativo documentado
 
 El ERGM bipartito **no se pudo estimar** sobre estos datos: tres intentos, suspendidos por decisión del autor tras >3 h de cómputo (2026-07-10; bitácora en `code/16-bipartite-ergm.R`):
 
@@ -279,7 +279,24 @@ El ERGM bipartito **no se pudo estimar** sobre estos datos: tres intentos, suspe
 2. **Parametrización estándar** (`edges + gwb1degree + gwb2degree + nodematch + b1nodematch`): degeneración desde el arranque MPLE — las estadísticas de grado no varían y el muestreo "did not mix at all" (25 min).
 3. **Especificación mínima** (sin términos gw): suspendido sin converger.
 
-El diagnóstico de fondo: con grados de firmante extremadamente sesgados (mediana 42, máximo 157; F9a) y estadísticas `b1nodematch` de conteos enormes, la superficie de verosimilitud del ERGM bipartito es degenerada en la región de los datos — un problema conocido de la familia, no de la implementación. **Consecuencia para la inferencia**: el logit condicional queda como vehículo único de M1; su FE por iniciativa ya absorbe la dependencia dentro de cada coalición (la misma que el nodo-iniciativa representaría), y los EE se agrupan por convencional. La capa que el ERGM habría agregado — dependencias estructurales *entre* firmas (repetición, cierre) — queda asignada al **RHEM** (`docs/RHEM-intro.pdf`, paquete `amorem`), cuya verosimilitud caso-control evita exactamente esta degeneración por diseño.
+El diagnóstico de fondo: con grados de firmante extremadamente sesgados (mediana 42, máximo 157; F9a) y estadísticas `b1nodematch` de conteos enormes, la superficie de verosimilitud del ERGM bipartito es degenerada en la región de los datos — un problema conocido de la familia, no de la implementación. La capa de dependencias estructurales *entre* firmas (repetición, cierre) queda asignada al **RHEM** (`docs/RHEM-intro.pdf`, paquete `amorem`), cuya verosimilitud caso-control evita esta degeneración por diseño.
+
+## M1 — Robustez estructural (ii): inferencia honesta para la red proyectada (bootstrap por iniciativas)
+
+La segunda vía de robustez sí funcionó, y con un dividendo técnico (2026-07-11; `code/23` piloto, `code/25` ejecución). La especificación del ERGM valuado del proyecto (sum + nodematch + absdiff + nodecov, referencia Poisson) es **díado-independiente**: su verosimilitud factoriza y el "ERGM" es exactamente una **regresión de Poisson** $w_{ij} \sim \text{Poisson}(\exp(\theta' x_{ij}))$ sobre las 11.781 díadas — verificado contra el MCMLE archivado (coincidencia a la 3ª decimal; las corridas MCMC de 8 min eran innecesarias para esta spec). Eso vuelve trivial el **bootstrap por iniciativas**: re-muestrear las 487 iniciativas con reemplazo (el *acto* vuelve a ser la unidad muestral — la corrección directa a la pseudo-replicación), reconstruir $W$ y re-ajustar: 0.02 s por réplica, $B = 1000$ en ~20 s. Resultados (red $\leq 16$, spec con ideología 2D; `M1_ergm_bootstrap.csv`):
+
+| Término | $\hat\theta$ | EE Poisson | EE bootstrap | IC 95% | inflación |
+|:---|:-:|:-:|:-:|:-:|:-:|
+| nodematch afiliación | $+0.267$ | 0.012 | 0.047 | $[+0.18, +0.36]$ | $\times 4.0$ |
+| nodematch experiencia | $+0.283$ | 0.014 | 0.046 | $[+0.19, +0.37]$ | $\times 3.3$ |
+| nodematch abogado | $+0.101$ | 0.011 | 0.021 | $[+0.06, +0.14]$ | $\times 1.9$ |
+| nodematch mujer | $+0.091$ | 0.011 | 0.025 | $[+0.04, +0.14]$ | $\times 2.3$ |
+| absdiff edad | $-0.001$ | 0.001 | 0.001 | $[-0.003, +0.001]$ | $\times 2.0$ |
+| absdiff grado | $-0.048$ | 0.007 | 0.021 | $[-0.09, -0.01]$ | $\times 2.9$ |
+| absdiff $\theta_1$ | $-2.726$ | 0.024 | 0.091 | $[-2.91, -2.54]$ | $\times 3.7$ |
+| absdiff $\theta_2$ | $-0.380$ | 0.016 | 0.056 | $[-0.49, -0.27]$ | $\times 3.5$ |
+
+**Lectura.** (i) Los EE honestos son **2--4×** los ingenuos — la cuantificación de cuánta precisión fabricaba tratar las díadas de un clique como independientes. (ii) Aun así, **todas las homofilias sustantivas sobreviven** con IC lejos de cero. (iii) La aparente tensión con el clogit (abogado/experiencia n.s. allí) no es contradicción sino **dos estimandos**: la regresión diádica mide co-ocurrencia *marginal* (los pares de abogados terminan juntos en iniciativas más de lo que el azar de iniciativas predice), el clogit mide la decisión *condicional al menú* (un abogado no elige coaliciones por su densidad de abogados, fijada la iniciativa). Ambos van al paper como complementos con inferencia defendible. (iv) Extensión con dependencia estructural (p. ej. `transitiveweights`): cada réplica exigiría MCMC completo — el piloto de timing (`code/23`, suspendido con el dato en la mano) mostró que un ajuste corto no completa ni su primera iteración MCMLE en 35 min, o sea un bootstrap estructural de **cientos de horas**: impracticable; la dependencia estructural queda para el RHEM.
 
 ## M1 — Limitaciones
 
@@ -332,33 +349,33 @@ En cada comisión y onda, la posición ponderada de los co-firmantes sigue de ce
 
 ## M2 — Resultados
 
-Panel: **4.278 observaciones** delegado-onda, 154 delegados, 7 comisiones; 1.078 celdas con período emIRT compartido se excluyen.
+Panel: **4.224 observaciones** delegado-onda, 154 delegados, 7 comisiones; 1.078 celdas con período emIRT compartido se excluyen.
 
-Coeficiente de exposición ($\hat\beta_3$), EE agrupados por delegado:
+Coeficiente de exposición ($\hat\beta_3$), EE agrupados por delegado (`M2_panel.csv`):
 
 | Modelo | $\hat\beta_3$ | EE | $p$ |
 |:---|---:|---:|:--|
-| OLS agrupado | $+0.0356$ | 0.0099 | $3.1\times10^{-4}$ |
-| **Efectos fijos (within)** | $-0.0007$ | 0.0045 | $0.88$ |
-| OLS + FE de comisión | $+0.0364$ | 0.0095 | $1.4\times10^{-4}$ |
-| Falsificación (*lead*) | $+0.0552$ | 0.0116 | $2.2\times10^{-6}$ |
-| FE, exposición con decaimiento ($\lambda=0.5$) | $+0.0017$ | 0.0045 | $0.71$ |
+| OLS agrupado | $+0.0707$ | 0.0122 | $7.4\times10^{-9}$ |
+| **Efectos fijos (within)** | $+0.0080$ | 0.0048 | $0.095$ |
+| OLS + FE de comisión | $+0.0707$ | 0.0121 | $6.3\times10^{-9}$ |
+| Falsificación (*lead*) | $+0.0932$ | 0.0142 | $5.4\times10^{-11}$ |
+| FE, exposición con decaimiento ($\lambda=0.5$) | $+0.0088$ | 0.0043 | $0.042$ |
 | FE, exposición solo-última-onda | $+0.0068$ | 0.0128 | $0.60$ |
-| FE, $\Delta\theta$ por día | $-0.0001$ | 0.0004 | $0.83$ |
+| FE, $\Delta\theta$ por día | $+0.0002$ | 0.0006 | $0.71$ |
 
-Coeficientes completos (`M2_full_models.csv`; EE agrupados por delegado en OLS/FE/lead; \*\*\* $p<0.001$, \*\* $p<0.01$, \* $p<0.05$):
+Coeficientes de los modelos clave (EE agrupados por delegado; \*\*\* $p<0.001$, \*\* $p<0.01$, \* $p<0.05$, $\dagger$ $p<0.1$):
 
-| Término | OLS agrupado | Efectos fijos | Efectos aleatorios | Falsificación (lead) |
-|:---|:-:|:-:|:-:|:-:|
-| Intercepto | $0.032$ (0.016)\* | — | $0.007$ (0.019) | $0.013$ (0.011) |
-| $\theta_{t-1}$ | $-0.038$ (0.008)\*\*\* | $-0.656$ (0.022)\*\*\* | $-0.074$ (0.006)\*\*\* | $-0.059$ (0.009)\*\*\* |
-| NetExp$_{t-1}$ | $+0.036$ (0.010)\*\*\* | $-0.001$ (0.005) | $+0.051$ (0.006)\*\*\* | — |
-| NetExp$_{t+1}$ (lead) | — | — | — | $+0.055$ (0.012)\*\*\* |
-| Abogado | $0.020$ (0.019) | — | $0.032$ (0.021) | — |
-| Experiencia previa | $-0.015$ (0.021) | — | $0.037$ (0.026) | — |
-| Mujer | $-0.019$ (0.018) | — | $-0.030$ (0.020) | — |
+| Término | OLS agrupado | Efectos fijos | Falsificación (lead) |
+|:---|:-:|:-:|:-:|
+| Intercepto | $0.036$ (0.010)\*\*\* | — | $0.013$ (0.010) |
+| $\theta_{t-1}$ | $-0.071$ (0.006)\*\*\* | $-0.656$ (0.023)\*\*\* | $-0.096$ (0.013)\*\*\* |
+| NetExp$_{t-1}$ | $+0.071$ (0.007)\*\*\* | $+0.008$ (0.005)$\dagger$ | — |
+| NetExp$_{t+1}$ (lead) | — | — | $+0.093$ (0.014)\*\*\* |
+| Abogado | $0.027$ (0.011)\* | — | — |
+| Experiencia previa | $-0.025$ (0.013)$\dagger$ | — | — |
+| Mujer | $-0.022$ (0.010)\* | — | — |
 
-Hausman $\chi^2 = 1973.9$ ($p \approx 0$) $\to$ FE. **El resultado central se replica y blinda**: la correlación positiva desaparece bajo efectos fijos, la exposición futura "predice" el cambio pasado (falsificación falla $\to$ selección endógena), y el nulo bajo FE sobrevive las tres ventanas alternativas de exposición. H2 confirmada con las 7 comisiones.
+Hausman $\chi^2 = 1810.0$ ($p \approx 0$) $\to$ FE. **La conclusión central — selección, no influencia — se sostiene, ahora con un matiz que la red limpia hizo visible.** Con la exclusión de las mega-iniciativas, el coeficiente de exposición bajo FE deja de ser un cero limpio: $+0.008$ ($p = 0.095$), y la variante con decaimiento cruza el umbral ($+0.0088$, $p = 0.042$). Pero la vara causal sigue siendo la falsificación, y sigue fallando *en grande*: la exposición **futura** "predice" el cambio pasado con un coeficiente **doce veces mayor** ($+0.093$, $p < 10^{-10}$) que el efecto rezagado — la firma inequívoca de selección endógena (elijo co-firmantes hacia cuya posición ya me estoy moviendo). La señal residual bajo FE es un orden de magnitud menor que la firma de selección, no sobrevive las ventanas solo-última-onda ni por-día, y se lee como selección de *timing* fino, no como influencia. H2 confirmada con las 7 comisiones, con el matiz registrado.
 
 ## M2 — Influencia como conducta: co-defección de voto
 
@@ -366,7 +383,7 @@ El nulo de H2 dice que la red no mueve las *posiciones*. La contraparte conductu
 $$\Pr(D_{iv} = 1) = \Lambda\Big(\eta_i + \mu_v + \phi\, \underbrace{\textstyle\frac{\sum_{j \neq i} w_{ij} D_{jv}}{\sum_{j \neq i} w_{ij}}}_{E_{iv}:\ \text{defección de mis co-firmantes génesis}}\Big),$$
 con FE de persona ($\eta_i$) y votación ($\mu_v$), exposición leave-one-out, y — la pieza clave — un **test de permutación dentro de bloque × votación**: se barajan las identidades de los defectores manteniendo exacta la tasa de defección de cada lista en cada votación, lo que preserva todo el co-movimiento mecánico de bloques y solo destruye el alineamiento con la red.
 
-**Resultados** (`code/19-vote-defection.R`; `M_defection.csv`). Defección base: 7.9%. $\hat\phi = 14.0$ (SE 0.86) en la era de normas ($N = 374.044$; período completo: 13.8). El benchmark mecánico de las 200 permutaciones es $\phi_{perm}$ = media 6.55, p95 6.62: la mitad del efecto crudo es co-movimiento de bloque, pero el observado está a decenas de EE del benchmark ($p_{perm} < 0.005$). **La defección viaja por la red de co-firma**: es la primera evidencia del proyecto de coordinación *conductual* que sobrevive un contrafactual duro, y le da contenido positivo al nulo de M2 — la red no mueve $\theta$, pero sí mueve votos en el margen donde la disciplina se rompe. Magnitud: el exceso sobre lo mecánico implica un factor propio de red $\approx e^{0.75} \approx 2.1$ en las odds por cada 10 puntos de exposición.
+**Resultados** (`code/19-vote-defection.R`; `M_defection.csv`; red $\leq 16$). Defección base: 7.9%. $\hat\phi = 11.5$ (SE 0.57) en la era de normas ($N = 374.039$; período completo: 11.3). El benchmark mecánico de las 200 permutaciones es $\phi_{perm}$ = media 5.93, p95 6.00: la mitad del efecto crudo es co-movimiento de bloque, pero el observado está a decenas de EE del benchmark ($p_{perm} < 0.005$). **La defección viaja por la red de co-firma**: es la primera evidencia del proyecto de coordinación *conductual* que sobrevive un contrafactual duro, y le da contenido positivo al resultado de M2 — la red no mueve $\theta$ (más allá del matiz de timing), pero sí mueve votos en el margen donde la disciplina se rompe. Magnitud: el exceso sobre lo mecánico ($\Delta\phi \approx 5.5$) implica un factor propio de red $\approx e^{0.55} \approx 1.7$ en las odds por cada 10 puntos de exposición.
 
 ## M2 — Limitaciones
 
@@ -388,34 +405,34 @@ con $\tilde{W}$ = red génesis-iniciativa **row-normalizada** (la estructura pre
 
 ## M3 — Resultados
 
-Esta sección reporta dos tablas. La **Tabla 1** compara el ajuste global de los cuatro modelos por AIC y su parámetro espacial. La **Tabla 2** da los coeficientes del OLS y del SDM, separando en el SDM el efecto **directo** (el atributo del propio delegado) del **término espacial $\tilde{W}X$** (el mismo atributo promediado sobre sus co-firmantes). El diagnóstico previo es Moran's $I = 0.380$ ($p \approx 10^{-194}$), que justifica el modelo espacial.
+Esta sección reporta dos tablas (cifras v3.1, red $\leq 16$). La **Tabla 1** compara el ajuste global de los cuatro modelos por AIC y su parámetro espacial. La **Tabla 2** da los coeficientes del OLS y del SDM, separando en el SDM el efecto **directo** (el atributo del propio delegado) del **término espacial $\tilde{W}X$** (el mismo atributo promediado sobre sus co-firmantes). El diagnóstico previo es Moran's $I = 0.457$ ($p \approx 10^{-177}$; con la red pre-filtro era 0.380 — limpiar las mega-iniciativas *aumentó* la autocorrelación del éxito), que justifica el modelo espacial.
 
 **Tabla 1 — comparación de modelos y parámetro espacial:**
 
 | Modelo | AIC | Parámetro espacial |
 |:---|---:|:---|
-| OLS | $-448.9$ | — |
-| SEM | $-529.5$ | $\lambda = 0.981$ (0.012)\*\*\* |
-| SAR | $-539.3$ | $\rho = 0.979$ (0.014)\*\*\* |
-| **SDM** | $\mathbf{-575.5}$ | $\rho = 0.943$ (0.037)\*\*\* |
+| OLS | $-454.8$ | — |
+| SEM | $-555.1$ | $\lambda = 0.987$ |
+| SAR | $-558.6$ | $\rho = 0.977$ |
+| **SDM** | $\mathbf{-574.3}$ | $\rho = 0.945$ (0.036)\*\*\* |
 
-**Tabla 2 — coeficientes de OLS y SDM** (`M3_full_models.csv`; \*\*\* $p<0.001$, \*\* $p<0.01$, \* $p<0.05$, $\dagger$ $p<0.1$):
+**Tabla 2 — coeficientes de OLS y SDM** (`M3_sdm_pivot.csv`, filas OLS/SDM base; \*\*\* $p<0.001$, \*\* $p<0.01$, \* $p<0.05$, $\dagger$ $p<0.1$):
 
 | Término | OLS | SDM (directo) | SDM (lag espacial $\tilde{W}X$) |
 |:---|:-:|:-:|:-:|
-| Intercepto | $-0.020$ (0.039) | $-0.532$ (0.253)\* | — |
-| Degree | $+0.00125$ (0.0004)\*\* | $+0.00048$ (0.0003) | $+0.0092$ (0.0022)\*\*\* |
-| Betweenness | $-0.00110$ (0.0004)\*\* | $-0.00018$ (0.0002) | $-0.0081$ (0.0019)\*\*\* |
-| Abogado | $0.0125$ (0.010) | $0.0093$ (0.006) | $0.102$ (0.091) |
-| Experiencia previa | $0.0050$ (0.013) | $0.0089$ (0.008) | $-0.078$ (0.109) |
-| Mujer | $-0.0163$ (0.009)$\dagger$ | $-0.0013$ (0.006) | $-0.175$ (0.063)\*\* |
-| Edad | $-0.0001$ (0.0004) | $-0.0001$ (0.0002) | $-0.0025$ (0.0029) |
-| Grado académico (0--3) | $0.0093$ (0.006) | $0.0026$ (0.004) | $-0.0083$ (0.048) |
-| $\theta$ medio | $0.0020$ (0.004) | $-0.0034$ (0.004) | $+0.0925$ (0.021)\*\*\* |
-| $\theta$ desv. est. | $0.0270$ (0.031) | $0.0088$ (0.019) | $0.158$ (0.164) |
-| Heterofilia del ego | $0.0026$ (0.017) | $-0.0081$ (0.012) | $-0.047$ (0.086) |
+| Intercepto | $-0.021$ (0.033) | $-0.300$ (0.200) | — |
+| Degree | $+0.00145$ (0.0004)\*\*\* | $+0.00007$ (0.0003) | $+0.0062$ (0.0020)\*\* |
+| Betweenness | $-0.00033$ (0.0001)\*\* | $-0.00001$ (0.0001) | $-0.0016$ (0.0006)\*\* |
+| Abogado | $0.0128$ (0.010) | $0.0051$ (0.006) | $+0.181$ (0.072)\* |
+| Experiencia previa | $0.0009$ (0.013) | $0.0152$ (0.008)$\dagger$ | $-0.043$ (0.084) |
+| Mujer | $-0.0162$ (0.009)$\dagger$ | $0.0001$ (0.006) | $-0.014$ (0.059) |
+| Edad | $0.0000$ (0.0004) | $-0.0001$ (0.0002) | $+0.0007$ (0.0025) |
+| Grado académico (0--3) | $0.0070$ (0.006) | $-0.0002$ (0.004) | $-0.072$ (0.044)$\dagger$ |
+| $\theta$ medio | $0.0023$ (0.003) | $+0.0108$ (0.006)$\dagger$ | $+0.0444$ (0.020)\* |
+| $\theta$ desv. est. | $0.0183$ (0.030) | $-0.0165$ (0.020) | $-0.061$ (0.131) |
+| Heterofilia del ego | $0.0109$ (0.017) | $-0.0115$ (0.013) | $-0.069$ (0.072) |
 
-**Lectura.** (i) Hay dependencia de red fuerte y el **SDM domina** (AIC $-575.5$ vs. OLS $-448.9$; $\hat\rho = 0.943$): el éxito de un delegado está acoplado al de sus co-firmantes. (ii) En el OLS, la **posición de red predice el éxito** (`degree` $+$, `betweenness` $-$, ambos $p<0.01$). (iii) En el SDM, los efectos **directos** individuales se disipan y son los **términos espaciales** los significativos: tu éxito depende menos de tus atributos que de los de tu vecindario de co-firma. **H3 confirmada y amplificada**: el éxito es un fenómeno de red, no individual.
+**Lectura.** (i) Hay dependencia de red fuerte y el **SDM domina** (AIC $-574.3$ vs. OLS $-454.8$; $\hat\rho = 0.945$): el éxito de un delegado está acoplado al de sus co-firmantes. (ii) En el OLS, la **posición de red predice el éxito** (`degree` $+$, `betweenness` $-$). (iii) En el SDM, los efectos **directos** individuales se disipan y son los **términos espaciales** los significativos (`lag.degree`, `lag.betweenness`, y ahora `lag.abogado` $+0.18$\*: estar rodeado de abogados ayuda a que *tu* texto sobreviva — el capital jurídico reaparece, pero como recurso *de la coalición*, no del individuo — exactamente el lugar teórico que la revisión D6 le asignó). **H3 confirmada y amplificada**: el éxito es un fenómeno de red, no individual.
 
 ## M3 — El rival institucional: la distancia al pívot de 2/3
 
@@ -423,12 +440,12 @@ Toda norma necesitaba 103 votos (§1.1.5): el rival teórico de "la red derrama 
 
 | Modelo | AIC | $\rho$ | dist. pívot (directo) | $\tilde{W} \times$ dist. pívot (lag) |
 |:---|:-:|:-:|:-:|:-:|
-| OLS base | $-448.9$ | — | — | — |
-| OLS + dist. pívot | $-509.3$ | — | $-0.118$ ($p<10^{-13}$) | — |
-| SDM base | $-575.5$ | 0.943 | — | — |
-| SDM + dist. pívot | $\mathbf{-594.1}$ | **0.915** | $-0.0004$ ($p=0.99$) | $\mathbf{-0.418}$ ($p<10^{-5}$) |
+| OLS base | $-454.8$ | — | — | — |
+| OLS + dist. pívot | $-511.8$ | — | $-0.117$ ($p<10^{-12}$) | — |
+| SDM base | $-574.3$ | 0.945 | — | — |
+| SDM + dist. pívot | $\mathbf{-584.7}$ | **0.914** | $-0.0003$ ($p=0.99$) | $\mathbf{-0.256}$ ($p=0.0003$) |
 
-**Lectura.** (i) **$\rho$ no colapsa** (0.943 $\to$ 0.915): el derrame de red no era geometría pivotal disfrazada — ambos canales coexisten, y la teoría pivotal *mejora* el modelo (AIC $-594.1$) sin destronar a la red. (ii) El detalle fino: la distancia al pívot **propia** pierde toda su fuerza dentro del SDM ($-0.118$ en OLS $\to \approx 0$), pero la del **entorno de co-firma** ($\tilde{W} \times$ dist. pívot) es grande y significativa ($-0.42$): no importa dónde estás tú respecto del pívot — importa dónde está *la compañía que firma contigo*. (iii) Esto reencuadra el mecanismo de H3: el éxito se derrama, en parte, porque co-firmar con gente cercana al pívot te arrastra hacia textos viables. La versión a nivel artículo (M4, diseñada en `docs/revision-critica.md` IV.D6, con la composición de la coalición como bloque SNA) es el siguiente paso natural.
+**Lectura.** (i) **$\rho$ no colapsa** (0.945 $\to$ 0.914): el derrame de red no era geometría pivotal disfrazada — ambos canales coexisten, y la teoría pivotal *mejora* el modelo (AIC $-584.7$) sin destronar a la red. (ii) El detalle fino: la distancia al pívot **propia** pierde toda su fuerza dentro del SDM ($-0.117$ en OLS $\to \approx 0$), pero la del **entorno de co-firma** ($\tilde{W} \times$ dist. pívot) sigue siendo clara ($-0.26$, $p = 0.0003$): no importa dónde estás tú respecto del pívot — importa dónde está *la compañía que firma contigo*. (iii) Esto reencuadra el mecanismo de H3: el éxito se derrama, en parte, porque co-firmar con gente cercana al pívot te arrastra hacia textos viables. La versión a nivel artículo (M4, diseñada en `docs/revision-critica.md` IV.D6, con la composición de la coalición como bloque SNA) es el siguiente paso natural.
 
 ## M3 — Robustez
 
@@ -443,13 +460,13 @@ La dependencia espacial sobrevive todas las variantes (`M3_robustness.csv`). Cad
 
 | Variante | $N$ | Moran $I$ | $\rho$ (SDM) | AIC OLS | AIC SDM |
 |:---|:-:|:-:|:-:|---:|---:|
-| $y'$, $\tilde{W}$ iniciativa (**principal**) | 154 | 0.380 | 0.943 | $-448.9$ | $-575.5$ |
-| $y$ condicional (DV antigua), $\tilde{W}$ iniciativa | 154 | 0.140 | 0.840 | $-224.9$ | $-239.5$ |
-| $y'$, $\tilde{W}$ binaria | 154 | 0.185 | 0.794 | $-448.9$ | $-512.6$ |
-| $y'$, $\tilde{W}$ artículo | 154 | 0.408 | 0.934 | $-448.9$ | $-581.3$ |
-| $y'$ SBERT, $\tilde{W}$ iniciativa | 154 | 0.399 | 0.937 | $-329.2$ | $-489.0$ |
+| $y'$, $\tilde{W}$ iniciativa (**principal**) | 154 | 0.457 | 0.945 | $-454.8$ | $-574.3$ |
+| $y$ condicional (DV antigua), $\tilde{W}$ iniciativa | 154 | 0.162 | 0.786 | $-232.3$ | $-238.3$ |
+| $y'$, $\tilde{W}$ binaria | 154 | 0.269 | 0.879 | $-454.8$ | $-509.6$ |
+| $y'$, $\tilde{W}$ artículo | 154 | 0.487 | 0.945 | $-454.8$ | $-573.2$ |
+| $y'$ SBERT, $\tilde{W}$ iniciativa | 154 | 0.478 | 0.937 | $-331.4$ | $-473.2$ |
 
-En las cinco variantes el SDM mejora al OLS y $\rho$ se mantiene alto (0.79--0.94). *(Las variantes se corrieron con el script 08, hoy archivado en `old-version/scripts/`; sus tablas siguen vigentes en `results/tables/`.)*
+En las cinco variantes el SDM mejora al OLS y $\rho$ se mantiene alto (0.79--0.95). *(Variantes recalculadas sobre la red $\leq 16$ con `code/24-m3-robustness.R`, portado del antiguo 08.)*
 
 ## M3 — Dinámica de la retención sobre las ondas de comisión (7 comisiones, LOCF)
 
@@ -481,6 +498,8 @@ Similitud media al borrador, génesis $\to$ última onda: C1 $0.65 \to 0.82$; C2
 | 2026-07-10 | M3 incorpora el **test pivotal** (distancia a $\theta_{(103)}$). M4 artículo-nivel rediseñada con bloque SNA de composición de coalición (revisión D6). |
 | 2026-07-10 | Co-defección de voto como complemento conductual de M2 (revisión P4a); adopción de lenguaje **abandonada** (autoría de redacción no observable). |
 | 2026-07-10 | Modelo longitudinal futuro: **RHEM** con el paquete `amorem` (CRAN v1.0.0) + capa fina propia; sin implementación paralela propia (ver `docs/RHEM-intro.pdf`). |
+| 2026-07-11 | **Exclusión de las 41 iniciativas con >16 firmantes de toda red y menú** (`MAX_SIGNERS = 16` en `code/00`; registro y F9 se conservan completos; el tope no aplica a indicaciones). Toda la cadena re-corrida (v3.1). |
+| 2026-07-11 | **Bootstrap por iniciativas** como inferencia honesta del ERGM proyectado (D1): la spec díado-independiente factoriza como Poisson diádico (equivalencia verificada), B=1000 en ~20 s; ejecutado (`code/25`). Extensión con términos estructurales: impracticable por costo MCMC (piloto `code/23`, suspendido); va al RHEM. |
 
 ## 4.1 Puntos a revisar (no son problemas P)
 
@@ -488,12 +507,13 @@ Similitud media al borrador, génesis $\to$ última onda: C1 $0.65 \to 0.82$; C2
 2. **Narrativa de H1b.** El arco completo (gatekeeping v1 → homofilia positiva v2 proyectada → no-significancia en el diseño honesto + brokers moderados) debe contarse como corrección metodológica en el paper. La heterogeneidad C1/C3 detectada bajo la especificación archivada queda pendiente de re-test (interacciones comisión × afinidad en el clogit).
 3. **$\lambda = 0.5$ del decaimiento en M2**: si la robustez de ventana entra al paper, barrer $\lambda \in \{0.25, 0.5, 0.75\}$.
 4. **Fechas de génesis (F8)**: los timestamps son rótulos de informe, no fechas legales; alternativa defendible = eje ordinal.
-5. **Auditoría de las 41 iniciativas con >16 firmantes** (listado completo en `docs/revision-critica.md` IV.D8): patrón dominante = documentos transversales duplicados por comisión (la 954 con 83 firmantes en C4/C5/C6; la 9-2 en C2/C7); hipótesis de arreglo aguas arriba (CPT): dedupe por `icc_id`/`sources` cruzando comisiones.
+5. **Auditoría de las 41 iniciativas con >16 firmantes** (listado completo en `docs/revision-critica.md` IV.D8): patrón dominante = documentos transversales duplicados por comisión (la 954 con 83 firmantes en C4/C5/C6; la 9-2 en C2/C7); hipótesis de arreglo aguas arriba (CPT): dedupe por `icc_id`/`sources` cruzando comisiones. **Desde v3.1 están excluidas de todos los análisis** (decisión 2026-07-11); cuando CPT resuelva la duplicación, decidir si se reintegran deduplicadas.
 6. **Separación de roll-calls por régimen de quórum** (mayoría vs. 2/3, corte 15-02-2022): diseñada y **congelada** — ninguna modificación a las estimaciones de posicionamiento se ejecuta sin notificación previa al autor con el código a la vista. Fuente auxiliar de fechas: `A-data-pleno/sesion_##.xls`.
 7. **Ventana densa para M2 (D7)** y **crosswalk de Fábrega** para las 21 listas `REVISAR`: en cola.
 
 # 5. Registro de cambios
 
+- **v3.1 (2026-07-11).** Respuesta a los dos comentarios del autor. **(D8)** Exclusión de las 41 iniciativas con >16 firmantes de toda red/menú (`MAX_SIGNERS = 16` en 00; la red génesis pierde ~35% de su peso — las mega-iniciativas lo fabricaban) y re-corrida completa: la ideología se fortalece en el clogit ($-3.09 \to -3.46$), los $\lambda$ de lista se emparejan (todos $\approx 0.8$--$1.1$ salvo PPOO 2.0), abogado repunta a marginal ($p = 0.06$), el FE de M2 deja de ser cero limpio ($+0.008$, $p = 0.095$; decaimiento $p = 0.042$) pero la falsificación lead sigue fallando 12 a 1 → selección se sostiene; Moran de M3 sube a 0.457 y el test pivotal mantiene su lectura (lag $-0.256$***); defección $\phi = 11.5$ vs. 5.9 mecánico. **(D1)** Bootstrap por iniciativas evaluado y ejecutado: la spec díado-independiente factoriza como Poisson diádico (equivalencia MCMLE$\leftrightarrow$glm verificada a la 3ª decimal), $B = 1000$ en ~20 s; EE honestos 2--4× los ingenuos y todas las homofilias sustantivas sobreviven (nueva sección "M1 — Robustez estructural (ii)"). Scripts nuevos 22--25; `M2_full_models.csv` (huérfano de una versión anterior de 03) eliminado.
 - **v3.0 (2026-07-10).** Respuesta a la revisión crítica (`docs/revision-critica.md`, Partes I--IV). **M1 reescrito**: logit condicional con FE de iniciativa (81.312 decisiones) como principal + ERGM bipartito como robustez; el Valued ERGM proyectado y sus 9 robusteces se archivan en `old-version/` (junto con los scripts 01 y 08 y el reporte v2.4). Nuevas secciones: listas como partidos ($\lambda_c$ + Rice + F10), escaños reservados (E-I + interacciones), brokerage de Burt, co-defección de voto (M2), test pivotal (M3). Ideología 2D primer mes como covariable exógena; dynIRT = voto revelado. Nuevas figuras F9 (distribuciones de firma) y F10 (Rice mensual). Documento nuevo: `docs/RHEM-intro.pdf` (modelo longitudinal elegido + decisión de software `amorem`).
 - **v2.4 (2026-07-08).** Reestructura editorial; M1/M2/M3 titulados; esquemas visuales (§2.2/2.3); F1--F8 referenciadas; M3 reordenado. *(Historial completo en `docs/report-archive.txt`, fuera de versionado.)*
 
@@ -593,6 +613,10 @@ Pipeline v3: todos los scripts derivan rutas de `code/paths.{py,R}` y nombres de
 | 19 | `code/19-vote-defection.R` | **M2**: co-defección con FE dobles + permutación | `tables/M_defection.csv` |
 | 20 | `code/20-reserved-seats.R` | Q5: E-I de Krackhardt + constraint PPOO | `tables/Q5_reserved_seats.csv` |
 | 21 | `code/21-rice-figure.py` | F10: Rice mensual por conglomerado | `rice_cohesion_monthly.*` |
+| 22 | `code/22-network-metrics.R` | Métricas de red (reemplaza la parte de métricas del antiguo 01) | `network_metrics.csv` |
+| 23 | `code/23-ergm-bootstrap-pilot.R` | **D1 piloto**: equivalencia Poisson$\leftrightarrow$MCMLE + timing bootstrap Tier A/B (Tier B suspendido: impracticable) | consola |
+| 24 | `code/24-m3-robustness.R` | Variantes de robustez de M3 (portadas del antiguo 08) | `tables/M3_robustness.csv` |
+| 25 | `code/25-ergm-initiative-bootstrap.R` | **D1**: bootstrap por iniciativas completo (B=1000) | `tables/M1_ergm_bootstrap.csv` |
 
 ```{=latex}
 \end{landscape}

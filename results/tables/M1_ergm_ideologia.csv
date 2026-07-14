@@ -1,19 +1,19 @@
 "model","term","estimate","se","p","secs"
-"Base (sin ideología)","sum",1.49821419707273,0.0268234103582983,0,478.1
-"Base (sin ideología)","nodematch.sum.afiliacion_agrupada",0.576574115561168,0.00953915084949278,0,478.1
-"Base (sin ideología)","nodematch.sum.experiencia_previa_institucional",0.435444553607367,0.0113305679574488,3.95252516672997e-323,478.1
-"Base (sin ideología)","nodematch.sum.es_abogado",0.155660464759067,0.00912235408452093,2.7681229469214e-65,478.1
-"Base (sin ideología)","nodematch.sum.es_mujer",0.141501366856279,0.0086048970981169,9.21680119253956e-61,478.1
-"Base (sin ideología)","absdiff.sum.edad_al_asumir",-0.000469028422902227,0.000474894197094088,0.32332494694118,478.1
-"Base (sin ideología)","absdiff.sum.grado_academico_nivel",-0.0478022888780796,0.0055168709624569,4.52518394826609e-18,478.1
-"Base (sin ideología)","nodecov.sum.edad_al_asumir",-0.00818787427193227,0.000283784395452607,4.72106731123613e-183,478.1
-"Base + absdiff(theta1_fm) + absdiff(theta2_fm)","sum",2.46824246109441,0.0288550900290598,0,321.4
-"Base + absdiff(theta1_fm) + absdiff(theta2_fm)","nodematch.sum.afiliacion_agrupada",0.303808875835067,0.0100972068347183,6.87067105532703e-199,321.4
-"Base + absdiff(theta1_fm) + absdiff(theta2_fm)","nodematch.sum.experiencia_previa_institucional",0.338174731022905,0.0118944534023095,8.3005510549295e-178,321.4
-"Base + absdiff(theta1_fm) + absdiff(theta2_fm)","nodematch.sum.es_abogado",0.135587032553988,0.00902400474411159,5.02468250443157e-51,321.4
-"Base + absdiff(theta1_fm) + absdiff(theta2_fm)","nodematch.sum.es_mujer",0.0816196627533764,0.00868404252517564,5.51838169464378e-21,321.4
-"Base + absdiff(theta1_fm) + absdiff(theta2_fm)","absdiff.sum.edad_al_asumir",0.0001403554783459,0.000456684225711527,0.75858767812797,321.4
-"Base + absdiff(theta1_fm) + absdiff(theta2_fm)","absdiff.sum.grado_academico_nivel",-0.0521220360852644,0.00593113343774228,1.52420718753912e-18,321.4
-"Base + absdiff(theta1_fm) + absdiff(theta2_fm)","nodecov.sum.edad_al_asumir",-0.00524773032816815,0.000298583227310775,3.79959831821014e-69,321.4
-"Base + absdiff(theta1_fm) + absdiff(theta2_fm)","absdiff.sum.theta1_fm",-1.91464955483662,0.0146217785893385,0,321.4
-"Base + absdiff(theta1_fm) + absdiff(theta2_fm)","absdiff.sum.theta2_fm",-0.318732563774941,0.0117332388940359,1.68728382975635e-162,321.4
+"Base (sin ideología)","sum",1.1244618103589,0.0409832379516192,9.89941107398133e-166,321
+"Base (sin ideología)","nodematch.sum.afiliacion_agrupada",0.598159928362632,0.0166749960906323,8.45018878529275e-282,321
+"Base (sin ideología)","nodematch.sum.experiencia_previa_institucional",0.379411914002042,0.0239575701187967,1.73347693864146e-56,321
+"Base (sin ideología)","nodematch.sum.es_abogado",0.135323827794806,0.0181967964309459,1.03243999286598e-13,321
+"Base (sin ideología)","nodematch.sum.es_mujer",0.158730836894865,0.0169876459089579,9.28509895473598e-21,321
+"Base (sin ideología)","absdiff.sum.edad_al_asumir",-0.00171046885156902,0.000785821089139373,0.0295056104304427,321
+"Base (sin ideología)","absdiff.sum.grado_academico_nivel",-0.043711651531178,0.00948690833331852,4.07390242173789e-06,321
+"Base (sin ideología)","nodecov.sum.edad_al_asumir",-0.00969772034204713,0.000427568862145275,6.88895965598712e-114,321
+"Base + absdiff(theta1_fm) + absdiff(theta2_fm)","sum",2.40832454623853,0.0334809014481725,0,410.5
+"Base + absdiff(theta1_fm) + absdiff(theta2_fm)","nodematch.sum.afiliacion_agrupada",0.267135899111396,0.0113893844975478,1.18052720769964e-121,410.5
+"Base + absdiff(theta1_fm) + absdiff(theta2_fm)","nodematch.sum.experiencia_previa_institucional",0.282610318768736,0.0140514330780865,5.72871135561576e-90,410.5
+"Base + absdiff(theta1_fm) + absdiff(theta2_fm)","nodematch.sum.es_abogado",0.101315569106493,0.0107031463473054,2.90873100425683e-21,410.5
+"Base + absdiff(theta1_fm) + absdiff(theta2_fm)","nodematch.sum.es_mujer",0.0902763601123667,0.0101525994166796,6.00481773749033e-19,410.5
+"Base + absdiff(theta1_fm) + absdiff(theta2_fm)","absdiff.sum.edad_al_asumir",-0.000957174852598772,0.000587593189369699,0.103318226047813,410.5
+"Base + absdiff(theta1_fm) + absdiff(theta2_fm)","absdiff.sum.grado_academico_nivel",-0.0480185515181728,0.00711989310179606,1.53787883548224e-11,410.5
+"Base + absdiff(theta1_fm) + absdiff(theta2_fm)","nodecov.sum.edad_al_asumir",-0.00591785299212805,0.000345475868281852,8.93127097330924e-66,410.5
+"Base + absdiff(theta1_fm) + absdiff(theta2_fm)","absdiff.sum.theta1_fm",-2.72731398206659,0.0247350415428259,0,410.5
+"Base + absdiff(theta1_fm) + absdiff(theta2_fm)","absdiff.sum.theta2_fm",-0.379810068525161,0.0159023899377156,4.50946782051433e-126,410.5

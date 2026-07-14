@@ -34,6 +34,13 @@ from paths import (COMMISSIONS, DATA_PROCESSED, genesis_path, track_full_path)
 
 TS_RE = re.compile(r"^(\d{2}-\d{2})(-\d+)?$")
 
+# Decisión 2026-07-11 (revisión D8): los eventos de co-firma con >16
+# firmantes-persona son imposibles bajo la regla ICC (art. 83) y están en
+# auditoría como duplicaciones transversales (p. ej. la 954 con 83 firmantes
+# en C4+C5+C6). SE EXCLUYEN de toda red/menú de análisis; el registro CSV
+# se escribe COMPLETO (sigue documentando la anomalía; F9 la muestra).
+MAX_SIGNERS = 16
+
 
 def classify(record):
     if "titleuid" in record or "tite" in record:
@@ -163,6 +170,9 @@ def indication_events(track):
             if len(au) < 2:
                 solo_events += 1
                 continue
+            # NOTA D8: aquí NO se aplica el tope de 16 — la regla 8-16 del
+            # art. 83 rige para INICIATIVAS; una indicación puede llevar
+            # legítimamente >16 firmas (p. ej. renovaciones, art. 95).
             h = event_hash(au, day, content)
             if h in seen:
                 dropped_dup += 1
@@ -181,12 +191,14 @@ if __name__ == "__main__":
 
     registry, multi_assigned, conflicts = build_initiative_registry()
     per_comm = Counter(k for k, _ in registry)
-    usable = {key: au for key, au in registry.items() if len(au) >= 2}
+    usable = {key: au for key, au in registry.items() if 2 <= len(au) <= MAX_SIGNERS}
+    n_over = sum(1 for au in registry.values() if len(au) > MAX_SIGNERS)
     print("=== Registro de iniciativas ===")
     for k in COMMISSIONS:
         n_u = sum(1 for (c, _), au in usable.items() if c == k)
-        print(f"  C{k}: {per_comm[k]} iniciativas, {n_u} con >=2 firmantes-persona")
-    print(f"  Total: {len(registry)} iniciativas ({len(usable)} utilizables); "
+        print(f"  C{k}: {per_comm[k]} iniciativas, {n_u} con 2..{MAX_SIGNERS} firmantes-persona")
+    print(f"  Total: {len(registry)} iniciativas ({len(usable)} utilizables; "
+          f"{n_over} excluidas por >{MAX_SIGNERS} firmantes, decisión D8); "
           f"{multi_assigned} asignadas desde registros multi-fuente, {conflicts} sets de autores fusionados")
 
     with open(os.path.join(DATA_PROCESSED, "initiative_registry.csv"), "w", newline="", encoding="utf-8") as fh:
@@ -214,7 +226,7 @@ if __name__ == "__main__":
         for r in track:
             if classify(r) == "articulo":
                 au = clean_authors(r.get("authors") or [])
-                if len(au) >= 2:
+                if 2 <= len(au) <= MAX_SIGNERS:
                     add_clique(pooled_art, au)
                     n_art_events += 1
     n, e, w = net_stats(pooled_art)

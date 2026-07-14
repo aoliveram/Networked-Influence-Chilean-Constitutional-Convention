@@ -32,6 +32,7 @@ ip2d <- read.csv(file.path(DATA_PROCESSED, "ideal_points_2d_firstmonth.csv"), st
 listas <- read.csv(file.path(DATA_RAW, "electoral_lists.csv"), stringsAsFactors = FALSE)
 memb <- read.csv(file.path(DATA_RAW, "commission_membership.csv"), stringsAsFactors = FALSE)
 registry <- read.csv(file.path(DATA_PROCESSED, "initiative_registry.csv"), stringsAsFactors = FALSE)
+registry <- registry[registry$n_firmantes <= 16, ]   # decisión D8 (2026-07-11)
 
 n <- length(roster)
 theta1 <- ip2d$theta1_fm[match(roster, ip2d$nombre_armonizado)]
