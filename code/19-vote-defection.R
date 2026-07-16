@@ -119,4 +119,47 @@ tab <- data.frame(
 )
 dir.create(RESULTS_TABLES, recursive = TRUE, showWarnings = FALSE)
 write.csv(tab, file.path(RESULTS_TABLES, "M_defection.csv"), row.names = FALSE)
+
+# ------------- chequeo de confound de COMISIÓN (autor, 2026-07-15) -----------
+# Preocupación: "mis co-firmantes son de mi comisión; si defeccionamos juntos
+# puede ser porque ambos conocemos el artículo en tabla, no por la red".
+# Chequeo: (i) separar la exposición en co-firmantes de MI comisión vs de OTRAS
+# comisiones; (ii) controlar la tasa de defección de mi comisión (leave-one-out)
+# en esa votación. Si phi_diff (otras comisiones) sobrevive, la co-defección no
+# es un artefacto de "compartir sala con el artículo".
+cat("\n--- Chequeo comisión: exposición split + control de tasa de comisión ---\n")
+memb2 <- read.csv(file.path(DATA_RAW, "commission_membership.csv"), stringsAsFactors = FALSE)
+comisv <- memb2$commission[match(votantes, memb2$nombre_armonizado)]
+same_c <- outer(comisv, comisv, "==")
+W_same <- W * same_c
+W_diff <- W * !same_c
+
+expo_with <- function(Wm, D) {
+  M <- !is.na(D); D0 <- D; D0[!M] <- 0
+  num <- Wm %*% D0; den <- Wm %*% M
+  E <- num / den; E[den == 0] <- NA
+  E
+}
+E_same <- expo_with(W_same, D)
+E_diff <- expo_with(W_diff, D)
+# tasa de defección LOO de la comisión de i en v (no ponderada)
+Cmask <- outer(comisv, comisv, "==") * (1 - diag(length(votantes)))
+R_com <- expo_with(Cmask, D)
+
+idx <- which(!is.na(D[, cols_main, drop = FALSE]) &
+               !is.na(E_same[, cols_main, drop = FALSE]) &
+               !is.na(E_diff[, cols_main, drop = FALSE]) &
+               !is.na(R_com[, cols_main, drop = FALSE]), arr.ind = TRUE)
+long2 <- data.frame(nombre = votantes[idx[, 1]], vote_id = cols_main[idx[, 2]],
+                    D = D[, cols_main, drop = FALSE][idx],
+                    E_same = E_same[, cols_main, drop = FALSE][idx],
+                    E_diff = E_diff[, cols_main, drop = FALSE][idx],
+                    R_com = R_com[, cols_main, drop = FALSE][idx])
+m_split <- feglm(D ~ E_same + E_diff + R_com | nombre + vote_id,
+                 data = long2, family = binomial())
+ct2 <- summary(m_split, cluster = ~nombre)$coeftable
+cat(sprintf("  N = %d (exige vecinos en AMBAS categorías)\n", nobs(m_split)))
+print(round(ct2, 3))
+write.csv(data.frame(term = rownames(ct2), ct2, row.names = NULL),
+          file.path(RESULTS_TABLES, "M_defection_commission_check.csv"), row.names = FALSE)
 cat(sprintf("--- Done (%.1f min) ---\n", as.numeric(difftime(Sys.time(), T0, units = "mins"))))
