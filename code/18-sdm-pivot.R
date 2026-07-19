@@ -19,6 +19,14 @@ source("code/paths.R")
 dataset <- read.csv(file.path(DATA_PROCESSED, "integrated_dataset.csv"), stringsAsFactors = FALSE)
 edges <- read.csv(file.path(DATA_PROCESSED, "genesis_network_initiative.csv"), stringsAsFactors = FALSE)
 ip2d <- read.csv(file.path(DATA_PROCESSED, "ideal_points_2d_firstmonth.csv"), stringsAsFactors = FALSE)
+registry <- read.csv(file.path(DATA_PROCESSED, "initiative_registry.csv"), stringsAsFactors = FALSE)
+registry <- registry[registry$n_firmantes >= 2 & registry$n_firmantes <= 16, ]
+
+# control de actividad (autor, 2026-07-18): nº total de iniciativas firmadas
+# por cada convencional — el éxito podría ser mera exposición por volumen
+firmas <- table(unlist(strsplit(registry$firmantes, "; ", fixed = TRUE)))
+dataset$n_iniciativas <- as.integer(firmas[dataset$nombre_armonizado])
+dataset$n_iniciativas[is.na(dataset$n_iniciativas)] <- 0
 
 dataset$theta1_fm <- ip2d$theta1_fm[match(dataset$nombre_armonizado, ip2d$nombre_armonizado)]
 pivot <- sort(ip2d$theta1_fm)[103]
@@ -50,7 +58,7 @@ build_listw <- function(sample_names, edges_df) {
 W_listw <- build_listw(complete$nombre_armonizado, edges)
 set.ZeroPolicyOption(TRUE)
 
-f_base <- retention_all ~ degree + betweenness + es_abogado +
+f_base <- retention_all ~ n_iniciativas + degree + betweenness + es_abogado +
   experiencia_previa_institucional + es_mujer + edad_al_asumir +
   grado_academico_nivel + theta_mean + theta_sd + ego_heterophily
 f_piv <- update(f_base, . ~ . + dist_pivot)

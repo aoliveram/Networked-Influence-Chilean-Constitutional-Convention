@@ -82,6 +82,7 @@ congl <- setNames(congl, roster)
 comis <- setNames(memb$commission[match(roster, memb$nombre_armonizado)], roster)
 abog <- setNames(profiles$es_abogado[match(roster, profiles$nombre_armonizado)] == 1, roster)
 exper <- setNames(profiles$experiencia_previa_institucional[match(roster, profiles$nombre_armonizado)] == 1, roster)
+distr <- setNames(profiles$distrito[match(roster, profiles$nombre_armonizado)], roster)
 
 S_list <- lapply(registry$firmantes, function(s) {
   x <- strsplit(s, "; ", fixed = TRUE)[[1]]; x[x %in% roster]
@@ -113,13 +114,14 @@ features_stratum <- function(k, C_mask) {
     cand <- roster[row == 1]
     p <- combn(length(cand), 2)
     th1 <- theta1[cand]; th2 <- theta2[cand]; cg <- congl[cand]
-    ab <- abog[cand]; ex <- exper[cand]
+    ab <- abog[cand]; ex <- exper[cand]; dd <- distr[cand]
     c(disp_theta1 = mean(abs(th1[p[1, ]] - th1[p[2, ]])),
       disp_theta2 = mean(abs(th2[p[1, ]] - th2[p[2, ]])),
       prop_lista = mean(cg[p[1, ]] == cg[p[2, ]]),
       prop_comision = mean(comis[cand] == registry$commission[k]),
       pares_abogado = mean(ab[p[1, ]] & ab[p[2, ]]),
-      pares_exper = mean(ex[p[1, ]] & ex[p[2, ]]))
+      pares_exper = mean(ex[p[1, ]] & ex[p[2, ]]),
+      pares_distrito = mean(dd[p[1, ]] == dd[p[2, ]]))
   }))
   cbind(out, exo)
 }
@@ -142,7 +144,7 @@ cat("  Sanity: motor propio == amorem::hyperedge_subrep (memoria infinita) OK\n"
 
 # ------------------- caso-control + ajuste por re-muestreo -------------------
 EXO <- c("disp_theta1", "disp_theta2", "prop_lista", "prop_comision",
-         "pares_abogado", "pares_exper")
+         "pares_abogado", "pares_exper", "pares_distrito")
 FEATS <- c("sr1_inf", "sr2_inf", "sr3_inf", "sr1_30", "sr2_30", "sr3_30", EXO)
 F_INF <- c("sr1_inf", "sr2_inf", "sr3_inf", EXO)
 F_30 <- c("sr1_30", "sr2_30", "sr3_30", EXO)

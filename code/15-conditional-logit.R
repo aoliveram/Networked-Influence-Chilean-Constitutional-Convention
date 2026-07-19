@@ -42,6 +42,9 @@ abog <- profiles$es_abogado[match(roster, profiles$nombre_armonizado)]
 exper <- profiles$experiencia_previa_institucional[match(roster, profiles$nombre_armonizado)]
 mujer <- profiles$es_mujer[match(roster, profiles$nombre_armonizado)]
 comis <- memb$commission[match(roster, memb$nombre_armonizado)]
+distr <- profiles$distrito[match(roster, profiles$nombre_armonizado)]
+distr_i <- match(distr, sort(unique(distr)))          # 39 categorías (28-29
+DISTR_NLEV <- length(unique(distr))                   # distritos + 10 pueblos)
 congl <- listas$conglomerado[match(roster, listas$nombre_armonizado)]
 congl[congl == "REVISAR (lista local sin conglomerado)"] <- "Otras listas locales"
 CONGL_LEV <- c("Vamos por Chile", "Apruebo Dignidad", "Lista del Apruebo",
@@ -74,6 +77,9 @@ for (k in seq_len(nrow(registry))) {
   cnt_G <- matrix(cnt_S, nrow = n, ncol = length(CONGL_LEV), byrow = TRUE)
   cnt_G[cbind(seq_len(n), congl_i)] <- cnt_G[cbind(seq_len(n), congl_i)] - signed
   modal_G <- max.col(cnt_G, ties.method = "first")
+  # afinidad de distrito: proporción de G del mismo distrito/pueblo que i
+  cnt_d <- tabulate(distr_i[S], nbins = DISTR_NLEV)
+  distrito_aff <- (cnt_d[distr_i] - signed) / nG
   rows[[k]] <- data.frame(
     initiative_id = paste(registry$commission[k], registry$initiative_id[k], sep = ":"),
     commission = registry$commission[k],
@@ -88,6 +94,7 @@ for (k in seq_len(nrow(registry))) {
     abogado_aff = abog * (s_ab / nG),
     exper_aff = exper * (s_ex / nG),
     mujer_aff = mujer * (s_mu / nG),
+    distrito_aff = distrito_aff,
     ppoo = ppoo,
     stringsAsFactors = FALSE
   )
@@ -117,7 +124,7 @@ cat("\n--- Logit condicional principal (strata = iniciativa; SE cluster convenci
 f1 <- as.formula(paste(
   "signed ~ d_theta1 + d_theta2 + misma_comision +",
   paste(lam_cols, collapse = " + "),
-  "+ abogado_aff + exper_aff + mujer_aff + d_grado",
+  "+ abogado_aff + exper_aff + mujer_aff + distrito_aff + d_grado",
   "+ strata(initiative_id) + cluster(nombre_armonizado)"))
 t1 <- Sys.time()
 m1 <- clogit(f1, data = choice, method = "efron")
