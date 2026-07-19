@@ -120,3 +120,30 @@ for ext in ("pdf", "png"):
                 dpi=300, bbox_inches="tight")
 print("medias por comisión:", {c: round(float(m), 3) for c, m in zip(order, means)})
 print("figura: lawyer_share_initiatives.pdf/.png")
+
+# ---- figura complementaria (punto 10, 2026-07-19): medias por comisión como
+# barras con etiqueta de porcentaje, contra la tasa de la Convención ----------
+fig2, ax3 = plt.subplots(figsize=(6.8, 3.4))
+bars = ax3.bar(order, means, color=BLUE, alpha=0.75, edgecolor=SURF, width=0.62, zorder=3)
+for rect, m in zip(bars, means):
+    ax3.annotate(f"{100*m:.0f}%", (rect.get_x() + rect.get_width()/2, m + 0.012),
+                 fontsize=9, color=INK, ha="center", fontweight="bold")
+ax3.axhline(base_rate, color=RED, lw=1.4, ls="--", zorder=4)
+ax3.annotate(f"all convention members: {100*base_rate:.0f}%",
+             (6.45, base_rate + 0.012), fontsize=8, color=RED, ha="right")
+ax3.set_ylabel("Mean share of lawyers among signers", fontsize=9)
+ax3.set_ylim(0, 0.62)
+ax3.set_title("Average lawyer share of initiative coalitions, by commission",
+              fontsize=10, color=INK, loc="left", pad=8)
+ax3.grid(axis="y", color=GRID, lw=0.6)
+ax3.set_axisbelow(True)
+for side in ("top", "right"):
+    ax3.spines[side].set_visible(False)
+ax3.spines["left"].set_color(BASE)
+ax3.spines["bottom"].set_color(BASE)
+ax3.tick_params(labelsize=8.5)
+fig2.tight_layout()
+for ext in ("pdf", "png"):
+    fig2.savefig(os.path.join(RESULTS_FIGURES, f"lawyer_share_by_commission.{ext}"),
+                 dpi=300, bbox_inches="tight")
+print("figura: lawyer_share_by_commission.pdf/.png")

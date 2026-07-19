@@ -141,8 +141,19 @@ cat(sprintf("  [%.1f s]\n", as.numeric(difftime(Sys.time(), t2, units = "secs"))
 tab2 <- tidy_clogit(m2, "clogit + PPOO")
 print(tab2, row.names = FALSE, digits = 3)
 
+# ------------- Modelo 3 (robustez, punto 5 2026-07-19): pendiente ideológica
+# POR LISTA — interacción d_theta1 x conglomerado del individuo (ref = Vamos
+# por Chile). ¿Es PPOO la lista que más se desvía?
+choice$congl_f <- relevel(factor(congl[match(choice$nombre_armonizado, roster)],
+                                 levels = CONGL_LEV), ref = "Vamos por Chile")
+f3 <- update(f1, . ~ . + congl_f + d_theta1:congl_f)
+m3 <- clogit(f3, data = choice, method = "efron")
+tab3 <- tidy_clogit(m3, "clogit + d_theta1 x lista")
+cat("\n--- Robustez: pendiente de d_theta1 por lista (ref: Vamos por Chile) ---\n")
+print(tab3[grepl("congl_f", tab3$term), ], row.names = FALSE, digits = 3)
+
 dir.create(RESULTS_TABLES, recursive = TRUE, showWarnings = FALSE)
-write.csv(rbind(tab1, tab2), file.path(RESULTS_TABLES, "M1_clogit.csv"), row.names = FALSE)
+write.csv(rbind(tab1, tab2, tab3), file.path(RESULTS_TABLES, "M1_clogit.csv"), row.names = FALSE)
 
 # tabla comparada de lambdas (D2: ¿listas ad hoc ~ pactos tradicionales?)
 lam_tab <- tab1[tab1$term %in% lam_cols, ]

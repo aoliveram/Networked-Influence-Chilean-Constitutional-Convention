@@ -27,33 +27,46 @@ Sobre ese escenario hacemos tres preguntas:
 
 - RQ1 (formación): ¿qué organiza la decisión de co-firmar entre extraños? En particular, ¿cuánto se puede predecir con lo que ya se sabía de cada convencional *antes* de que la Convención empezara — su distrito, su lista, su profesión, su experiencia — y cuánto requiere lo que ocurrió adentro?
 - RQ2 (efectos sobre las personas): ¿la red mueve las posiciones de los convencionales (influencia), o los convencionales eligen la red según sus posiciones (selección)? ¿Y mueve su conducta?
-- RQ3 (efectos sobre los textos): ¿qué hace que un artículo sobreviva hasta el borrador final — y cuánto de eso es la coalición que lo firmó?
+- RQ3 (efectos sobre los textos): ¿qué hace que un artículo sobreviva hasta el borrador final — y cuánto de eso se debe al grupo concreto de convencionales que firmó la iniciativa que lo contenía (su "coalición firmante", que no debe confundirse con la lista electoral)?
 
 # 2. Datos
 
 Todo el material proviene del registro documental de la Convención, procesado en un pipeline reproducible (los datos viven como snapshot versionado dentro del repositorio).
 
-- Actores: 154 convencionales con perfil curado por doble fuente (BCN y Wikipedia, con validación manual): género, profesión de abogado/a, experiencia institucional previa, grado académico (0 = sin estudios universitarios terminados, 1 = educación superior, 2 = magíster, 3 = doctorado), distrito electoral (o pueblo originario, para los escaños reservados), lista electoral y comisión temática.
-- Iniciativas: 996 ingresadas a la plataforma oficial; 528 con dos o más firmantes-persona. El análisis usa 487: las 41 restantes registran más de 16 firmantes — imposible bajo el reglamento — y están en auditoría como duplicaciones de documentos transversales. Para 448 de las 487 tenemos la fecha exacta de ingreso (3-nov-2021 al 2-feb-2022; 156 ingresaron el día del plazo).
-- Red de co-patrocinio: proyectando las firmas, 154 nodos y 5.870 aristas, donde el peso $w_{ij}$ es el número de iniciativas que $i$ y $j$ co-firmaron. La Figura 2 muestra que firmar no escasea para el firmante (mediana 42 iniciativas firmadas, máximo 157) y que el tope legal de 16 patrocinantes se llenaba con frecuencia.
-- Trazabilidad de textos: 1.809 artículos génesis con desenlace conocido frente al borrador del 14-mayo-2022 (498 artículos finales); cada artículo conserva texto, autores e historial fechado de indicaciones.
-- Votaciones: 4.707 votaciones nominales del Pleno (jul-2021 a jun-2022).
+- Actores: los 154 convencionales, con perfil curado por doble fuente (BCN y Wikipedia, con capa de validación manual). Covariables:
+    - género; profesión de abogado/a (39% de la Convención); experiencia institucional previa (haber sido parlamentario/a, alcalde/sa, concejal/a, ministro/a u otro cargo público antes de jul-2021);
+    - grado académico en escala 0--3 (0 = sin estudios universitarios terminados, 1 = educación superior, 2 = magíster, 3 = doctorado);
+    - distrito electoral (28 distritos; para los 17 escaños reservados, su pueblo originario — 10 pueblos);
+    - lista electoral de origen, agrupada en conglomerados (Vamos por Chile 37, Apruebo Dignidad 28, Lista del Apruebo 25, Lista del Pueblo 23, escaños reservados 17, Independientes No Neutrales 3, otras listas locales 21);
+    - comisión temática de pertenencia.
+- Iniciativas: 996 ingresadas a la plataforma oficial entre nov-2021 y feb-2022.
+    - 528 tienen dos o más firmantes-persona (el resto son populares/institucionales o de firmante único recuperable).
+    - El análisis usa 487: las 41 restantes registran más de 16 firmantes — imposible bajo la regla del reglamento — y están en auditoría como duplicaciones de documentos transversales entre comisiones.
+    - Para 448 de las 487 tenemos la fecha exacta de ingreso (3-nov-2021 al 2-feb-2022); 156 ingresaron el día del plazo final. Las 39 sin fecha solo quedan fuera del modelo que necesita orden temporal (sección 3.3).
+- Red de co-patrocinio: la proyección de las firmas sobre pares de convencionales.
+    - 154 nodos y 5.870 aristas; el peso $w_{ij}$ = número de iniciativas que $i$ y $j$ co-firmaron.
+    - Firmar no escasea para el firmante: mediana 42 iniciativas firmadas por convencional, máximo 157 (Figura 2a).
+    - El tope legal de 16 patrocinantes se llenaba con frecuencia: es el valor modal (Figura 2b).
+- Trazabilidad de textos: 1.809 artículos génesis con desenlace conocido frente al borrador del 14-mayo-2022.
+    - 498 artículos llegaron al borrador (tasa de supervivencia 20%); el resto murió en comisión o en el Pleno.
+    - Cada artículo conserva su texto original, sus autores y el historial fechado de indicaciones que recibió.
+- Votaciones: 4.707 votaciones nominales del Pleno (jul-2021 a jun-2022), base del voto revelado y de los puntos ideales.
 
 ![Figura 2. (a) Iniciativas firmadas por convencional; (b) firmantes por iniciativa, con la regla 8--16.](../results/figures/signature_distributions.pdf){width=100%}
 
 Las siete comisiones temáticas difieren fuertemente en composición y en productividad — diferencias que los modelos explotan y controlan:
 
-| | Nombre (corto) | Miembros | % abog. | % exper. | Edad | Grado (0--3) | Iniciativas | Ondas ind. | Eventos ind. |
-|:-:|:---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-| C1 | Sistema Político | 25 | 60 | 36 | 42.2 | 1.44 | 27 | 4 | 266 |
-| C2 | Principios Const. | 18 | 22 | 22 | 45.8 | 1.28 | 51 | 3 | 1 |
-| C3 | Forma de Estado | 30 | 37 | 40 | 45.1 | 1.43 | 38 | 6 | 212 |
-| C4 | Derechos Fund. | 30 | 30 | 13 | 45.9 | 1.03 | 59 | 5 | 154 |
-| C5 | Medio Ambiente | 19 | 21 | 16 | 44.7 | 1.26 | 142 | 5 | 0 |
-| C6 | Sist. de Justicia | 17 | 88 | 18 | 42.6 | 1.65 | 75 | 6 | 317 |
-| C7 | Conocimientos | 15 | 13 | 0 | 51.7 | 1.33 | 95 | 8 | 54 |
+| | Nombre (corto) | Miembros | % abog. | % exper. | Edad | Grado (0--3) | Iniciativas | Ondas ind. | Indicaciones | Ind. multifirm. |
+|:-:|:---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+| C1 | Sistema Político | 25 | 60 | 36 | 42.2 | 1.44 | 27 | 4 | 365 | 266 |
+| C2 | Principios Const. | 18 | 22 | 22 | 45.8 | 1.28 | 51 | 3 | 53 | 1 |
+| C3 | Forma de Estado | 30 | 37 | 40 | 45.1 | 1.43 | 38 | 6 | 241 | 212 |
+| C4 | Derechos Fund. | 30 | 30 | 13 | 45.9 | 1.03 | 59 | 5 | 395 | 154 |
+| C5 | Medio Ambiente | 19 | 21 | 16 | 44.7 | 1.26 | 142 | 5 | 559 | 0 |
+| C6 | Sist. de Justicia | 17 | 88 | 18 | 42.6 | 1.65 | 75 | 6 | 381 | 317 |
+| C7 | Conocimientos | 15 | 13 | 0 | 51.7 | 1.33 | 95 | 8 | 332 | 54 |
 
-(Iniciativas = con 2--16 firmantes, set de análisis; ondas/eventos = informes de indicaciones y eventos de co-firma multi-autor en ellos; los ceros de C5 son una limitación de registro — sus informes anotan solo al primer firmante.)
+(Iniciativas = con 2--16 firmantes, set de análisis. Ondas ind. = número de informes de indicaciones de la comisión. Indicaciones = actos de enmienda registrados con autoría, deduplicados. Ind. multifirm. = el subconjunto de esas indicaciones con dos o más firmantes — las únicas que agregan lazos a la red de la sección 4. Los ceros de C5 son una limitación de registro: sus indicaciones fueron colectivas pero los informes anotan solo al primer firmante.)
 
 ## 2.1 Cómo medimos la ideología
 
@@ -74,7 +87,7 @@ $$U_{ia} = \beta^\top x_{ia} + \alpha_a + \varepsilon_{ia},$$
 donde $x_{ia}$ es el vector de covariables que describe la relación del convencional $i$ con la coalición firmante $S_a$; $\alpha_a$ es un efecto fijo de la iniciativa (todo lo que la hace atractiva en sí: tema, redactor, momento); y $\varepsilon_{ia}$ es un shock idiosincrático. Las covariables, cada una definida sobre la coalición sin contar al propio $i$ ("leave-one-out"):
 
 - $d^{\theta_1}_{ia} = |\theta_{1i} - \bar\theta_{1,S_a}|$ y $d^{\theta_2}_{ia}$: distancia de $i$ a la posición media de la coalición en cada dimensión.
-- $comision_{ia} \in \{0,1\}$: si $i$ pertenece a la comisión temática del texto.
+- $comision_{ia} \in \{0,1\}$: si $i$ pertenece a la comisión temática del texto. Cualquier convencional podía patrocinar iniciativas de cualquier comisión, y de hecho lo hacía: el 70% de las firmas observadas proviene de convencionales de otra comisión. La variable mide, entonces, una inclinación real y no una restricción: los miembros de la comisión son el 12% del pool de candidatos pero aportan el 30% de las firmas.
 - $lista^c_{ia} \in \{0,1\}$: si la lista de $i$ coincide con la lista mayoritaria de la coalición, con un coeficiente $\lambda_c$ distinto por conglomerado $c$.
 - $distrito_{ia} \in [0,1]$: proporción de la coalición que comparte distrito (o pueblo originario) con $i$.
 - $abogado_{ia} = abogado_i \times$ (proporción de abogados en $S_a$), y análogos para experiencia y género.
@@ -125,7 +138,22 @@ Los escaños reservados firman menos iniciativas ajenas, coordinan entre sí má
 
 ## 3.2 Las listas: coordinación sin disciplina
 
-¿Funcionaron las listas ad hoc como partidos? Un partido hace al menos dos cosas por sus miembros: los ayuda a coordinar con quién trabajan, y los hace votar juntos. La primera ya está medida arriba (los $\lambda_c$). Para la segunda usamos el índice de Rice, que conviene explicar con calma.
+¿Funcionaron las listas ad hoc como partidos? Un partido hace al menos dos cosas por sus miembros: los ayuda a coordinar con quién trabajan, y los hace votar juntos.
+
+La primera está medida en la tabla de 3.1, en las filas "Misma lista": cada $\lambda_c$ es el coeficiente del indicador "mi lista coincide con la lista mayoritaria de esta coalición", estimado por separado para cada conglomerado $c$. En palabras: $\lambda_c$ mide cuánto más probable es que un miembro de la lista $c$ firme una iniciativa cuando la coalición ya está dominada por su propia gente — todo lo demás igual, incluida la cercanía ideológica. Es la firma de la coordinación organizacional: si las listas fueran meras etiquetas sin vida interna, sus miembros firmarían con los suyos solo en la medida en que los suyos piensan parecido, y $\lambda_c$ sería cero. El recuento:
+
+| Conglomerado | $\hat\lambda_c$ | OR |
+|:---|:-:|:-:|
+| Escaños Reservados PPOO | $1.80$ | 6.0 |
+| Otras listas locales | $1.09$ | 3.0 |
+| Vamos por Chile | $1.05$ | 2.9 |
+| Lista del Pueblo | $1.02$ | 2.8 |
+| Lista del Apruebo | $1.01$ | 2.8 |
+| Apruebo Dignidad | $0.79$ | 2.2 |
+
+Todos positivos, todos entre 0.8 y 1.1 salvo los escaños reservados: la lista ad hoc por excelencia (Lista del Pueblo) coordinó firmas igual que los pactos de partidos tradicionales.
+
+Para la segunda — votar juntos — usamos el índice de Rice, que conviene explicar con calma.
 
 Para una lista $\ell$ y una votación $v$, sean $Y_{\ell v}$ los miembros de la lista que votaron a favor y $N_{\ell v}$ los que votaron en contra. El índice de Rice es
 
@@ -167,24 +195,29 @@ El modelo de regresión efectivamente estimado es, de nuevo, un logit condiciona
 
 $$P\big(h_e \text{ real} \,\big|\, \text{estrato } e\big) = \frac{\exp\big(\theta^\top s(t_e, h_e)\big)}{\sum_{h \in \{h_e\} \cup \text{controles}_e} \exp\big(\theta^\top s(t_e, h)\big)},$$
 
-con $s(t,h) = \big(sub.rep^{(1)}, sub.rep^{(2)}, sub.rep^{(3)}, \text{disp}(\theta_1), \text{disp}(\theta_2), \text{prop. misma lista}, \text{prop. comisión}, \text{prop. pares mismo distrito}, \text{prop. pares abogados}, \text{prop. pares con experiencia}\big)$, donde $\text{disp}(\theta_d)$ es la distancia ideológica promedio entre los pares de la coalición. Todas las covariables se estandarizan (media 0, desviación 1), así que cada coeficiente responde: si esta característica sube una desviación estándar, ¿cuánto más "real" parece la coalición? La estimación se repite con 10 sorteos independientes de controles; la tabla reporta el promedio (los coeficientes apenas se mueven entre sorteos) y la mediana de los $p$:
+con las mismas covariables de composición del logit condicional (para que las tablas se lean en paralelo) más las tres estadísticas de historia: $s(t,h)$ reúne la dispersión ideológica de la coalición en cada dimensión (la distancia promedio entre sus pares), la proporción de pares de la misma lista, del mismo distrito/pueblo, ambos abogados, ambos con experiencia, ambos mujeres, la dispersión de grado académico, la proporción de miembros de la comisión del texto, y $sub.rep^{(1,2,3)}$. Todas las covariables se estandarizan (media 0, desviación 1), así que cada coeficiente responde: si esta característica sube una desviación estándar, ¿cuánto más "real" parece la coalición? La estimación se repite con 10 sorteos independientes de controles; la tabla reporta el promedio (los coeficientes apenas se mueven entre sorteos) y la mediana de los $p$, con los mismos bloques que la tabla de 3.1:
 
-| Variable | Memoria infinita | $p$ | Semivida 30 días | $p$ |
-|:---|:-:|:-:|:-:|:-:|
-| $sub.rep^{(2)}$ — familiaridad de pares | $+7.55$ | $8\times10^{-8}$ | $+6.94$ | $2\times10^{-7}$ |
-| $sub.rep^{(1)}$ — actividad individual (†) | $-7.20$ | $8\times10^{-6}$ | $-6.31$ | $1\times10^{-5}$ |
-| Dispersión ideológica $\theta_1$ | $-2.70$ | $1\times10^{-16}$ | $-2.71$ | $3\times10^{-18}$ |
-| $sub.rep^{(3)}$ — familiaridad de tríos (†) | $-2.61$ | $6\times10^{-5}$ | $-2.31$ | $4\times10^{-5}$ |
-| Prop. pares misma lista | $+0.99$ | $4\times10^{-5}$ | $+1.04$ | $3\times10^{-6}$ |
-| Prop. pares mismo distrito/pueblo | $+0.77$ | $3\times10^{-7}$ | $+0.74$ | $1\times10^{-7}$ |
-| Dispersión ideológica $\theta_2$ | $-0.56$ | $0.015$ | $-0.57$ | $0.014$ |
-| Prop. de la comisión del texto (‡) | $-0.31$ | $0.40$ | $-0.22$ | $0.46$ |
-| Prop. pares ambos abogados | $+0.28$ | $0.39$ | $+0.34$ | $0.32$ |
-| Prop. pares ambos con experiencia | $+0.07$ | $0.65$ | $+0.03$ | $0.63$ |
+| Variable | Memoria infinita | $p$ | Semivida 30 días |
+|:---|:-:|:-:|:-:|
+| *Observables pre-Convención* | | | |
+| Prop. pares mismo distrito/pueblo | $+0.78$ | $2\times10^{-6}$ | $+0.75$ |
+| Prop. pares misma lista | $+1.03$ | $5\times10^{-5}$ | $+1.09$ |
+| Prop. pares ambos abogados | $+0.38$ | $0.30$ | $+0.44$ |
+| Prop. pares ambos con experiencia | $+0.09$ | $0.72$ | $+0.03$ |
+| Prop. pares ambas mujeres | $+0.10$ | $0.54$ | $+0.11$ |
+| Dispersión de grado académico | $+0.25$ | $0.30$ | $+0.27$ |
+| *Estructura y posiciones formadas en la Convención (controles)* | | | |
+| Prop. de la comisión del texto (‡) | $-0.31$ | $0.36$ | $-0.22$ |
+| Dispersión ideológica $\theta_1$ | $-2.72$ | $9\times10^{-16}$ | $-2.71$ |
+| Dispersión ideológica $\theta_2$ | $-0.55$ | $0.017$ | $-0.57$ |
+| *Historia de co-firma (lo nuevo del RHEM)* | | | |
+| $sub.rep^{(2)}$ — familiaridad de pares | $+7.53$ | $2\times10^{-7}$ | $+6.92$ |
+| $sub.rep^{(1)}$ — actividad individual (†) | $-7.23$ | $1\times10^{-5}$ | $-6.32$ |
+| $sub.rep^{(3)}$ — familiaridad de tríos (†) | $-2.61$ | $6\times10^{-5}$ | $-2.31$ |
 
 (†) Estos signos negativos no se leen por separado — ver el párrafo siguiente. (‡) No interpretable: la mitad de los controles se sortea dentro de la comisión, así que este contraste queda absorbido por el diseño; el efecto comisión ya está medido en 3.1.
 
-El truco de los signos. Las tres estadísticas de historia son casi la misma variable con distinto zoom (correlaciones 0.78 y 0.84: la gente activa acumula pares familiares, y los pares familiares componen tríos). Ajustadas de a una, las tres son positivas: actividad $+1.28$ ($p = 0.006$), pares $+1.59$ ($p < 10^{-5}$), tríos $+0.78$ ($p < 10^{-3}$). Juntas, la de pares absorbe toda la señal y las otras dos se vuelven negativas — un reparto engañoso típico entre variables casi colineales, no una paradoja. La lectura conjunta correcta: lo que distingue a una coalición real es específicamente la familiaridad de sus pares; condicional en ella, "mucha actividad individual sin familiaridad mutua" es marca de coalición ficticia (así lucen los controles: firmantes seriales que no se conocen), y los tríos no agregan sobre los pares. En una frase: la Convención se tejió de a dos — se reclutaban duplas consolidadas, no equipos completos. Entre las dos memorias, la infinita ajusta mejor (log-verosimilitud $-44.1$ contra $-49.8$): el capital de co-firma se acumula, no se evapora en un mes.
+El truco de los signos. Las tres estadísticas de historia son casi la misma variable con distinto zoom (correlaciones 0.78 y 0.84: la gente activa acumula pares familiares, y los pares familiares componen tríos). Ajustadas de a una, las tres son positivas: actividad $+1.63$ ($p = 0.002$), pares $+1.62$ ($p < 10^{-6}$), tríos $+0.77$ ($p < 10^{-3}$). Juntas, la de pares absorbe toda la señal y las otras dos se vuelven negativas — un reparto engañoso típico entre variables casi colineales, no una paradoja. La lectura conjunta correcta: lo que distingue a una coalición real es específicamente la familiaridad de sus pares; condicional en ella, "mucha actividad individual sin familiaridad mutua" es marca de coalición ficticia (así lucen los controles: firmantes seriales que no se conocen), y los tríos no agregan sobre los pares. En una frase: la Convención se tejió de a dos — se reclutaban duplas consolidadas, no equipos completos. Entre las dos memorias, la infinita ajusta mejor (log-verosimilitud $-42.7$ contra $-48.3$): el capital de co-firma se acumula, no se evapora en un mes.
 
 Qué agrega el RHEM sobre el logit condicional — la comparación en detalle. Los dos modelos usan los mismos eventos y la misma forma estadística; difieren en una sola cosa: el RHEM deja que el pasado entre a la ecuación. Eso tiene tres consecuencias. (i) El logit condicional es el RHEM del primer día: cuando nadie ha firmado con nadie, las estadísticas de historia valen cero para todos y el RHEM se reduce exactamente al logit de 3.1 — por eso no son rivales sino el mismo modelo en dos momentos, y por eso los coeficientes de composición del logit deben leerse como "la fuerza de los atributos cuando no hay historia que consultar" (los primeros momentos). (ii) La dinámica que el RHEM revela es acumulativa: cada co-firma de hoy se vuelve familiaridad mañana, y esa familiaridad es el predictor más fuerte de la próxima coalición — un mecanismo de rieles: los primeros encuentros (guiados por distrito, lista e ideología, como muestra el logit) crean los pares por los que después circula todo lo demás. (iii) La pregunta contrafactual cambia: el logit pregunta "¿a quién se parece el que firma?"; el RHEM pregunta "dado todo lo que ya pasó, ¿quién más podría haber firmado hoy?". Que la ideología ($-2.70$) sobreviva con toda su fuerza en la segunda pregunta es el hallazgo: la homofilia no era un espejismo de la historia acumulada. Y que lista y distrito también sobrevivan dice que la organización territorial y de etiqueta opera en cada coalición nueva, no solo en la primera.
 
@@ -192,9 +225,13 @@ Una cautela final: la "familiaridad" medida solo ve lo firmado desde noviembre d
 
 ## 3.4 Lo que no organiza la red: la profesión
 
-La versión para la abuela. Uno esperaría que los abogados de la Convención se buscaran entre ellos para escribir juntos — al fin y al cabo, escribir una constitución es trabajo de abogados. Y si uno mira las iniciativas, efectivamente hay varias llenas de abogados. Pero mirar quién termina junto engaña: hay que preguntar quién *elige* a quién. Nuestros modelos hacen exactamente eso, y la respuesta es que un abogado, puesto frente a dos coaliciones idénticas donde una tiene más abogados, no prefiere la de los abogados (efecto marginal en 3.1, nulo en 3.3). ¿Y entonces por qué se los ve juntos? Porque hay temas que son de abogados. La Figura 4 lo muestra sin ningún modelo: en la comisión de Sistemas de Justicia — jueces, fiscales, control constitucional — el 53% de los firmantes de cada iniciativa son abogados, cuando en la Convención entera son el 39% (de hecho, el 88% de los miembros de esa comisión son abogados: la tabla de la sección 2). En las comisiones de medioambiente o conocimientos, los abogados escasean. Es el tema el que junta a los abogados, como un asado junta parrilleros: nadie eligió a sus amigos por saber hacer fuego, pero alrededor de la parrilla terminan los que saben. Lo mismo vale para la experiencia política previa: nula en la elección de socios. Las credenciales no tejieron la red.
+La versión para la abuela. Uno esperaría que los abogados de la Convención se buscaran entre ellos para escribir juntos — al fin y al cabo, escribir una constitución es trabajo de abogados. Y si uno mira las iniciativas, efectivamente hay varias llenas de abogados. Pero mirar quién termina junto engaña: hay que preguntar quién *elige* a quién. Nuestros modelos hacen exactamente eso, y la respuesta es que un abogado, puesto frente a dos coaliciones idénticas donde una tiene más abogados, no prefiere la de los abogados (efecto marginal en 3.1, nulo en 3.3). ¿Y entonces por qué se los ve juntos? Porque hay temas que son de abogados. Es el tema el que junta a los abogados, como un asado junta parrilleros: nadie eligió a sus amigos por saber hacer fuego, pero alrededor de la parrilla terminan los que saben. Lo mismo vale para la experiencia política previa: nula en la elección de socios. Las credenciales no tejieron la red.
+
+Las dos figuras siguientes muestran la evidencia descriptiva. Cómo leer la Figura 4: cada iniciativa tiene una "proporción de abogados" (si la firman 10 personas y 4 son abogados, vale 0.4). El panel (a) apila las 487 iniciativas en un histograma (barras azules) y lo compara con un mundo ficticio donde las mismas iniciativas hubieran sorteado a sus firmantes al azar entre los 154 (barras grises): la distribución real es más ancha que la del azar por ambos lados — sobran iniciativas casi sin abogados y sobran iniciativas cargadas de abogados. Esa doble cola es la marca de la segregación temática. El panel (b) muestra la misma proporción separada por comisión, como cajas (la caja cubre la mitad central de las iniciativas de esa comisión; la línea es la mediana; el punto rojo, el promedio). La Figura 5 resume el panel (b) en su versión más simple: el promedio por comisión como barra, contra la línea roja del peso de los abogados en la Convención entera. Ahí se lee directamente el contraste clave: en Sistemas de Justicia — jueces, fiscales, control constitucional — las coaliciones firmantes promedian 53% de abogados, catorce puntos sobre la tasa global (y el 88% de los miembros de esa comisión son abogados: tabla de la sección 2); en Principios, Derechos Fundamentales, Medio Ambiente y Conocimientos, promedian 29--31%, bajo la tasa global.
 
 ![Figura 4. (a) Proporción de abogados por iniciativa contra un sorteo aleatorio de firmantes; (b) por comisión.](../results/figures/lawyer_share_initiatives.pdf){width=100%}
+
+![Figura 5. Promedio de la proporción de abogados de las coaliciones firmantes, por comisión; la línea roja marca la proporción de abogados en la Convención completa.](../results/figures/lawyer_share_by_commission.pdf){width=78%}
 
 # 4. RQ2 — ¿Qué le hace la red a las personas?
 

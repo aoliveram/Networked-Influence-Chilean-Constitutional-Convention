@@ -43,7 +43,7 @@ MILESTONES = [
 # ventanas (inicio, fin, etiqueta, color, fila)
 WINDOWS = [
     (date(2021, 7, 13), date(2021, 8, 12), "Ideology window\n($\\theta$: first-month votes,\nmajority rule)", PURPLE, 0),
-    (date(2021, 11, 3), date(2022, 2, 1), "Initiatives filed\n(448 dated events)", BLUE, 1),
+    (date(2021, 11, 3), date(2022, 2, 1), "Initiatives filed\n(487 studied; 448 dated)", BLUE, 1),
     (date(2022, 2, 8), date(2022, 5, 8), "Amendments in\ncommissions (M2 waves)", TEAL, 2),
     (date(2022, 2, 15), date(2022, 5, 14), "Constitutional norms\nvoted (2/3 = 103 votes)", RED, 3),
 ]
