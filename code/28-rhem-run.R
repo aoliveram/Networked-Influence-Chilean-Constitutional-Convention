@@ -151,8 +151,14 @@ cat("  Sanity: motor propio == amorem::hyperedge_subrep (memoria infinita) OK\n"
 EXO <- c("disp_theta1", "disp_theta2", "prop_lista", "prop_comision",
          "pares_abogado", "pares_exper", "pares_distrito", "pares_mujer", "disp_grado")
 FEATS <- c("sr1_inf", "sr2_inf", "sr3_inf", "sr1_30", "sr2_30", "sr3_30", EXO)
-F_INF <- c("sr1_inf", "sr2_inf", "sr3_inf", EXO)
-F_30 <- c("sr1_30", "sr2_30", "sr3_30", EXO)
+# PRINCIPAL (decisión del autor 2026-07-20): solo sub.rep(2) — el par es la
+# unidad mínima de una relación; sr1 (individual, no relacional) y sr3
+# (recicla la info de los pares) entran solo en la robustez conjunta, donde
+# la colinealidad (r = 0.78/0.84) produce signos no interpretables por separado.
+F_INF <- c("sr2_inf", EXO)
+F_30 <- c("sr2_30", EXO)
+F_INF_TRIO <- c("sr1_inf", "sr2_inf", "sr3_inf", EXO)
+F_30_TRIO <- c("sr1_30", "sr2_30", "sr3_30", EXO)
 
 build_resample <- function(b) {
   strata_rows <- mclapply(seq_len(E), function(k) {
@@ -199,6 +205,8 @@ for (b in seq_len(B_RESAMPLES)) {
                         row.names = FALSE)
   res[[length(res) + 1]] <- fit_one(df, F_INF, "infinita", b)
   res[[length(res) + 1]] <- fit_one(df, F_30, "semivida 30d", b)
+  res[[length(res) + 1]] <- fit_one(df, F_INF_TRIO, "infinita (trio, robustez)", b)
+  res[[length(res) + 1]] <- fit_one(df, F_30_TRIO, "semivida 30d (trio, robustez)", b)
   cat(sprintf("    b=%d listo (%.1f s)\n", b,
               as.numeric(difftime(Sys.time(), tb, units = "secs"))))
 }
@@ -233,6 +241,7 @@ fit_ll <- function(feats) {
   f <- as.formula(paste("case ~", paste(feats, collapse = " + "), "+ strata(stratum)"))
   clogit(f, data = df1, method = "efron")
 }
+cat("\n--- Correlaciones completas sr1/sr2/sr3 (b = 1) ---\n")
 solo <- list(
   "sr1 sola" = c("sr1_inf", EXO),
   "sr2 sola" = c("sr2_inf", EXO),

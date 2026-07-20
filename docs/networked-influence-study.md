@@ -136,6 +136,20 @@ El mismo modelo, agregando el término de escaños reservados y sus interaccione
 
 Los escaños reservados firman menos iniciativas ajenas, coordinan entre sí más que nadie, y — la interacción positiva — cruzan distancias en $\theta_1$ que el resto no cruza: su pendiente ideológica clásica es $-3.59 + 1.34 = -2.25$ contra $-3.59$ del resto. Su coordenada operativa no es el eje izquierda-derecha.
 
+Para poner a los PPOO en contexto, la robustez con una pendiente ideológica *por lista* (efectos principales de lista más interacciones con la distancia en $\theta_1$; referencia = Vamos por Chile):
+
+| Lista | Pendiente base (VC) | Interacción | Pendiente total |
+|:---|:-:|:-:|:-:|
+| Vamos por Chile | $-5.88$ | — | $-5.88$ |
+| Independientes No Neutrales | $-5.88$ | $+0.84$ (n.s.) | $-5.04$ |
+| Otras listas locales | $-5.88$ | $+1.51$ | $-4.37$ |
+| Lista del Apruebo | $-5.88$ | $+2.80$ | $-3.08$ |
+| Apruebo Dignidad | $-5.88$ | $+3.21$ | $-2.67$ |
+| Escaños Reservados PPOO | $-5.88$ | $+3.86$ | $-2.02$ |
+| Lista del Pueblo | $-5.88$ | $+4.09$ | $-1.79$ |
+
+La lectura honesta: los PPOO están entre los más planos, pero no solos — la Lista del Pueblo lo es incluso más, y la diferencia entre ambos no es estadísticamente distinguible. El patrón grueso es una asimetría izquierda-derecha: la derecha (VC) casi no cruza distancias ideológicas al firmar; los bloques de izquierda cruzan mucho más. Lo que sigue distinguiendo *únicamente* a los PPOO es la combinación de puentes largos con la máxima cohesión interna de lista ($\lambda = 1.80$).
+
 ## 3.2 Las listas: coordinación sin disciplina
 
 ¿Funcionaron las listas ad hoc como partidos? Un partido hace al menos dos cosas por sus miembros: los ayuda a coordinar con quién trabajan, y los hace votar juntos.
