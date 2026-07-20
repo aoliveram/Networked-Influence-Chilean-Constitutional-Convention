@@ -1,155 +1,155 @@
 "nombre_armonizado","degree","weighted_degree","betweenness","eigenvector","afiliacion_agrupada","es_abogado","es_mujer","edad_al_asumir","experiencia_previa_institucional","grado_academico_nivel"
-"Abarca, Damaris",101,511,58.1732112104665,0.869416935258561,"Independiente",0,1,31,0,0
-"Abarca, Jorge",103,618,45.1908008808525,0.905597745766437,"Independiente",0,0,54,0,1
-"Achurra, Ignacio",101,474,42.1588881817615,0.89152319122846,"Convergencia Social",0,0,41,0,2
-"Aguilera, Tiare",76,361,20.334657227078,0.680070906628564,"Independiente",1,1,39,0,2
-"Alvarado, Gloria",91,948,16.2994043732366,0.836684222066567,"Independiente",0,1,58,0,1
-"Alvarez, Julio",68,452,14.6016874158697,0.599793899091202,"Partido Socialista de Chile",1,0,56,1,2
-"Alvarez, Rodrigo",40,247,20.213889563201,0.108126736018957,"Unión Demócrata Independiente",1,0,54,1,3
-"Alvez, Amaya",77,374,9.33953105660025,0.71558167693837,"Revolución Democrática",1,1,50,0,3
-"Ampuero, Adriana",85,503,17.9080806524334,0.781688534402203,"Independiente",0,1,34,0,1
-"Andrade, Cristobal",87,857,12.8243462976929,0.803083308643701,"Independiente",0,0,32,0,1
-"Antilef, Victorino",72,312,17.9224865753167,0.645431237898888,"Independiente",0,0,51,0,2
-"Arancibia, Jorge",33,182,4.89587499240485,0.0559845261675647,"Independiente",0,0,81,1,2
-"Arauna, Francisca",87,1034,10.4408028218755,0.81480693852391,"Independiente",1,1,30,0,1
-"Arellano, Marco",81,351,23.0947634300822,0.729210590397195,"Independiente",0,0,31,0,1
-"Arrau, Martin",27,270,1.58133661395745,0.0381418978837324,"Partido Republicano de Chile",0,0,42,1,1
-"Atria, Fernando",78,345,14.9765222459749,0.704249973910448,"Independiente",1,0,52,0,3
-"Bacian, Wilfredo",70,267,10.6996144066488,0.632186521080984,"Independiente",0,0,45,1,0
-"Baradit, Jorge",110,492,67.136252953833,0.947299435295813,"Independiente",0,0,52,0,1
-"Baranda, Benito",105,553,49.9049900120999,0.909909264176409,"Independiente",0,0,62,0,3
-"Barcelo, Luis",40,167,16.0159578660393,0.264576189792889,"Independiente",1,0,67,1,1
-"Barraza, Marcos",109,627,56.4995925374114,0.948282985883798,"Partido Comunista de Chile",0,0,48,1,1
-"Bassa, Jaime",94,489,20.5771146858102,0.856007270184374,"Independiente",1,0,44,0,3
-"Botto, Miguel Angel",72,197,80.3373048032,0.530400639769808,"Independiente",0,0,52,0,2
-"Bown, Carol",36,257,7.83658507990994,0.0675960643632728,"Unión Demócrata Independiente",1,1,42,1,2
-"Bravo, Daniel",92,416,63.1930016017355,0.787986778946746,"Independiente",1,0,39,0,2
-"Caamano, Francisco",123,1609,211.816464971696,1,"Independiente",0,0,31,0,1
-"Caiguan, Alexis",80,317,10.50244222751,0.743273418446923,"Independiente",0,0,45,0,0
-"Calvo, Carlos",116,509,252.705094228196,0.906074820423508,"Independiente",0,0,75,0,3
-"Cancino, Adriana",97,541,138.320949457542,0.760763701264143,"Independiente",0,1,59,0,1
-"Cantuarias, Rocio",25,232,0.754358824610137,0.0321763281366058,"Independiente",1,1,43,0,2
-"Carrillo, Alondra",92,521,15.8457282242186,0.849987542909183,"Independiente",0,1,30,0,1
-"Castillo, Eduardo",35,142,8.41621501340449,0.237182433815972,"Partido Por la Democracia",1,0,71,1,2
-"Castillo, Maria Trinidad",108,641,66.4408953326114,0.92767775546164,"Independiente",0,1,64,0,2
-"Castro, Claudia",40,203,93.7452513590374,0.166672954021851,"Independiente",0,1,53,0,1
-"Catrileo, Rosa",78,418,15.2134493379469,0.713461688988916,"Independiente",1,1,39,0,2
-"Celedon, Roberto",76,226,17.347577580473,0.683660097446866,"Independiente",1,0,74,0,2
-"Celis, Raul",43,148,55.5958576718649,0.187914722728191,"Renovación Nacional",1,0,58,1,1
-"Cespedes, Lorena",69,290,10.3868297452063,0.631794346220581,"Independiente",0,1,47,0,1
-"Chahin, Fuad",57,173,46.3075245164472,0.397667469646852,"Partido Demócrata Cristiano",1,0,44,1,1
-"Chinga, Eric",72,406,8.31194689209041,0.659645848044825,"Independiente",0,0,50,0,0
-"Cozzi, Ruggero",40,112,22.680398624499,0.169026397647,"Independiente",1,0,34,0,2
-"Cretton, Eduardo",37,299,23.0976915902626,0.116802228844708,"Unión Demócrata Independiente",0,0,25,0,1
-"Cruz, Andres",105,589,139.395765319455,0.832045564874141,"Independiente",1,0,48,0,3
-"Cubillos, Marcela",42,199,33.7486067762874,0.131327766562932,"Unión Demócrata Independiente",1,1,54,1,1
-"Daza, Mauricio",100,477,39.3064989573935,0.886225744022462,"Independiente",1,0,49,0,2
-"De la Maza, Bernardo",83,186,207.583309175312,0.542945966874808,"Independiente",0,0,75,0,1
-"Delgado, Aurora",86,526,11.3873680699589,0.798840166215958,"Independiente",0,1,56,0,1
-"Dominguez, Gaspar",102,535,28.5440758918355,0.917682559236499,"Independiente",0,0,32,0,2
-"Dorador, Cristina",104,707,30.7909733334454,0.937946800574496,"Independiente",0,1,41,0,3
-"Fernandez, Patricio",94,507,90.7082753477199,0.762571216394826,"Independiente",0,0,51,0,0
-"Flores, Alejandra",94,696,16.2578890535988,0.867909256720663,"Independiente",0,1,60,0,2
-"Fontaine, Bernardo",38,107,23.1760726062152,0.0956310678124887,"Independiente",0,0,57,0,1
-"Fuchslocher, Javier",90,509,33.8888627868926,0.776701955403152,"Independiente",0,0,32,0,2
-"Gallardo, Bessy",102,746,36.0342950052141,0.905463140467478,"Independiente",0,1,36,0,1
-"Galleguillos, Felix",79,405,14.5185518922405,0.726372183975379,"Independiente",0,0,35,0,1
-"Garin, Renato",74,192,94.3023224240807,0.58006258874917,"Independiente",1,0,35,1,2
-"Giustinianovich, Elisa",96,710,16.5965050395046,0.880223374486153,"Independiente",0,1,36,0,3
-"Godoy, Isabel",96,1027,21.000068852037,0.870606843874139,"Independiente",0,1,53,0,0
-"Gomez, Claudio",101,657,55.8318345810455,0.869181332873097,"Independiente",1,0,41,0,2
-"Gomez, Yarela",105,671,30.4211095454432,0.947633898025155,"Independiente",0,1,31,0,1
-"Gonzalez, Dayana",85,552,13.6535183195408,0.790074945629748,"Independiente",0,1,33,0,1
-"Gonzalez, Lidia",89,468,23.0575074030954,0.811101798847625,"Independiente",0,1,54,1,0
-"Grandon, Giovanna",92,489,18.5874229647046,0.836296065566911,"Independiente",0,1,46,0,0
-"Grandon, Paola",74,361,6.36272789924022,0.699992521738502,"Federación Regionalista Verde Social",0,1,47,0,0
-"Gutierrez, Hugo",97,774,26.8888576934575,0.87665381927868,"Partido Comunista de Chile",1,0,59,1,1
-"Harboe, Felipe",65,196,62.8906697229046,0.469703762351977,"Partido por la Democracia",1,0,48,1,1
-"Henriquez, Natalia",92,670,23.5709992997544,0.835000199018791,"Independiente",0,1,35,0,1
-"Hoppe, Vanessa",104,1028,30.9896340130454,0.93627299465159,"Independiente",1,1,41,0,2
-"Hube, Constanza",37,154,22.6729184638841,0.119771142145282,"Unión Demócrata Independiente",1,1,35,0,2
-"Hurtado, Maximiliano",61,309,18.0687795674078,0.520705763490747,"Partido Socialista de Chile",0,0,36,0,0
-"Hurtado, Ruth",36,291,7.83658507990994,0.0675960643632729,"Republicano de Chile",0,1,39,0,1
-"Jimenez, Luis",110,678,75.0728129204499,0.946989397529795,"Independiente",1,0,37,0,1
-"Jofre, Alvaro",47,211,45.2510957229316,0.183514400072456,"Renovación Nacional",0,0,49,1,1
-"Jurgensen, Harry",38,326,17.171834101884,0.100072002766902,"Renovación Nacional",0,0,79,1,1
-"Labbe, Bastian",100,826,26.7619608005561,0.90566975621021,"Independiente",0,0,31,0,1
-"Labra, Patricia",61,150,103.96956505518,0.328994148612383,"Renovación Nacional",1,1,35,1,2
-"Labrana, Elsa",86,636,24.0518143246732,0.768746604362085,"Independiente",0,1,46,0,1
-"Laibe, Tomas",107,535,84.3408885020947,0.903339934534746,"Partido Socialista de Chile",0,0,30,0,2
-"Larrain, Hernan",32,161,6.7249705823408,0.108078065692525,"Evolución Política",1,0,46,0,2
-"Letelier, Margarita",36,247,22.2221474428509,0.113331712561676,"Unión Demócrata Independiente",0,1,67,0,1
-"Linconao, Francisca",59,237,12.3297537295356,0.528174084200499,"Independiente",0,1,64,0,0
-"Llanquileo, Natividad",90,502,26.6234511995775,0.807515000567818,"Independiente",1,1,36,0,1
-"Logan, Rodrigo",59,228,84.192387051983,0.384329548975791,"Independiente",1,0,41,0,2
-"Loncon, Elisa",99,507,37.882912646815,0.881686431749099,"Independiente",0,1,58,0,3
-"Madriaga, Tania",80,459,25.5197762229512,0.71523859960965,"Independiente",0,1,49,0,2
-"Mamani, Isabella",60,336,5.96816977248837,0.553697431559691,"Independiente",1,1,33,0,1
-"Marinovic, Teresa",23,203,0.355102835469606,0.0289711087067024,"Independiente",0,1,48,0,1
-"Martin, Juan Jose",99,424,73.8873740677262,0.840885471203378,"Independiente",0,0,25,0,0
-"Martinez, Helmuth",69,272,20.9189293964376,0.593145253515691,"Independiente",1,0,34,0,1
-"Mayol, Luis",37,132,16.8385533043727,0.0843570387655581,"Renovación Nacional",1,0,68,1,1
-"Mella, Jeniffer",95,478,38.1982562719484,0.850761137190274,"Independiente",1,1,40,0,1
-"Mena, Felipe",56,302,156.728234090407,0.254552473430942,"Unión Demócrata Independiente",0,0,38,1,2
-"Meneses, Janis",90,653,14.1849161784494,0.829667630384011,"Independiente",0,1,32,0,1
-"Millabur, Adolfo",87,424,21.7575833749108,0.785299058371979,"Independiente",0,0,54,1,0
-"Miranda, Valentina",93,663,21.132282685037,0.850907776964109,"Partido Comunista de Chile",0,1,21,0,0
-"Monckeberg, Cristian",48,216,58.1221295881604,0.22857970794797,"Renovación Nacional",1,0,53,1,2
-"Montealegre, Katerine",31,184,12.8689833458816,0.0827549769147366,"Unión Demócrata Independiente",1,1,29,0,1
-"Montero, Ricardo",27,198,1.17404053581758,0.223490672528427,"Partido Socialista de Chile",1,0,38,0,2
-"Moreno, Alfredo",38,152,18.7654571273997,0.102937805149872,"Independiente",0,0,39,0,2
-"Munoz, Pedro",82,408,23.8293249089263,0.732269794889373,"Partido Socialista de Chile",1,0,33,1,1
-"Namor, Guillermo",98,513,69.3643972844424,0.824345224183185,"Independiente",0,0,24,0,1
-"Navarrete, Geoconda",45,189,42.7378695378641,0.171298192699335,"Evolución Política",0,1,51,1,1
-"Neumann, Ricardo",62,327,170.302768386583,0.298782712969056,"Independiente",1,0,33,0,2
-"Nunez, Nicolas",109,1107,38.0394617472679,0.974623392587893,"Federación Regionalista Verde Social",1,0,33,0,1
-"Olivares, Ivanna",87,763,18.4984552102221,0.797023904591492,"Independiente",0,1,30,0,1
-"Orellana, Matias",85,447,38.45387873506,0.725261858069862,"Partido Socialista de Chile",1,0,32,0,1
-"Ossandon, Manuel",64,253,179.308734064282,0.291489985224306,"Independiente",1,0,34,0,1
-"Oyarzun, Maria Jose",69,309,5.28468994256861,0.650499796130789,"Partido Revolución Democrática",0,1,38,0,1
-"Perez, Alejandra",80,415,26.4509742129128,0.711769318555934,"Independiente",0,1,43,0,0
-"Pinto, Malucha",120,987,184.297975099163,0.997094235365418,"Partido Socialista de Chile",0,1,66,0,0
-"Politzer, Patricia",85,375,26.0968081082342,0.751485056897921,"Independiente",0,1,69,1,1
-"Portilla, Ericka",80,370,11.0810919450926,0.738508664972073,"Partido Comunista de Chile",1,1,36,1,2
-"Pustilnick, Tammy",96,487,62.7899483731219,0.815523883171183,"Independiente",1,1,34,0,2
-"Quinteros, Maria Elisa",88,492,16.0208730867469,0.801868303550579,"Independiente",0,1,39,0,3
-"Rebolledo, Barbara",47,151,66.0455397510643,0.2404355787734,"Independiente",0,1,48,0,2
-"Reyes, Maria Ramona",100,648,34.7163918219837,0.891242721953641,"Partido Socialista de Chile",0,1,54,1,1
-"Rivera, Maria Magdalena",92,428,39.7621120904031,0.801965457214951,"Independiente",1,1,63,0,1
-"Rivera, Pollyana",31,161,3.59220895748092,0.0495983454973276,"Independiente",0,1,46,0,1
-"Roa, Giovanna",91,412,12.9892104557963,0.847460007932254,"Revolución Democrática",0,1,34,0,1
-"Royo, Manuela",107,1333,31.2102928759942,0.95960157381853,"Independiente",1,1,38,0,2
-"Saldana, Alvin",102,925,22.8872239338155,0.926548082944322,"Independiente",1,0,44,0,1
-"Salinas, Fernando",60,358,2.94891110310246,0.571193459389544,"Independiente",0,0,65,0,1
-"San Juan, Constanza",87,532,13.8895592354259,0.80687869395197,"Independiente",0,1,35,0,1
-"Sanchez, Beatriz",72,289,6.12384705789106,0.682989160582521,"Independiente",0,1,50,0,1
-"Schonhaut, Constanza",85,392,21.0610432719227,0.771249311013307,"Convergencia Social",1,1,32,0,1
-"Sepulveda, Barbara",102,646,39.0598981482231,0.912126459215235,"Partido Comunista de Chile",1,1,35,0,2
-"Sepulveda, Carolina",109,728,60.6869502715017,0.943110746864491,"Independiente",0,1,41,0,3
-"Serey, Mariela",91,376,17.7363691476773,0.824949588098597,"Independiente",0,1,40,0,1
-"Silva, Luciano",37,97,17.1405266974064,0.234625912564233,"Renovación Nacional",0,0,50,0,1
-"Squella, Agustin",50,159,21.6731862626062,0.374813063626606,"Independiente",1,0,77,1,3
-"Stingo, Daniel",82,313,15.8616853244885,0.739494334802537,"Independiente",1,0,55,0,1
-"Tepper, Maria Angelica",71,206,136.522079708117,0.401678421477866,"Independiente",0,1,60,0,0
-"Tirado, Fernando",43,177,4.84482703687471,0.396447752657591,"Pueblo Chango",0,0,67,1,1
-"Toloza, Pablo",35,193,6.61386107211066,0.0632857907357645,"Unión Demócrata Independiente",1,0,50,1,1
-"Ubilla, Maria Cecilia",24,254,0.475192881458859,0.0314661621707976,"Independiente",1,1,65,1,1
-"Uribe, Cesar",94,923,20.6946042191869,0.864770481609949,"Independiente",0,0,37,0,1
-"Urrutia, Tatiana",86,497,13.5198734916887,0.794152389357213,"Revolución Democrática",0,1,38,0,0
-"Valenzuela, Cesar",54,337,6.86295619772861,0.48281095671897,"Partido Socialista de Chile",1,0,32,0,2
-"Valenzuela, Paulina",94,460,26.1939703892722,0.845487140699715,"Independiente",0,1,36,0,1
-"Vallejos, Loreto",102,975,34.4938370123071,0.91536214327135,"Independiente",0,1,41,0,1
-"Vargas, Margarita",97,391,179.394223869134,0.75812342859793,"Independiente",0,1,51,0,1
-"Vargas, Mario",96,450,41.7051997967521,0.848541285565576,"Partido Socialista de Chile",0,0,58,0,2
-"Vega, Roberto",54,173,131.200681669044,0.222473758140619,"Renovación Nacional",1,0,43,1,2
-"Velasquez, Hernan",61,266,4.5860534631887,0.574037261764568,"Federación Regionalista Verde Social",0,0,55,1,1
-"Veloso, Paulina",52,208,70.7903041994173,0.274761114799743,"Renovación Nacional",0,1,33,0,1
-"Vergara, Lisette",91,554,23.4283198602252,0.820452628015901,"Independiente",0,1,28,0,1
-"Vidal, Rossana",97,488,117.275990808555,0.806591385288696,"Independiente",1,1,51,0,2
-"Videla, Carolina",107,807,41.2544259917639,0.948622829353228,"Partido Comunista de Chile",0,1,52,0,1
-"Viera, Christian",76,278,7.41572181557299,0.716839606950617,"Independiente",1,0,48,0,3
-"Vilches, Carolina",93,955,15.231573988335,0.856156521401723,"Independiente",0,1,36,0,1
-"Villena, Ingrid",104,896,68.1954537411869,0.904765859112447,"Independiente",1,1,31,0,1
-"Woldarsky, Manuel",95,687,31.3067268459051,0.851704249660158,"Independiente",1,0,37,0,1
-"Zarate, Camila",86,806,13.8599696238955,0.793724859695801,"Independiente",0,1,29,0,1
-"Zuniga, Luis Arturo",30,174,12.4591842229476,0.081808908832137,"Unión Demócrata Independiente",0,0,38,1,1
+"Abarca, Damaris",112,723,34.9681547276923,0.879346236380498,"Independiente",0,1,31,0,0
+"Abarca, Jorge",114,809,48.5854064179665,0.895928770403309,"Independiente",0,0,54,0,1
+"Achurra, Ignacio",105,618,20.0572585851987,0.851254455037963,"Convergencia Social",0,0,41,0,2
+"Aguilera, Tiare",89,544,12.5144004606236,0.728897217353011,"Independiente",1,1,39,0,2
+"Alvarado, Gloria",97,1288,11.1068001655718,0.800064687601804,"Independiente",0,1,58,0,1
+"Alvarez, Julio",85,594,10.5540436173955,0.694813570570409,"Partido Socialista de Chile",1,0,56,1,2
+"Alvarez, Rodrigo",64,1148,46.2819853906405,0.351600327671902,"Unión Demócrata Independiente",1,0,54,1,3
+"Alvez, Amaya",89,474,11.6773148083917,0.728070101523804,"Revolución Democrática",1,1,50,0,3
+"Ampuero, Adriana",95,650,14.8911493970736,0.783285352568766,"Independiente",0,1,34,0,1
+"Andrade, Cristobal",96,1187,8.91891014286754,0.798651574520842,"Independiente",0,0,32,0,1
+"Antilef, Victorino",80,556,10.735829779041,0.651165237411059,"Independiente",0,0,51,0,2
+"Arancibia, Jorge",45,649,15.5788015753292,0.190600853465589,"Independiente",0,0,81,1,2
+"Arauna, Francisca",98,1446,20.5176879632207,0.798482701501043,"Independiente",1,1,30,0,1
+"Arellano, Marco",91,955,17.8020578430817,0.737588744444446,"Independiente",0,0,31,0,1
+"Arrau, Martin",45,1196,3.72516344673376,0.182366935317662,"Partido Republicano de Chile",0,0,42,1,1
+"Atria, Fernando",80,408,7.32360906001961,0.660195568100086,"Independiente",1,0,52,0,3
+"Bacian, Wilfredo",82,596,14.9814969850387,0.663761047775132,"Independiente",0,0,45,1,0
+"Baradit, Jorge",117,700,37.4118981763177,0.923365783947686,"Independiente",0,0,52,0,1
+"Baranda, Benito",133,824,129.851313901643,0.958455262399174,"Independiente",0,0,62,0,3
+"Barcelo, Luis",85,613,52.6146479343312,0.562165859788929,"Independiente",1,0,67,1,1
+"Barraza, Marcos",114,1087,31.5550067743664,0.904587128386608,"Partido Comunista de Chile",0,0,48,1,1
+"Bassa, Jaime",101,615,20.3786575127541,0.817199626806493,"Independiente",1,0,44,0,3
+"Botto, Miguel Angel",93,527,65.4509530234084,0.610129956499718,"Independiente",0,0,52,0,2
+"Bown, Carol",50,1103,8.58198625361358,0.211592271635349,"Unión Demócrata Independiente",1,1,42,1,2
+"Bravo, Daniel",103,579,39.4283560236682,0.803922152836908,"Independiente",1,0,39,0,2
+"Caamano, Francisco",129,2528,91.7101078868155,0.96823631760229,"Independiente",0,0,31,0,1
+"Caiguan, Alexis",83,466,6.46002160843726,0.69156635342969,"Independiente",0,0,45,0,0
+"Calvo, Carlos",130,807,138.349862917907,0.927468985500783,"Independiente",0,0,75,0,3
+"Cancino, Adriana",120,801,117.468688624795,0.838479871567001,"Independiente",0,1,59,0,1
+"Cantuarias, Rocio",50,1074,10.4548326248023,0.22150176202769,"Independiente",1,1,43,0,2
+"Carrillo, Alondra",99,912,15.4074222572276,0.80793141583957,"Independiente",0,1,30,0,1
+"Castillo, Eduardo",63,449,19.5181837232302,0.4263924976072,"Partido Por la Democracia",1,0,71,1,2
+"Castillo, Maria Trinidad",121,967,67.9320270749925,0.919448279807964,"Independiente",0,1,64,0,2
+"Castro, Claudia",55,1048,17.5157723059527,0.270859872081414,"Independiente",0,1,53,0,1
+"Catrileo, Rosa",86,485,12.0154470721846,0.700433679089957,"Independiente",1,1,39,0,2
+"Celedon, Roberto",116,484,50.8922103431517,0.902003573921746,"Independiente",1,0,74,0,2
+"Celis, Raul",62,539,36.6702386068611,0.307126241781647,"Renovación Nacional",1,0,58,1,1
+"Cespedes, Lorena",97,434,29.8785951624714,0.759500984678265,"Independiente",0,1,47,0,1
+"Chahin, Fuad",72,504,30.1372845586027,0.488928381295198,"Partido Demócrata Cristiano",1,0,44,1,1
+"Chinga, Eric",87,1252,14.1014337990255,0.713212145870327,"Independiente",0,0,50,0,0
+"Cozzi, Ruggero",54,292,14.957981506906,0.254734245626781,"Independiente",1,0,34,0,2
+"Cretton, Eduardo",52,1143,12.5797683746874,0.231501151235771,"Unión Demócrata Independiente",0,0,25,0,1
+"Cruz, Andres",117,892,77.4149881536937,0.866044779981405,"Independiente",1,0,48,0,3
+"Cubillos, Marcela",56,791,25.3217526138676,0.279316985023969,"Unión Demócrata Independiente",1,1,54,1,1
+"Daza, Mauricio",114,588,80.4864383400636,0.868153383812424,"Independiente",1,0,49,0,2
+"De la Maza, Bernardo",104,457,102.09422407004,0.677635731309213,"Independiente",0,0,75,0,1
+"Delgado, Aurora",93,713,9.96646039581591,0.769689694393584,"Independiente",0,1,56,0,1
+"Dominguez, Gaspar",120,766,52.4353353634388,0.931144342417619,"Independiente",0,0,32,0,2
+"Dorador, Cristina",115,894,33.9432337140809,0.91679082909296,"Independiente",0,1,41,0,3
+"Fernandez, Patricio",101,651,49.7158358333599,0.760501845037508,"Independiente",0,0,51,0,0
+"Flores, Alejandra",104,1067,15.3959640676465,0.848729609200536,"Independiente",0,1,60,0,2
+"Fontaine, Bernardo",46,468,6.3528325407609,0.187513145582564,"Independiente",0,0,57,0,1
+"Fuchslocher, Javier",111,767,51.6149680903638,0.84403098944001,"Independiente",0,0,32,0,2
+"Gallardo, Bessy",112,1212,27.5496097020034,0.891056358255253,"Independiente",0,1,36,0,1
+"Galleguillos, Felix",90,644,8.81518579832839,0.747540874693718,"Independiente",0,0,35,0,1
+"Garin, Renato",79,310,38.7332615738953,0.584606858045937,"Independiente",1,0,35,1,2
+"Giustinianovich, Elisa",104,1063,14.9659299447035,0.851585795512857,"Independiente",0,1,36,0,3
+"Godoy, Isabel",105,1929,24.6333019313146,0.848139926562052,"Independiente",0,1,53,0,0
+"Gomez, Claudio",112,934,42.4373063820066,0.88069988701915,"Independiente",1,0,41,0,2
+"Gomez, Yarela",112,990,21.6128711643066,0.906197424435305,"Independiente",0,1,31,0,1
+"Gonzalez, Dayana",99,893,14.1971075836944,0.816433230567335,"Independiente",0,1,33,0,1
+"Gonzalez, Lidia",97,540,14.847723796358,0.7936047613351,"Independiente",0,1,54,1,0
+"Grandon, Giovanna",106,996,17.2438076438012,0.862675268480622,"Independiente",0,1,46,0,0
+"Grandon, Paola",94,534,11.429898524203,0.778188274385986,"Federación Regionalista Verde Social",0,1,47,0,0
+"Gutierrez, Hugo",107,1135,21.9297061867533,0.860864046689988,"Partido Comunista de Chile",1,0,59,1,1
+"Harboe, Felipe",78,489,34.0320383115615,0.539404543157045,"Partido por la Democracia",1,0,48,1,1
+"Henriquez, Natalia",99,837,16.1211156609232,0.807125173631248,"Independiente",0,1,35,0,1
+"Hoppe, Vanessa",108,1507,25.2901133339256,0.873480431208251,"Independiente",1,1,41,0,2
+"Hube, Constanza",43,650,4.92122726967377,0.180186187798019,"Unión Demócrata Independiente",1,1,35,0,2
+"Hurtado, Maximiliano",91,488,23.3683793191579,0.721902700792689,"Partido Socialista de Chile",0,0,36,0,0
+"Hurtado, Ruth",51,1316,5.83477029569067,0.221139223320733,"Republicano de Chile",0,1,39,0,1
+"Jimenez, Luis",111,713,38.2242184820654,0.877088680483536,"Independiente",1,0,37,0,1
+"Jofre, Alvaro",60,658,17.1055789515396,0.310821508369324,"Renovación Nacional",0,0,49,1,1
+"Jurgensen, Harry",52,1368,9.33087213854912,0.243158155471483,"Renovación Nacional",0,0,79,1,1
+"Labbe, Bastian",108,1233,18.6296465889511,0.881147961303359,"Independiente",0,0,31,0,1
+"Labra, Patricia",91,632,77.7698185694508,0.556883571963609,"Renovación Nacional",1,1,35,1,2
+"Labrana, Elsa",113,1622,63.464925171941,0.854285713079724,"Independiente",0,1,46,0,1
+"Laibe, Tomas",113,587,46.1726191650034,0.874070424300536,"Partido Socialista de Chile",0,0,30,0,2
+"Larrain, Hernan",49,464,6.59500886562136,0.221718277317286,"Evolución Política",1,0,46,0,2
+"Letelier, Margarita",54,1048,11.5343247414651,0.243413246450521,"Unión Demócrata Independiente",0,1,67,0,1
+"Linconao, Francisca",65,338,6.9519155629842,0.528056886671761,"Independiente",0,1,64,0,0
+"Llanquileo, Natividad",98,936,14.692530006847,0.803640511792429,"Independiente",1,1,36,0,1
+"Logan, Rodrigo",86,558,67.9640143663976,0.529199337186511,"Independiente",1,0,41,0,2
+"Loncon, Elisa",111,665,26.5969803354144,0.887221105837525,"Independiente",0,1,58,0,3
+"Madriaga, Tania",105,1278,38.9763136005613,0.825764228510866,"Independiente",0,1,49,0,2
+"Mamani, Isabella",74,429,7.99452865831226,0.605943599109494,"Independiente",1,1,33,0,1
+"Marinovic, Teresa",31,789,0.174792378000225,0.0927024162420655,"Independiente",0,1,48,0,1
+"Martin, Juan Jose",119,566,104.585456493316,0.871237818926415,"Independiente",0,0,25,0,0
+"Martinez, Helmuth",108,499,99.8706408073374,0.735454050698317,"Independiente",1,0,34,0,1
+"Mayol, Luis",51,626,11.8395947296256,0.223017255831431,"Renovación Nacional",1,0,68,1,1
+"Mella, Jeniffer",104,675,25.968366243146,0.832662536438279,"Independiente",1,1,40,0,1
+"Mena, Felipe",68,1168,37.2822801935216,0.369359322029941,"Unión Demócrata Independiente",0,0,38,1,2
+"Meneses, Janis",106,1074,20.7420181884597,0.861306989191274,"Independiente",0,1,32,0,1
+"Millabur, Adolfo",94,590,13.9575243316183,0.767330836990862,"Independiente",0,0,54,1,0
+"Miranda, Valentina",108,1058,18.8239771973463,0.880151575126133,"Partido Comunista de Chile",0,1,21,0,0
+"Monckeberg, Cristian",70,627,32.0195470718423,0.403851908108745,"Renovación Nacional",1,0,53,1,2
+"Montealegre, Katerine",51,740,7.59956176341513,0.231541455725405,"Unión Demócrata Independiente",1,1,29,0,1
+"Montero, Ricardo",45,265,3.14575303237349,0.360458577849797,"Partido Socialista de Chile",1,0,38,0,2
+"Moreno, Alfredo",61,802,26.0562447348055,0.298311042365765,"Independiente",0,0,39,0,2
+"Munoz, Pedro",93,499,22.7385668624386,0.735065982821317,"Partido Socialista de Chile",1,0,33,1,1
+"Namor, Guillermo",116,603,94.352379740713,0.855196480559821,"Independiente",0,0,24,0,1
+"Navarrete, Geoconda",56,690,16.6398544956158,0.265225134124622,"Evolución Política",0,1,51,1,1
+"Neumann, Ricardo",89,1091,76.622847220766,0.538723485478958,"Independiente",1,0,33,0,2
+"Nunez, Nicolas",112,1401,23.6400199714501,0.904411891098024,"Federación Regionalista Verde Social",1,0,33,0,1
+"Olivares, Ivanna",93,1131,17.0231594853454,0.755414178722885,"Independiente",0,1,30,0,1
+"Orellana, Matias",93,569,24.6384764910721,0.723244602207884,"Partido Socialista de Chile",1,0,32,0,1
+"Ossandon, Manuel",81,779,60.2318030365881,0.462960413944771,"Independiente",1,0,34,0,1
+"Oyarzun, Maria Jose",78,369,4.68423603198951,0.654220311129385,"Partido Revolución Democrática",0,1,38,0,1
+"Perez, Alejandra",100,1251,28.4825131422172,0.792115271785523,"Independiente",0,1,43,0,0
+"Pinto, Malucha",133,1492,94.8446679192592,1,"Partido Socialista de Chile",0,1,66,0,0
+"Politzer, Patricia",102,460,25.8271684580811,0.807903060886564,"Independiente",0,1,69,1,1
+"Portilla, Ericka",89,602,10.2971592724515,0.73572252496814,"Partido Comunista de Chile",1,1,36,1,2
+"Pustilnick, Tammy",102,616,32.8823855858312,0.801477416788673,"Independiente",1,1,34,0,2
+"Quinteros, Maria Elisa",103,902,14.0311444898013,0.844882897410895,"Independiente",0,1,39,0,3
+"Rebolledo, Barbara",69,526,44.2322208826907,0.378647652186163,"Independiente",0,1,48,0,2
+"Reyes, Maria Ramona",116,917,47.7615207559417,0.90014140774823,"Partido Socialista de Chile",0,1,54,1,1
+"Rivera, Maria Magdalena",117,1188,110.172284285023,0.845856380823031,"Independiente",1,1,63,0,1
+"Rivera, Pollyana",43,703,4.70947791352151,0.171950785275264,"Independiente",0,1,46,0,1
+"Roa, Giovanna",102,609,11.3512028476661,0.843543299415985,"Revolución Democrática",0,1,34,0,1
+"Royo, Manuela",111,1870,25.1341206206051,0.892862767848122,"Independiente",1,1,38,0,2
+"Saldana, Alvin",111,1313,19.6981985733282,0.90193010159004,"Independiente",1,0,44,0,1
+"Salinas, Fernando",68,437,1.94172613399788,0.579767864390365,"Independiente",0,0,65,0,1
+"San Juan, Constanza",100,736,14.796471655411,0.819060253687619,"Independiente",0,1,35,0,1
+"Sanchez, Beatriz",78,357,5.85422727084922,0.652271563876926,"Independiente",0,1,50,0,1
+"Schonhaut, Constanza",89,543,10.5416607962206,0.735727704976982,"Convergencia Social",1,1,32,0,1
+"Sepulveda, Barbara",118,921,58.479638379955,0.908448781129254,"Partido Comunista de Chile",1,1,35,0,2
+"Sepulveda, Carolina",127,1005,119.390055889044,0.939203486985692,"Independiente",0,1,41,0,3
+"Serey, Mariela",107,640,17.7454325388794,0.869703679970602,"Independiente",0,1,40,0,1
+"Silva, Luciano",63,251,25.872005172235,0.349113233792107,"Renovación Nacional",0,0,50,0,1
+"Squella, Agustin",81,431,35.8698900336447,0.584778836774705,"Independiente",1,0,77,1,3
+"Stingo, Daniel",86,374,9.49752738520955,0.705813623591842,"Independiente",1,0,55,0,1
+"Tepper, Maria Angelica",86,715,57.4657256782132,0.520722260951779,"Independiente",0,1,60,0,0
+"Tirado, Fernando",53,260,10.4147590911389,0.422093148107125,"Pueblo Chango",0,0,67,1,1
+"Toloza, Pablo",45,1000,4.11882317636472,0.184992793095405,"Unión Demócrata Independiente",1,0,50,1,1
+"Ubilla, Maria Cecilia",51,1034,17.8591723250994,0.24061256646785,"Independiente",1,1,65,1,1
+"Uribe, Cesar",105,1341,22.9854004098043,0.854724515812555,"Independiente",0,0,37,0,1
+"Urrutia, Tatiana",91,637,9.05899592334212,0.756649482732931,"Revolución Democrática",0,1,38,0,0
+"Valenzuela, Cesar",81,490,19.9374764947325,0.629816784649142,"Partido Socialista de Chile",1,0,32,0,2
+"Valenzuela, Paulina",104,634,27.456264043554,0.828498176420738,"Independiente",0,1,36,0,1
+"Vallejos, Loreto",112,1314,23.6068743567563,0.908646354469304,"Independiente",0,1,41,0,1
+"Vargas, Margarita",101,684,62.2556030435395,0.742895585684801,"Independiente",0,1,51,0,1
+"Vargas, Mario",115,705,48.1827270817545,0.892990323465655,"Partido Socialista de Chile",0,0,58,0,2
+"Vega, Roberto",65,628,33.4969036765749,0.33692330755167,"Renovación Nacional",1,0,43,1,2
+"Velasquez, Hernan",81,460,4.28037561681987,0.6847048725649,"Federación Regionalista Verde Social",0,0,55,1,1
+"Veloso, Paulina",80,613,51.953323885326,0.463242507679665,"Renovación Nacional",0,1,33,0,1
+"Vergara, Lisette",104,1341,27.7809296304039,0.826975453616085,"Independiente",0,1,28,0,1
+"Vidal, Rossana",110,735,76.9363253340001,0.820167503089224,"Independiente",1,1,51,0,2
+"Videla, Carolina",115,1250,26.1249601043363,0.92443449586339,"Partido Comunista de Chile",0,1,52,0,1
+"Viera, Christian",84,369,6.14081924327114,0.701679572631839,"Independiente",1,0,48,0,3
+"Vilches, Carolina",98,1487,20.8686721692108,0.79655533249091,"Independiente",0,1,36,0,1
+"Villena, Ingrid",111,1190,39.6744028516721,0.878204353280681,"Independiente",1,1,31,0,1
+"Woldarsky, Manuel",108,1368,22.483656443702,0.871375641936457,"Independiente",1,0,37,0,1
+"Zarate, Camila",98,1114,12.7689225987072,0.801755782626522,"Independiente",0,1,29,0,1
+"Zuniga, Luis Arturo",55,634,18.8476350944501,0.287575508858962,"Unión Demócrata Independiente",0,0,38,1,1

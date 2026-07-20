@@ -1,6 +1,6 @@
 ---
-title: "Networked Influence in a Tabula Rasa Legislature"
-subtitle: "Redes de co-patrocinio, dinámicas ideológicas y éxito político en la Convención Constitucional de Chile (2021--2022)"
+title: "Collaboration Networks in a Tabula Rasa Legislature"
+subtitle: "Tie Formation, Voting Behavior, and Legislative Success in Chile's Constitutional Convention (2021--2022)"
 author: "A. Olivera, J. Fábrega"
 date: \today
 geometry: "margin=2.5cm"
@@ -39,13 +39,13 @@ Todo el material proviene del registro documental de la Convención, procesado e
     - distrito electoral (28 distritos; para los 17 escaños reservados, su pueblo originario — 10 pueblos);
     - lista electoral de origen, agrupada en conglomerados (Vamos por Chile 37, Apruebo Dignidad 28, Lista del Apruebo 25, Lista del Pueblo 23, escaños reservados 17, Independientes No Neutrales 3, otras listas locales 21);
     - comisión temática de pertenencia.
-- Iniciativas: 996 ingresadas a la plataforma oficial entre nov-2021 y feb-2022.
-    - 528 tienen dos o más firmantes-persona (el resto son populares/institucionales o de firmante único recuperable).
-    - El análisis usa 487: las 41 restantes registran más de 16 firmantes — imposible bajo la regla del reglamento — y están en auditoría como duplicaciones de documentos transversales entre comisiones.
-    - Para 448 de las 487 tenemos la fecha exacta de ingreso (3-nov-2021 al 2-feb-2022); 156 ingresaron el día del plazo final. Las 39 sin fecha solo quedan fuera del modelo que necesita orden temporal (sección 3.3).
+- Iniciativas: 995 ingresadas a la plataforma oficial de la Convención entre nov-2021 y feb-2022, con la lista de firmantes armonizada al padrón de 154.
+    - 947 tienen entre 2 y 16 firmantes-persona y forman el set de análisis; 46 registran más de 16 firmantes — imposible bajo la regla del reglamento — y quedan excluidas mientras se auditan como duplicaciones de documentos transversales entre comisiones; 2 tienen un solo firmante recuperable.
+    - Todas tienen fecha de ingreso (3-nov-2021 al 2-feb-2022; 123 del set de análisis con fecha imputada desde las notas del propio registro). 339 — un 36% — ingresaron el día del plazo final.
+    - 827 del set de análisis tienen comisión temática asignada en la plataforma; las 120 restantes entran a la red agregada y al modelo de eventos, pero no a los análisis por comisión.
 - Red de co-patrocinio: la proyección de las firmas sobre pares de convencionales.
-    - 154 nodos y 5.870 aristas; el peso $w_{ij}$ = número de iniciativas que $i$ y $j$ co-firmaron.
-    - Firmar no escasea para el firmante: mediana 42 iniciativas firmadas por convencional, máximo 157 (Figura 2a).
+    - 154 nodos y 6.946 aristas; el peso $w_{ij}$ = número de iniciativas que $i$ y $j$ co-firmaron.
+    - Firmar no escasea para el firmante: mediana 62 iniciativas firmadas por convencional, máximo 227 (Figura 2a).
     - El tope legal de 16 patrocinantes se llenaba con frecuencia: es el valor modal (Figura 2b).
 - Trazabilidad de textos: 1.809 artículos génesis con desenlace conocido frente al borrador del 14-mayo-2022.
     - 498 artículos llegaron al borrador (tasa de supervivencia 20%); el resto murió en comisión o en el Pleno.
@@ -58,15 +58,15 @@ Las siete comisiones temáticas difieren fuertemente en composición y en produc
 
 | | Nombre (corto) | Miembros | % abog. | % exper. | Edad | Grado (0--3) | Iniciativas | Ondas ind. | Indicaciones | Ind. multifirm. |
 |:-:|:---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-| C1 | Sistema Político | 25 | 60 | 36 | 42.2 | 1.44 | 27 | 4 | 365 | 266 |
-| C2 | Principios Const. | 18 | 22 | 22 | 45.8 | 1.28 | 51 | 3 | 53 | 1 |
-| C3 | Forma de Estado | 30 | 37 | 40 | 45.1 | 1.43 | 38 | 6 | 241 | 212 |
-| C4 | Derechos Fund. | 30 | 30 | 13 | 45.9 | 1.03 | 59 | 5 | 395 | 154 |
-| C5 | Medio Ambiente | 19 | 21 | 16 | 44.7 | 1.26 | 142 | 5 | 559 | 0 |
-| C6 | Sist. de Justicia | 17 | 88 | 18 | 42.6 | 1.65 | 75 | 6 | 381 | 317 |
-| C7 | Conocimientos | 15 | 13 | 0 | 51.7 | 1.33 | 95 | 8 | 332 | 54 |
+| C1 | Sistema Político | 25 | 60 | 36 | 42.2 | 1.44 | 89 | 4 | 365 | 266 |
+| C2 | Principios Const. | 18 | 22 | 22 | 45.8 | 1.28 | 114 | 3 | 53 | 1 |
+| C3 | Forma de Estado | 30 | 37 | 40 | 45.1 | 1.43 | 51 | 6 | 241 | 212 |
+| C4 | Derechos Fund. | 30 | 30 | 13 | 45.9 | 1.03 | 283 | 5 | 395 | 154 |
+| C5 | Medio Ambiente | 19 | 21 | 16 | 44.7 | 1.26 | 133 | 5 | 559 | 0 |
+| C6 | Sist. de Justicia | 17 | 88 | 18 | 42.6 | 1.65 | 93 | 6 | 381 | 317 |
+| C7 | Conocimientos | 15 | 13 | 0 | 51.7 | 1.33 | 64 | 8 | 332 | 54 |
 
-(Iniciativas = con 2--16 firmantes, set de análisis. Ondas ind. = número de informes de indicaciones de la comisión. Indicaciones = actos de enmienda registrados con autoría, deduplicados. Ind. multifirm. = el subconjunto de esas indicaciones con dos o más firmantes — las únicas que agregan lazos a la red de la sección 4. Los ceros de C5 son una limitación de registro: sus indicaciones fueron colectivas pero los informes anotan solo al primer firmante.)
+(Iniciativas = con 2--16 firmantes asignadas a la comisión en la plataforma; otras 120 del set de análisis no tienen comisión asignada. Ondas ind. = número de informes de indicaciones de la comisión. Indicaciones = actos de enmienda registrados con autoría, deduplicados. Ind. multifirm. = el subconjunto de esas indicaciones con dos o más firmantes — las únicas que agregan lazos a la red de la sección 4. Los ceros de C5 son una limitación de registro: sus indicaciones fueron colectivas pero los informes anotan solo al primer firmante.)
 
 ## 2.1 Cómo medimos la ideología
 
@@ -87,7 +87,7 @@ $$U_{ia} = \beta^\top x_{ia} + \alpha_a + \varepsilon_{ia},$$
 donde $x_{ia}$ es el vector de covariables que describe la relación del convencional $i$ con la coalición firmante $S_a$; $\alpha_a$ es un efecto fijo de la iniciativa (todo lo que la hace atractiva en sí: tema, redactor, momento); y $\varepsilon_{ia}$ es un shock idiosincrático. Las covariables, cada una definida sobre la coalición sin contar al propio $i$ ("leave-one-out"):
 
 - $d^{\theta_1}_{ia} = |\theta_{1i} - \bar\theta_{1,S_a}|$ y $d^{\theta_2}_{ia}$: distancia de $i$ a la posición media de la coalición en cada dimensión.
-- $comision_{ia} \in \{0,1\}$: si $i$ pertenece a la comisión temática del texto. Cualquier convencional podía patrocinar iniciativas de cualquier comisión, y de hecho lo hacía: el 70% de las firmas observadas proviene de convencionales de otra comisión. La variable mide, entonces, una inclinación real y no una restricción: los miembros de la comisión son el 12% del pool de candidatos pero aportan el 30% de las firmas.
+- $comision_{ia} \in \{0,1\}$: si $i$ pertenece a la comisión temática del texto. Cualquier convencional podía patrocinar iniciativas de cualquier comisión, y de hecho lo hacía: el 72% de las firmas observadas proviene de convencionales de otra comisión. La variable mide, entonces, una inclinación real y no una restricción: los miembros de la comisión son el 12% del pool de candidatos pero aportan el 28% de las firmas.
 - $lista^c_{ia} \in \{0,1\}$: si la lista de $i$ coincide con la lista mayoritaria de la coalición, con un coeficiente $\lambda_c$ distinto por conglomerado $c$.
 - $distrito_{ia} \in [0,1]$: proporción de la coalición que comparte distrito (o pueblo originario) con $i$.
 - $abogado_{ia} = abogado_i \times$ (proporción de abogados en $S_a$), y análogos para experiencia y género.
@@ -97,58 +97,56 @@ El modelo de regresión efectivamente estimado es el logit condicional de McFadd
 
 $$P\big(S_a \,\big|\, |S_a|\big) = \frac{\exp\big(\sum_{i \in S_a} \beta^\top x_{ia}\big)}{\sum_{R \subseteq \{1..154\},\, |R| = |S_a|} \exp\big(\sum_{i \in R} \beta^\top x_{ia}\big)},$$
 
-y $\hat\beta$ maximiza $\ell(\beta) = \sum_a \log P(S_a \mid |S_a|)$. Como $\alpha_a$ es común a todos los candidatos de la iniciativa $a$, aparece idéntico en numerador y denominador y se cancela: no hay que estimarlo, y $\beta$ queda identificado solo por comparaciones entre convencionales frente al mismo menú. La suma del denominador se aproxima con el método de Efron (estándar para este diseño), y los errores estándar se agrupan por convencional. Datos: 487 menús $\times$ 154 convencionales = 74.998 decisiones.
+y $\hat\beta$ maximiza $\ell(\beta) = \sum_a \log P(S_a \mid |S_a|)$. Como $\alpha_a$ es común a todos los candidatos de la iniciativa $a$, aparece idéntico en numerador y denominador y se cancela: no hay que estimarlo, y $\beta$ queda identificado solo por comparaciones entre convencionales frente al mismo menú. La suma del denominador se aproxima con el método de Efron (estándar para este diseño), y los errores estándar se agrupan por convencional. Datos: 949 menús $\times$ 154 convencionales = 145.838 decisiones.
 
 La tabla completa, con las variables ordenadas según la pregunta de esta sección — primero lo que se sabía de cada convencional antes de que la Convención existiera, después lo que solo se supo adentro:
 
 | Variable | Coef. | OR | EE | $p$ |
 |:---|:-:|:-:|:-:|:-:|
 | *Observables pre-Convención* | | | | |
-| Afinidad de distrito/pueblo | $+1.76$ | 5.8 | 0.54 | $0.001$ |
-| Misma lista: Escaños Reservados PPOO | $+1.80$ | 6.0 | 0.21 | $<10^{-16}$ |
-| Misma lista: Vamos por Chile | $+1.05$ | 2.9 | 0.22 | $<10^{-5}$ |
-| Misma lista: Otras listas locales | $+1.09$ | 3.0 | 0.15 | $<10^{-12}$ |
-| Misma lista: Lista del Pueblo | $+1.02$ | 2.8 | 0.15 | $<10^{-10}$ |
-| Misma lista: Lista del Apruebo | $+1.01$ | 2.8 | 0.17 | $<10^{-9}$ |
-| Misma lista: Apruebo Dignidad | $+0.79$ | 2.2 | 0.13 | $<10^{-9}$ |
-| Afinidad de abogados | $+0.38$ | 1.5 | 0.20 | $0.059$ |
-| Afinidad de experiencia previa | $+0.33$ | 1.4 | 0.26 | $0.195$ |
-| Afinidad de género | $+0.39$ | 1.5 | 0.18 | $0.028$ |
-| Distancia de grado académico | $-0.08$ | 0.9 | 0.08 | $0.297$ |
+| Afinidad de distrito/pueblo | $+2.45$ | 11.6 | 0.57 | $<10^{-4}$ |
+| Misma lista: Escaños Reservados PPOO | $+1.44$ | 4.2 | 0.21 | $<10^{-11}$ |
+| Misma lista: Otras listas locales | $+1.33$ | 3.8 | 0.16 | $<10^{-16}$ |
+| Misma lista: Lista del Pueblo | $+1.07$ | 2.9 | 0.17 | $<10^{-10}$ |
+| Misma lista: Lista del Apruebo | $+1.04$ | 2.8 | 0.19 | $<10^{-7}$ |
+| Misma lista: Vamos por Chile | $+0.95$ | 2.6 | 0.21 | $<10^{-5}$ |
+| Misma lista: Apruebo Dignidad | $+0.93$ | 2.5 | 0.14 | $<10^{-10}$ |
+| Afinidad de experiencia previa | $+0.51$ | 1.7 | 0.23 | $0.026$ |
+| Afinidad de género | $+0.29$ | 1.3 | 0.17 | $0.076$ |
+| Afinidad de abogados | $+0.14$ | 1.1 | 0.18 | $0.439$ |
+| Distancia de grado académico | $-0.09$ | 0.9 | 0.08 | $0.237$ |
 | *Estructura y posiciones formadas en la Convención (controles)* | | | | |
-| Misma comisión que el texto | $+1.21$ | 3.4 | 0.05 | $<10^{-117}$ |
-| Distancia en $\theta_1$ a la coalición | $-3.46$ | 0.03 | 0.23 | $<10^{-52}$ |
-| Distancia en $\theta_2$ a la coalición | $-1.22$ | 0.30 | 0.13 | $<10^{-19}$ |
+| Misma comisión que el texto | $+0.92$ | 2.5 | 0.05 | $<10^{-69}$ |
+| Distancia en $\theta_1$ a la coalición | $-3.64$ | 0.03 | 0.24 | $<10^{-51}$ |
+| Distancia en $\theta_2$ a la coalición | $-1.37$ | 0.25 | 0.14 | $<10^{-21}$ |
 
 (La lista Independientes No Neutrales, con 3 miembros, nunca es mayoritaria en una coalición y su coeficiente no está identificado.)
 
-Tres lecturas. Primera, la sorpresa territorial: compartir distrito es uno de los predictores pre-Convención más fuertes — pasar de una coalición sin coterráneos a una llena de ellos multiplica las odds de firmar por casi seis. Es conocimiento disponible el día uno: dos convencionales del mismo distrito hicieron campaña en el mismo territorio, comparten electores y problemas locales. Segunda, la lista coordina en todos los conglomerados (todos los $\lambda_c$ entre 0.8 y 1.1, con los escaños reservados aparte en 1.8): también predecible ex ante. Tercera, las credenciales no organizan la firma: abogados marginal, experiencia nula, educación nula — con lo que se sabía de las profesiones antes de julio de 2021 no se predice quién firma con quién (sección 3.4 explica por qué igual "se ven" juntos). Los controles se comportan como se espera: la distancia ideológica es el mayor inhibidor del modelo (una unidad de $\theta_1$ divide las odds por 30) y la comisión triplica las odds — pero son variables *formadas dentro* de la Convención, y por eso las tratamos como controles y no como hallazgo.
+Tres lecturas. Primera, la sorpresa territorial: compartir distrito es el predictor pre-Convención más fuerte — pasar de una coalición sin coterráneos a una llena de ellos multiplica las odds de firmar por casi doce. Es conocimiento disponible el día uno: dos convencionales del mismo distrito hicieron campaña en el mismo territorio, comparten electores y problemas locales. Segunda, la lista coordina en todos los conglomerados (todos los $\lambda_c$ entre 0.9 y 1.4, con los escaños reservados y las listas locales en la parte alta): también predecible ex ante. Tercera, las credenciales se parten en dos: ser abogado no organiza la firma en absoluto (y la educación tampoco), pero la experiencia institucional previa sí — dos personas con carrera pública tienen odds 1.7 veces mayores de terminar en la misma coalición (la sección 3.4 muestra que ese eco no llega a marcar coaliciones reales en el modelo dinámico). Los controles se comportan como se espera: la distancia ideológica es el mayor inhibidor del modelo (una unidad de $\theta_1$ divide las odds por casi 40) y la comisión multiplica las odds por 2.5 — pero son variables *formadas dentro* de la Convención, y por eso las tratamos como controles y no como hallazgo.
 
 El mismo modelo, agregando el término de escaños reservados y sus interacciones (segunda columna: ¿los PPOO eligen distinto?):
 
 | Variable (modelo con interacciones PPOO) | Coef. | EE | $p$ |
 |:---|:-:|:-:|:-:|
-| PPOO (efecto base) | $-0.84$ | 0.28 | $0.002$ |
-| PPOO $\times$ distancia en $\theta_1$ | $+1.34$ | 0.63 | $0.034$ |
-| PPOO $\times$ distancia en $\theta_2$ | $-0.30$ | 0.47 | $0.530$ |
-| Misma lista PPOO | $+2.58$ | 0.33 | $<10^{-14}$ |
-| Afinidad de distrito/pueblo | $+1.45$ | 0.53 | $0.006$ |
+| PPOO (efecto base) | $-0.36$ | 0.36 | $0.31$ |
+| PPOO $\times$ distancia en $\theta_1$ | $+0.65$ | 0.60 | $0.27$ |
+| PPOO $\times$ distancia en $\theta_2$ | $-0.66$ | 0.58 | $0.26$ |
+| Misma lista PPOO | $+1.89$ | 0.38 | $<10^{-6}$ |
+| Afinidad de distrito/pueblo | $+2.26$ | 0.56 | $<10^{-4}$ |
 
-Los escaños reservados firman menos iniciativas ajenas, coordinan entre sí más que nadie, y — la interacción positiva — cruzan distancias en $\theta_1$ que el resto no cruza: su pendiente ideológica clásica es $-3.59 + 1.34 = -2.25$ contra $-3.59$ del resto. Su coordenada operativa no es el eje izquierda-derecha.
-
-Para poner a los PPOO en contexto, la robustez con una pendiente ideológica *por lista* (efectos principales de lista más interacciones con la distancia en $\theta_1$; referencia = Vamos por Chile):
+Con el pool completo de iniciativas, ninguna interacción PPOO es significativa: una vez controlados su lista (la más cohesionada del modelo) y su territorio, los escaños reservados no eligen distinto del resto. El contraste que sí existe aparece recién al mirar la pendiente ideológica *por lista* (efectos principales de lista más interacciones con la distancia en $\theta_1$; referencia = Vamos por Chile):
 
 | Lista | Pendiente base (VC) | Interacción | Pendiente total |
 |:---|:-:|:-:|:-:|
-| Vamos por Chile | $-5.88$ | — | $-5.88$ |
-| Independientes No Neutrales | $-5.88$ | $+0.84$ (n.s.) | $-5.04$ |
-| Otras listas locales | $-5.88$ | $+1.51$ | $-4.37$ |
-| Lista del Apruebo | $-5.88$ | $+2.80$ | $-3.08$ |
-| Apruebo Dignidad | $-5.88$ | $+3.21$ | $-2.67$ |
-| Escaños Reservados PPOO | $-5.88$ | $+3.86$ | $-2.02$ |
-| Lista del Pueblo | $-5.88$ | $+4.09$ | $-1.79$ |
+| Vamos por Chile | $-6.10$ | — | $-6.10$ |
+| Independientes No Neutrales | $-6.10$ | $+0.71$ (n.s.) | $-5.38$ |
+| Otras listas locales | $-6.10$ | $+1.96$ | $-4.13$ |
+| Lista del Apruebo | $-6.10$ | $+2.69$ | $-3.41$ |
+| Apruebo Dignidad | $-6.10$ | $+3.02$ | $-3.08$ |
+| Escaños Reservados PPOO | $-6.10$ | $+3.26$ | $-2.83$ |
+| Lista del Pueblo | $-6.10$ | $+4.14$ | $-1.95$ |
 
-La lectura honesta: los PPOO están entre los más planos, pero no solos — la Lista del Pueblo lo es incluso más, y la diferencia entre ambos no es estadísticamente distinguible. El patrón grueso es una asimetría izquierda-derecha: la derecha (VC) casi no cruza distancias ideológicas al firmar; los bloques de izquierda cruzan mucho más. Lo que sigue distinguiendo *únicamente* a los PPOO es la combinación de puentes largos con la máxima cohesión interna de lista ($\lambda = 1.80$).
+La lectura honesta: los PPOO están entre los más planos, pero no solos — la Lista del Pueblo lo es incluso más, y la diferencia entre ambos no es estadísticamente distinguible. El patrón grueso es una asimetría izquierda-derecha: la derecha (VC) casi no cruza distancias ideológicas al firmar; los bloques de izquierda cruzan mucho más. Lo que sigue distinguiendo a los PPOO es la combinación de puentes ideológicos largos con la mayor cohesión interna de lista del modelo ($\lambda = 1.44$).
 
 ## 3.2 Las listas: coordinación sin disciplina
 
@@ -158,14 +156,14 @@ La primera está medida en la tabla de 3.1, en las filas "Misma lista": cada $\l
 
 | Conglomerado | $\hat\lambda_c$ | OR |
 |:---|:-:|:-:|
-| Escaños Reservados PPOO | $1.80$ | 6.0 |
-| Otras listas locales | $1.09$ | 3.0 |
-| Vamos por Chile | $1.05$ | 2.9 |
-| Lista del Pueblo | $1.02$ | 2.8 |
-| Lista del Apruebo | $1.01$ | 2.8 |
-| Apruebo Dignidad | $0.79$ | 2.2 |
+| Escaños Reservados PPOO | $1.44$ | 4.2 |
+| Otras listas locales | $1.33$ | 3.8 |
+| Lista del Pueblo | $1.07$ | 2.9 |
+| Lista del Apruebo | $1.04$ | 2.8 |
+| Vamos por Chile | $0.95$ | 2.6 |
+| Apruebo Dignidad | $0.93$ | 2.5 |
 
-Todos positivos, todos entre 0.8 y 1.1 salvo los escaños reservados: la lista ad hoc por excelencia (Lista del Pueblo) coordinó firmas igual que los pactos de partidos tradicionales.
+Todos positivos y de magnitud comparable (odds entre 2.5 y 4.2), con los escaños reservados y las listas locales en la parte alta: la lista ad hoc por excelencia (Lista del Pueblo) coordinó firmas igual que los pactos de partidos tradicionales.
 
 Para la segunda — votar juntos — usamos el índice de Rice, que conviene explicar con calma.
 
@@ -191,7 +189,7 @@ Ninguna lista tiene premio. Pero antes de concluir "no hubo disciplina", hay que
 
 El logit condicional mira cada iniciativa como si fuera la primera de la historia. Pero las iniciativas ocurrieron en orden — tenemos la fecha de cada una — y el orden permite hacer la pregunta que ninguna foto responde: cuando dos personas firman juntas, ¿es porque se parecen, o porque ya habían firmado juntas antes? Parecerse y conocerse suelen venir juntos, y solo un modelo con tiempo puede separarlos.
 
-La idea del modelo de hipereventos relacionales (RHEM), contada primero sin fórmulas. La historia de la Convención es una película de 448 escenas; en cada escena, una coalición concreta aparece firmando una iniciativa. Para cada escena preguntamos: de todas las coaliciones de ese mismo tamaño que podrían haberse formado ese día, ¿por qué exactamente esta? Y respondemos comparando la coalición real con 50 coaliciones ficticias del mismo tamaño (25 sorteadas entre los 154 convencionales y 25 entre los miembros de la comisión del texto, para que la comparación sea exigente). El modelo aprende qué características separan las coaliciones reales de las ficticias. Algunas características son de composición — las mismas del logit condicional: compacidad ideológica, misma lista, mismo distrito. La novedad son las características de historia: cuánto habían firmado antes, hasta el día anterior, los miembros de la coalición candidata.
+La idea del modelo de hipereventos relacionales (RHEM), contada primero sin fórmulas. La historia de la Convención es una película de 947 escenas; en cada escena, una coalición concreta aparece firmando una iniciativa. Para cada escena preguntamos: de todas las coaliciones de ese mismo tamaño que podrían haberse formado ese día, ¿por qué exactamente esta? Y respondemos comparando la coalición real con 50 coaliciones ficticias del mismo tamaño (25 sorteadas entre los 154 convencionales y 25 entre los miembros de la comisión del texto, para que la comparación sea exigente). El modelo aprende qué características separan las coaliciones reales de las ficticias. Algunas características son de composición — las mismas del logit condicional: compacidad ideológica, misma lista, mismo distrito. La novedad son las características de historia: cuánto habían firmado antes, hasta el día anterior, los miembros de la coalición candidata.
 
 Las variables de historia se llaman repetición de subconjuntos ($sub.rep$) y se entienden mejor con un ejemplo. Tomemos la coalición candidata {Ana, Berta, Carlos} evaluada el 10 de enero:
 
@@ -211,37 +209,37 @@ $$P\big(h_e \text{ real} \,\big|\, \text{estrato } e\big) = \frac{\exp\big(\thet
 
 con las mismas covariables de composición del logit condicional (para que las tablas se lean en paralelo) más las tres estadísticas de historia: $s(t,h)$ reúne la dispersión ideológica de la coalición en cada dimensión (la distancia promedio entre sus pares), la proporción de pares de la misma lista, del mismo distrito/pueblo, ambos abogados, ambos con experiencia, ambos mujeres, la dispersión de grado académico, la proporción de miembros de la comisión del texto, y $sub.rep^{(1,2,3)}$. Todas las covariables se estandarizan (media 0, desviación 1), así que cada coeficiente responde: si esta característica sube una desviación estándar, ¿cuánto más "real" parece la coalición? La estimación se repite con 10 sorteos independientes de controles; la tabla reporta el promedio (los coeficientes apenas se mueven entre sorteos) y la mediana de los $p$, con los mismos bloques que la tabla de 3.1:
 
+Como estadística de historia, el modelo principal usa solo $sub.rep^{(2)}$: el par es la unidad mínima de una relación ($sub.rep^{(1)}$ mide actividad individual, no relación, y $sub.rep^{(3)}$ recicla la información de los pares), y el párrafo siguiente muestra qué pasa cuando entran las tres a la vez.
+
 | Variable | Memoria infinita | $p$ | Semivida 30 días |
 |:---|:-:|:-:|:-:|
 | *Observables pre-Convención* | | | |
-| Prop. pares mismo distrito/pueblo | $+0.78$ | $2\times10^{-6}$ | $+0.75$ |
-| Prop. pares misma lista | $+1.03$ | $5\times10^{-5}$ | $+1.09$ |
-| Prop. pares ambos abogados | $+0.38$ | $0.30$ | $+0.44$ |
-| Prop. pares ambos con experiencia | $+0.09$ | $0.72$ | $+0.03$ |
-| Prop. pares ambas mujeres | $+0.10$ | $0.54$ | $+0.11$ |
-| Dispersión de grado académico | $+0.25$ | $0.30$ | $+0.27$ |
+| Prop. pares mismo distrito/pueblo | $+0.58$ | $2\times10^{-7}$ | $+0.58$ |
+| Prop. pares misma lista | $+0.93$ | $3\times10^{-8}$ | $+0.99$ |
+| Prop. pares ambos abogados | $+0.06$ | $0.39$ | $+0.06$ |
+| Prop. pares ambos con experiencia | $+0.22$ | $0.33$ | $+0.24$ |
+| Prop. pares ambas mujeres | $-0.10$ | $0.47$ | $-0.07$ |
+| Dispersión de grado académico | $+0.35$ | $0.031$ | $+0.36$ |
 | *Estructura y posiciones formadas en la Convención (controles)* | | | |
-| Prop. de la comisión del texto (‡) | $-0.31$ | $0.36$ | $-0.22$ |
-| Dispersión ideológica $\theta_1$ | $-2.72$ | $9\times10^{-16}$ | $-2.71$ |
-| Dispersión ideológica $\theta_2$ | $-0.55$ | $0.017$ | $-0.57$ |
+| Prop. de la comisión del texto (‡) | $+0.05$ | $0.81$ | $+0.09$ |
+| Dispersión ideológica $\theta_1$ | $-2.67$ | $2\times10^{-40}$ | $-2.64$ |
+| Dispersión ideológica $\theta_2$ | $-0.33$ | $0.042$ | $-0.35$ |
 | *Historia de co-firma (lo nuevo del RHEM)* | | | |
-| $sub.rep^{(2)}$ — familiaridad de pares | $+7.53$ | $2\times10^{-7}$ | $+6.92$ |
-| $sub.rep^{(1)}$ — actividad individual (†) | $-7.23$ | $1\times10^{-5}$ | $-6.32$ |
-| $sub.rep^{(3)}$ — familiaridad de tríos (†) | $-2.61$ | $6\times10^{-5}$ | $-2.31$ |
+| $sub.rep^{(2)}$ — familiaridad de pares | $+2.10$ | $8\times10^{-21}$ | $+2.09$ |
 
-(†) Estos signos negativos no se leen por separado — ver el párrafo siguiente. (‡) No interpretable: la mitad de los controles se sortea dentro de la comisión, así que este contraste queda absorbido por el diseño; el efecto comisión ya está medido en 3.1.
+(‡) No interpretable: la mitad de los controles se sortea dentro de la comisión, así que este contraste queda absorbido por el diseño; el efecto comisión ya está medido en 3.1.
 
-El truco de los signos. Las tres estadísticas de historia son casi la misma variable con distinto zoom (correlaciones 0.78 y 0.84: la gente activa acumula pares familiares, y los pares familiares componen tríos). Ajustadas de a una, las tres son positivas: actividad $+1.63$ ($p = 0.002$), pares $+1.62$ ($p < 10^{-6}$), tríos $+0.77$ ($p < 10^{-3}$). Juntas, la de pares absorbe toda la señal y las otras dos se vuelven negativas — un reparto engañoso típico entre variables casi colineales, no una paradoja. La lectura conjunta correcta: lo que distingue a una coalición real es específicamente la familiaridad de sus pares; condicional en ella, "mucha actividad individual sin familiaridad mutua" es marca de coalición ficticia (así lucen los controles: firmantes seriales que no se conocen), y los tríos no agregan sobre los pares. En una frase: la Convención se tejió de a dos — se reclutaban duplas consolidadas, no equipos completos. Entre las dos memorias, la infinita ajusta mejor (log-verosimilitud $-42.7$ contra $-48.3$): el capital de co-firma se acumula, no se evapora en un mes.
+¿Y las otras dos estadísticas de historia? Las tres son casi la misma variable con distinto zoom (correlación 0.69 entre actividad y pares, 0.82 entre pares y tríos: la gente activa acumula pares familiares, y los pares familiares componen tríos). Ajustadas de a una, las tres son positivas y de tamaño casi idéntico: actividad $+2.52$, pares $+2.57$, tríos $+2.65$ — pero la de pares es la que mejor ajusta sola (log-verosimilitud $-111$ contra $-190$ y $-115$). Y en la robustez con las tres juntas, la de pares absorbe toda la señal ($+4.48$) mientras actividad ($-5.23$) y tríos ($-0.87$, n.s.) se vuelven negativas — el reparto engañoso típico entre variables casi colineales, no una paradoja. La lectura conjunta: lo que distingue a una coalición real es específicamente la familiaridad de sus pares; condicional en ella, "mucha actividad individual sin familiaridad mutua" es marca de coalición ficticia (así lucen los controles: firmantes seriales que no se conocen), y los tríos no agregan sobre los pares. En una frase: la Convención se tejió de a dos — se reclutaban duplas consolidadas, no equipos completos. Las dos memorias ajustan igual de bien (log-verosimilitud $-110.9$ en ambas): con una ventana de tres meses, no se puede distinguir si el capital de co-firma se acumula o decae. Un detalle nuevo: la dispersión de grado académico entra *positiva* ($+0.35$, $p = 0.03$) — las coaliciones reales mezclan niveles educativos más que el azar, otra señal de que las credenciales no segregan.
 
-Qué agrega el RHEM sobre el logit condicional — la comparación en detalle. Los dos modelos usan los mismos eventos y la misma forma estadística; difieren en una sola cosa: el RHEM deja que el pasado entre a la ecuación. Eso tiene tres consecuencias. (i) El logit condicional es el RHEM del primer día: cuando nadie ha firmado con nadie, las estadísticas de historia valen cero para todos y el RHEM se reduce exactamente al logit de 3.1 — por eso no son rivales sino el mismo modelo en dos momentos, y por eso los coeficientes de composición del logit deben leerse como "la fuerza de los atributos cuando no hay historia que consultar" (los primeros momentos). (ii) La dinámica que el RHEM revela es acumulativa: cada co-firma de hoy se vuelve familiaridad mañana, y esa familiaridad es el predictor más fuerte de la próxima coalición — un mecanismo de rieles: los primeros encuentros (guiados por distrito, lista e ideología, como muestra el logit) crean los pares por los que después circula todo lo demás. (iii) La pregunta contrafactual cambia: el logit pregunta "¿a quién se parece el que firma?"; el RHEM pregunta "dado todo lo que ya pasó, ¿quién más podría haber firmado hoy?". Que la ideología ($-2.70$) sobreviva con toda su fuerza en la segunda pregunta es el hallazgo: la homofilia no era un espejismo de la historia acumulada. Y que lista y distrito también sobrevivan dice que la organización territorial y de etiqueta opera en cada coalición nueva, no solo en la primera.
+Qué agrega el RHEM sobre el logit condicional — la comparación en detalle. Los dos modelos usan los mismos eventos y la misma forma estadística; difieren en una sola cosa: el RHEM deja que el pasado entre a la ecuación. Eso tiene tres consecuencias. (i) El logit condicional es el RHEM del primer día: cuando nadie ha firmado con nadie, las estadísticas de historia valen cero para todos y el RHEM se reduce exactamente al logit de 3.1 — por eso no son rivales sino el mismo modelo en dos momentos, y por eso los coeficientes de composición del logit deben leerse como "la fuerza de los atributos cuando no hay historia que consultar" (los primeros momentos). (ii) La dinámica que el RHEM revela es acumulativa: cada co-firma de hoy se vuelve familiaridad mañana, y esa familiaridad es el predictor más fuerte de la próxima coalición — un mecanismo de rieles: los primeros encuentros (guiados por distrito, lista e ideología, como muestra el logit) crean los pares por los que después circula todo lo demás. (iii) La pregunta contrafactual cambia: el logit pregunta "¿a quién se parece el que firma?"; el RHEM pregunta "dado todo lo que ya pasó, ¿quién más podría haber firmado hoy?". Que la ideología ($-2.67$) sobreviva con toda su fuerza en la segunda pregunta es el hallazgo: la homofilia no era un espejismo de la historia acumulada. Y que lista y distrito también sobrevivan dice que la organización territorial y de etiqueta opera en cada coalición nueva, no solo en la primera.
 
 Una cautela final: la "familiaridad" medida solo ve lo firmado desde noviembre de 2021. Amistades previas, militancias compartidas u otras afinidades estables que no observamos quedan dentro de $sub.rep^{(2)}$; por eso la llamamos persistencia relacional y no amistad.
 
 ## 3.4 Lo que no organiza la red: la profesión
 
-La versión para la abuela. Uno esperaría que los abogados de la Convención se buscaran entre ellos para escribir juntos — al fin y al cabo, escribir una constitución es trabajo de abogados. Y si uno mira las iniciativas, efectivamente hay varias llenas de abogados. Pero mirar quién termina junto engaña: hay que preguntar quién *elige* a quién. Nuestros modelos hacen exactamente eso, y la respuesta es que un abogado, puesto frente a dos coaliciones idénticas donde una tiene más abogados, no prefiere la de los abogados (efecto marginal en 3.1, nulo en 3.3). ¿Y entonces por qué se los ve juntos? Porque hay temas que son de abogados. Es el tema el que junta a los abogados, como un asado junta parrilleros: nadie eligió a sus amigos por saber hacer fuego, pero alrededor de la parrilla terminan los que saben. Lo mismo vale para la experiencia política previa: nula en la elección de socios. Las credenciales no tejieron la red.
+La versión para la abuela. Uno esperaría que los abogados de la Convención se buscaran entre ellos para escribir juntos — al fin y al cabo, escribir una constitución es trabajo de abogados. Y si uno mira las iniciativas, efectivamente hay varias llenas de abogados. Pero mirar quién termina junto engaña: hay que preguntar quién *elige* a quién. Nuestros modelos hacen exactamente eso, y la respuesta es que un abogado, puesto frente a dos coaliciones idénticas donde una tiene más abogados, no prefiere la de los abogados (nulo en 3.1, nulo en 3.3). ¿Y entonces por qué se los ve juntos? Porque hay temas que son de abogados. Es el tema el que junta a los abogados, como un asado junta parrilleros: nadie eligió a sus amigos por saber hacer fuego, pero alrededor de la parrilla terminan los que saben. La experiencia política previa es el matiz: sí aparece en la elección de socios (3.1, odds 1.7), aunque no llega a marcar coaliciones reales una vez que la historia entra al modelo (3.3). La profesión, en cambio, no tejió la red.
 
-Las dos figuras siguientes muestran la evidencia descriptiva. Cómo leer la Figura 4: cada iniciativa tiene una "proporción de abogados" (si la firman 10 personas y 4 son abogados, vale 0.4). El panel (a) apila las 487 iniciativas en un histograma (barras azules) y lo compara con un mundo ficticio donde las mismas iniciativas hubieran sorteado a sus firmantes al azar entre los 154 (barras grises): la distribución real es más ancha que la del azar por ambos lados — sobran iniciativas casi sin abogados y sobran iniciativas cargadas de abogados. Esa doble cola es la marca de la segregación temática. El panel (b) muestra la misma proporción separada por comisión, como cajas (la caja cubre la mitad central de las iniciativas de esa comisión; la línea es la mediana; el punto rojo, el promedio). La Figura 5 resume el panel (b) en su versión más simple: el promedio por comisión como barra, contra la línea roja del peso de los abogados en la Convención entera. Ahí se lee directamente el contraste clave: en Sistemas de Justicia — jueces, fiscales, control constitucional — las coaliciones firmantes promedian 53% de abogados, catorce puntos sobre la tasa global (y el 88% de los miembros de esa comisión son abogados: tabla de la sección 2); en Principios, Derechos Fundamentales, Medio Ambiente y Conocimientos, promedian 29--31%, bajo la tasa global.
+Las dos figuras siguientes muestran la evidencia descriptiva. Cómo leer la Figura 4: cada iniciativa tiene una "proporción de abogados" (si la firman 10 personas y 4 son abogados, vale 0.4). El panel (a) apila las 947 iniciativas en un histograma (barras azules) y lo compara con un mundo ficticio donde las mismas iniciativas hubieran sorteado a sus firmantes al azar entre los 154 (barras grises): la distribución real es más ancha que la del azar por ambos lados — sobran iniciativas casi sin abogados y sobran iniciativas cargadas de abogados. Esa doble cola es la marca de la segregación temática. El panel (b) muestra la misma proporción separada por comisión, como cajas (la caja cubre la mitad central de las iniciativas de esa comisión; la línea es la mediana; el punto rojo, el promedio). La Figura 5 resume el panel (b) en su versión más simple: el promedio por comisión como barra, contra la línea roja del peso de los abogados en la Convención entera. Ahí se lee directamente el contraste clave: en Sistemas de Justicia — jueces, fiscales, control constitucional — las coaliciones firmantes promedian 47% de abogados, ocho puntos sobre la tasa global (y el 88% de los miembros de esa comisión son abogados: tabla de la sección 2); en Derechos Fundamentales, Medio Ambiente y Conocimientos, promedian 27--33%, bajo la tasa global.
 
 ![Figura 4. (a) Proporción de abogados por iniciativa contra un sorteo aleatorio de firmantes; (b) por comisión.](../results/figures/lawyer_share_initiatives.pdf){width=100%}
 
@@ -259,41 +257,41 @@ donde $w_{ij,t}$ es el número de veces que $i$ y $j$ co-firmaron desde el inici
 
 $$\Delta\theta_{i,t} = \alpha_i + \beta\,\theta_{i,t-1} + \lambda\,E_{i,t-1} + \varepsilon_{it},$$
 
-donde $\Delta\theta_{i,t} = \theta_{i,t} - \theta_{i,t-1}$ es el cambio de posición, $\alpha_i$ absorbe todo lo estable de cada convencional (el estimador "within" usa solo la variación de cada persona respecto de su propia media), $\beta$ captura la reversión a la media y $\lambda$ es el parámetro de interés: si $\lambda > 0$, me muevo hacia donde está mi vecindario. Errores agrupados por convencional; 4.224 observaciones persona-onda.
+donde $\Delta\theta_{i,t} = \theta_{i,t} - \theta_{i,t-1}$ es el cambio de posición, $\alpha_i$ absorbe todo lo estable de cada convencional (el estimador "within" usa solo la variación de cada persona respecto de su propia media), $\beta$ captura la reversión a la media y $\lambda$ es el parámetro de interés: si $\lambda > 0$, me muevo hacia donde está mi vecindario. Errores agrupados por convencional; 4.355 observaciones persona-onda.
 
 La tabla completa, incluyendo las dos preguntas de robustez que importan — ¿cambia el resultado según la ventana temporal? (¿pudo la influencia operar temprano, sobre los novatos, y agotarse?) y ¿cambia según cuánta historia carga la exposición? (¿cuál es la "dosis" relevante?):
 
 | Ventana temporal | Definición de exposición | $\hat\lambda$ | EE | $p$ | N |
 |:---|:---|:-:|:-:|:-:|:-:|
-| Completa | Acumulada desde T0 | $+0.008$ | 0.005 | $0.095$ | 4.224 |
+| Completa | Acumulada desde T0 | $+0.007$ | 0.004 | $0.119$ | 4.355 |
 | Completa | Solo última onda | $+0.007$ | 0.013 | $0.60$ | 463 |
-| Completa | Últimas 2 ondas | $+0.007$ | 0.008 | $0.41$ | 1.450 |
-| Completa | Últimas 3 ondas | $+0.006$ | 0.006 | $0.33$ | 2.340 |
-| Completa | Decaimiento $\lambda_w = 0.25$ | $+0.008$ | 0.004 | $0.062$ | 4.224 |
-| Completa | Decaimiento $\lambda_w = 0.50$ | $+0.009$ | 0.004 | $0.042$ | 4.224 |
-| Completa | Decaimiento $\lambda_w = 0.75$ | $+0.009$ | 0.005 | $0.061$ | 4.224 |
-| Completa | Falsificación: exposición futura | $+0.009$ | 0.005 | $0.069$ | 3.255 |
-| Temprana (ondas $\leq$ 31-mar) | Acumulada | $+0.005$ | 0.007 | $0.42$ | 1.587 |
-| Temprana | Últimas 2 ondas | $+0.013$ | 0.010 | $0.19$ | 937 |
-| Temprana | Últimas 3 ondas | $+0.001$ | 0.007 | $0.95$ | 1.452 |
-| Temprana | Decaimiento $\lambda_w = 0.25$ | $+0.004$ | 0.006 | $0.50$ | 1.587 |
-| Temprana | Decaimiento $\lambda_w = 0.50$ | $+0.005$ | 0.006 | $0.44$ | 1.587 |
-| Temprana | Decaimiento $\lambda_w = 0.75$ | $+0.005$ | 0.007 | $0.42$ | 1.587 |
-| Temprana | Falsificación: exposición futura | $+0.007$ | 0.007 | $0.30$ | 1.589 |
-| Tardía (ondas $\geq$ 1-abr) | Acumulada | $+0.004$ | 0.005 | $0.46$ | 2.637 |
+| Completa | Últimas 2 ondas | $+0.003$ | 0.009 | $0.72$ | 1.504 |
+| Completa | Últimas 3 ondas | $-0.002$ | 0.007 | $0.76$ | 2.447 |
+| Completa | Decaimiento $\lambda_w = 0.25$ | $+0.008$ | 0.004 | $0.051$ | 4.355 |
+| Completa | Decaimiento $\lambda_w = 0.50$ | $+0.008$ | 0.004 | $0.042$ | 4.355 |
+| Completa | Decaimiento $\lambda_w = 0.75$ | $+0.007$ | 0.004 | $0.078$ | 4.355 |
+| Completa | Falsificación: exposición futura | $+0.010$ | 0.004 | $0.030$ | 3.329 |
+| Temprana (ondas $\leq$ 31-mar) | Acumulada | $+0.005$ | 0.007 | $0.50$ | 1.586 |
+| Temprana | Últimas 2 ondas | $+0.013$ | 0.014 | $0.35$ | 955 |
+| Temprana | Últimas 3 ondas | $+0.002$ | 0.010 | $0.81$ | 1.466 |
+| Temprana | Decaimiento $\lambda_w = 0.25$ | $+0.005$ | 0.007 | $0.46$ | 1.586 |
+| Temprana | Decaimiento $\lambda_w = 0.50$ | $+0.005$ | 0.007 | $0.48$ | 1.586 |
+| Temprana | Decaimiento $\lambda_w = 0.75$ | $+0.005$ | 0.007 | $0.49$ | 1.586 |
+| Temprana | Falsificación: exposición futura | $+0.006$ | 0.007 | $0.41$ | 1.587 |
+| Tardía (ondas $\geq$ 1-abr) | Acumulada | $+0.011$ | 0.005 | $0.018$ | 2.769 |
 | Tardía | Solo última onda | $-0.002$ | 0.018 | $0.92$ | 332 |
-| Tardía | Últimas 2 ondas | $-0.005$ | 0.008 | $0.55$ | 513 |
-| Tardía | Últimas 3 ondas | $-0.002$ | 0.008 | $0.79$ | 888 |
-| Tardía | Decaimiento $\lambda_w = 0.25$ | $+0.003$ | 0.005 | $0.52$ | 2.637 |
-| Tardía | Decaimiento $\lambda_w = 0.50$ | $+0.004$ | 0.005 | $0.35$ | 2.637 |
-| Tardía | Decaimiento $\lambda_w = 0.75$ | $+0.004$ | 0.005 | $0.39$ | 2.637 |
-| Tardía | Falsificación: exposición futura | $-0.001$ | 0.005 | $0.83$ | 1.666 |
+| Tardía | Últimas 2 ondas | $-0.006$ | 0.008 | $0.45$ | 549 |
+| Tardía | Últimas 3 ondas | $-0.011$ | 0.008 | $0.21$ | 981 |
+| Tardía | Decaimiento $\lambda_w = 0.25$ | $+0.009$ | 0.004 | $0.032$ | 2.769 |
+| Tardía | Decaimiento $\lambda_w = 0.50$ | $+0.011$ | 0.004 | $0.008$ | 2.769 |
+| Tardía | Decaimiento $\lambda_w = 0.75$ | $+0.011$ | 0.004 | $0.011$ | 2.769 |
+| Tardía | Falsificación: exposición futura | $+0.010$ | 0.004 | $0.004$ | 1.742 |
 
-Sobre las ventanas: la ventana ideal para la hipótesis "la influencia operó temprano sobre los nuevos" sería el primer mes de la Convención, pero ahí la red de co-firma no existía todavía (las primeras iniciativas son de noviembre; los primeros informes, de enero-febrero — Figura 1). Las ventanas factibles cortan la era de colaboración activa en sus dos primeros meses (febrero-marzo de 2022) y el resto (abril-junio). En ninguna ventana ni con ninguna dosis de exposición aparece influencia: los coeficientes rondan $+0.005$ a $+0.009$ y el único que roza la significancia (decaimiento 0.50, $p = 0.042$) no se concentra en la ventana temprana, como exigiría la historia de los novatos susceptibles.
+Sobre las ventanas: la ventana ideal para la hipótesis "la influencia operó temprano sobre los nuevos" sería el primer mes de la Convención, pero ahí la red de co-firma no existía todavía (las primeras iniciativas son de noviembre; los primeros informes, de enero-febrero — Figura 1). Las ventanas factibles cortan la era de colaboración activa en sus dos primeros meses (febrero-marzo de 2022) y el resto (abril-junio). El patrón: en la ventana temprana no hay nada; en la tardía varios coeficientes se vuelven significativos ($+0.009$ a $+0.011$) — pero su falsificación también ($+0.010$, $p = 0.004$), y con la misma magnitud. La historia de los novatos susceptibles exigiría exactamente lo contrario (efecto temprano, falsificación limpia).
 
-La falsificación merece su propia explicación. Si el coeficiente de la exposición *pasada* reflejara influencia causal, la exposición *futura* no debería "predecir" el cambio de hoy. Pero lo hace, y con la misma magnitud que la pasada ($+0.009$ contra $+0.008$). Esa simetría es la firma de la selección: la exposición no causa el cambio — acompaña al cambio, antes y después, porque elijo co-firmantes hacia cuya posición ya me estoy moviendo. (Una precaución que verificamos: la exposición es persistente en el tiempo, así que pasada y futura comparten señal; por eso el argumento no es "el futuro predice", sino que pasado y futuro predicen *igual* — si hubiera causalidad, el pasado debería dominar, y no domina.)
+La falsificación merece su propia explicación. Si el coeficiente de la exposición *pasada* reflejara influencia causal, la exposición *futura* no debería "predecir" el cambio de hoy. Pero lo hace — en la ventana completa incluso algo más que la pasada ($+0.010$ contra $+0.007$), y en la tardía exactamente igual. Esa simetría es la firma de la selección: la exposición no causa el cambio — acompaña al cambio, antes y después, porque elijo co-firmantes hacia cuya posición ya me estoy moviendo. (Una precaución que verificamos: la exposición es persistente en el tiempo, así que pasada y futura comparten señal; por eso el argumento no es "el futuro predice", sino que pasado y futuro predicen *igual* — si hubiera causalidad, el pasado debería dominar, y no domina.) Un chequeo adicional en la misma línea: como casi todas las ondas caen después del cambio de reglas del 15-feb-2022, re-estimamos el panel usando un $\theta$ recalculado solo con las votaciones de la era de dos tercios (mismo régimen de agenda para toda la serie). Los coeficientes suben — $+0.021$ la exposición pasada, $+0.020$ la futura, ambos $p < 10^{-3}$ — pero la simetría se mantiene intacta: más señal compartida, ninguna asimetría causal.
 
-¿Y si el nulo fuera falta de poder? La versión para la abuela: imagina que quieres saber si tu grupo de amigas te cambia los gustos musicales. Hay dos formas de que el experimento fracase sin que signifique nada: que tus amigas ya tengan exactamente tus gustos (no habría nada que copiar — sin espacio), o que tu termómetro de gustos sea tan malo que no note cambios chicos (sin instrumento). Verificamos ambas. Espacio: la distancia promedio entre la posición de cada convencional y la de su vecindario es 0.59; si los vecindarios se armaran al azar sería 2.26 — la selección cerró el 74% del espacio, pero el 0.59 restante es espacio real donde la influencia se habría notado. Instrumento: el efecto mínimo detectable con nuestros datos es $\lambda = 0.013$ (es decir, habríamos detectado una influencia que cerrara apenas 1.3% de la distancia por onda); lo estimado es $0.008$, por debajo incluso de eso. Conclusión: hubo espacio y hubo instrumento — la influencia simplemente no está, o es sustantivamente despreciable. (Precisión técnica: ese 0.013 sale del error estándar del coeficiente de la regresión — la incertidumbre muestral —, no del error de medición de $\theta$, que aún no está propagado; ver sección 7.)
+¿Y si el nulo fuera falta de poder? La versión para la abuela: imagina que quieres saber si tu grupo de amigas te cambia los gustos musicales. Hay dos formas de que el experimento fracase sin que signifique nada: que tus amigas ya tengan exactamente tus gustos (no habría nada que copiar — sin espacio), o que tu termómetro de gustos sea tan malo que no note cambios chicos (sin instrumento). Verificamos ambas. Espacio: la distancia promedio entre la posición de cada convencional y la de su vecindario es 0.59; si los vecindarios se armaran al azar sería 2.25 — la selección cerró el 74% del espacio, pero el 0.59 restante es espacio real donde la influencia se habría notado. Instrumento: el efecto mínimo detectable con nuestros datos es $\lambda = 0.012$ (es decir, habríamos detectado una influencia que cerrara apenas 1.2% de la distancia por onda); lo estimado es $0.007$, por debajo incluso de eso. Conclusión: hubo espacio y hubo instrumento — la influencia simplemente no está, o es sustantivamente despreciable. (Precisión técnica: ese 0.012 sale del error estándar del coeficiente de la regresión — la incertidumbre muestral —, no del error de medición de $\theta$, que aún no está propagado; ver sección 7.)
 
 ## 4.2 Conducta: la defección viaja por la red
 
@@ -307,20 +305,20 @@ donde $w_{ij}$ es el peso de co-firma de la red génesis (cuántas iniciativas f
 
 $$\Pr(D_{iv} = 1) = \Lambda\big(\eta_i + \mu_v + \phi\, X_{iv}\big),$$
 
-donde $\Lambda$ es la función logística, $\eta_i$ absorbe la propensión individual a rebelarse (hay personalidades díscolas), $\mu_v$ absorbe la votación (hay votaciones que rompen a todo el mundo), y $\phi$ es el parámetro de interés: ¿defecciono más cuando defeccionan los míos? Errores agrupados por convencional; 374.039 observaciones en la era de votaciones de normas.
+donde $\Lambda$ es la función logística, $\eta_i$ absorbe la propensión individual a rebelarse (hay personalidades díscolas), $\mu_v$ absorbe la votación (hay votaciones que rompen a todo el mundo), y $\phi$ es el parámetro de interés: ¿defecciono más cuando defeccionan los míos? Errores agrupados por convencional; 374.047 observaciones en la era de votaciones de normas.
 
 El problema es que $\phi$ crudo exagera: si una votación parte a mi lista en dos, varios defeccionamos a la vez aunque no nos conozcamos. El contrafactual duro: barajamos los nombres de los defectores dentro de cada lista y votación — manteniendo exactamente cuántos defeccionaron en cada una — y re-estimamos 200 veces. Todo lo mecánico sobrevive al barajado; solo muere el alineamiento con la red. Y el chequeo adicional contra una historia alternativa: "defeccionamos juntos porque somos de la misma comisión y conocemos el artículo en tabla" — separamos la exposición según si el co-firmante es de mi comisión o de otra, controlando además la tasa de defección de mi comisión en esa votación ($C_{iv}$, la fracción de miembros de mi comisión que defeccionó, sin contarme).
 
 | Modelo | Variable | Coef. | EE | $p$ |
 |:---|:---|:-:|:-:|:-:|
-| Principal | Exposición a defectores ($\phi$) | $+11.46$ | 0.57 | $<10^{-89}$ |
-| Benchmark permutado (200 réplicas) | $\phi$ esperado por mecánica | $5.93$ [p95: $6.00$] | — | $< 0.005$ |
-| Período completo (robustez) | $\phi$ | $+11.30$ | 0.51 | $<10^{-108}$ |
-| Split por comisión | Exposición co-firmantes de otra comisión | $+8.97$ | 0.49 | $<10^{-15}$ |
-| | Exposición co-firmantes de mi comisión | $+2.76$ | 0.32 | $<10^{-15}$ |
-| | Tasa de defección de mi comisión ($C_{iv}$) | $-2.65$ | 0.42 | $<10^{-9}$ |
+| Principal | Exposición a defectores ($\phi$) | $+11.21$ | 0.52 | $<10^{-100}$ |
+| Benchmark permutado (200 réplicas) | $\phi$ esperado por mecánica | $6.02$ [p95: $6.08$] | — | $< 0.005$ |
+| Período completo (robustez) | $\phi$ | $+11.06$ | 0.47 | $<10^{-121}$ |
+| Split por comisión | Exposición co-firmantes de otra comisión | $+8.67$ | 0.46 | $<10^{-15}$ |
+| | Exposición co-firmantes de mi comisión | $+2.99$ | 0.32 | $<10^{-15}$ |
+| | Tasa de defección de mi comisión ($C_{iv}$) | $-3.01$ | 0.45 | $<10^{-10}$ |
 
-Lectura: la mitad del efecto crudo era mecánica de bloques ($11.5$ observado contra $5.9$ del mundo barajado), pero lo que sobra es enorme y real. Y la historia de "compartir sala con el artículo" queda descartada: la co-defección viaja más fuerte por los co-firmantes de *otras* comisiones que por los de la propia, y la tasa de defección de mi comisión, lejos de arrastrarme, tiene signo negativo. En una frase: la red no cambia lo que piensas (4.1), pero cuando llega el momento de desmarcarse del bloque, no te desmarcas solo — te desmarcas con los tuyos.
+Lectura: la mitad del efecto crudo era mecánica de bloques ($11.2$ observado contra $6.0$ del mundo barajado), pero lo que sobra es enorme y real. Y la historia de "compartir sala con el artículo" queda descartada: la co-defección viaja más fuerte por los co-firmantes de *otras* comisiones que por los de la propia, y la tasa de defección de mi comisión, lejos de arrastrarme, tiene signo negativo. En una frase: la red no cambia lo que piensas (4.1), pero cuando llega el momento de desmarcarse del bloque, no te desmarcas solo — te desmarcas con los tuyos.
 
 # 5. RQ3 — ¿Qué hace ganar?
 
@@ -334,35 +332,35 @@ donde $S_a$ es la coalición firmante del artículo $a$; $\bar\theta_{1,S_a}$ su
 
 | Variable | (1) Pivotal | (2) + Red | (3) + Capital humano |
 |:---|:-:|:-:|:-:|
-| Distancia de la coalición al pívot | $-0.35$ ($p=.001$) | $-0.64$ ($p<10^{-4}$) | $-0.70$ ($p<10^{-4}$) |
-| Heterogeneidad ideológica $sd(\theta_1)$ | $+0.27$ ($p=.008$) | $+0.47$ ($p<10^{-3}$) | $+0.50$ ($p<10^{-3}$) |
-| Tamaño de la coalición | $+0.20$ ($p=.13$) | $+0.21$ ($p=.07$) | $+0.19$ ($p=.11$) |
-| Grado medio | | $+0.56$ ($p=.11$) | $+0.41$ ($p=.24$) |
-| Betweenness media | | $-0.38$ ($p=.004$) | $-0.37$ ($p=.007$) |
-| Constraint media | | $+0.74$ ($p=.020$) | $+0.73$ ($p=.016$) |
-| Densidad interna (pares con historia) | | $+0.27$ ($p=.018$) | $+0.29$ ($p=.009$) |
-| Prop. abogados | | | $-0.06$ ($p=.71$) |
-| Prop. con experiencia previa | | | $-0.09$ ($p=.66$) |
-| Grado académico medio | | | $-0.10$ ($p=.52$) |
-| AIC | 1393 | 1372 | 1375 |
+| Distancia de la coalición al pívot | $-0.35$ ($p=.001$) | $-0.51$ ($p=.036$) | $-0.62$ ($p=.012$) |
+| Heterogeneidad ideológica $sd(\theta_1)$ | $+0.27$ ($p=.008$) | $+0.46$ ($p<10^{-3}$) | $+0.53$ ($p<10^{-4}$) |
+| Tamaño de la coalición | $+0.20$ ($p=.12$) | $+0.19$ ($p=.12$) | $+0.15$ ($p=.21$) |
+| Grado medio | | $+0.09$ ($p=.80$) | $+0.03$ ($p=.94$) |
+| Betweenness media | | $-0.25$ ($p=.17$) | $-0.24$ ($p=.21$) |
+| Constraint media | | $+0.10$ ($p=.83$) | $+0.28$ ($p=.54$) |
+| Densidad interna (pares con historia) | | $+0.26$ ($p=.025$) | $+0.32$ ($p=.003$) |
+| Prop. abogados | | | $-0.10$ ($p=.57$) |
+| Prop. con experiencia previa | | | $-0.16$ ($p=.47$) |
+| Grado académico medio | | | $-0.06$ ($p=.70$) |
+| AIC | 1393 | 1386 | 1388 |
 
-(Advertencia: grado medio y constraint media son colineales — VIF cercano a 11 — y sus coeficientes individuales se leen con cautela; el resto tiene VIF bajo 4. Con la variable dependiente continua — la similitud textual con el borrador, con los fracasos en cero — los signos y significancias se mantienen.)
+(Advertencia: grado medio y constraint media son colineales — VIF cercano a 10 — y sus coeficientes individuales se leen con cautela; el resto tiene VIF bajo 4. Con la variable dependiente continua — la similitud textual con el borrador, con los fracasos en cero — los signos y significancias se mantienen.)
 
-La geometría manda: coaliciones lejanas al pívot mueren, y condicional a dónde está su centro, las coaliciones ideológicamente anchas sobreviven más. Los equipos consolidados (densidad interna) y de miembros incrustados (constraint alta) ganan; las coaliciones de intermediarios (betweenness) pierden. Y el capital humano no aparece: la proporción de abogados o de experimentados no predice nada — la pericia ni forma lazos (3.4) ni gana votaciones.
+La geometría manda: coaliciones lejanas al pívot mueren, y condicional a dónde está su centro, las coaliciones ideológicamente anchas sobreviven más. Del bloque de red, lo único que sobrevive con claridad es la densidad interna: los equipos con historia de co-firma previa ganan (las posiciones estructurales — grado, betweenness, constraint — no distinguen nada una vez que la geometría está controlada). Y el capital humano no aparece: la proporción de abogados o de experimentados no predice nada — la pericia ni forma lazos (3.4) ni gana votaciones.
 
 ¿Heterogeneidad, o heterogeneidad dentro de la izquierda? Una objeción importante: el 87% de las coaliciones tiene posición media a la izquierda de cero (mediana $-0.58$) — la Convención *era* de izquierda. ¿El premio a la anchura será entonces solo dispersión dentro de la izquierda? Partimos las coaliciones en terciles de posición media y re-estimamos el modelo (2) en cada tramo:
 
 | Tramo (posición media de la coalición) | Supervivencia | $sd(\theta_1)$ | $p$ |
 |:---|:-:|:-:|:-:|
-| T1: izquierda ($\bar\theta_1 \in [-0.83, -0.69]$) | 10.5% | $+1.34$ | $0.019$ |
-| T2: centro-izquierda ($[-0.69, -0.41]$) | 29.0% | $+0.32$ | $0.22$ |
-| T3: centro ($[-0.41, +0.81]$) | 21.0% | $-0.26$ | $0.42$ |
+| T1: izquierda ($\bar\theta_1 \in [-0.83, -0.69]$) | 10.5% | $+1.64$ | $0.003$ |
+| T2: centro-izquierda ($[-0.69, -0.41]$) | 29.0% | $+0.48$ | $0.10$ |
+| T3: centro ($[-0.41, +0.81]$) | 21.0% | $-0.35$ | $0.26$ |
 
 La respuesta es sí — y eso no debilita el resultado sino que revela el mecanismo. El premio a la heterogeneidad vive exactamente en las coaliciones más de izquierda: para ellas, "ensancharse" significa extenderse hacia el pívot, y eso es lo que salva artículos (nótese además el gradiente bruto: las coaliciones puramente de izquierda sobreviven 10.5%, las de centro-izquierda 29%). Para las coaliciones ya centradas, ensancharse no agrega nada — ya están donde hay que estar. Es la lógica de los 103 votos operando por dentro. (La versión más fina de este chequeo — clasificar los artículos según *quiénes los votaron* en el Pleno — requiere un vínculo votación-artículo que los datos aún no tienen; queda anotada como extensión.)
 
 ## 5.2 La vista agregada: el éxito se comparte
 
-A nivel de convencional, definimos el éxito de $i$ como su retención léxica media: $y_i = \frac{1}{|A_i|} \sum_{a \in A_i} sim(a)$, donde $A_i$ son los artículos que $i$ co-firmó y $sim(a)$ es la similitud textual (coseno TF-IDF) entre el texto génesis del artículo y su versión en el borrador — con $sim(a) = 0$ si el artículo murió. El éxito así medido está fuertemente correlacionado entre vecinos de red ($I$ de Moran 0.46, $p \approx 10^{-177}$), y el modelo que lo formaliza es el espacial de Durbin:
+A nivel de convencional, definimos el éxito de $i$ como su retención léxica media: $y_i = \frac{1}{|A_i|} \sum_{a \in A_i} sim(a)$, donde $A_i$ son los artículos que $i$ co-firmó y $sim(a)$ es la similitud textual (coseno TF-IDF) entre el texto génesis del artículo y su versión en el borrador — con $sim(a) = 0$ si el artículo murió. El éxito así medido está fuertemente correlacionado entre vecinos de red ($I$ de Moran 0.44, $p \approx 10^{-163}$), y el modelo que lo formaliza es el espacial de Durbin:
 
 $$y = \rho\, W y + X\beta + W X \gamma + \varepsilon,$$
 
@@ -370,32 +368,32 @@ donde $W$ es la red de co-patrocinio normalizada por filas (cada fila suma 1: $W
 
 | Variable | Directo ($\beta$) | $p$ | Vecindario ($\gamma$, lag) | $p$ |
 |:---|:-:|:-:|:-:|:-:|
-| N° de iniciativas firmadas | $-0.0003$ | 0.16 | $-0.0013$ | 0.26 |
-| Grado (red) | $+0.0004$ | 0.26 | $+0.0039$ | 0.11 |
-| Betweenness | $+0.0000$ | 0.93 | $-0.0009$ | 0.12 |
-| Abogado | $+0.009$ | 0.15 | $+0.207$ | 0.004 |
-| Experiencia previa | $+0.015$ | 0.06 | $+0.052$ | 0.53 |
-| Mujer | $+0.003$ | 0.57 | $+0.142$ | 0.08 |
-| Edad | $-0.0003$ | 0.20 | $-0.005$ | 0.07 |
-| Grado académico | $-0.001$ | 0.84 | $-0.117$ | 0.02 |
-| Voto revelado medio ($\theta$) | $-0.000$ | 1.00 | $+0.047$ | 0.01 |
-| Desv. est. de $\theta$ | $-0.012$ | 0.53 | $+0.047$ | 0.72 |
-| Heterofilia del ego | $-0.015$ | 0.22 | $-0.128$ | 0.07 |
-| Distancia propia al pívot | $+0.011$ | 0.67 | $-0.182$ | 0.048 |
-| $\rho$ (acoplamiento de red) | $0.898$ | $<10^{-15}$ | — | — |
+| N° de iniciativas firmadas | $-0.0001$ | 0.28 | $+0.0002$ | 0.78 |
+| Grado (red) | $+0.0004$ | 0.30 | $+0.0052$ | 0.31 |
+| Betweenness | $-0.0000$ | 0.98 | $-0.0020$ | 0.40 |
+| Abogado | $+0.011$ | 0.13 | $+0.193$ | 0.041 |
+| Experiencia previa | $+0.019$ | 0.031 | $+0.170$ | 0.11 |
+| Mujer | $+0.002$ | 0.78 | $+0.208$ | 0.075 |
+| Edad | $-0.0002$ | 0.53 | $-0.0033$ | 0.40 |
+| Grado académico | $-0.003$ | 0.49 | $-0.154$ | 0.012 |
+| Voto revelado medio ($\theta$) | $+0.008$ | 0.33 | $+0.056$ | 0.11 |
+| Desv. est. de $\theta$ | $-0.018$ | 0.42 | $+0.026$ | 0.85 |
+| Heterofilia del ego | $-0.024$ | 0.088 | $-0.255$ | 0.055 |
+| Distancia propia al pívot | $-0.002$ | 0.95 | $-0.265$ | 0.050 |
+| $\rho$ (acoplamiento de red) | $0.891$ | $<10^{-15}$ | — | — |
 
-Tres lecturas. Primera, el control de actividad responde la pregunta que lo motivó: firmar muchas iniciativas no hace más exitoso a nadie (coeficiente nulo) y las demás conclusiones no cambian al incluirlo. Segunda, el patrón general del estudio se repite: los atributos propios no predicen casi nada; los del vecindario, sí — incluida la distancia al pívot, que solo importa en su versión "de la compañía" ($-0.18$) y no en la propia ($p = 0.67$). Tercera, $\rho = 0.90$: el éxito está acoplado entre co-firmantes incluso tras todos los controles. Parte de ese acoplamiento es composición — co-firmantes comparten artículos, y por tanto las propiedades de coalición de 5.1 —, por lo que leemos 5.1 como el mecanismo y esta sección como su sombra agregada (la dependencia sobrevive además con red binaria, con otra definición de lazo, con similitud semántica en vez de léxica, y con la retención condicional: $\rho$ entre 0.79 y 0.95 en todas las variantes). Nota sobre el lag de abogado ($+0.21$): a nivel de convencional, estar rodeado de abogados acompaña al éxito, pero el modelo de mecanismo (5.1) muestra que la proporción de abogados de la coalición no salva artículos — preferimos la lectura del nivel artículo, que es el diseño limpio.
+Tres lecturas. Primera, el control de actividad responde la pregunta que lo motivó: firmar muchas iniciativas no hace más exitoso a nadie (coeficiente nulo) y las demás conclusiones no cambian al incluirlo. Segunda, el patrón general del estudio se repite: los atributos propios no predicen casi nada — la única excepción es la experiencia previa propia, positiva y chica ($+0.019$) —; los del vecindario pesan más, incluida la distancia al pívot, que solo importa en su versión "de la compañía" ($-0.27$) y no en la propia ($p = 0.95$). Tercera, $\rho = 0.89$: el éxito está acoplado entre co-firmantes incluso tras todos los controles. Parte de ese acoplamiento es composición — co-firmantes comparten artículos, y por tanto las propiedades de coalición de 5.1 —, por lo que leemos 5.1 como el mecanismo y esta sección como su sombra agregada (la dependencia sobrevive además con red binaria, con otra definición de lazo, con similitud semántica en vez de léxica, y con la retención condicional: $\rho$ entre 0.63 y 0.95 en todas las variantes). Nota sobre el lag de abogado ($+0.19$): a nivel de convencional, estar rodeado de abogados acompaña al éxito, pero el modelo de mecanismo (5.1) muestra que la proporción de abogados de la coalición no salva artículos — preferimos la lectura del nivel artículo, que es el diseño limpio.
 
 # 6. Síntesis
 
-En una asamblea de extraños, la colaboración se organizó con lo que la gente traía puesto: el territorio (compartir distrito multiplica por seis las odds de firmar juntos), la etiqueta electoral (todas las listas coordinan patrocinio, las ad hoc igual que los pactos tradicionales — aunque ninguna compra unidad de voto más allá de su alineamiento), y la afinidad ideológica; no las credenciales (ni abogados ni experimentados se eligen entre sí — los juntan los temas). Sobre esos primeros encuentros la red se rigidiza rápido: el mejor predictor de la próxima coalición es qué pares ya trabajaron juntos, y aun así la afinidad ideológica conserva fuerza propia — conocerse y parecerse operan a la vez. Esa red no cambia las posiciones de nadie (selección, no influencia: exposición pasada y futura predicen igual, y el nulo tiene espacio e instrumento verificados), pero sí coordina la conducta en el margen: las rupturas de disciplina viajan por los lazos de co-firma, incluso entre comisiones distintas. Y cuando los textos llegan al Pleno, sobreviven los de coaliciones cercanas al pívot de 2/3, ideológicamente anchas — el ensancharse salva artículos precisamente a las coaliciones de izquierda, que necesitan estirarse hacia el 103 — y relacionalmente consolidadas; no los de coaliciones con más títulos. El capital que rindió fue territorial, posicional y relacional. Se colaboró por cercanía; se ganó por amplitud.
+En una asamblea de extraños, la colaboración se organizó con lo que la gente traía puesto: el territorio (compartir distrito multiplica por casi doce las odds de firmar juntos), la etiqueta electoral (todas las listas coordinan patrocinio, las ad hoc igual que los pactos tradicionales — aunque ninguna compra unidad de voto más allá de su alineamiento), y la afinidad ideológica; no la profesión (los abogados no se eligen entre sí — los juntan los temas; la experiencia previa deja apenas un eco en la elección de socios que no llega a marcar coaliciones reales). Sobre esos primeros encuentros la red se rigidiza rápido: el mejor predictor de la próxima coalición es qué pares ya trabajaron juntos, y aun así la afinidad ideológica conserva fuerza propia — conocerse y parecerse operan a la vez. Esa red no cambia las posiciones de nadie (selección, no influencia: exposición pasada y futura predicen igual, y el nulo tiene espacio e instrumento verificados), pero sí coordina la conducta en el margen: las rupturas de disciplina viajan por los lazos de co-firma, incluso entre comisiones distintas. Y cuando los textos llegan al Pleno, sobreviven los de coaliciones cercanas al pívot de 2/3, ideológicamente anchas — el ensancharse salva artículos precisamente a las coaliciones de izquierda, que necesitan estirarse hacia el 103 — y relacionalmente consolidadas; no los de coaliciones con más títulos. El capital que rindió fue territorial, posicional y relacional. Se colaboró por cercanía; se ganó por amplitud.
 
 # 7. Limitaciones y trabajo en curso
 
 1. Los puntos ideales se estiman de votos: la distinción entre ideología y disciplina estable (sección 3.2) es parcialmente circular, y el error de medición de $\theta$ no está propagado a los modelos (el efecto mínimo detectable de 4.1 refleja solo incertidumbre muestral). Está diseñado el bootstrap paramétrico para ambas cosas.
-2. La familiaridad del modelo de eventos mezcla dependencia del estado con afinidades estables no observadas; la ventana es corta (tres meses) y un tercio de los eventos cae el día del plazo, donde no existe orden intradiario.
-3. 39 iniciativas del análisis no tienen fecha (quedan fuera del modelo de eventos) y 41 con más de 16 firmantes están en auditoría; 21 convencionales de listas locales esperan un crosswalk fino de conglomerado.
-4. En el modelo de supervivencia, grado medio y constraint media de la coalición son colineales (VIF $\approx$ 11).
+2. La familiaridad del modelo de eventos mezcla dependencia del estado con afinidades estables no observadas; la ventana es corta (tres meses), un 36% de los eventos cae el día del plazo (donde no existe orden intradiario) y 123 fechas están imputadas desde las notas del registro.
+3. 46 iniciativas con más de 16 firmantes están excluidas mientras se auditan como duplicaciones transversales (quedan además 24 grupos de texto casi duplicado sin resolver en la fuente); 120 iniciativas utilizables no tienen comisión asignada en la plataforma (entran a la red agregada y al modelo de eventos, no a los análisis por comisión); 21 convencionales de listas locales esperan un crosswalk fino de conglomerado.
+4. En el modelo de supervivencia, grado medio y constraint media de la coalición son colineales (VIF $\approx$ 10).
 5. Con $\rho$ cercano a 1, la descomposición de impactos del modelo espacial es numéricamente inestable; se reportan coeficientes y $\rho$.
 
 En curso: robustez del modelo de eventos (excluir el bloque del plazo; imputar fechas faltantes); la variante dirigida (quién recluta a quién, con el autor principal de cada iniciativa); la extensión del modelo de eventos y de supervivencia a las indicaciones (incorporar a quienes modificaron cada artículo, no solo a quienes lo iniciaron); y el vínculo votación-artículo para clasificar artículos por su coalición de votantes.

@@ -1,8 +1,11 @@
 # =============================================================================
 # 28-rhem-run.R  (IV.P2 / RHEM-intro §9: EL RUN REAL)
 #
-# RHEM no dirigido sobre las iniciativas <=16 (D8) con FECHAS REALES de
-# ingreso (data/raw/initiative_submission_dates.csv, refresco code/27).
+# RHEM no dirigido sobre las iniciativas <=16 (D8) del registro de la
+# PLATAFORMA (initiative_registry.csv, refresco code/27 -> 00): 947 eventos,
+# todos con fecha_iso (131 imputadas). Los eventos sin comisión asignada
+# (~120) entran igual: prop_comision = 0 en su estrato (constante, no
+# informa el clogit) y su matching blando degrada a uniforme.
 #
 # Diseño (RHEM-intro §9, aprobado):
 #   - Eventos: iniciativas fechadas; tiempo = días desde 2021-11-01.
@@ -48,28 +51,13 @@ listas <- read.csv(file.path(DATA_RAW, "electoral_lists.csv"), stringsAsFactors 
 memb <- read.csv(file.path(DATA_RAW, "commission_membership.csv"), stringsAsFactors = FALSE)
 registry <- read.csv(file.path(DATA_PROCESSED, "initiative_registry.csv"), stringsAsFactors = FALSE)
 registry <- registry[registry$n_firmantes >= 2 & registry$n_firmantes <= 16, ]
-fechas <- read.csv(file.path(DATA_RAW, "initiative_submission_dates.csv"), stringsAsFactors = FALSE)
 
-# ------------------- cruce de fechas (misma lógica que 27) -------------------
-lookup_fecha <- function(rid, commission) {
-  hit <- fechas[fechas$initiative_id == rid, ]
-  if (nrow(hit) == 1) return(hit$fecha_ingreso)
-  num <- suppressWarnings(as.integer(sub("^([0-9]+).*$", "\\1", rid)))
-  if (is.na(num)) return("")
-  hit <- fechas[fechas$icc_num == num & fechas$commission == commission, ]
-  if (nrow(hit) == 1) return(hit$fecha_ingreso)
-  hit <- fechas[fechas$icc_num == num, ]
-  if (nrow(hit) == 1) return(hit$fecha_ingreso)
-  ""
-}
-registry$fecha <- mapply(lookup_fecha, registry$initiative_id, registry$commission)
-n_sin_fecha <- sum(registry$fecha == "")
-registry <- registry[registry$fecha != "", ]
+# fechas: vienen en el propio registro (fecha_iso de la plataforma, 100%)
 registry$dia <- as.numeric(as.Date(registry$fecha) - as.Date("2021-11-01"))
 registry <- registry[order(registry$dia, registry$initiative_id), ]
 E <- nrow(registry)
-cat(sprintf("  Eventos fechados: %d (excluidos %d sin fecha) | %s a %s | %d días distintos\n",
-            E, n_sin_fecha, min(registry$fecha), max(registry$fecha),
+cat(sprintf("  Eventos: %d (todos fechados; %d con fecha imputada) | %s a %s | %d días distintos\n",
+            E, sum(registry$fecha_imputada), min(registry$fecha), max(registry$fecha),
             length(unique(registry$dia))))
 
 # ------------------- atributos y matriz de membresía -------------------------

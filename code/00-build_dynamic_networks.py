@@ -30,7 +30,7 @@ import re
 from collections import Counter, defaultdict
 
 from lib_names import clean_authors
-from paths import (COMMISSIONS, DATA_PROCESSED, genesis_path, track_full_path)
+from paths import (COMMISSIONS, DATA_PROCESSED, DATA_RAW, genesis_path, track_full_path)
 
 TS_RE = re.compile(r"^(\d{2}-\d{2})(-\d+)?$")
 
@@ -189,30 +189,45 @@ def indication_events(track):
 if __name__ == "__main__":
     os.makedirs(DATA_PROCESSED, exist_ok=True)
 
-    registry, multi_assigned, conflicts = build_initiative_registry()
-    per_comm = Counter(k for k, _ in registry)
+    # ------------------------------------------------------------------
+    # Registro de iniciativas: DESDE LA PLATAFORMA (decisión 2026-07-20).
+    # data/raw/platform_initiatives.csv (refresco code/27) trae las 995 ICC
+    # presentadas, con firmantes armonizados y fecha_iso al 100%. El registro
+    # TRACK anterior (solo ICC que entraron a informes de comisión, ~528)
+    # queda superado; TRACK sigue siendo la fuente de artículos e indicaciones.
+    # ------------------------------------------------------------------
+    plat_rows = list(csv.DictReader(open(os.path.join(DATA_RAW, "platform_initiatives.csv"),
+                                         encoding="utf-8")))
+    registry = {}
+    for r in plat_rows:
+        au = [a for a in r["firmantes"].split("; ") if a] if r["firmantes"] else []
+        registry[(r["commission"], r["icc_num"], r["fecha_iso"], r["fecha_imputada"])] = au
     usable = {key: au for key, au in registry.items() if 2 <= len(au) <= MAX_SIGNERS}
     n_over = sum(1 for au in registry.values() if len(au) > MAX_SIGNERS)
-    print("=== Registro de iniciativas ===")
+    print("=== Registro de iniciativas (plataforma, 995 ICC) ===")
     for k in COMMISSIONS:
-        n_u = sum(1 for (c, _), au in usable.items() if c == k)
-        print(f"  C{k}: {per_comm[k]} iniciativas, {n_u} con 2..{MAX_SIGNERS} firmantes-persona")
-    print(f"  Total: {len(registry)} iniciativas ({len(usable)} utilizables; "
-          f"{n_over} excluidas por >{MAX_SIGNERS} firmantes, decisión D8); "
-          f"{multi_assigned} asignadas desde registros multi-fuente, {conflicts} sets de autores fusionados")
+        n_u = sum(1 for (c, *_), au in usable.items() if c == f"C{k}")
+        print(f"  C{k}: {n_u} utilizables")
+    n_sincom = sum(1 for (c, *_), au in usable.items() if not c)
+    print(f"  sin comisión asignada: {n_sincom}")
+    print(f"  Total: {len(registry)} ICC ({len(usable)} utilizables 2..{MAX_SIGNERS}; "
+          f"{n_over} excluidas por >{MAX_SIGNERS}, decisión D8)")
 
     with open(os.path.join(DATA_PROCESSED, "initiative_registry.csv"), "w", newline="", encoding="utf-8") as fh:
         wr = csv.writer(fh)
-        wr.writerow(["commission", "initiative_id", "n_firmantes", "firmantes"])
-        for (k, iid), au in sorted(registry.items()):
-            wr.writerow([f"C{k}", iid, len(au), "; ".join(sorted(au))])
+        wr.writerow(["commission", "initiative_id", "n_firmantes", "firmantes",
+                     "fecha", "fecha_imputada"])
+        for (c, iid, fecha, imp), au in sorted(registry.items(), key=lambda x: int(x[0][1])):
+            wr.writerow([c, iid, len(au), "; ".join(sorted(au)), fecha, imp])
 
     # --- red génesis pooled: unidad INICIATIVA (principal) ---
     pooled_init = defaultdict(int)
     genesis_by_comm = {k: defaultdict(int) for k in COMMISSIONS}
-    for (k, _), au in usable.items():
+    for (c, *_), au in usable.items():
         add_clique(pooled_init, au)
-        add_clique(genesis_by_comm[k], au)
+        if c:
+            k = int(c[1:])
+            add_clique(genesis_by_comm[k], au)
     n, e, w = net_stats(pooled_init)
     print(f"\n=== Red génesis (iniciativa) === nodos={n}, aristas={e}, peso total={w}, "
           f"peso máx={max(pooled_init.values())}")

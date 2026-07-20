@@ -31,7 +31,8 @@ from paths import DATA_PROCESSED, RESULTS_FIGURES, COMMISSIONS, track_full_path 
 
 # --- paleta (referencia dataviz, modo claro) ---
 CAT = {1: "#2a78d6", 2: "#1baf7a", 3: "#eda100", 4: "#008300",
-       5: "#4a3aa7", 6: "#e34948", 7: "#e87ba4"}
+       5: "#4a3aa7", 6: "#e34948", 7: "#e87ba4",
+       0: "#898781"}  # 0 = iniciativas de la plataforma sin comisión asignada
 INK, INK2, MUTED = "#0b0b0b", "#52514e", "#898781"
 GRID, BASE, SURFACE = "#e1e0d9", "#c3c2b7", "#fcfcfb"
 COMM_LABELS = {k: f"C{k}" for k in COMMISSIONS}
@@ -143,7 +144,10 @@ def bipartite(doc_rows, title, name):
             fontsize=9, color=INK2)
     ax.text(-0.015, 0.0, "Delegates (n = 154)\nsorted by ideal point", ha="right",
             va="center", fontsize=9, color=INK2)
-    handles = [Patch(facecolor=CAT[k], label=f"C{k} {COMM_NAMES[k]}") for k in COMMISSIONS]
+    ks_present = sorted({k for k, _ in docs if k}) + ([0] if any(k == 0 for k, _ in docs) else [])
+    handles = [Patch(facecolor=CAT[k],
+                     label=f"C{k} {COMM_NAMES[k]}" if k else "No commission assigned")
+               for k in ks_present]
     ax.legend(handles=handles, loc="upper left", bbox_to_anchor=(0.02, -0.05),
               ncol=4, frameon=False, fontsize=8, handlelength=1.1, handleheight=0.9)
     # leyenda del gradiente ideológico
@@ -160,7 +164,7 @@ def bipartite(doc_rows, title, name):
     save(fig, name)
 
 
-init_rows = [(int(r["commission"][1]), r["firmantes"].split("; "))
+init_rows = [(int(r["commission"][1]) if r["commission"] else 0, r["firmantes"].split("; "))
              for r in registry if int(r["n_firmantes"]) >= 2]
 bipartite(init_rows, "Genesis co-sponsorship as a bipartite network — initiative unit",
           "bipartite_initiative")

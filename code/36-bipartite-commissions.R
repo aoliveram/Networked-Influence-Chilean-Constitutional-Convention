@@ -1,8 +1,9 @@
 # =============================================================================
-# 36-bipartite-commissions.R  (comentario del autor 2026-07-20, punto 6)
-# ERGM bipartito POR COMISIÓN, para las dos con menos documentos (C1: 27
-# iniciativas, C3: 38). Redes chicas (154 x 27 / 154 x 38): la vía con mayor
-# probabilidad de converger tras los tres fracasos del bipartito completo.
+# 36-bipartite-commissions.R  (comentario del autor 2026-07-20, punto 6;
+# extendido a las 7 comisiones tras aprobar el piloto C1/C3 y adoptar el
+# registro de la plataforma con las 947 iniciativas utilizables)
+# ERGM bipartito POR COMISIÓN (redes 154 x n_k; convergen en segundos donde
+# el bipartito completo 154 x 487 falló tres veces).
 # Términos: edges + b1cov(miembro de la comisión) + b1nodematch (conglomerado,
 # quintil theta1, abogado, experiencia, mujer). MCMC con 8 cadenas paralelas.
 #
@@ -73,7 +74,7 @@ fit_commission <- function(k) {
   out
 }
 
-tab <- rbind(fit_commission(1), fit_commission(3))
+tab <- do.call(rbind, lapply(1:7, fit_commission))
 dir.create(RESULTS_TABLES, recursive = TRUE, showWarnings = FALSE)
 write.csv(tab, file.path(RESULTS_TABLES, "M1_bipartite_commissions.csv"), row.names = FALSE)
 cat(sprintf("\n--- Done (total %.1f min) ---\n", as.numeric(difftime(Sys.time(), T0, units = "mins"))))
