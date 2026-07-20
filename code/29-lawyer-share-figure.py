@@ -69,7 +69,8 @@ print(f"cola superior observada sobre el p95 del azar: {top_tail:.1%} (esperado 
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(9.6, 3.6))
 
 bins = np.linspace(0, 1, 18)
-ax1.hist(null_pool, bins=bins, density=True, color=BASE, alpha=0.55,
+ax1.hist(null_pool, bins=bins, density=True, histtype="stepfilled",
+         color="#f2b134", alpha=0.45, edgecolor="#c98a00", lw=1.4,
          label="random signers (same sizes)", zorder=2)
 ax1.hist(shares, bins=bins, density=True, color=BLUE, alpha=0.75,
          edgecolor=SURF, lw=0.5, label="observed initiatives", zorder=3)

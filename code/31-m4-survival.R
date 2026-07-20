@@ -1,5 +1,6 @@
 # =============================================================================
-# 31-m4-survival.R  (M4: supervivencia a nivel ARTÍCULO — diseño IV.D6 refinado)
+# 31-m4-survival.R  (2026-07-20, punto 9: m_degree FUERA de los modelos —
+# colineal con m_constraint, VIF ~8-10; la columna sigue en m4_articles.csv)  (M4: supervivencia a nivel ARTÍCULO — diseño IV.D6 refinado)
 #
 # Unidad: el artículo génesis (no el convencional). DV principal:
 #   survive_a = 1{outcome in (identico, similar)}  — llegó al borrador
@@ -99,9 +100,9 @@ fit_cl <- function(f, data, label) {
 }
 
 t1 <- fit_cl(survive ~ dist_pivot + sd_theta1 + size + factor(commission), m4z, "1 pivotal")
-t2 <- fit_cl(survive ~ dist_pivot + sd_theta1 + size + m_degree + m_betw +
+t2 <- fit_cl(survive ~ dist_pivot + sd_theta1 + size + m_betw +
                m_constraint + dens_interna + factor(commission), m4z, "2 + SNA")
-t3 <- fit_cl(survive ~ dist_pivot + sd_theta1 + size + m_degree + m_betw +
+t3 <- fit_cl(survive ~ dist_pivot + sd_theta1 + size + m_betw +
                m_constraint + dens_interna + sh_abogado + sh_exper + m_grado +
                factor(commission), m4z, "3 + capital humano")
 tab <- rbind(t1, t2, t3)
@@ -110,14 +111,14 @@ write.csv(tab, file.path(RESULTS_TABLES, "M4_survival.csv"), row.names = FALSE)
 cat("\n--- M4 logit (coef estandarizados; SE cluster por coalición) ---\n")
 print(tab, row.names = FALSE, digits = 3)
 
-vf <- vif(glm(survive ~ dist_pivot + sd_theta1 + size + m_degree + m_betw +
+vf <- vif(glm(survive ~ dist_pivot + sd_theta1 + size + m_betw +
                 m_constraint + dens_interna + sh_abogado + sh_exper + m_grado,
               data = m4z, family = binomial()))
 cat("\n  VIF (modelo 3, sin FE):\n")
 print(round(vf, 1))
 
 # DV secundaria: retención continua con fallidos = 0 (OLS, mismos X)
-m_ols <- lm(y_art ~ dist_pivot + sd_theta1 + size + m_degree + m_betw +
+m_ols <- lm(y_art ~ dist_pivot + sd_theta1 + size + m_betw +
               m_constraint + dens_interna + sh_abogado + sh_exper + m_grado +
               factor(commission), data = m4z)
 ct_ols <- coeftest(m_ols, vcov. = vcovCL(m_ols, cluster = m4z$cl[!is.na(m4z$y_art)]))

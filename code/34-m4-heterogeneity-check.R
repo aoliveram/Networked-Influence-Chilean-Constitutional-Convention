@@ -40,7 +40,7 @@ m4z <- m4
 m4z[CONT] <- scale(m4z[CONT])
 
 fit_cl <- function(data, label) {
-  m <- glm(survive ~ dist_pivot + sd_theta1 + size + m_degree + m_betw +
+  m <- glm(survive ~ dist_pivot + sd_theta1 + size + m_betw +
              m_constraint + dens_interna + factor(commission),
            data = data, family = binomial())
   ct <- coeftest(m, vcov. = vcovCL(m, cluster = data$cl))
@@ -58,7 +58,7 @@ res <- rbind(
 )
 
 # modelo con interacción formal
-mi <- glm(survive ~ dist_pivot + sd_theta1 * tercil + size + m_degree + m_betw +
+mi <- glm(survive ~ dist_pivot + sd_theta1 * tercil + size + m_betw +
             m_constraint + dens_interna + factor(commission),
           data = m4z, family = binomial())
 cti <- coeftest(mi, vcov. = vcovCL(mi, cluster = m4z$cl))
