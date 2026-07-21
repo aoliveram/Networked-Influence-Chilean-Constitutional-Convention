@@ -38,6 +38,7 @@ n <- length(roster)
 theta1 <- ip2d$theta1_fm[match(roster, ip2d$nombre_armonizado)]
 theta2 <- ip2d$theta2_fm[match(roster, ip2d$nombre_armonizado)]
 grado <- profiles$grado_academico_nivel[match(roster, profiles$nombre_armonizado)]
+edad <- profiles$edad_al_asumir[match(roster, profiles$nombre_armonizado)]
 abog <- profiles$es_abogado[match(roster, profiles$nombre_armonizado)]
 exper <- profiles$experiencia_previa_institucional[match(roster, profiles$nombre_armonizado)]
 mujer <- profiles$es_mujer[match(roster, profiles$nombre_armonizado)]
@@ -69,6 +70,7 @@ for (k in seq_len(nrow(registry))) {
   s_t1 <- sum(theta1[S]) - signed * theta1
   s_t2 <- sum(theta2[S]) - signed * theta2
   s_gr <- sum(grado[S]) - signed * grado
+  s_ed <- sum(edad[S]) - signed * edad
   s_ab <- sum(abog[S]) - signed * abog
   s_ex <- sum(exper[S]) - signed * exper
   s_mu <- sum(mujer[S]) - signed * mujer
@@ -88,6 +90,7 @@ for (k in seq_len(nrow(registry))) {
     d_theta1 = abs(theta1 - s_t1 / nG),
     d_theta2 = abs(theta2 - s_t2 / nG),
     d_grado = abs(grado - s_gr / nG),
+    d_edad = abs(edad - s_ed / nG) / 10,   # por década, para escala legible
     misma_comision = as.integer(comis == registry$commission[k]),
     misma_lista_modal = as.integer(congl_i == modal_G),
     congl_modal = CONGL_LEV[modal_G],
@@ -124,7 +127,7 @@ cat("\n--- Logit condicional principal (strata = iniciativa; SE cluster convenci
 f1 <- as.formula(paste(
   "signed ~ d_theta1 + d_theta2 + misma_comision +",
   paste(lam_cols, collapse = " + "),
-  "+ abogado_aff + exper_aff + mujer_aff + distrito_aff + d_grado",
+  "+ abogado_aff + exper_aff + mujer_aff + distrito_aff + d_grado + d_edad",
   "+ strata(initiative_id) + cluster(nombre_armonizado)"))
 t1 <- Sys.time()
 m1 <- clogit(f1, data = choice, method = "efron")

@@ -59,15 +59,27 @@ build_net <- function(regk, k = NULL) {
   network::add.edges(net, tail = tails, head = heads)
 }
 
-CTRL <- control.ergm(seed = 42, MCMLE.maxit = 60, MCMC.samplesize = 8192,
-                     MCMC.interval = 4096, parallel = 8, parallel.type = "PSOCK")
+# Presupuesto RECALIBRADO (2026-07-21): el run del 20-jul con samplesize 8192 x
+# interval 4096 (32x el default) tomaba ~1-1.5 h POR ITERACIÓN MCMLE -> orden
+# 100 h. Con el default (1024 x 1024) una iteración en la C1 real toma ~2.5
+# min -> ~1 h por comisión, la suite + pooled en una noche. Cores por env
+# BIPARTITE_CORES (default 8; usar 3-4 si la máquina está en uso).
+NCORES <- as.integer(Sys.getenv("BIPARTITE_CORES", "8"))
+CTRL <- control.ergm(seed = 42, MCMLE.maxit = 60,
+                     parallel = NCORES, parallel.type = "PSOCK")
 
 append_out <- function(df) {
   write.table(df, OUT, sep = ",", row.names = FALSE, append = file.exists(OUT),
               col.names = !file.exists(OUT))
 }
 
+done_configs <- if (file.exists(OUT)) unique(read.csv(OUT)$config) else character(0)
+
 fit_and_save <- function(net, f, label, rds) {
+  if (label %in% done_configs) {
+    cat(sprintf("  [skip] %s ya completado en %s\n", label, basename(OUT)))
+    return(invisible(NULL))
+  }
   t0 <- Sys.time()
   out <- tryCatch({
     fit <- ergm(f, control = CTRL)

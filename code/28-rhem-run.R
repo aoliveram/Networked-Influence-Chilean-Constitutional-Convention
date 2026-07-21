@@ -73,6 +73,7 @@ exper <- setNames(profiles$experiencia_previa_institucional[match(roster, profil
 distr <- setNames(profiles$distrito[match(roster, profiles$nombre_armonizado)], roster)
 mujer <- setNames(profiles$es_mujer[match(roster, profiles$nombre_armonizado)] == 1, roster)
 grado <- setNames(profiles$grado_academico_nivel[match(roster, profiles$nombre_armonizado)], roster)
+edad <- setNames(profiles$edad_al_asumir[match(roster, profiles$nombre_armonizado)], roster)
 
 S_list <- lapply(registry$firmantes, function(s) {
   x <- strsplit(s, "; ", fixed = TRUE)[[1]]; x[x %in% roster]
@@ -105,7 +106,7 @@ features_stratum <- function(k, C_mask) {
     p <- combn(length(cand), 2)
     th1 <- theta1[cand]; th2 <- theta2[cand]; cg <- congl[cand]
     ab <- abog[cand]; ex <- exper[cand]; dd <- distr[cand]
-    mu <- mujer[cand]; gr <- grado[cand]
+    mu <- mujer[cand]; gr <- grado[cand]; ed <- edad[cand]
     c(disp_theta1 = mean(abs(th1[p[1, ]] - th1[p[2, ]])),
       disp_theta2 = mean(abs(th2[p[1, ]] - th2[p[2, ]])),
       prop_lista = mean(cg[p[1, ]] == cg[p[2, ]]),
@@ -114,7 +115,8 @@ features_stratum <- function(k, C_mask) {
       pares_exper = mean(ex[p[1, ]] & ex[p[2, ]]),
       pares_distrito = mean(dd[p[1, ]] == dd[p[2, ]]),
       pares_mujer = mean(mu[p[1, ]] & mu[p[2, ]]),
-      disp_grado = mean(abs(gr[p[1, ]] - gr[p[2, ]])))
+      disp_grado = mean(abs(gr[p[1, ]] - gr[p[2, ]])),
+      disp_edad = mean(abs(ed[p[1, ]] - ed[p[2, ]])) / 10)
   }))
   cbind(out, exo)
 }
@@ -137,7 +139,7 @@ cat("  Sanity: motor propio == amorem::hyperedge_subrep (memoria infinita) OK\n"
 
 # ------------------- caso-control + ajuste por re-muestreo -------------------
 EXO <- c("disp_theta1", "disp_theta2", "prop_lista", "prop_comision",
-         "pares_abogado", "pares_exper", "pares_distrito", "pares_mujer", "disp_grado")
+         "pares_abogado", "pares_exper", "pares_distrito", "pares_mujer", "disp_grado", "disp_edad")
 FEATS <- c("sr1_inf", "sr2_inf", "sr3_inf", "sr1_15", "sr2_15", "sr3_15", EXO)
 # PRINCIPAL (decisión del autor 2026-07-20): solo sub.rep(2) — el par es la
 # unidad mínima de una relación; sr1 (individual, no relacional) y sr3

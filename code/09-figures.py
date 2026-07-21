@@ -222,17 +222,31 @@ from datetime import date as _date
 def to_date(mmdd):
     return _date(2022, int(mmdd[:2]), int(mmdd[3:5]))
 
+# por día: eventos multi-autor (deduplicados) Y total de indicaciones con
+# fecha (incluye unipersonales) — la figura muestra TODO lo disponible; solo
+# quedan fuera los 9 registros sin timestamp (documentados en 00).
 events_by_day = {}
+totals_by_day = {}
 for k in COMMISSIONS:
     track = json.load(open(track_full_path(k), encoding="utf-8"))
     days, edge_events, _, _, _ = b00.indication_events(track)
     per_day = {d: 0 for d in days}
     for d, _au in edge_events:
         per_day[d] += 1
+    tot_day = {d: 0 for d in days}
+    for r in track:
+        cls = b00.classify(r)
+        pool = ([(h.get("timestamp"),) for h in r.get("history", [])] if cls == "articulo"
+                else [(r.get("timestamp"),)] if cls == "suelta" else [])
+        for (ts,) in pool:
+            d = b00.ts_day(ts)
+            if d is not None:
+                tot_day[d] += 1
     events_by_day[k] = {to_date(d): n for d, n in sorted(per_day.items())}
+    totals_by_day[k] = {to_date(d): n for d, n in sorted(tot_day.items())}
 
-VMAX = max(max(v.values()) for v in events_by_day.values() if v)  # 145
-fig, ax = plt.subplots(figsize=(8.6, 5.4))
+VMAX = max(max(v.values()) for v in totals_by_day.values() if v)
+fig, ax = plt.subplots(figsize=(8.6, 3.9))
 all_dates = sorted({d for v in events_by_day.values() for d in v})
 x0, x1 = min(all_dates), max(all_dates)
 span = (x1 - x0).days
@@ -243,14 +257,18 @@ for row, k in enumerate(COMMISSIONS):           # C1 arriba
     ax.text(x0 - __import__("datetime").timedelta(days=9), base + 0.30, f"C{k}",
             ha="center", va="center", fontsize=9.5,
             color=CAT[k], fontweight="bold", transform=ax.transData)
-    for d, n in events_by_day[k].items():
+    for d, tot in totals_by_day[k].items():
+        n = events_by_day[k].get(d, 0)
+        if tot > 0:
+            ax.vlines(d, base, base + 0.88 * tot / VMAX, color=CAT[k], lw=3.4,
+                      alpha=0.30, zorder=2)
         if n == 0:
-            ax.plot(d, base, "o", ms=2.6, color=MUTED, mec="none", zorder=3)
+            ax.plot(d, base, "o", ms=2.4, color=MUTED, mec="none", zorder=3)
         else:
             h = 0.88 * n / VMAX
             ax.vlines(d, base, base + h, color=CAT[k], lw=3.4, zorder=3)
-            ax.text(d, base + h + 0.05, str(n), ha="center", va="bottom",
-                    fontsize=7, color=INK2)
+            ax.text(d, base + max(h, 0.88 * tot / VMAX) + 0.04, str(n), ha="center",
+                    va="bottom", fontsize=6.4, color=INK2)
 import matplotlib.dates as mdates
 ax.xaxis.set_major_locator(mdates.MonthLocator())
 ax.xaxis.set_major_formatter(mdates.DateFormatter("%b 2022"))
@@ -262,9 +280,10 @@ for side in ("top", "right", "left"):
     ax.spines[side].set_visible(False)
 ax.spines["bottom"].set_color(BASE)
 ax.tick_params(axis="x", labelsize=8.5)
-ax.set_title("Multi-author indication events per report date, by commission\n"
-             f"(bar height $\\propto$ events, shared scale 0–{VMAX}; dots = reports with zero multi-author events)",
-             fontsize=10.3, color=INK, loc="left", pad=8)
+ax.set_title("Indication events per report date, by commission\n"
+             f"(solid = multi-author events, light = all dated indications incl. single-author; "
+             f"shared scale 0–{VMAX}; dots = dates with no multi-author event)",
+             fontsize=10.0, color=INK, loc="left", pad=8)
 save(fig, "indication_events_timeline")
 
 print("--- Done ---")

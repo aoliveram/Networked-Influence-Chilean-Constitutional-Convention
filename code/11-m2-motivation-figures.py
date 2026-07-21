@@ -20,6 +20,7 @@ import os
 import re
 import sys
 import unicodedata
+import pandas as pd
 from collections import Counter, defaultdict
 from datetime import date
 
@@ -184,10 +185,10 @@ ax2.set_title("…and they move at every wave: distribution of per-wave ideologi
               fontsize=10.3, color=INK, loc="left", pad=6)
 fig.tight_layout(h_pad=2.2)
 for ext in ("pdf", "png"):
-    fig.savefig(os.path.join(RESULTS_FIGURES, f"m2_positions_dynamics.{ext}"),
+    fig.savefig(os.path.join(RESULTS_FIGURES, f"positions_dynamics.{ext}"),
                 dpi=300, bbox_inches="tight")
 plt.close(fig)
-print("  m2_positions_dynamics.pdf/.png")
+print("  positions_dynamics.pdf/.png")
 
 # =============================================================================
 # FB2 — trayectorias con medias por comisión (membresía)
@@ -222,8 +223,45 @@ ax.set_title("Ideal-point trajectories by commission membership "
              "(thin lines = delegates, thick lines = commission means)",
              fontsize=10.3, color=INK, loc="left", pad=8)
 for ext in ("pdf", "png"):
-    fig.savefig(os.path.join(RESULTS_FIGURES, f"theta_dynamics_by_commission.{ext}"),
+    fig.savefig(os.path.join(RESULTS_FIGURES, f"positions_dynamics_by_commission.{ext}"),
                 dpi=300, bbox_inches="tight")
 plt.close(fig)
-print("  theta_dynamics_by_commission.pdf/.png")
+print("  positions_dynamics_by_commission.pdf/.png")
 print("--- Done ---")
+
+
+# =============================================================================
+# FB3 — preview seleccion vs influencia (regenerada 2026-07-21; antes huerfana)
+# (a) entre personas: theta_it vs E_it pooled -> correlacion alta (seleccion)
+# (b) dentro de cada persona: delta theta vs delta E -> nube sin pendiente
+# =============================================================================
+pan = pd.read_csv(os.path.join(DATA_PROCESSED, "network_exposure_panel.csv"))
+pan = pan.sort_values(["legislator", "commission", "step"])
+pan["dE"] = pan.groupby(["legislator", "commission"])["net_exposure"].diff()
+lev = pan.dropna(subset=["theta", "net_exposure"])
+chg = pan.dropna(subset=["delta_theta", "dE"])
+r_lev = lev["theta"].corr(lev["net_exposure"])
+r_chg = chg["delta_theta"].corr(chg["dE"])
+fig, (a1, a2) = plt.subplots(1, 2, figsize=(8.6, 3.4))
+a1.scatter(lev["net_exposure"], lev["theta"], s=5, alpha=0.12, color="#2a78d6",
+           edgecolors="none", rasterized=True)
+a1.set_title(f"(a) Between: position vs. exposure (r = {r_lev:.2f})",
+             fontsize=9.5, loc="left", color=INK)
+a1.set_xlabel("Exposure $E_{it}$ (neighbors' mean position)", fontsize=8.5)
+a1.set_ylabel(r"Own position $\theta_{it}$", fontsize=8.5)
+a2.scatter(chg["dE"], chg["delta_theta"], s=5, alpha=0.12, color="#e34948",
+           edgecolors="none", rasterized=True)
+a2.set_title(f"(b) Within: change vs. change (r = {r_chg:.2f})",
+             fontsize=9.5, loc="left", color=INK)
+a2.set_xlabel(r"$\Delta E_{it}$ (wave-to-wave)", fontsize=8.5)
+a2.set_ylabel(r"$\Delta\theta_{it}$", fontsize=8.5)
+for a in (a1, a2):
+    a.grid(color=GRID, lw=0.5)
+    for side in ("top", "right"):
+        a.spines[side].set_visible(False)
+fig.tight_layout()
+for ext in ("pdf", "png"):
+    fig.savefig(os.path.join(RESULTS_FIGURES, f"m2_selection_vs_influence_preview.{ext}"),
+                dpi=300, bbox_inches="tight")
+plt.close(fig)
+print("figura: m2_selection_vs_influence_preview.pdf/.png")

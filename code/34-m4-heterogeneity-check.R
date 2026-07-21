@@ -2,7 +2,7 @@
 # 34-m4-heterogeneity-check.R  (comentario del autor 2026-07-18, punto 15)
 # ¿La "heterogeneidad ideológica ayuda a sobrevivir" es solo dispersión DENTRO
 # de la izquierda (que era mayoría)? Chequeo con lo disponible: clasificar las
-# coaliciones por su POSICIÓN MEDIA en theta1 (terciles) y ver si el efecto de
+# coaliciones por su POSICIÓN MEDIA en theta1 (cuartiles) y ver si el efecto de
 # sd_theta1 se sostiene en cada tramo, más el modelo con interacción.
 # (La versión con votaciones — clasificar artículos por QUIÉNES los votaron —
 #  requiere el vínculo roll-call <-> artículo, que aún no existe en los datos;
@@ -30,9 +30,11 @@ cat(sprintf("  Coaliciones: media de theta1 — min %.2f, mediana %.2f, max %.2f
             min(m4$mean_theta1), median(m4$mean_theta1), max(m4$mean_theta1),
             100 * mean(m4$mean_theta1 < 0)))
 
-m4$tercil <- cut(m4$mean_theta1, quantile(m4$mean_theta1, probs = seq(0, 1, 1/3)),
-                 include.lowest = TRUE, labels = c("T1 izquierda", "T2 centro-izq", "T3 centro"))
-print(tapply(m4$mean_theta1, m4$tercil, function(x) round(range(x), 2)))
+# CUARTILES (decisión del autor 2026-07-21: gradiente más fino que cuartiles)
+m4$cuartil <- cut(m4$mean_theta1, quantile(m4$mean_theta1, probs = seq(0, 1, 0.25)),
+                  include.lowest = TRUE,
+                  labels = c("Q1 izquierda", "Q2", "Q3", "Q4 centro-derecha"))
+print(tapply(m4$mean_theta1, m4$cuartil, function(x) round(range(x), 2)))
 
 CONT <- c("dist_pivot", "sd_theta1", "size", "m_degree", "m_betw",
           "m_constraint", "dens_interna")
@@ -52,21 +54,12 @@ fit_cl <- function(data, label) {
 
 res <- rbind(
   fit_cl(m4z, "todas"),
-  fit_cl(m4z[m4z$tercil == "T1 izquierda", ], "T1 izquierda"),
-  fit_cl(m4z[m4z$tercil == "T2 centro-izq", ], "T2 centro-izq"),
-  fit_cl(m4z[m4z$tercil == "T3 centro", ], "T3 centro")
+  do.call(rbind, lapply(levels(m4z$cuartil), function(q)
+    fit_cl(m4z[m4z$cuartil == q, ], q))),
+  fit_cl(m4z[m4z$cuartil %in% c("Q1 izquierda", "Q2"), ], "Q1+Q2 (izquierda)"),
+  fit_cl(m4z[m4z$cuartil %in% c("Q3", "Q4 centro-derecha"), ], "Q3+Q4 (centro)")
 )
 
-# modelo con interacción formal
-mi <- glm(survive ~ dist_pivot + sd_theta1 * tercil + size + m_betw +
-            m_constraint + dens_interna + factor(commission),
-          data = m4z, family = binomial())
-cti <- coeftest(mi, vcov. = vcovCL(mi, cluster = m4z$cl))
-keep <- grepl("sd_theta1", rownames(cti))
-inter <- data.frame(muestra = "interacción", term = rownames(cti)[keep],
-                    estimate = cti[keep, 1], se = cti[keep, 2], p = cti[keep, 4],
-                    n = nobs(mi), surv_media = mean(m4z$survive), row.names = NULL)
-res <- rbind(res, inter)
 
 dir.create(RESULTS_TABLES, recursive = TRUE, showWarnings = FALSE)
 write.csv(res, file.path(RESULTS_TABLES, "M4_heterogeneity_check.csv"), row.names = FALSE)
