@@ -240,7 +240,40 @@ Lo que no debe perderse de vista: las debilidades D1--D12 son las de un *paper*;
 
 ---
 
-# Parte IV — Respuesta a la revisión (bitácora en curso)
+# Parte IV — Pendientes (el estado real, 2026-07-21)
+
+Esta parte reemplaza a la antigua bitácora como índice de trabajo: aquí está SOLO lo pendiente o en curso. Todo lo ya ejecutado se movió al Anexo (bitácora de respuestas cerradas), al final del documento.
+
+## IV-P.1 — Bipartito: errores estándar definitivos y términos estructurales **[EN CURSO]**
+
+La Tabla 8 del reporte usa MPLE (puntos correctos, EE anti-conservadores). Pendiente: (a) el run MCMLE nocturno (`code/43`, presupuesto recalibrado, guardado incremental, espec extendida a paridad con el clogit) para re-etiquetar la Tabla 8 con EE válidos; (b) el test de costo de términos estructurales (primer candidato: `gwb1degree(0.5, fixed)` sobre C3, en ejecución); (c) `ergm.multi` con intercepto por red como "un número por término" del paper.
+
+## IV-P.2 — RHEM por bloque del elector **[PENDIENTE, anotado 2026-07-21]**
+
+El corte por bloques de la Tabla 3 (clogit) no se traslada directamente al RHEM: la unidad del RHEM no es un elector sino la coalición-evento, así que no existe "muestra del bloque". Rutas viables cuando se aborde: (a) interacciones de las features con el bloque mayoritario de la coalición (un solo modelo, barato); (b) RHEMs separados según el bloque del autor principal (`autor_matched` disponible; requiere crosswalk de autores); (c) features de composición específicas por bloque. Sin decisión aún.
+
+## IV-P.3 — M4 dinámico con enmendadores + etapa 0 **[PLAN ESCRITO, NO EJECUTADO]**
+
+Plan de implementación completo (expresiones, inventario de datos, advertencias de identificación, orden de ejecución) en `docs/playground.pdf` §12. Resumen: etapa 0 = logit de llegada a informe sobre las 947 iniciativas (previa: crosswalk plataforma-TRACK auditado, objetivo >90% de match inequívoco); etapa 1 = panel artículo x onda con equipo de custodia (génesis $\cup$ enmendadores hasta $t$) para C1/C3/C4/C6. Decisión del autor 2026-07-21: no se aborda ahora.
+
+## IV-P.4 — SDM: los upgrades del workshop del autor **[PENDIENTE DE DECISIÓN]**
+
+Del análisis del workshop `3-network-from-surveys.qmd` (2026-07-20) salieron seis recomendaciones, ninguna implementada aún: (1) descomposición de impactos Directo/Indirecto/Total — con N = 154 se puede el multiplicador $(I-\rho W)^{-1}$ exacto, esquivando la inestabilidad que hizo abandonar `impacts()`; (2) tabla "beta OLS vs impacto total" con % de reducción; (3) contrafactual de magnitud $\rho\,(Wy_{p90}-Wy_{p10})$; (4) párrafo-caveat DellaPosta para $\rho \approx 0.9$ con W endógena; (5) placebo-W vía ERGM solo-homofilia (costoso); (6) robustez con W top-K con pesos. Sugerencia vigente: 1-3 como próximo upgrade (baratos), 4 un párrafo, 5-6 backlog.
+
+## IV-P.5 — Propagación del error de medición a los demás modelos **[M2 LISTO; RESTO PENDIENTE]**
+
+El bootstrap paramétrico del dynIRT (code/40) y su propagación a M2 (code/45) están ejecutados: EE total (Rubin) 0.0039, MDE honesto 0.011, el nulo sobrevive. Pendiente: propagar a los modelos de formación (clogit/RHEM usan theta del primer mes — requiere bootstrap del W-NOMINATE, distinto) y a M4/SDM (theta medio).
+
+## IV-P.6 — Backlog menor acumulado
+
+- Robustez RHEM: excluir el bloque del plazo final (36% de eventos en un día); variante dirigida (quién recluta, con `autor_matched`).
+- Vínculo votación-artículo (para clasificar artículos por su coalición de votantes — cierra el chequeo fino de M4 por cuartiles).
+- Crosswalk fino de conglomerado para los 21 convencionales de listas locales ("REVISAR").
+- Auditoría en CPT: 46 iniciativas >16 firmantes; 24 grupos de texto casi duplicado; 210 indicaciones sueltas; 142 linajes sin autores.
+- IV.Q7 (color del borrador): drag_i y serie X_t.
+- Decisión editorial: ¿promover el hallazgo M2-régimen (lag>lead con theta de era 2/3) o mantener el nulo como titular? (Con la red-plataforma la asimetría desapareció: hoy el nulo es el titular.)
+
+# Anexo — Bitácora de respuestas ejecutadas (cerradas; referencia histórica)
 
 Esta parte registra, punto por punto, cómo el proyecto responde a la revisión: qué se verificó, qué se ejecutó, qué se diseñó y qué queda en cola. Se irá completando a medida que avance la implementación. Convención: **[Hecho]** = ejecutado y con resultados; **[Diseñado]** = especificado, listo para implementar; **[En cola]**.
 

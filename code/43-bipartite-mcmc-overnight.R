@@ -38,6 +38,11 @@ theta1_q <- as.character(cut(theta1, quantile(theta1, probs = seq(0, 1, 0.2)),
 congl <- listas$conglomerado[match(roster, listas$nombre_armonizado)]
 congl[congl == "REVISAR (lista local sin conglomerado)"] <- "Otras"
 comis_v <- memb$commission[match(roster, memb$nombre_armonizado)]
+distr_v <- profiles$distrito[match(roster, profiles$nombre_armonizado)]
+grado_v <- profiles$grado_academico_nivel[match(roster, profiles$nombre_armonizado)]
+edad_v <- profiles$edad_al_asumir[match(roster, profiles$nombre_armonizado)]
+edad_q <- as.character(cut(edad_v, quantile(edad_v, probs = seq(0, 1, 0.2)),
+                           include.lowest = TRUE, labels = paste0("E", 1:5)))
 
 build_net <- function(regk, k = NULL) {
   n2 <- nrow(regk)
@@ -48,6 +53,9 @@ build_net <- function(regk, k = NULL) {
               es_abogado = c(profiles$es_abogado[match(roster, profiles$nombre_armonizado)], rep(-1L, n2)),
               experiencia = c(profiles$experiencia_previa_institucional[match(roster, profiles$nombre_armonizado)], rep(-1L, n2)),
               es_mujer = c(profiles$es_mujer[match(roster, profiles$nombre_armonizado)], rep(-1L, n2)),
+              distrito = c(distr_v, rep("modo2", n2)),
+              grado = c(as.character(grado_v), rep("modo2", n2)),
+              edad_q = c(edad_q, rep("modo2", n2)),
               miembro = c(miembro, rep(0L, n2)))
   for (a in names(atr)) network::set.vertex.attribute(net, a, atr[[a]])
   tails <- integer(0); heads <- integer(0)
@@ -104,11 +112,26 @@ for (k in 1:7) {
   net <- build_net(regk, k)
   fit_and_save(net,
                net ~ edges + b1cov("miembro") + b1nodematch("conglomerado") +
-                 b1nodematch("theta1_q") + b1nodematch("es_abogado") +
-                 b1nodematch("experiencia") + b1nodematch("es_mujer"),
+                 b1nodematch("theta1_q") + b1nodematch("distrito") +
+                 b1nodematch("es_abogado") + b1nodematch("experiencia") +
+                 b1nodematch("es_mujer") + b1nodematch("grado") + b1nodematch("edad_q"),
                sprintf("C%d (MCMLE)", k),
                file.path(DATA_PROCESSED, sprintf("bipartite_mcmc_C%d.rds", k)))
 }
+
+# test estructural (punto 4b, 2026-07-21): C3 (la más chica) con la espec
+# extendida + gwb1degree(0.5, fixed) — el término estructural más simple y
+# menos degenerable. Medido de día: ~15 min/iteración con 8 cadenas.
+regk3 <- registry[registry$commission == "C3", ]
+net3 <- build_net(regk3, 3)
+fit_and_save(net3,
+             net3 ~ edges + b1cov("miembro") + b1nodematch("conglomerado") +
+               b1nodematch("theta1_q") + b1nodematch("distrito") +
+               b1nodematch("es_abogado") + b1nodematch("experiencia") +
+               b1nodematch("es_mujer") + b1nodematch("grado") + b1nodematch("edad_q") +
+               gwb1degree(0.5, fixed = TRUE),
+             "C3 + gwb1degree (estructural)",
+             file.path(DATA_PROCESSED, "bipartite_mcmc_C3_gwb1.rds"))
 
 # pooled 947 (para el registro; interpretación con cautela: intercepto único ->
 # la composición entre comisiones confunde la homofilia, Simpson documentado)
@@ -117,8 +140,9 @@ membmat <- sapply(registry$commission, function(cc)
 netp <- build_net(registry)
 fit_and_save(netp,
              netp ~ edges + edgecov(membmat) + b1nodematch("conglomerado") +
-               b1nodematch("theta1_q") + b1nodematch("es_abogado") +
-               b1nodematch("experiencia") + b1nodematch("es_mujer"),
+               b1nodematch("theta1_q") + b1nodematch("distrito") +
+               b1nodematch("es_abogado") + b1nodematch("experiencia") +
+               b1nodematch("es_mujer") + b1nodematch("grado") + b1nodematch("edad_q"),
              "pooled 947 (MCMLE)",
              file.path(DATA_PROCESSED, "bipartite_mcmc_pooled947.rds"))
 

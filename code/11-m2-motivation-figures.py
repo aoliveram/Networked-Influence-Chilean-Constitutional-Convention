@@ -238,19 +238,41 @@ print("--- Done ---")
 pan = pd.read_csv(os.path.join(DATA_PROCESSED, "network_exposure_panel.csv"))
 pan = pan.sort_values(["legislator", "commission", "step"])
 pan["dE"] = pan.groupby(["legislator", "commission"])["net_exposure"].diff()
-lev = pan.dropna(subset=["theta", "net_exposure"])
-chg = pan.dropna(subset=["delta_theta", "dE"])
+lev = pan.dropna(subset=["theta", "net_exposure"]).copy()
+chg = pan.dropna(subset=["delta_theta", "dE"]).copy()
 r_lev = lev["theta"].corr(lev["net_exposure"])
 r_chg = chg["delta_theta"].corr(chg["dE"])
+# extremos del panel (a): 5% con mayor residuo |theta - fit(E)| (punto 1,
+# 2026-07-21) -> se marcan ambos paneles; si en (b) se ven aleatorios,
+# ni siquiera los desalineados muestran arrastre
+b1, b0 = np.polyfit(lev["net_exposure"], lev["theta"], 1)
+lev["resid"] = lev["theta"] - (b0 + b1 * lev["net_exposure"])
+thr = lev["resid"].abs().quantile(0.95)
+lev["extreme"] = lev["resid"].abs() >= thr
+key = ["legislator", "commission", "step"]
+chg = chg.merge(lev[key + ["extreme"]], on=key, how="left")
+chg["extreme"] = chg["extreme"].fillna(False)
+r_chg_ext = chg.loc[chg["extreme"], "delta_theta"].corr(chg.loc[chg["extreme"], "dE"])
 fig, (a1, a2) = plt.subplots(1, 2, figsize=(8.6, 3.4))
-a1.scatter(lev["net_exposure"], lev["theta"], s=5, alpha=0.12, color="#2a78d6",
-           edgecolors="none", rasterized=True)
+a1.scatter(lev.loc[~lev["extreme"], "net_exposure"], lev.loc[~lev["extreme"], "theta"],
+           s=5, alpha=0.12, color="#2a78d6", edgecolors="none", rasterized=True)
+a1.scatter(lev.loc[lev["extreme"], "net_exposure"], lev.loc[lev["extreme"], "theta"],
+           s=9, alpha=0.75, color="#c98a00", edgecolors="none", zorder=3,
+           label="5% farthest from fit")
+a1.plot([lev["net_exposure"].min(), lev["net_exposure"].max()],
+        [b0 + b1 * lev["net_exposure"].min(), b0 + b1 * lev["net_exposure"].max()],
+        color="#0b0b0b", lw=1.0, ls="--", zorder=2)
+a1.legend(fontsize=7.5, frameon=False, loc="upper left")
 a1.set_title(f"(a) Between: position vs. exposure (r = {r_lev:.2f})",
              fontsize=9.5, loc="left", color=INK)
 a1.set_xlabel("Exposure $E_{it}$ (neighbors' mean position)", fontsize=8.5)
 a1.set_ylabel(r"Own position $\theta_{it}$", fontsize=8.5)
-a2.scatter(chg["dE"], chg["delta_theta"], s=5, alpha=0.12, color="#e34948",
-           edgecolors="none", rasterized=True)
+a2.scatter(chg.loc[~chg["extreme"], "dE"], chg.loc[~chg["extreme"], "delta_theta"],
+           s=5, alpha=0.12, color="#e34948", edgecolors="none", rasterized=True)
+a2.scatter(chg.loc[chg["extreme"], "dE"], chg.loc[chg["extreme"], "delta_theta"],
+           s=9, alpha=0.75, color="#c98a00", edgecolors="none", zorder=3,
+           label=f"same obs. as (a): r = {r_chg_ext:.2f}")
+a2.legend(fontsize=7.5, frameon=False, loc="upper left")
 a2.set_title(f"(b) Within: change vs. change (r = {r_chg:.2f})",
              fontsize=9.5, loc="left", color=INK)
 a2.set_xlabel(r"$\Delta E_{it}$ (wave-to-wave)", fontsize=8.5)

@@ -34,6 +34,11 @@ theta1_q <- as.character(cut(theta1, quantile(theta1, probs = seq(0, 1, 0.2)),
 congl <- listas$conglomerado[match(roster, listas$nombre_armonizado)]
 congl[congl == "REVISAR (lista local sin conglomerado)"] <- "Otras"
 comis_v <- memb$commission[match(roster, memb$nombre_armonizado)]
+distr_v <- profiles$distrito[match(roster, profiles$nombre_armonizado)]
+grado_v <- profiles$grado_academico_nivel[match(roster, profiles$nombre_armonizado)]
+edad_v <- profiles$edad_al_asumir[match(roster, profiles$nombre_armonizado)]
+edad_q <- as.character(cut(edad_v, quantile(edad_v, probs = seq(0, 1, 0.2)),
+                           include.lowest = TRUE, labels = paste0("E", 1:5)))
 
 fit_commission <- function(k) {
   regk <- registry[registry$commission == sprintf("C%d", k), ]
@@ -47,6 +52,9 @@ fit_commission <- function(k) {
     es_abogado = c(profiles$es_abogado[match(roster, profiles$nombre_armonizado)], rep(-1L, n2)),
     experiencia = c(profiles$experiencia_previa_institucional[match(roster, profiles$nombre_armonizado)], rep(-1L, n2)),
     es_mujer = c(profiles$es_mujer[match(roster, profiles$nombre_armonizado)], rep(-1L, n2)),
+    distrito = c(distr_v, rep("modo2", n2)),
+    grado = c(as.character(grado_v), rep("modo2", n2)),
+    edad_q = c(edad_q, rep("modo2", n2)),
     miembro = c(as.integer(comis_v == sprintf("C%d", k)), rep(0L, n2))
   )
   for (a in names(atr)) network::set.vertex.attribute(net, a, atr[[a]])
@@ -59,9 +67,12 @@ fit_commission <- function(k) {
   net <- network::add.edges(net, tail = tails, head = heads)
 
   t0 <- Sys.time()
+  # espec extendida (2026-07-21, punto 4): paridad máxima con el clogit —
+  # homofilia también de distrito/pueblo, nivel educativo y quintil de edad
   f <- net ~ edges + b1cov("miembro") + b1nodematch("conglomerado") +
-    b1nodematch("theta1_q") + b1nodematch("es_abogado") +
-    b1nodematch("experiencia") + b1nodematch("es_mujer")
+    b1nodematch("theta1_q") + b1nodematch("distrito") +
+    b1nodematch("es_abogado") + b1nodematch("experiencia") +
+    b1nodematch("es_mujer") + b1nodematch("grado") + b1nodematch("edad_q")
   out <- tryCatch({
     # BIPARTITE_ESTIMATE=MPLE: máxima pseudo-verosimilitud (segundos; puntos
     # consistentes bajo dependencia debil, EEs logísticos ANTI-conservadores).
