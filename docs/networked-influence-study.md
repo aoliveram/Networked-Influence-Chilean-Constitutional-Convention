@@ -37,7 +37,7 @@ Todo el material proviene del registro documental de la Convención, procesado e
     - género; profesión de abogado/a (39% de la Convención); experiencia institucional previa (haber sido parlamentario/a, alcalde/sa, concejal/a, ministro/a u otro cargo público antes de jul-2021);
     - grado académico en escala 0--3 (0 = sin estudios universitarios terminados, 1 = educación superior, 2 = magíster, 3 = doctorado);
     - distrito electoral (28 distritos; para los 17 escaños reservados, su pueblo originario — 10 pueblos);
-    - lista electoral de origen, agrupada en conglomerados (Vamos por Chile 37, Apruebo Dignidad 28, Lista del Apruebo 25, Lista del Pueblo 23, escaños reservados 17, Independientes No Neutrales 3, otras listas locales 21);
+    - lista electoral de origen, agrupada en conglomerados (Vamos por Chile 37, Apruebo Dignidad 28, Lista del Apruebo 25, Lista del Pueblo 23, escaños reservados 17, Independientes No Neutrales 3, otras listas locales 21); la agrupación sigue el pacto electoral de origen y difiere en los bordes de la de Fábrega (2022, *Revista de Ciencia Política* 42(1)), cuya Tabla 1 usa una categoría residual "Otras candidaturas fuera de pacto" (10 escaños, "Izquierda y Centro-Izquierda") sin enumerar su composición en el texto — el material suplementario del artículo codifica 15 convencionales como "O"; nuestro "otras listas locales" (21) es más ancho porque agrupa por lista de registro, no por orientación (el crosswalk fino está anotado como pendiente);
     - comisión temática de pertenencia.
 - Iniciativas: 995 ingresadas a la plataforma oficial de la Convención entre nov-2021 y feb-2022, con la lista de firmantes armonizada al padrón de 154.
     - 947 tienen entre 2 y 16 firmantes-persona y forman el set de análisis; 46 registran más de 16 firmantes — imposible bajo la regla del reglamento — y quedan excluidas mientras se auditan como duplicaciones de documentos transversales entre comisiones; 2 tienen un solo firmante recuperable.
@@ -329,7 +329,7 @@ Sobre esa red estimamos un ERGM (exponential random graph model), que conviene e
 
 - *edges*: la propensión base a firmar (el intercepto del modelo);
 - *miembro*: ¿los miembros de la comisión firman las iniciativas de su comisión más que el resto?
-- *misma lista, mismo quintil de $\theta_1$, ambos abogados, ambos con experiencia, mismo género*: cada uno cuenta los pares de co-firmantes de una misma iniciativa que comparten ese atributo — homofilia de co-firma medida sin proyección.
+- *misma lista, mismo quintil de $\theta_1$, mismo distrito, ambos abogados, ambos con experiencia, mismo género, mismo nivel educativo, mismo quintil de edad*: cada uno cuenta los pares de co-firmantes de una misma iniciativa que comparten ese atributo — homofilia de co-firma medida sin proyección. (Una diferencia de forma con el logit condicional y el RHEM: allá las variables continuas entran como distancias — $|\theta_i - \bar\theta|$, dispersión de edad —; el vocabulario estándar del ERGM bipartito solo trae homofilia por *coincidencia de categoría*, así que ideología, educación y edad entran discretizadas en quintiles/niveles. La paridad entre los tres modelos es de variables, no de forma funcional.)
 
 ¿Por qué siete modelos y no uno? Por dos razones, una sustantiva y una práctica. La sustantiva: la comisión es el mayor confundidor de composición (la sección 3.4 mostró que los temas arman las coaliciones), y estimar dentro de cada comisión es condicionar por ese confundidor por diseño — en un modelo único de las 947 iniciativas, con un solo intercepto, las diferencias de composición *entre* comisiones contaminan la homofilia *dentro* de cada una (lo verificamos: el modelo agregado invierte los signos de la homofilia, la paradoja de Simpson de manual). La práctica: en estas redes la estimación MCMC completa toma horas por comisión; la tabla reporta máxima pseudo-verosimilitud (MPLE), que entrega los mismos puntos en segundos pero errores estándar que subestiman la incertidumbre — las estrellas se leen como indicativas, y el run MCMC completo (en curso, nocturno) entrega la inferencia definitiva. Los siete modelos ($^{*}$ $p<.05$, $^{**}$ $p<.01$, $^{***}$ $p<.001$; errores estándar completos en `M1_bipartite_commissions.csv`):
 
@@ -497,7 +497,7 @@ La respuesta es sí — y eso no debilita el resultado sino que revela el mecani
 
 La Figura 12 muestra esta geometría directamente, sin cortar en tramos: la tasa de supervivencia contra la posición media de la coalición, en bins de igual tamaño. El máximo (cerca del 45%) no está sobre el pívot sino algo a su izquierda ($\bar\theta_1 \approx -0.55$): subida empinada desde la izquierda dura hasta ese punto, descenso suave al acercarse al pívot y caída al cruzarlo. La interpretación encaja con la aritmética de la sala: en una Convención mayoritariamente de izquierda, la coalición óptima es la que está en el centro de masa de esa mayoría — lo bastante central para estirarse hasta el voto 103, sin despegarse del bloque que redacta. La Tabla 12 es esta curva leída por cuartiles.
 
-![Figura 12. Tasa de supervivencia de los artículos según la posición media de su coalición firmante (bins de igual tamaño; el tamaño del punto es el n del bin; bandas = cuartiles de la Tabla 12; línea roja = pívot de 2/3).](../results/figures/survival_by_position.pdf){width=100%}
+![Figura 12. Tasa de supervivencia de los artículos según la posición media de su coalición firmante (bins de igual tamaño; el tamaño del punto es el n del bin). Las bandas sombreadas son terciles — el corte que dialoga con la regla de 2/3 — con su tasa de supervivencia; las barandillas rojas superiores marcan los cortes por quintiles (fila de arriba) y por cuartiles (fila de abajo); la línea roja discontinua es el pívot.](../results/figures/survival_by_position.pdf){width=100%}
 
 ## 5.2 La vista agregada: el éxito se comparte
 
@@ -531,9 +531,37 @@ donde $W$ es la red de co-patrocinio normalizada por filas (cada fila suma 1: $W
 
 Tres lecturas. Primera, el control de actividad responde la pregunta que lo motivó: firmar muchas iniciativas no hace más exitoso a nadie (coeficiente nulo) y las demás conclusiones no cambian al incluirlo. Segunda, el patrón general del estudio se repite: los atributos propios no predicen casi nada — la única excepción es la experiencia previa propia, positiva y chica ($+0.019$) —; los del vecindario pesan más, incluida la distancia al pívot, que solo importa en su versión "de la compañía" ($-0.27$) y no en la propia ($p = 0.95$). Tercera, $\rho = 0.89$: el éxito está acoplado entre co-firmantes incluso tras todos los controles. Parte de ese acoplamiento es composición — co-firmantes comparten artículos, y por tanto las propiedades de coalición de 5.1 —, por lo que leemos 5.1 como el mecanismo y esta sección como su sombra agregada (la dependencia sobrevive además con red binaria, con otra definición de lazo, con similitud semántica en vez de léxica, y con la retención condicional: $\rho$ entre 0.63 y 0.95 en todas las variantes). Nota sobre el lag de abogado ($+0.19$): a nivel de convencional, estar rodeado de abogados acompaña al éxito, pero el modelo de mecanismo (5.1) muestra que la proporción de abogados de la coalición no salva artículos — preferimos la lectura del nivel artículo, que es el diseño limpio.
 
-La Figura 13 muestra la materia prima de este éxito en el tiempo: la similitud de los artículos de cada comisión con el borrador final, onda a onda — la convergencia gradual (y desigual entre comisiones) cuyo punto de llegada es el numerador del éxito $y_i$.
+¿Qué pasa si tomamos el modelo en serio y calculamos sus efectos completos? En un modelo espacial, el coeficiente crudo de una variable no es su efecto total: si mi éxito sube, el de mis vecinos sube ($\rho$), lo que vuelve a subir el mío — un eco infinito. La descomposición estándar (LeSage-Pace) separa el efecto *directo* (sobre mí, incluido mi propio eco), el *indirecto* (el derrame sobre los demás) y el *total*. Con solo 154 nodos podemos calcularla de forma exacta — el multiplicador $(I - \rho W)^{-1}$ completo, sin las aproximaciones que se vuelven inestables cuando $\rho$ se acerca a 1:
 
-![Figura 13. Retención textual por comisión a lo largo de las ondas de indicaciones: similitud media de los artículos con el borrador final.](../results/figures/retention_dynamics_all_commissions.pdf){width=100%}
+**Tabla 14 — SDM: descomposición exacta de impactos (modelo de la Tabla 13) y comparación con OLS.**
+
+| Variable | $\beta$ OLS | Directo | Indirecto | Total |
+|:---|:-:|:-:|:-:|:-:|
+| ***— Actividad y posición en la red*** | | | | |
+| N° de iniciativas firmadas | $-0.0004$ | $-0.0001$ | $+0.0009$ | $+0.0007$ |
+| Grado (red) | $+0.0011$ | $+0.0010$ | $+0.051$ | $+0.052$ |
+| Betweenness | $-0.0004$ | $-0.0002$ | $-0.018$ | $-0.018$ |
+| ***— Posición ideológica*** | | | | |
+| Voto revelado medio ($\theta$) | $+0.003$ | $+0.015$ | $+0.57$ | $+0.58$ |
+| Desv. est. de $\theta$ | $+0.025$ | $-0.017$ | $+0.09$ | $+0.07$ |
+| Distancia propia al pívot | $-0.093$ | $-0.030$ | $-2.41$ | $-2.44$ |
+| Heterofilia del ego | $-0.011$ | $-0.053$ | $-2.50$ | $-2.56$ |
+| ***— Credenciales y perfil*** | | | | |
+| Abogado | $+0.010$ | $+0.032$ | $+1.83$ | $+1.86$ |
+| Experiencia previa | $+0.013$ | $+0.038$ | $+1.68$ | $+1.72$ |
+| Mujer | $+0.001$ | $+0.024$ | $+1.90$ | $+1.92$ |
+| Edad | $-0.0004$ | $-0.0005$ | $-0.031$ | $-0.032$ |
+| Grado académico | $+0.002$ | $-0.020$ | $-1.42$ | $-1.44$ |
+
+La tabla enseña más por lo que revela del modelo que por sus números sueltos, y hay que leerla con tres claves. Primera: los efectos *directos* son chicos y del orden de los OLS — sobre uno mismo, nada mueve mucho. Segunda: los *totales* son enormes porque con $\rho = 0.89$ el multiplicador de equilibrio vale $1/(1-\rho) \approx 9$ — el modelo afirma, tomado literalmente, que convertir a alguien en abogado sumaría $+1.86$ de retención repartida por toda la sala, cuando el éxito individual promedio es $0.09$. Eso no es un efecto creíble: es el diagnóstico cuantitativo de por qué el acoplamiento $\rho$ debe leerse como asociación (composición más selección) y no como difusión causal — la advertencia que este mismo reporte hace desde 5.1. (La inferencia sobre los totales tampoco es utilizable en este régimen: en el Monte Carlo con la covarianza ML, los sorteos con $\rho \to 1$ disparan el multiplicador y los errores estándar explotan; por eso la tabla no trae $p$-values de totales, y la columna de "% de reducción vs OLS" que sugiere la comparación estándar pierde sentido — los porcentajes salen en decenas de miles.) Tercera clave, los dos contrafactuales que sí son tangibles: mover a un convencional de un vecindario de bajo éxito (percentil 10 de $Wy$) a uno de alto éxito (percentil 90) asocia $+0.078$ de retención — 1.3 desviaciones estándar del éxito, casi duplicar la media — y mover a *una sola* persona del P10 al P90 de una covariable produce efectos propios minúsculos (abogado: $+0.03$; distancia al pívot: $-0.03$) pero derrames agregados gigantes según el modelo ($+1.8$ y $-2.0$ sumados sobre la sala). El contraste entre lo propio (chico) y lo derramado (enorme) es la firma aritmética de $\rho \approx 0.9$.
+
+La Figura 13 baja todo esto a la evidencia visual más simple: el éxito de cada convencional contra su posición del primer mes. El perfil replica a nivel individual lo que la Figura 12 mostró a nivel de coalición — máximo justo a la izquierda del pívot (y los individuos más exitosos son de listas locales, INN y Lista del Apruebo parados ahí), niveles moderados en la izquierda, y el piso plano en la derecha.
+
+![Figura 13. Éxito individual (retención léxica media) según el punto ideal del primer mes, coloreado por conglomerado; línea = medias por bins de igual tamaño; vertical = pívot de 2/3.](../results/figures/success_by_ideology.pdf){width=100%}
+
+La Figura 14 muestra la materia prima de este éxito en el tiempo: la similitud de los artículos de cada comisión con el borrador final, onda a onda — la convergencia gradual (y desigual entre comisiones) cuyo punto de llegada es el numerador del éxito $y_i$.
+
+![Figura 14. Retención textual por comisión a lo largo de las ondas de indicaciones: similitud media de los artículos con el borrador final.](../results/figures/retention_dynamics_all_commissions.pdf){width=100%}
 
 # 6. Síntesis
 
@@ -544,7 +572,8 @@ En una asamblea de extraños, la colaboración se organizó con lo que la gente 
 1. Los puntos ideales se estiman de votos: la distinción entre ideología y disciplina estable (sección 3.2) es parcialmente circular. El error de medición de $\theta$ ya está cuantificado y propagado a M2 (bootstrap paramétrico, sección 4.1: el nulo sobrevive); su propagación a los demás modelos que usan $\theta$ (formación, supervivencia) queda pendiente.
 2. La familiaridad del modelo de eventos mezcla dependencia del estado con afinidades estables no observadas; la ventana es corta (tres meses), un 36% de los eventos cae el día del plazo (donde no existe orden intradiario) y 123 fechas están imputadas desde las notas del registro.
 3. 46 iniciativas con más de 16 firmantes están excluidas mientras se auditan como duplicaciones transversales (quedan además 24 grupos de texto casi duplicado sin resolver en la fuente); 120 iniciativas utilizables no tienen comisión asignada en la plataforma (entran a la red agregada y al modelo de eventos, no a los análisis por comisión); 21 convencionales de listas locales esperan un crosswalk fino de conglomerado.
-4. En el modelo de supervivencia, el grado medio de red de la coalición se excluye por colinealidad con la constraint media (VIF $\approx$ 10 entre ambas); con esa exclusión todos los VIF quedan bajo 4.
-5. Con $\rho$ cercano a 1, la descomposición de impactos del modelo espacial es numéricamente inestable; se reportan coeficientes y $\rho$.
+4. El ERGM bipartito por comisión (Tabla 8) reporta por ahora puntos MPLE: los errores estándar definitivos requieren el MCMC completo (en curso; horas por comisión en las redes reales). Los términos *estructurales* (heterogeneidad de grado, clustering más allá de atributos) siguen fuera de todos los modelos de formación: el más simple (`gwb1degree`) cuesta ~15 minutos por iteración MCMC incluso en la comisión más chica, y los intentos con términos `gw` más ricos degeneraron.
+5. No existe un "ERGM bipartito total" válido con intercepto único: al juntar las 947 iniciativas en una sola red, la composición entre comisiones invierte los signos de la homofilia (paradoja de Simpson, verificada numéricamente); el modelo general correcto es la suite por comisión (o su versión conjunta con interceptos por red), que es lo que se reporta.
+6. Con $\rho \approx 0.9$, la descomposición de impactos del modelo espacial se calcula exacta (Tabla 14) pero sus totales son efectos de equilibrio amplificados $\sim 9\times$ y su inferencia Monte Carlo no es utilizable (sorteos con $\rho \to 1$); se leen como diagnóstico del acoplamiento, no como tamaños de efecto.
 
 En curso: robustez del modelo de eventos (excluir el bloque del plazo; imputar fechas faltantes); la variante dirigida (quién recluta a quién, con el autor principal de cada iniciativa); la extensión del modelo de eventos y de supervivencia a las indicaciones (incorporar a quienes modificaron cada artículo, no solo a quienes lo iniciaron); y el vínculo votación-artículo para clasificar artículos por su coalición de votantes.

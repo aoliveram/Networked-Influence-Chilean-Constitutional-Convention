@@ -257,7 +257,7 @@ fig, (a1, a2) = plt.subplots(1, 2, figsize=(8.6, 3.4))
 a1.scatter(lev.loc[~lev["extreme"], "net_exposure"], lev.loc[~lev["extreme"], "theta"],
            s=5, alpha=0.12, color="#2a78d6", edgecolors="none", rasterized=True)
 a1.scatter(lev.loc[lev["extreme"], "net_exposure"], lev.loc[lev["extreme"], "theta"],
-           s=9, alpha=0.75, color="#c98a00", edgecolors="none", zorder=3,
+           s=9, alpha=0.35, color="#c98a00", edgecolors="none", zorder=3,
            label="5% farthest from fit")
 a1.plot([lev["net_exposure"].min(), lev["net_exposure"].max()],
         [b0 + b1 * lev["net_exposure"].min(), b0 + b1 * lev["net_exposure"].max()],
@@ -270,7 +270,7 @@ a1.set_ylabel(r"Own position $\theta_{it}$", fontsize=8.5)
 a2.scatter(chg.loc[~chg["extreme"], "dE"], chg.loc[~chg["extreme"], "delta_theta"],
            s=5, alpha=0.12, color="#e34948", edgecolors="none", rasterized=True)
 a2.scatter(chg.loc[chg["extreme"], "dE"], chg.loc[chg["extreme"], "delta_theta"],
-           s=9, alpha=0.75, color="#c98a00", edgecolors="none", zorder=3,
+           s=9, alpha=0.35, color="#c98a00", edgecolors="none", zorder=3,
            label=f"same obs. as (a): r = {r_chg_ext:.2f}")
 a2.legend(fontsize=7.5, frameon=False, loc="upper left")
 a2.set_title(f"(b) Within: change vs. change (r = {r_chg:.2f})",

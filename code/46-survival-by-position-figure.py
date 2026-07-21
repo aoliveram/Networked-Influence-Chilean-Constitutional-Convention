@@ -53,20 +53,33 @@ for b in range(NB):
     rates.append(sv[m].mean())
     sizes.append(m.sum())
 
-q = np.quantile(mt, [0, .25, .5, .75, 1])
-fig, ax = plt.subplots(figsize=(8.4, 3.6))
-# bandas de cuartil con su tasa
-for i, lab in enumerate(["Q1", "Q2", "Q3", "Q4"]):
-    m = (mt >= q[i]) & (mt <= q[i + 1])
-    ax.axvspan(q[i], q[i + 1], color=GRID, alpha=0.35 if i % 2 == 0 else 0.12, zorder=0)
-    ax.text((max(q[i], -0.9) + min(q[i + 1], 0.85)) / 2, 0.485,
+fig, ax = plt.subplots(figsize=(8.4, 3.9))
+# bandas de TERCIL (calzan con la lógica del pívot de 2/3; punto 6, 2026-07-21)
+t = np.quantile(mt, [0, 1/3, 2/3, 1])
+for i, lab in enumerate(["T1", "T2", "T3"]):
+    m = (mt >= t[i]) & (mt <= t[i + 1])
+    ax.axvspan(t[i], t[i + 1], color=GRID, alpha=0.35 if i % 2 == 0 else 0.12, zorder=0)
+    ax.text((max(t[i], -0.9) + min(t[i + 1], 0.85)) / 2, 0.415,
             f"{lab}\n{100 * sv[m].mean():.0f}%", ha="center", va="top",
             fontsize=8.5, color=INK2)
+# barandillas superiores: cortes por QUINTIL (arriba) y por CUARTIL (debajo),
+# lineas rojas claras horizontales con topes pequenos (punto 7, 2026-07-21)
+def bracket_row(y, cuts, label):
+    tick = 0.008
+    for i in range(len(cuts) - 1):
+        x0, x1 = cuts[i] + 0.004, cuts[i + 1] - 0.004
+        ax.plot([x0, x1], [y, y], color=RED, lw=1.0, alpha=0.45, zorder=5)
+        ax.plot([x0, x0], [y - tick, y + tick], color=RED, lw=1.0, alpha=0.45, zorder=5)
+        ax.plot([x1, x1], [y - tick, y + tick], color=RED, lw=1.0, alpha=0.45, zorder=5)
+    ax.text(cuts[0] - 0.02, y, label, ha="right", va="center", fontsize=7.2,
+            color=RED, alpha=0.8)
+bracket_row(0.478, list(np.quantile(mt, np.linspace(0, 1, 6))), "quintiles")
+bracket_row(0.448, list(np.quantile(mt, np.linspace(0, 1, 5))), "quartiles")
 ax.plot(centers, rates, "-", color=BLUE, lw=1.6, zorder=2)
 ax.scatter(centers, rates, s=np.array(sizes) * 0.55, color=BLUE, edgecolors=SURF,
            linewidths=0.6, zorder=3)
 ax.axvline(PIVOT, color=RED, lw=1.4, ls="--", zorder=4)
-ax.text(PIVOT + 0.02, 0.44, f"2/3 pivot ($\\theta_{{(103)}}$ = {PIVOT:.2f})",
+ax.text(PIVOT + 0.02, 0.36, f"2/3 pivot ($\\theta_{{(103)}}$ = {PIVOT:.2f})",
         fontsize=8.5, color=RED, va="top")
 ax.axhline(sv.mean(), color=MUTED, lw=1.0, ls=":", zorder=1)
 ax.text(mt.min(), sv.mean() + 0.008, f"overall rate = {sv.mean():.2f}",
@@ -78,7 +91,7 @@ ax.grid(axis="y", color=GRID, lw=0.6)
 for side in ("top", "right"):
     ax.spines[side].set_visible(False)
 ax.set_title(f"Article survival by coalition position (n = {n} articles; "
-             "dots = equal-count bins, size $\\propto$ n; bands = quartiles of Table 12)",
+             "dots = equal-count bins, size $\\propto$ n; bands = terciles; top rails = quintile/quartile cuts)",
              fontsize=9.8, color=INK, loc="left", pad=8)
 os.makedirs(RESULTS_FIGURES, exist_ok=True)
 for ext in ("pdf", "png"):
