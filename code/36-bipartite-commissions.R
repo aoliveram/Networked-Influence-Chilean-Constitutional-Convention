@@ -2,8 +2,11 @@
 # 36-bipartite-commissions.R  (comentario del autor 2026-07-20, punto 6;
 # extendido a las 7 comisiones tras aprobar el piloto C1/C3 y adoptar el
 # registro de la plataforma con las 947 iniciativas utilizables)
-# ERGM bipartito POR COMISIÓN (redes 154 x n_k; convergen en segundos donde
-# el bipartito completo 154 x 487 falló tres veces).
+# ERGM bipartito POR COMISIÓN (redes 154 x n_k). NOTA 2026-07-20: se corrigió
+# un bug de construcción (heads sin rep() -> firmas asignadas a documentos
+# equivocados); con las redes REALES el MCMLE toma ~2.5 min/iteración incluso
+# en C1, así que el modo por defecto es para el run nocturno y el modo
+# BIPARTITE_ESTIMATE=MPLE entrega puntos rápidos para el reporte.
 # Términos: edges + b1cov(miembro de la comisión) + b1nodematch (conglomerado,
 # quintil theta1, abogado, experiencia, mujer). MCMC con 8 cadenas paralelas.
 #
@@ -51,7 +54,7 @@ fit_commission <- function(k) {
   for (j in seq_len(n2)) {
     S <- match(strsplit(regk$firmantes[j], "; ", fixed = TRUE)[[1]], roster)
     S <- S[!is.na(S)]
-    tails <- c(tails, S); heads <- c(heads, n1 + j)
+    tails <- c(tails, S); heads <- c(heads, rep(n1 + j, length(S)))
   }
   net <- network::add.edges(net, tail = tails, head = heads)
 
@@ -60,13 +63,22 @@ fit_commission <- function(k) {
     b1nodematch("theta1_q") + b1nodematch("es_abogado") +
     b1nodematch("experiencia") + b1nodematch("es_mujer")
   out <- tryCatch({
-    fit <- ergm(f, control = control.ergm(seed = 42, MCMLE.maxit = 40,
-                                          parallel = 8, parallel.type = "PSOCK"))
+    # BIPARTITE_ESTIMATE=MPLE: máxima pseudo-verosimilitud (segundos; puntos
+    # consistentes bajo dependencia debil, EEs logísticos ANTI-conservadores).
+    # Por defecto, MCMLE completo (horas por comisión en las redes reales).
+    fit <- ergm(f, estimate = ifelse(Sys.getenv("BIPARTITE_ESTIMATE") == "MPLE",
+                                     "MPLE", "MLE"),
+                control = control.ergm(seed = 42, MCMLE.maxit = 60,
+                                       MCMC.samplesize = 8192, MCMC.interval = 4096,
+                                       parallel = 8, parallel.type = "PSOCK"))
     sm <- summary(fit)
-    data.frame(commission = sprintf("C%d", k), term = rownames(sm$coefficients),
+    data.frame(commission = sprintf("C%d", k),
+               method = ifelse(Sys.getenv("BIPARTITE_ESTIMATE") == "MPLE", "MPLE", "MCMLE"),
+               term = rownames(sm$coefficients),
                estimate = sm$coefficients[, 1], se = sm$coefficients[, 2],
                p = sm$coefficients[, ncol(sm$coefficients)], row.names = NULL)
   }, error = function(e) data.frame(commission = sprintf("C%d", k),
+                                    method = ifelse(Sys.getenv("BIPARTITE_ESTIMATE") == "MPLE", "MPLE", "MCMLE"),
                                     term = paste("ERROR:", conditionMessage(e)),
                                     estimate = NA, se = NA, p = NA))
   out$secs <- round(as.numeric(difftime(Sys.time(), t0, units = "secs")), 1)

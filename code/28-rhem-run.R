@@ -14,7 +14,7 @@
 #   - Estadísticas de historia (motor propio vectorizado; verificado contra
 #     amorem::hyperedge_subrep en memoria infinita):
 #       subrep_1/2/3 en DOS memorias: infinita (w=1) y corta
-#       (w = exp(-Δ·ln2/30), semivida 30 días).
+#       (w = exp(-Δ·ln2/15), semivida 15 días).
 #     Truco de cómputo: para el candidato h y el evento pasado e,
 #     el nº de subconjuntos de tamaño r de h contenidos en S_e es
 #     choose(|S_e ∩ h|, r) -> todo se reduce a |S_e ∩ h| (producto matricial).
@@ -42,7 +42,7 @@ T0 <- Sys.time()
 N_CORES <- max(1, min(8, detectCores() - 2))
 M_CONTROLES <- 50
 B_RESAMPLES <- 10
-HALF_LIFE <- 30
+HALF_LIFE <- 15
 
 profiles <- fromJSON(PROFILES)
 roster <- sort(fromJSON(MEMBERS))
@@ -89,7 +89,7 @@ features_stratum <- function(k, C_mask) {
   s <- rowSums(C_mask)
   out <- matrix(0, nrow(C_mask), 6,
                 dimnames = list(NULL, c("sr1_inf", "sr2_inf", "sr3_inf",
-                                        "sr1_30", "sr2_30", "sr3_30")))
+                                        "sr1_15", "sr2_15", "sr3_15")))
   if (length(past) > 0) {
     kmat <- M[past, , drop = FALSE] %*% t(C_mask)          # pasado x candidatos
     w30 <- exp(-(registry$dia[k] - registry$dia[past]) * log(2) / HALF_LIFE)
@@ -138,15 +138,15 @@ cat("  Sanity: motor propio == amorem::hyperedge_subrep (memoria infinita) OK\n"
 # ------------------- caso-control + ajuste por re-muestreo -------------------
 EXO <- c("disp_theta1", "disp_theta2", "prop_lista", "prop_comision",
          "pares_abogado", "pares_exper", "pares_distrito", "pares_mujer", "disp_grado")
-FEATS <- c("sr1_inf", "sr2_inf", "sr3_inf", "sr1_30", "sr2_30", "sr3_30", EXO)
+FEATS <- c("sr1_inf", "sr2_inf", "sr3_inf", "sr1_15", "sr2_15", "sr3_15", EXO)
 # PRINCIPAL (decisión del autor 2026-07-20): solo sub.rep(2) — el par es la
 # unidad mínima de una relación; sr1 (individual, no relacional) y sr3
 # (recicla la info de los pares) entran solo en la robustez conjunta, donde
 # la colinealidad (r = 0.78/0.84) produce signos no interpretables por separado.
 F_INF <- c("sr2_inf", EXO)
-F_30 <- c("sr2_30", EXO)
+F_30 <- c("sr2_15", EXO)
 F_INF_TRIO <- c("sr1_inf", "sr2_inf", "sr3_inf", EXO)
-F_30_TRIO <- c("sr1_30", "sr2_30", "sr3_30", EXO)
+F_30_TRIO <- c("sr1_15", "sr2_15", "sr3_15", EXO)
 
 build_resample <- function(b) {
   strata_rows <- mclapply(seq_len(E), function(k) {
@@ -192,9 +192,9 @@ for (b in seq_len(B_RESAMPLES)) {
   if (b == 1) write.csv(df, file.path(DATA_PROCESSED, "rhem_case_control_b1.csv"),
                         row.names = FALSE)
   res[[length(res) + 1]] <- fit_one(df, F_INF, "infinita", b)
-  res[[length(res) + 1]] <- fit_one(df, F_30, "semivida 30d", b)
+  res[[length(res) + 1]] <- fit_one(df, F_30, "semivida 15d", b)
   res[[length(res) + 1]] <- fit_one(df, F_INF_TRIO, "infinita (trio, robustez)", b)
-  res[[length(res) + 1]] <- fit_one(df, F_30_TRIO, "semivida 30d (trio, robustez)", b)
+  res[[length(res) + 1]] <- fit_one(df, F_30_TRIO, "semivida 15d (trio, robustez)", b)
   cat(sprintf("    b=%d listo (%.1f s)\n", b,
               as.numeric(difftime(Sys.time(), tb, units = "secs"))))
 }
@@ -247,8 +247,8 @@ aux <- do.call(rbind, lapply(names(solo), function(lb) {
 print(aux, row.names = FALSE, digits = 3)
 
 ll_inf <- logLik(fit_ll(F_INF)); ll_30 <- logLik(fit_ll(F_30))
-cat(sprintf("\n--- Memorias (b = 1, mismo dataset): logLik infinita = %.1f | semivida 30d = %.1f -> %s ---\n",
+cat(sprintf("\n--- Memorias (b = 1, mismo dataset): logLik infinita = %.1f | semivida 15d = %.1f -> %s ---\n",
             as.numeric(ll_inf), as.numeric(ll_30),
-            ifelse(ll_inf > ll_30, "gana infinita", "gana 30d")))
+            ifelse(ll_inf > ll_30, "gana infinita", "gana 15d")))
 write.csv(aux, file.path(RESULTS_TABLES, "RHEM_aux.csv"), row.names = FALSE)
 cat(sprintf("\n--- Done (%.1f min) ---\n", as.numeric(difftime(Sys.time(), T0, units = "mins"))))

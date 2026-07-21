@@ -74,9 +74,19 @@ ax1.hist(null_pool, bins=bins, density=True, histtype="stepfilled",
          label="random signers (same sizes)", zorder=2)
 ax1.hist(shares, bins=bins, density=True, color=BLUE, alpha=0.75,
          edgecolor=SURF, lw=0.5, label="observed initiatives", zorder=3)
+# curvas de densidad ajustadas (KDE) y medias de cada distribución, cada una
+# del color de su histograma (comentario del autor 2026-07-20, punto 5)
+from scipy.stats import gaussian_kde
+xs = np.linspace(0, 1, 300)
+# bw fijo: el pool nulo es discreto (k/s) y el ancho de banda por defecto oscila
+ax1.plot(xs, gaussian_kde(null_pool, bw_method=0.3)(xs), color="#c98a00", lw=2.0, zorder=5)
+ax1.plot(xs, gaussian_kde(shares, bw_method=0.3)(xs), color="#1a5cab", lw=2.0, zorder=6)
+ax1.axvline(float(np.mean(null_pool)), color="#c98a00", lw=1.2, ls=":", zorder=4)
+ax1.axvline(float(np.mean(shares)), color="#1a5cab", lw=1.2, ls=":", zorder=4)
 ax1.axvline(base_rate, color=INK, lw=1.1, ls="--", zorder=4)
-ax1.text(base_rate + 0.01, ax1.get_ylim()[1] * 0.78, f"convention rate = {base_rate:.2f}",
-         fontsize=7.5, color=INK2, va="top")
+ax1.text(0.60, ax1.get_ylim()[1] * 0.55,
+         f"convention rate = {base_rate:.2f}\nmean obs = {np.mean(shares):.2f}\n"
+         f"mean random = {np.mean(null_pool):.2f}", fontsize=7.5, color=INK2, va="top")
 ax1.set_xlabel(f"Share of lawyers among signers (n = {len(shares)} initiatives)", fontsize=9)
 ax1.set_ylabel("Density", fontsize=9)
 ax1.set_title("(a) Lawyer share per initiative vs. random-signer benchmark",

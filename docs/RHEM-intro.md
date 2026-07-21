@@ -256,3 +256,74 @@ Y el resultado grande, el que justificaba todo el aparato: **historia y homofili
 Caveats para tener a mano: los 39 eventos sin fecha quedan fuera (8%; robustez de imputación pendiente); los EE de sr$_1$/sr$_2$ son grandes por colinealidad (aun así $p < 10^{-4}$; para el paper, reportar la tabla conjunta *y* la de "a solas"); el bloque del deadline (156 iniciativas el 1-feb) se evalúa contra la historia al 31-ene — la convención correcta, pero comprime un tercio del riesgo en un día.
 
 **Nada de esto entra aún a `networked-influence-study`**: primero viene la discusión de qué modelo encabeza M1 (clogit estático, Poisson+boot, RHEM) y cómo se reparten los papeles.
+
+# 11. El ERGM bipartito, revisitado a fondo (2026-07-20): qué tenemos, qué falta, cuánto cuesta
+
+El autor pidió estar completamente seguro de que exploramos todas las opciones del ERGM bipartito general, y entender qué perdemos con la configuración actual por comisión. Esta sección responde esas preguntas (6.0 a 6.4 de sus comentarios), con una confesión metodológica primero.
+
+## 11.0 Primero, la confesión: un bug de construcción, y cómo lo pilló la contabilidad
+
+Al revisar por qué el modelo agregado y los siete modelos por comisión daban respuestas incompatibles, encontramos un bug en el código que construye las redes bipartitas (introducido al escribir el script de la suite; el script antiguo del intento agregado estaba correcto). En R, la lista de aristas se arma con dos vectores paralelos — el firmante (`tail`) y el documento (`head`) — y el código agregaba los $k$ firmantes de cada documento pero **una sola** entrada de documento:
+
+```r
+tails <- c(tails, S);  heads <- c(heads, n1 + j)          # MAL
+tails <- c(tails, S);  heads <- c(heads, rep(n1 + j, length(S)))  # BIEN
+```
+
+Con vectores de largo distinto, R recicla el corto: cada firma quedó conectada a un documento esencialmente arbitrario. Lo insidioso: el atributo del firmante seguía siendo correcto (por eso el término *miembro* daba resultados sensatos), y los tests de convergencia del MCMC pasaban sin quejas — el modelo convergía perfectamente bien *sobre datos revueltos*. Lo que delató el problema no fue ninguna estadística sino una identidad contable: la red apilada y las siete redes por separado deberían tener exactamente las mismas aristas, y no las tenían (9.356 vs 9.224, contra 9.706 firmas reales). Moraleja para el paper y para la vida: un test de convergencia valida el ajuste, no los datos; las identidades contables (¿cuántas aristas *deberían* haber?) son el sanity check más barato y el que nadie corre.
+
+Consecuencia sustantiva: la tabla bipartita que el reporte mostró hasta hoy (homofilias nulas o negativas dentro de cada comisión, "la homofilia está en la puerta, no en el patio") era un artefacto del revoltijo — co-ocurrencia aleatorizada produce homofilia cero por construcción. Con las redes correctas, la homofilia de lista ($+0.16$ a $+0.22$) y la ideológica ($+0.12$ a $+0.16$) son positivas y significativas en las siete comisiones, en línea con el logit condicional y el RHEM. La Tabla 8 del reporte ya está corregida.
+
+## 11.1 ¿Qué tan ideales son las estimaciones actuales? ¿Qué nos perdemos? (pregunta 6.0)
+
+Recordemos qué es un ERGM, en una ecuación. El modelo asigna probabilidad a cada red bipartita posible $y$:
+
+$$\Pr(Y = y) = \frac{\exp\big(\theta^\top s(y)\big)}{\kappa(\theta)},$$
+
+donde $s(y)$ son las estadísticas (número de aristas, firmas de miembros, pares de co-firmantes de la misma lista, etc.) y $\kappa$ es la constante que suma sobre *todas* las redes posibles — el monstruo de $2^{154 \times 947}$ términos que obliga a estimar por MCMC.
+
+Lo que la suite por comisión estima bien: la propensión de membresía y la homofilia de co-firma *dentro* de cada pool temático, condicionando por diseño en el mayor confundidor (la comisión). Lo que nos perdemos, en orden de importancia:
+
+1. **La inferencia exacta, hoy.** La tabla vigente usa MPLE (máxima pseudo-verosimilitud): en vez de la probabilidad de la red completa, maximiza el producto de las probabilidades condicionales de cada lazo dado el resto — una regresión logística sobre las "estadísticas de cambio". Para términos diádicamente independientes (edges, miembro) MPLE *es* el MLE exacto; para los `b1nodematch` (que dependen de otras aristas) los puntos son consistentes pero los errores estándar logísticos subestiman la incertidumbre. El run MCMC nocturno (11.4) entrega los EE válidos.
+2. **La estructura más allá de los atributos.** Nada en nuestra especificación captura dependencia puramente estructural: heterogeneidad de grado de los firmantes (hay gente que firma 227 iniciativas y gente que firma 8), clustering (¿dos firmantes que comparten un documento tienden a compartir otro, *más allá* de sus atributos?). Esos son los términos `gw*` que degeneraron en los intentos de 2026-07-12, y siguen fuera. Es la pieza genuinamente ausente — pero no es carga estructural del argumento del estudio: la pregunta de homofilia está triangulada por tres diseños distintos, y la dependencia histórica la captura el RHEM por otra vía.
+3. **Los tamaños de coalición como dato.** La regla 8-16 fija los tamaños por reglamento; el modelo ideal condicionaría en los grados del modo-2 (los tamaños observados) en vez de dejarlos libres. Esa restricción (`constraints = ~b2degrees`) hizo colapsar el muestreador en los intentos previos. La buena noticia conceptual: el logit condicional del reporte ES exactamente esa condicional — el modelo bipartito con tamaños fijos y términos diádicos, estimado estrato por estrato de forma exacta. En ese sentido preciso, "el ERGM bipartito general condicionado correctamente" ya está corrido desde la sección 3.1; lo que el ERGM agrega es la versión sin condicionar y los términos estructurales.
+4. **Las 120 iniciativas sin comisión** (12.7% de las utilizables) quedan fuera de la suite (no de la red agregada ni del RHEM). Es un límite del mapeo iniciativa→comisión de la fuente, no del modelo; si el CPT completa ese mapeo, entran solas.
+
+## 11.2 La regla de escalado del tiempo de cómputo (pregunta 6.2)
+
+Corrimos la escalera pedida — uniones de comisiones de tamaño creciente, hasta la red completa — y la respuesta tiene una vuelta: **el costo del ERGM no escala con el tamaño de la matriz sino con la dificultad de mezcla del MCMC**, y esa dificultad depende de cuánta estructura real hay que reproducir.
+
+- **MPLE**: segundos a cualquier escala (la 154×947 completa: ~1 s). Es una logística; escala lineal en díadas.
+- **MCMLE sobre las redes revueltas del bug** (co-ocurrencia casi aleatoria, poca estructura): 7 a 31 s de 115 a 947 documentos; exponente ajustado $\approx n^{0.44}$ — sublineal, casi plano. Este fue el escalado "milagroso" que medimos primero, y es real *para redes sin estructura*.
+- **MCMLE sobre las redes reales** (clustering fuerte de verdad): la primera comisión (154×89, ¡la chica!) tomó ~2.5 minutos *por iteración* MCMLE, con decenas de iteraciones por delante — horas por comisión. El costo por iteración crece con el tamaño, pero el número de iteraciones y el largo de cadena necesarios crecen con la dependencia.
+
+La regla honesta: $T \approx (\text{iteraciones hasta converger}) \times (\text{costo de muestreo por iteración})$; el segundo factor escala suave con las díadas, el primero explota con la estructura. Por eso la extrapolación útil no es "947 documentos tardarán X" sino "una noche por tanda": ver 11.4.
+
+## 11.3 ¿Exploramos todas las opciones para el 154×947? (pregunta 6.3)
+
+Inventario completo, con veredicto:
+
+| Opción | ¿Probada? | Veredicto |
+|:---|:---|:---|
+| Más cores (8P) | 8 cadenas PSOCK ya en uso | Paraleliza el muestreo, no las iteraciones MCMLE (secuenciales); ganancia marginal. No es el cuello. |
+| MPLE | Sí (esta ronda) | Puntos en segundos a toda escala; EE inválidos bajo dependencia. Es la tabla vigente. |
+| MCMLE con presupuesto grande | En curso (nocturno) | La vía definitiva para los EE; horas por comisión. |
+| `ergm.multi` (7 redes, coef. comunes) | Sí (esta ronda) | Corre; con intercepto por red es el marco correcto para "un número por término". Mismo costo MCMC. |
+| Agregado 154×947 con intercepto único | Sí (MPLE y MCMLE) | **Es el modelo equivocado**, no un problema de cómputo: sin estructura por comisión, la composición entre pools invierte los signos de la homofilia (Simpson verificado numéricamente: misma lista pasa de $+0.16..+0.22$ por comisión a $-0.09$ agregado). |
+| `constraints = ~b2degrees` (tamaños fijos) | Sí (2026-07-12) | El muestreador no mezcla. Su versión estadísticamente equivalente y computable es el logit condicional (sección 3.1). |
+| Términos estructurales `gw*` | Sí (2026-07-12) | Degeneración. Reintentables con presupuesto nocturno y curved-ERGM, prioridad baja. |
+| Bayesiano (`bergm`) | No | Escala peor que MCMLE; sin ventaja aquí. |
+| Modificar el paquete | No | El cuello es estadístico (mezcla/degeneración), no de implementación; no hay nada que parchar. |
+
+Respuesta directa a "¿qué ganamos con 8 cores?": casi nada — el tiempo se va en iteraciones MCMLE secuenciales y en cadenas que deben ser *largas* (mezcla), no *muchas*.
+
+Y la pregunta de fondo — "¿el 154×947 sigue siendo el modelo ansiado?" — tiene respuesta nueva: **no con un intercepto único** (Simpson lo descalifica); el modelo general correcto es "siete pools con sus interceptos y homofilia común", que es exactamente `ergm.multi`, o la suite con meta-análisis. El agregado puro solo tiene sentido como curiosidad descriptiva.
+
+## 11.4 ¿Por dónde va la solución final? (pregunta 6.4)
+
+El plan ya está andando:
+
+1. **Esta noche** (lanzado hoy con `nohup`, script `code/43-bipartite-mcmc-overnight.R`): MCMLE completo de las siete comisiones + el agregado, con presupuesto generoso (60 iteraciones, muestras de 8.192, 8 cadenas), guardando cada resultado apenas termina (un corte a medias no pierde nada). Salida en `results/tables/M1_bipartite_mcmc_overnight.csv` y los `.rds` de cada ajuste.
+2. **Validación mañana**: si los puntos MCMLE quedan cerca de los MPLE (lo esperable), la Tabla 8 del reporte se re-etiqueta con los EE válidos y el asunto queda cerrado. Si se alejan, tenemos un problema más interesante que contar.
+3. **Mediano plazo**: `ergm.multi` con intercepto por red y homofilia común como "el número único por término" del paper; y si algún referee pide EE para MPLE, bootstrap por iniciativa (la maquinaria del script 25 sirve tal cual).
+4. **Lo que no haremos**: perseguir el agregado de intercepto único (modelo equivocado) ni modificar `ergm` (no es el cuello).

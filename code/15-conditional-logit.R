@@ -153,6 +153,17 @@ cat("\n--- Robustez: pendiente de d_theta1 por lista (ref: Vamos por Chile) ---\
 print(tab3[grepl("congl_f", tab3$term), ], row.names = FALSE, digits = 3)
 
 dir.create(RESULTS_TABLES, recursive = TRUE, showWarnings = FALSE)
+# bondad de ajuste (comentario del autor 2026-07-20, punto 1): AIC y pseudo-R2
+# de McFadden = 1 - logLik(modelo)/logLik(nulo); clogit guarda ambos en $loglik
+gof <- function(m, label) {
+  data.frame(model = label, aic = AIC(m),
+             r2_mcfadden = 1 - m$loglik[2] / m$loglik[1],
+             loglik = m$loglik[2], loglik_null = m$loglik[1])
+}
+gof_tab <- rbind(gof(m1, "clogit principal"), gof(m2, "clogit + PPOO"),
+                 gof(m3, "clogit + d_theta1 x lista"))
+cat("\n--- Bondad de ajuste ---\n"); print(gof_tab, row.names = FALSE, digits = 4)
+write.csv(gof_tab, file.path(RESULTS_TABLES, "M1_clogit_gof.csv"), row.names = FALSE)
 write.csv(rbind(tab1, tab2, tab3), file.path(RESULTS_TABLES, "M1_clogit.csv"), row.names = FALSE)
 
 # tabla comparada de lambdas (D2: ¿listas ad hoc ~ pactos tradicionales?)
