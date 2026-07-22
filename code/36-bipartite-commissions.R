@@ -55,6 +55,9 @@ fit_commission <- function(k) {
     distrito = c(distr_v, rep("modo2", n2)),
     grado = c(as.character(grado_v), rep("modo2", n2)),
     edad_q = c(edad_q, rep("modo2", n2)),
+    theta1_c = c(theta1, rep(0, n2)),
+    edad_c = c(edad_v / 10, rep(0, n2)),
+    grado_c = c(as.numeric(grado_v), rep(0, n2)),
     miembro = c(as.integer(comis_v == sprintf("C%d", k)), rep(0L, n2))
   )
   for (a in names(atr)) network::set.vertex.attribute(net, a, atr[[a]])
@@ -67,12 +70,14 @@ fit_commission <- function(k) {
   net <- network::add.edges(net, tail = tails, head = heads)
 
   t0 <- Sys.time()
-  # espec extendida (2026-07-21, punto 4): paridad máxima con el clogit —
-  # homofilia también de distrito/pueblo, nivel educativo y quintil de edad
+  # espec extendida (punto 4, 2026-07-21) + RANGOS CONTINUOS (punto 1,
+  # 2026-07-22): b2covrange = dispersión continua de los firmantes por
+  # documento (Hoffman et al. 2023) para theta1, edad (décadas) y grado
   f <- net ~ edges + b1cov("miembro") + b1nodematch("conglomerado") +
     b1nodematch("theta1_q") + b1nodematch("distrito") +
     b1nodematch("es_abogado") + b1nodematch("experiencia") +
-    b1nodematch("es_mujer") + b1nodematch("grado") + b1nodematch("edad_q")
+    b1nodematch("es_mujer") + b1nodematch("grado") + b1nodematch("edad_q") +
+    b2covrange("theta1_c") + b2covrange("edad_c") + b2covrange("grado_c")
   out <- tryCatch({
     # BIPARTITE_ESTIMATE=MPLE: máxima pseudo-verosimilitud (segundos; puntos
     # consistentes bajo dependencia debil, EEs logísticos ANTI-conservadores).

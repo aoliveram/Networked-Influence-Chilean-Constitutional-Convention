@@ -106,6 +106,21 @@
 \end{itemize}
 \end{frame}
 
+% ---------------------------------------------------------------- RQs
+\begin{frame}{Las preguntas de investigación}
+\begin{itemize}
+  \item El registro documental completo permite muchas preguntas (formación, agenda, género, especialización, \dots). Hoy: \emphr{las de redes}.
+  \vspace{0.3cm}
+  \item \emphr{RQ1 — Formación}: ¿podíamos \emph{predecir} la red de colaboración solo con lo que se sabía de cada convencional \emph{antes} del día uno?
+  \vspace{0.3cm}
+  \item ¿Qué compra el capital relacional?
+  \begin{itemize}
+    \item \emphr{RQ2 — Personas}: ¿la red mueve las \emph{posiciones} de los convencionales, o su \emph{conducta}?
+    \item \emphr{RQ3 — Textos}: ¿qué hace que un artículo \emph{sobreviva} hasta el borrador?
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
 % ================================================================ PARTE 0
 \sectionslide{Parte 0}{La Convención}
 
@@ -193,7 +208,7 @@ C7 & Conocimientos & 15 & 13 & 0 & 51.7 & 1.33 & 64 & 8 & 332 & 54 \\
 \end{frame}
 
 % ================================================================ ACTO I
-\sectionslide{Acto I}{¿Podíamos predecir la red de colaboración?}
+\sectionslide{RQ1 — Formación}{¿Podíamos predecir la red de colaboración?}
 
 \begin{frame}{La pregunta, y las dos herramientas}
 \begin{itemize}
@@ -310,7 +325,7 @@ Mismo género & $-0.03^{+}$ & $-0.00$ & $-0.05^{*}$ & $-0.01$ & $-0.06^{***}$ & 
 Mismo nivel educativo & $-0.10^{***}$ & $-0.08^{***}$ & $-0.03^{+}$ & $-0.09^{***}$ & $+0.02^{*}$ & $-0.05^{***}$ & $+0.00$ \\
 Mismo quintil de edad & $-0.06^{*}$ & $-0.04^{+}$ & $-0.01$ & $-0.05^{***}$ & $-0.08^{***}$ & $-0.05^{*}$ & $-0.09^{**}$ \\
 \midrule
-\multicolumn{8}{l}{Extensión continua (\texttt{b2covrange}): rango de $\theta_1$ por documento $\in [-9.7, -3.3]$, $p<.001$ en las 7 — los textos \emphr{evitan} dispersión ideológica.}\\
+\multicolumn{8}{l}{Rangos continuos por documento (\texttt{b2covrange}): $\theta_1 \in [-9.7, -3.3]$, $p<.001$ en las 7 (\emphr{evitan} dispersión ideológica); grado $-$ en 5/7; edad $\approx 0$.}\\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -342,10 +357,19 @@ Edad & $-0.1$ (n.s.) & quintil $-$; rango $\approx 0$ & mezcla generacional \\
 \end{itemize}
 \end{frame}
 
-% ================================================================ ACTO II
-\sectionslide{Acto II}{¿Qué compra el capital relacional?}
+% ================================================================ QUE COMPRA
+\begin{frame}[plain]
+  \vfill
+  \begin{center}
+    {\Large ¿Qué compra el capital relacional?}\\[2pt]
+    {\color{ndred}\rule{0.30\textwidth}{1.1pt}}
+  \end{center}
+  \vfill
+\end{frame}
 
-\begin{frame}{Pregunta 1: ¿compra mentes? El diseño}
+\sectionslide{RQ2 — Personas}{¿La red mueve las posiciones, o la conducta?}
+
+\begin{frame}{RQ2a: ¿compra mentes? El diseño}
 \begin{itemize}
   \item Exposición de $i$ en la onda $t$: posición media de sus co-firmantes, ponderada por intensidad:
 \end{itemize}
@@ -373,7 +397,7 @@ $$E_{i,t} = \frac{\sum_{j \neq i} w_{ij,t}\,\theta_{j,t}}{\sum_{j \neq i} w_{ij,
 \end{enumerate}
 \end{frame}
 
-\begin{frame}{Pregunta 2: ¿compra conducta? Sí — la defección viaja en red}
+\begin{frame}{RQ2b: ¿compra conducta? Sí — la defección viaja en red}
 \begin{itemize}
   \item Defección: votar contra la mayoría del propio bloque (7.9\% de los votos). ¿Defecciono más cuando defeccionan \emph{mis co-firmantes}?
 \end{itemize}
@@ -416,7 +440,9 @@ Experiencia institucional & $+2.6$ & $+9.3$ & $<0.001$ \\
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Pregunta 3: ¿compra textos? El modelo de supervivencia}
+\sectionslide{RQ3 — Textos}{¿Qué hace que un artículo sobreviva?}
+
+\begin{frame}{RQ3: el modelo de supervivencia}
 \begin{itemize}
   \item Unidad: el \emphr{artículo} (1.565, con coalición firmante de 2--16). ¿Llega al borrador?
 \end{itemize}
