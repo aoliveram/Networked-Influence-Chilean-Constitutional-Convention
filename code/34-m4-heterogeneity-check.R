@@ -30,10 +30,11 @@ cat(sprintf("  Coaliciones: media de theta1 — min %.2f, mediana %.2f, max %.2f
             min(m4$mean_theta1), median(m4$mean_theta1), max(m4$mean_theta1),
             100 * mean(m4$mean_theta1 < 0)))
 
-# CUARTILES (decisión del autor 2026-07-21: gradiente más fino que cuartiles)
-m4$cuartil <- cut(m4$mean_theta1, quantile(m4$mean_theta1, probs = seq(0, 1, 0.25)),
+# QUINTILES (decisión del autor 2026-07-22: máximo detalle; revela que el
+# premio a la anchura tiene su pico en Q2, no en el extremo)
+m4$cuartil <- cut(m4$mean_theta1, quantile(m4$mean_theta1, probs = seq(0, 1, 0.2)),
                   include.lowest = TRUE,
-                  labels = c("Q1 izquierda", "Q2", "Q3", "Q4 centro-derecha"))
+                  labels = c("Q1 izquierda", "Q2", "Q3", "Q4", "Q5 centro-derecha"))
 print(tapply(m4$mean_theta1, m4$cuartil, function(x) round(range(x), 2)))
 
 CONT <- c("dist_pivot", "sd_theta1", "size", "m_degree", "m_betw",
@@ -55,9 +56,7 @@ fit_cl <- function(data, label) {
 res <- rbind(
   fit_cl(m4z, "todas"),
   do.call(rbind, lapply(levels(m4z$cuartil), function(q)
-    fit_cl(m4z[m4z$cuartil == q, ], q))),
-  fit_cl(m4z[m4z$cuartil %in% c("Q1 izquierda", "Q2"), ], "Q1+Q2 (izquierda)"),
-  fit_cl(m4z[m4z$cuartil %in% c("Q3", "Q4 centro-derecha"), ], "Q3+Q4 (centro)")
+    fit_cl(m4z[m4z$cuartil == q, ], q)))
 )
 
 
