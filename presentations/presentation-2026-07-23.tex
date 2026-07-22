@@ -1,0 +1,494 @@
+% ============================================================================
+% Collaboration Networks in a Tabula Rasa Legislature — presentación 23-jul-2026
+% Narrativa B ("el capital que rindió") con cierre C ("la aritmética del 103").
+% Estilo replicado de presentation-cpin2.tex (JORNADA REDES): fondo blanco,
+% títulos centrados con regla roja, acentos rojo oscuro, sans humanista.
+% Compilar: pdflatex presentation-2026-07-23.tex  (correr dos veces)
+% ~1 hora: 30 láminas de contenido + backup.
+% ============================================================================
+\documentclass[aspectratio=169,11pt]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{xcolor}
+
+% ---------- Fuentes ----------
+\usefonttheme{professionalfonts}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+% ---------- Colores (deck JORNADA) ----------
+\definecolor{ndred}{RGB}{222,32,38}
+\definecolor{ndreddark}{RGB}{176,22,28}
+\definecolor{ndgreen}{RGB}{0,118,54}
+\definecolor{ndblue}{RGB}{30,90,200}
+\definecolor{ndgray}{RGB}{90,90,90}
+
+% ---------- Sin chrome de Beamer ----------
+\setbeamertemplate{navigation symbols}{}
+\setbeamercolor{normal text}{fg=black,bg=white}
+\setbeamercolor{structure}{fg=ndreddark}
+\setbeamertemplate{itemize item}{\color{ndreddark}\textbullet}
+\setbeamertemplate{itemize subitem}{\color{ndgray}\textendash}
+
+% ---------- Título de lámina: centrado + regla roja ----------
+\setbeamercolor{frametitle}{fg=black,bg=white}
+\setbeamerfont{frametitle}{size=\Large, series=\mdseries}
+\setbeamertemplate{frametitle}{%
+  \vspace{0.35cm}%
+  \begin{center}\insertframetitle\end{center}%
+  \vspace{-0.18cm}%
+  {\color{ndred}\hrule height 1.1pt}%
+}
+
+% ---------- Pie mínimo: número de página ----------
+\setbeamertemplate{footline}{%
+  \hfill{\color{ndgray}\scriptsize\insertframenumber}\hspace{0.5cm}\vspace{0.2cm}}
+
+% ---------- Macros ----------
+\newcommand{\emphr}[1]{{\color{ndreddark}\textbf{#1}}}
+\newcommand{\nota}[1]{{\footnotesize\color{ndgray} #1}}
+\newcommand{\sectionslide}[2]{%
+  \begin{frame}[plain]
+    \vfill
+    \begin{center}
+      {\footnotesize\color{ndgray} #1}\\[6pt]
+      {\Large #2}\\[2pt]
+      {\color{ndred}\rule{0.30\textwidth}{1.1pt}}
+    \end{center}
+    \vfill
+  \end{frame}}
+\newcommand{\fig}[2]{\begin{center}\includegraphics[width=#1\textwidth]{../results/figures/#2}\end{center}}
+
+% ============================================================================
+\title{Collaboration Networks in a Tabula Rasa Legislature}
+\author{Aníbal Olivera M. \& Jorge Fábrega}
+\date{}
+
+\begin{document}
+
+% ---------------------------------------------------------------- PORTADA
+\begin{frame}[plain]
+  \vspace{0.6cm}
+  \begin{center}
+    {\footnotesize\color{ndgray} Centro de Investigación en Complejidad Social $\cdot$ Universidad del Desarrollo $\cdot$ Chile}
+  \end{center}
+  \vspace{1.0cm}
+  \begin{center}
+    {\LARGE \textbf{Collaboration Networks in a Tabula Rasa Legislature}}\\[0.5cm]
+    {\large \color{ndreddark} Formación de lazos, conducta y éxito legislativo\\en la Convención Constitucional chilena (2021--2022)}
+  \end{center}
+  \vspace{1.1cm}
+  \begin{center}
+    {\normalsize Aníbal Olivera M. \quad$\cdot$\quad Jorge Fábrega}\\[2pt]
+    {\footnotesize PhD(c) in Social Complexity Sciences, CICS--UDD}
+  \end{center}
+  \vfill
+  \begin{center}
+    {\scriptsize\color{ndgray} 23 de julio de 2026}
+  \end{center}
+\end{frame}
+
+% ---------------------------------------------------------------- HOJA DE RUTA
+\begin{frame}{La pregunta, y el argumento en una lámina}
+\begin{itemize}
+  \item ¿Qué organiza la colaboración política cuando \emphr{no hay historia acumulada} que la organice?
+  \vspace{0.25cm}
+  \item La Convención como laboratorio: mayoría novata, órgano que se disuelve, reglas propias.
+  \vspace{0.25cm}
+  \item El argumento en tres actos:
+  \begin{enumerate}
+    \item \emphr{Lo que la gente traía puesto} formó la red: territorio, lista, ideología — \emph{no} las credenciales.
+    \item El capital relacional \emphr{se acumula}: la Convención se tejió \emph{de a dos}.
+    \item Qué compra ese capital: \emphr{mentes no} $\cdot$ \emphr{conducta sí} $\cdot$ \emphr{textos sí}.
+  \end{enumerate}
+  \vspace{0.25cm}
+  \item Cierre: \emphr{la aritmética del 103} — con las mentes quietas, la geometría era destino.
+\end{itemize}
+\end{frame}
+
+% ================================================================ LABORATORIO
+\sectionslide{Parte 0}{El laboratorio}
+
+\begin{frame}{Una asamblea sin sedimento institucional}
+\begin{itemize}
+  \item 155 electos (154 en ejercicio), jul-2021 a jul-2022; mayoría inédita de independientes y novatos; 17 escaños reservados para pueblos originarios; paridad de género.
+  \item El órgano \emphr{se disolvía al entregar el texto}: sin sombra electoral del futuro.
+  \item Dos reglas escritas por los propios convencionales estructuran el estudio:
+  \begin{itemize}
+    \item Cada iniciativa requería \emphr{8--16 patrocinantes}: firmar = coalición visible, fechada, acotada.
+    \item Cada norma requería \emphr{2/3 del Pleno (103 de 154)}; en comisión bastaba mayoría simple.\\
+          \nota{Nacer era barato; sobrevivir, caro.}
+  \end{itemize}
+\end{itemize}
+\vspace{0.15cm}
+\fig{0.92}{cc_timeline.pdf}
+\end{frame}
+
+\begin{frame}{Los datos: el proceso documental completo}
+\begin{itemize}
+  \item \emphr{995 iniciativas} presentadas en la plataforma oficial (nov-21 a feb-22); 947 con 2--16 firmantes-persona forman el set de análisis; 100\% fechadas.
+  \item \emphr{1.565 artículos génesis} con desenlace conocido frente al borrador (supervivencia 20\%).
+  \item \emphr{2.326 indicaciones} con autoría (1.004 eventos multi-firmantes) en 7 comisiones.
+  \item \emphr{4.707 votaciones nominales} del Pleno.
+\end{itemize}
+\vspace{0.1cm}
+\fig{0.80}{bipartite_initiative.pdf}
+\end{frame}
+
+\begin{frame}{El calendario de la colaboración}
+\fig{0.94}{indication_events_timeline.pdf}
+\vspace{0.1cm}
+\nota{Génesis (iniciativas, nov--feb) y enmienda (indicaciones por informes, feb--may): dos relojes que el estudio usa por separado. Sólido = eventos multi-firmantes (los que agregan lazos); claro = total fechado.}
+\end{frame}
+
+\begin{frame}{Cómo medimos la ideología (sin circularidad)}
+\begin{itemize}
+  \item \emphr{Pre-red}: W-NOMINATE 2D con \emph{solo el primer mes} de votaciones (147, jul--ago 2021), replicando a Fábrega (2022, \emph{RCP}).
+  \begin{itemize}
+    \item Anterior a las comisiones (oct), a las iniciativas (nov) y a la regla de 2/3 (feb) $\Rightarrow$ covariable \emphr{exógena} a la red.
+    \item De aquí sale el \emphr{pívot de 2/3}: $\theta_{1,(103)} = -0.15$.
+  \end{itemize}
+  \vspace{0.2cm}
+  \item \emphr{Voto revelado dinámico}: dynIRT sobre las 4.707 votaciones $\to$ trayectoria $\theta_{i,t}$ (insumo de la parte de influencia; se lee como conducta, no como ideología pura).
+\end{itemize}
+\vspace{0.15cm}
+\fig{0.74}{positions_dynamics.pdf}
+\end{frame}
+
+% ================================================================ ACTO I
+\sectionslide{Acto I}{Lo que la gente traía puesto}
+
+\begin{frame}{El modelo de elección de firma (logit condicional)}
+\begin{itemize}
+  \item Cada iniciativa $a$ es un \emphr{menú}: los 154 deciden firmar o no. Utilidad latente:
+\end{itemize}
+$$U_{ia} = \beta^\top x_{ia} + \alpha_a + \varepsilon_{ia}
+\qquad\Rightarrow\qquad
+P(S_a \mid |S_a|) = \frac{\exp(\sum_{i \in S_a}\beta^\top x_{ia})}{\sum_{|R|=|S_a|}\exp(\sum_{i \in R}\beta^\top x_{ia})}$$
+\begin{itemize}
+  \item El atractivo del texto ($\alpha_a$: tema, redactor, momento) \emphr{se cancela}: solo comparaciones \emph{dentro} del mismo menú.
+  \item 947 menús $\times$ 154 = 145.838 decisiones; covariables leave-one-out respecto de la coalición; EE cluster por convencional.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Qué predice la firma: los tres capitales de origen}
+\begin{center}\small
+\begin{tabular}{lccc}
+\toprule
+ & Coef. & OR & $p$ \\
+\midrule
+\emphr{Territorio}: afinidad de distrito/pueblo & $+2.52$ & \emphr{12.4} & $<10^{-5}$ \\
+\emphr{Lista}: misma lista (rango de los 6 conglomerados) & $+0.93$ a $+1.43$ & 2.5--4.2 & $<10^{-4}$ \\
+\emphr{Ideología} (control): distancia en $\theta_1$ & $-3.64$ & 0.03 & $<10^{-51}$ \\
+Misma comisión que el texto (control) & $+0.93$ & 2.5 & $<10^{-72}$ \\
+\midrule
+Afinidad de abogados & $+0.12$ & 1.1 & $0.48$ \\
+Distancia de grado académico & $-0.10$ & 0.9 & $0.21$ \\
+Distancia de edad & $-0.07$ & 0.9 & $0.23$ \\
+Afinidad de experiencia previa & $+0.52$ & 1.7 & $0.024$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\vspace{0.2cm}
+\nota{Lectura: el territorio es el predictor pre-Convención más fuerte (OR 12); las listas coordinan todas; las credenciales no organizan la firma (abajo). AIC 87.317; pseudo-$R^2$ 0.21.}
+\end{frame}
+
+\begin{frame}{La heterogeneidad que el promedio escondía (por bloque del elector)}
+\begin{center}\small
+\begin{tabular}{lccccc}
+\toprule
+ & Derecha & Centro-izq & Izquierda & PPOO & Otras \\
+ & (VC, 37) & (LA+INN, 28) & (AD+LdP, 51) & (17) & (21) \\
+\midrule
+Afinidad distrito/pueblo & $+7.9^{***}$ & $+5.1^{***}$ & $+0.1$ & $-1.4^{+}$ & $+2.4^{+}$ \\
+Afinidad de género & $+0.6^{*}$ & $+1.9^{***}$ & $+0.3$ & $+0.0$ & $-0.0$ \\
+Afinidad de abogados & $+0.0$ & $+0.5$ & $-0.0$ & $+0.9$ & $+1.2^{*}$ \\
+Distancia de edad & $+0.1$ & $-0.1$ & $-0.2^{**}$ & $-0.1$ & $+0.1$ \\
+Distancia en $\theta_1$ & $-5.1^{***}$ & $-2.8^{**}$ & $-0.8$ & $+0.1$ & $-6.1^{***}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\vspace{0.25cm}
+\begin{itemize}
+  \item El territorio es un fenómeno de \emphr{derecha y centro}; la izquierda organizada coordina por lista e ideología, no por geografía.
+  \item El género vive en la centro-izquierda; la izquierda es el único bloque con homofilia de \emphr{edad}.
+  \item El nulo de los abogados es \emphr{transversal}: ningún bloque grande los junta.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Las listas: coordinación sin disciplina}
+\begin{itemize}
+  \item Coordinan la \emphr{firma}: $\lambda_c$ entre $0.9$ y $1.4$ en los seis conglomerados — la lista improvisada (Lista del Pueblo) igual que el pacto tradicional; los escaños reservados, arriba ($1.43$).
+  \vspace{0.2cm}
+  \item Pero \emphr{no compran unidad de voto}: índice de Rice real vs.\ pseudo-listas emparejadas por ideología $\Rightarrow$ premio de disciplina $\approx 0$ en todas.
+  \vspace{0.2cm}
+  \item \nota{Cautela Krehbiel: la ideología se mide con votos — si una lista disciplinó desde el día uno, esa disciplina quedó dentro de la ``ideología''. Lo limpio: en la conducta de \emph{firma} (que no entra en esa medición) las listas sí coordinan.}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Primer nulo-titular: las credenciales no tejen lazos}
+\begin{columns}
+\column{0.55\textwidth}
+\begin{itemize}
+  \item Los abogados \emphr{no eligen abogados}: nulo en la elección (clogit), en la dinámica (RHEM) y en la estructura (ERGM bipartito, coeficiente levemente \emph{negativo}).
+  \item ¿Y por qué ``se los ve juntos''? \emphr{Los junta el tema}: Sistemas de Justicia es 88\% abogados; sus coaliciones promedian 47\%.
+  \item Educación y edad: homofilia \emphr{negativa} — las coaliciones mezclan credenciales y generaciones más que el azar.
+\end{itemize}
+\column{0.45\textwidth}
+\fig{1.0}{lawyer_share_by_commission.pdf}
+\end{columns}
+\end{frame}
+
+% ================================================================ ACTO II
+\sectionslide{Acto II}{El capital relacional se acumula}
+
+\begin{frame}{El modelo de eventos (RHEM): la pregunta que la foto no responde}
+\begin{itemize}
+  \item Las 947 iniciativas ocurren \emphr{en orden} (100\% fechadas). Cuando dos firman juntos, ¿es porque \emph{se parecen} o porque \emph{ya habían firmado juntos}?
+  \item Cada iniciativa = una escena: la coalición real contra 50 coaliciones ficticias del mismo tamaño ese mismo día.
+  \item La estadística de historia clave — \emphr{familiaridad de pares}:
+\end{itemize}
+$$sub.rep^{(2)}(t,h) = \binom{|h|}{2}^{-1} \sum_{\{i,j\} \subseteq h} \#\{\text{eventos previos a } t \text{ que contienen a } i \text{ y } j\}$$
+\begin{itemize}
+  \item \nota{En dos memorias: infinita y semivida de 15 días. Mismas covariables de composición que el clogit, para leer las tablas en paralelo.}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{La Convención se tejió de a dos}
+\begin{center}\small
+\begin{tabular}{lcc}
+\toprule
+ & Memoria infinita & $p$ \\
+\midrule
+\emphr{$sub.rep^{(2)}$ — familiaridad de pares} & $+2.11$ & $10^{-20}$ \\
+Prop.\ pares misma lista & $+0.92$ & $10^{-8}$ \\
+Prop.\ pares mismo distrito/pueblo & $+0.59$ & $10^{-8}$ \\
+Dispersión ideológica $\theta_1$ & $-2.66$ & $10^{-39}$ \\
+Prop.\ pares ambos abogados & $+0.04$ & $0.44$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\vspace{0.25cm}
+\begin{itemize}
+  \item El mejor predictor de la próxima coalición: \emphr{qué duplas ya trabajaron juntas} (se reclutan pares consolidados, no equipos completos — los tríos no agregan sobre los pares).
+  \item Y la homofilia \emphr{sobrevive} a la historia: parecerse y conocerse operan a la vez.
+  \item \nota{El clogit es el RHEM del día uno: sin historia que consultar, ambos modelos coinciden por construcción.}
+\end{itemize}
+\end{frame}
+
+% ================================================================ ACTO III
+\sectionslide{Acto III}{¿Qué compra el capital relacional?}
+
+\begin{frame}{Pregunta 1: ¿compra mentes? El diseño}
+\begin{itemize}
+  \item Exposición de $i$ en la onda $t$: posición media de sus co-firmantes, ponderada por intensidad:
+\end{itemize}
+$$E_{i,t} = \frac{\sum_{j \neq i} w_{ij,t}\,\theta_{j,t}}{\sum_{j \neq i} w_{ij,t}}
+\qquad\qquad
+\Delta\theta_{i,t} = \alpha_i + \beta\,\theta_{i,t-1} + \lambda\,E_{i,t-1} + \varepsilon_{it}$$
+\begin{itemize}
+  \item Efectos fijos individuales (solo variación \emph{dentro} de cada persona), EE cluster; 4.355 obs.
+  \item Resultado: $\hat\lambda = +0.007$ (EE $0.004$), \emphr{nulo}. Robusto a 3 ventanas temporales $\times$ 7 dosis de exposición.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Selección, no influencia — en una imagen}
+\fig{0.88}{m2_selection_vs_influence_preview.pdf}
+\vspace{0.05cm}
+\nota{(a) Entre personas: posición y vecindario van pegados ($r=0.95$) — elegimos vecindarios que se nos parecen. (b) Dentro de cada persona, los cambios no se siguen. Ámbar: el 5\% más desalineado — los únicos con espacio para ser arrastrados — cae en (b) sin pendiente ($r=-0.04$).}
+\end{frame}
+
+\begin{frame}{Cuatro defensas del nulo}
+\begin{enumerate}
+  \item \emphr{Falsificación fina}: exposición pasada y futura están pegadas ($r=0.995$); el test limpio separa la \emph{novedad} del futuro — y es la novedad la que predice el cambio de hoy ($+0.06$, $p=.007$), con el pasado en cero. \nota{Me muevo hacia donde \emph{estará} mi vecindario: definición operativa de selección.}
+  \item \emphr{Espacio}: la selección cerró 74\% de la distancia — pero el 0.59 restante era espacio real donde la influencia se habría visto.
+  \item \emphr{Instrumento}: efecto mínimo detectable $\lambda = 0.011$; lo estimado ($0.007$) queda debajo.
+  \item \emphr{Error de medición propagado}: bootstrap paramétrico del dynIRT (el ruido de $\theta$ es 3.6$\times$ el movimiento corto) $\to$ el EE de $\lambda$ apenas se mueve ($0.0036 \to 0.0039$): el nulo \emphr{no es artefacto del termómetro}.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Pregunta 2: ¿compra conducta? Sí — la defección viaja en red}
+\begin{itemize}
+  \item Defección: votar contra la mayoría del propio bloque (7.9\% de los votos). ¿Defecciono más cuando defeccionan \emph{mis co-firmantes}?
+\end{itemize}
+\begin{center}\small
+\begin{tabular}{lcc}
+\toprule
+ & $\phi$ & \\
+\midrule
+Exposición a defectores (FE persona + votación) & $+11.2$ & $p<10^{-100}$ \\
+\emphr{Benchmark permutado} (mecánica de bloques) & $6.0$ & [p95: $6.1$] \\
+Split: co-firmantes de \emph{otras} comisiones & $+8.7$ & \\
+Split: co-firmantes de \emph{mi} comisión & $+3.0$ & \\
+Rezago: defección de vecinos en $v-1$ (junto a contemporánea) & $+0.7$ & $p<10^{-11}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\vspace{0.15cm}
+\begin{itemize}
+  \item La mitad del efecto crudo era mecánica; \emphr{lo que sobra es enorme}, viaja entre comisiones, y deja un eco corto (muere a escala de días).
+  \item \nota{Marco honesto (Manski, Angrist, Shalizi-Thomas): clustering de defección por líneas de red más allá de lo mecánico; influencia es la lectura natural, homofilia fina la alternativa.}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{¿Y quién transmite? Los novatos}
+\begin{center}\small
+\begin{tabular}{lccc}
+\toprule
+Canal del emisor & $\phi$ vecinos \emph{con} el atributo & $\phi$ \emph{sin} & dif.\ ($p$) \\
+\midrule
+Abogado & $+5.8$ & $+6.0$ & $0.88$ \\
+Posgrado & $+4.3$ & $+7.0$ & $0.003$ \\
+Experiencia institucional & $+2.6$ & $+9.3$ & $<0.001$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\vspace{0.25cm}
+\begin{itemize}
+  \item Contra la hipótesis de los emisores de élite: los abogados transmiten \emphr{igual} que el resto (su tercer nulo, ahora como emisores); los senior transmiten \emphr{menos}.
+  \item La co-defección viaja por los \emphr{pares novatos}: la mayoría nueva se mueve junta; la vieja guardia no arrastra a nadie.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Pregunta 3: ¿compra textos? El modelo de supervivencia}
+\begin{itemize}
+  \item Unidad: el \emphr{artículo} (1.565, con coalición firmante de 2--16). ¿Llega al borrador?
+\end{itemize}
+$$\Pr(sobrevive_a) = \Lambda\Big(\alpha_c + \gamma_1 \underbrace{|\bar\theta_{1,S_a} - \theta_{1,(103)}|}_{\text{distancia al pívot}} + \gamma_2\, sd(\theta_{1,S_a}) + \boldsymbol{\gamma}^\top \big[\text{red}, \text{capital humano}\big]\Big)$$
+\begin{center}\small
+\begin{tabular}{lcc}
+\toprule
+ & Coef.\ (est.) & $p$ \\
+\midrule
+Distancia de la coalición al pívot & $-0.61$ & $.002$ \\
+Heterogeneidad ideológica $sd(\theta_1)$ & $+0.53$ & $<10^{-4}$ \\
+\emphr{Densidad interna} (pares con historia de co-firma) & $+0.32$ & $.002$ \\
+Prop.\ abogados / experiencia / grado medio & $\approx 0$ & n.s. \\
+\bottomrule
+\end{tabular}
+\end{center}
+\vspace{0.1cm}
+\nota{Ganan las coaliciones bien paradas, anchas y con historia interna — no las tituladas. La pericia ni forma lazos (Acto I) ni gana votaciones.}
+\end{frame}
+
+\begin{frame}{El premio a ensancharse, quintil a quintil}
+\begin{center}\small
+\begin{tabular}{lccc}
+\toprule
+Posición media de la coalición & Supervivencia & $sd(\theta_1)$ & $p$ \\
+\midrule
+Q1: izquierda $[-0.83, -0.73]$ & 7\% & $+1.18$ & $.050$ \\
+\emphr{Q2: izquierda moderada} $[-0.73, -0.67]$ & 14\% & \emphr{$+2.46$} & $.001$ \\
+Q3: centro-izquierda $[-0.66, -0.50]$ & 34\% & $+0.36$ & $.49$ \\
+Q4: centro $[-0.50, -0.18]$ & 30\% & $-0.09$ & $.82$ \\
+Q5: centro y derecha $[-0.17, +0.81]$ & 15\% & $+0.18$ & $.72$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\vspace{0.25cm}
+\begin{itemize}
+  \item El premio vive donde ensancharse \emphr{alcanza el pívot}: máximo en Q2 (desde $-0.7$ el brazo llega al 103); en el extremo, menor (ni estirándose); desde Q3, innecesario.
+  \item Decaimiento monótono hacia cero: \emphr{la lógica de los 103 votos, por dentro}.
+\end{itemize}
+\end{frame}
+
+% ================================================================ CIERRE (C)
+\sectionslide{Cierre}{La aritmética del 103}
+
+\begin{frame}{La geometría era destino}
+\fig{0.86}{survival_by_position.pdf}
+\vspace{0.05cm}
+\nota{Bandas: terciles de los 154 convencionales — como $103 = \tfrac{2}{3} \times 154$, el corte T2/T3 \emph{es} el pívot. El punto dulce no está sobre el pívot: está a su izquierda — el centro de masa de la mayoría que redactaba, con el brazo estirado hasta el voto 103.}
+\end{frame}
+
+\begin{frame}{La misma curva, persona a persona}
+\fig{0.86}{success_by_ideology.pdf}
+\vspace{0.05cm}
+\nota{El éxito individual replica la geometría: máximo justo a la izquierda del pívot (listas locales, INN y Apruebo parados ahí); niveles moderados en la izquierda; piso plano en la derecha.}
+\end{frame}
+
+\begin{frame}{Síntesis}
+\begin{itemize}
+  \item En una asamblea de extraños, la colaboración se organizó con lo que la gente \emphr{traía puesto}: territorio, lista, ideología — no credenciales.
+  \vspace{0.2cm}
+  \item Sobre esos primeros encuentros, la red se rigidizó rápido: \emphr{se tejió de a dos}, y la afinidad conservó fuerza propia.
+  \vspace{0.2cm}
+  \item Ese capital \emphr{no compró mentes} (selección, con el nulo defendido cuatro veces), pero \emphr{sí conducta} (la defección viaja por los lazos, transportada por los novatos) y \emphr{sí textos} (equipos con historia, cerca del pívot, anchos).
+  \vspace{0.2cm}
+  \item Y la institución cierra el círculo: la regla de 2/3 fijó un pívot, y la red fue el mecanismo por el que esa aritmética se volvió comportamiento.
+  \vspace{0.3cm}
+  \item[] \begin{center}\emphr{Se colaboró por cercanía; se ganó por amplitud.}\end{center}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Limitaciones y trabajo en curso}
+\begin{itemize}
+  \item Ideología medida con votos: la frontera ideología/disciplina es parcialmente circular (Krehbiel); error de medición de $\theta$ propagado a la parte de influencia, pendiente en el resto.
+  \item Los EE definitivos del ERGM bipartito (MCMC) y sus términos estructurales: en cómputo.
+  \item La familiaridad del RHEM mezcla dependencia del estado con afinidades estables no observadas.
+  \item En curso: supervivencia en dos etapas (iniciativa $\to$ informe $\to$ borrador), el panel dinámico con enmendadores, y el RHEM dirigido (quién recluta).
+\end{itemize}
+\vfill
+\begin{center}
+  {\large Gracias}\\[4pt]
+  {\color{ndred}\rule{0.2\textwidth}{1.1pt}}\\[6pt]
+  \nota{anibal.olivera.m@gmail.com}
+\end{center}
+\end{frame}
+
+% ================================================================ BACKUP
+\sectionslide{Backup}{Material de respaldo}
+
+\begin{frame}{Backup: el ERGM bipartito por comisión (tercera lente)}
+\begin{center}\footnotesize
+\begin{tabular}{lccccccc}
+\toprule
+ & C1 & C2 & C3 & C4 & C5 & C6 & C7 \\
+\midrule
+Miembro de la comisión & $+0.7$ & $+1.2$ & $+1.8$ & $+0.6$ & $+1.6$ & $+1.3$ & $+2.3$ \\
+Misma lista & $+0.21$ & $+0.18$ & $+0.20$ & $+0.18$ & $+0.18$ & $+0.21$ & $+0.22$ \\
+Mismo quintil $\theta_1$ & $+0.16$ & $+0.16$ & $+0.12$ & $+0.14$ & $+0.16$ & $+0.13$ & $+0.16$ \\
+Mismo distrito & $+0.23$ & $+0.19$ & $+0.36$ & $-0.01$ & $+0.07$ & $-0.02$ & $+0.30$ \\
+Ambos abogados & $-0.08$ & $-0.02$ & $-0.08$ & $-0.01$ & $-0.03$ & $-0.02$ & $-0.01$ \\
+Mismo nivel educativo & $-0.10$ & $-0.08$ & $-0.03$ & $-0.09$ & $+0.02$ & $-0.05$ & $+0.00$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\vspace{0.2cm}
+\nota{MPLE (puntos; EE definitivos por MCMC en cómputo). Lista e ideología positivas y estables en las 7; el modelo agregado con intercepto único invierte los signos (Simpson) — el marco correcto es por comisión. Homofilia de co-firma sin proyectar: triangula con clogit y RHEM.}
+\end{frame}
+
+\begin{frame}{Backup: robustez del nulo de influencia (ventanas $\times$ dosis)}
+\begin{itemize}
+  \item 3 ventanas (completa / temprana $\leq$ mar / tardía $\geq$ abr) $\times$ 7 definiciones de exposición (acumulada, últimas $k$ ondas, decaimientos): $\hat\lambda \in [-0.01, +0.011]$; los pocos significativos de la tardía vienen con falsificación igual de significativa.
+  \item Chequeo exploratorio con red imputada al primer mes (la ventana de los ``novatos susceptibles''): nada.
+  \item Poder: la distancia real persona-vecindario (0.59) era espacio suficiente; MDE $= 0.011$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Backup: el modelo espacial del éxito (SDM) y sus impactos exactos}
+\begin{itemize}
+  \item Éxito acoplado en la red: $\rho = 0.89$ (Durbin, robusto 0.63--0.95 entre variantes de $W$).
+  \item Impactos exactos con $(I-\rho W)^{-1}$ denso: directos chicos ($\approx$ OLS); totales amplificados $\sim 9\times$ por el multiplicador — la lectura de equilibrio literal no es creíble; $\rho$ se lee como composición + selección.
+  \item Contrafactual tangible: pasar del vecindario P10 al P90 de éxito asocia $+0.078$ = \emphr{1.3 sd del éxito}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Backup: cohesión de voto (Rice) por lista}
+\fig{0.9}{rice_cohesion_monthly.pdf}
+\end{frame}
+
+\begin{frame}{Backup: dinámica de retención textual}
+\fig{0.9}{retention_dynamics_all_commissions.pdf}
+\end{frame}
+
+\begin{frame}{Backup: distribución de firmas}
+\fig{0.9}{signature_distributions.pdf}
+\end{frame}
+
+\end{document}
