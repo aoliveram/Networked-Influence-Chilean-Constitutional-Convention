@@ -93,6 +93,26 @@
   \end{center}
 \end{frame}
 
+% ---------------------------------------------------------------- ÍNDICE
+\begin{frame}{Índice}
+\begin{itemize}
+  \item[{\color{ndred}\textbf{1.}}] La Convención: el cuasi-experimento y los datos
+  \item[{\color{ndred}\textbf{2.}}] RQ1 — Formación: ¿podíamos predecir la red?
+  \begin{itemize}
+    \item[{\color{ndred}2.1}] {\color{black}Herramienta 1: el logit condicional (elección dado el menú)}
+    \item[{\color{ndred}2.2}] {\color{black}Herramienta 2: el ERGM bipartito (la estructura completa)}
+    \item[{\color{ndred}2.3}] {\color{black}Dónde coinciden las lentes, y dónde no}
+  \end{itemize}
+  \item[{\color{ndred}\textbf{3.}}] ¿Qué compra el capital relacional?
+  \begin{itemize}
+    \item[{\color{ndred}3.1}] {\color{black}RQ2a — ¿La red mueve las posiciones?}
+    \item[{\color{ndred}3.2}] {\color{black}RQ2b — ¿La red mueve la conducta?}
+    \item[{\color{ndred}3.3}] {\color{black}RQ3 — ¿Qué hace que un artículo sobreviva?}
+  \end{itemize}
+  \item[{\color{ndred}\textbf{4.}}] Cierre: la aritmética del 103
+\end{itemize}
+\end{frame}
+
 % ---------------------------------------------------------------- APERTURA
 \begin{frame}{Un cuasi-experimento natural}
 \begin{itemize}
@@ -115,7 +135,8 @@
   \vspace{0.3cm}
   \item ¿Qué compra el capital relacional?
   \begin{itemize}
-    \item \emphr{RQ2 — Personas}: ¿la red mueve las \emph{posiciones} de los convencionales, o su \emph{conducta}?
+    \item \emphr{RQ2a — Posiciones}: ¿la red mueve las \emph{posiciones} de los convencionales?
+    \item \emphr{RQ2b — Conducta}: ¿la red coordina su \emph{conducta} de voto?
     \item \emphr{RQ3 — Textos}: ¿qué hace que un artículo \emph{sobreviva} hasta el borrador?
   \end{itemize}
 \end{itemize}
@@ -300,7 +321,7 @@ $$\Pr(Y = y) = \frac{\exp\big(\theta^\top s(y)\big)}{\kappa(\theta)}$$
 \begin{itemize}
   \item Cada término pregunta: ¿este patrón aparece \emphr{más que en redes aleatorias comparables}?
   \item \emphr{Siete modelos, uno por comisión}: la comisión es el mayor confundidor de composición (el modelo agregado con intercepto único invierte los signos — Simpson verificado).
-  \item \nota{Estimación MPLE (puntos consistentes; EE definitivos por bootstrap de iniciativas, en curso). La versión MCMC completa de esta especificación resultó computacionalmente infactible — parte de la lección de herramientas.}
+  \item \nota{El denominador $\kappa(\theta)$ suma sobre \emph{todas} las redes posibles ($2^{154 \times n}$) — incalculable. MCMC lo \emph{aproxima simulando} redes (aquí resultó infactible); \emphr{MPLE lo esquiva}: estima cada lazo condicional al resto (una logística sobre estadísticas de cambio) — mismos puntos en segundos; los EE honestos vienen de \emphr{bootstrap de iniciativas}.}
 \end{itemize}
 \end{frame}
 
@@ -367,9 +388,9 @@ Edad & $-0.1$ (n.s.) & quintil $-$; rango $\approx 0$ & mezcla generacional \\
   \vfill
 \end{frame}
 
-\sectionslide{RQ2 — Personas}{¿La red mueve las posiciones, o la conducta?}
+\sectionslide{RQ2 — Personas}{¿La red mueve las posiciones (RQ2a), o la conducta (RQ2b)?}
 
-\begin{frame}{RQ2a: ¿compra mentes? El diseño}
+\begin{frame}{RQ2a: ¿la red mueve las posiciones? El diseño}
 \begin{itemize}
   \item Exposición de $i$ en la onda $t$: posición media de sus co-firmantes, ponderada por intensidad:
 \end{itemize}
@@ -388,35 +409,89 @@ $$E_{i,t} = \frac{\sum_{j \neq i} w_{ij,t}\,\theta_{j,t}}{\sum_{j \neq i} w_{ij,
 \nota{(a) Entre personas: posición y vecindario van pegados ($r=0.95$) — elegimos vecindarios que se nos parecen. (b) Dentro de cada persona, los cambios no se siguen. Ámbar: el 5\% más desalineado — los únicos con espacio para ser arrastrados — cae en (b) sin pendiente ($r=-0.04$).}
 \end{frame}
 
-\begin{frame}{Cuatro defensas del nulo}
+\begin{frame}{La tabla completa: tres ventanas $\times$ siete dosis de exposición}
+\begin{center}\tiny
+\begin{tabular}{llcccc}
+\toprule
+Ventana & Definición de exposición & $\hat\lambda$ & EE & $p$ & N \\
+\midrule
+Completa & Acumulada desde T0 & $+0.007$ & 0.004 & $0.119$ & 4.355 \\
+Completa & Solo última onda & $+0.007$ & 0.013 & $0.60$ & 463 \\
+Completa & Últimas 2 ondas & $+0.003$ & 0.009 & $0.72$ & 1.504 \\
+Completa & Últimas 3 ondas & $-0.002$ & 0.007 & $0.76$ & 2.447 \\
+Completa & Decaimiento $\lambda_w = 0.25$ & $+0.008$ & 0.004 & $0.051$ & 4.355 \\
+Completa & Decaimiento $\lambda_w = 0.50$ & $+0.008$ & 0.004 & $0.042$ & 4.355 \\
+Completa & Decaimiento $\lambda_w = 0.75$ & $+0.007$ & 0.004 & $0.078$ & 4.355 \\
+Completa & Falsificación: exposición futura & $+0.010$ & 0.004 & $0.030$ & 3.329 \\
+Temprana ($\leq$ 31-mar) & Acumulada & $+0.005$ & 0.007 & $0.50$ & 1.586 \\
+Temprana & Últimas 2 ondas & $+0.013$ & 0.014 & $0.35$ & 955 \\
+Temprana & Últimas 3 ondas & $+0.002$ & 0.010 & $0.81$ & 1.466 \\
+Temprana & Decaimiento $\lambda_w = 0.25$ & $+0.005$ & 0.007 & $0.46$ & 1.586 \\
+Temprana & Decaimiento $\lambda_w = 0.50$ & $+0.005$ & 0.007 & $0.48$ & 1.586 \\
+Temprana & Decaimiento $\lambda_w = 0.75$ & $+0.005$ & 0.007 & $0.49$ & 1.586 \\
+Temprana & Falsificación: exposición futura & $+0.006$ & 0.007 & $0.41$ & 1.587 \\
+Tardía ($\geq$ 1-abr) & Acumulada & $+0.011$ & 0.005 & $0.018$ & 2.769 \\
+Tardía & Solo última onda & $-0.002$ & 0.018 & $0.92$ & 332 \\
+Tardía & Últimas 2 ondas & $-0.006$ & 0.008 & $0.45$ & 549 \\
+Tardía & Últimas 3 ondas & $-0.011$ & 0.008 & $0.21$ & 981 \\
+Tardía & Decaimiento $\lambda_w = 0.25$ & $+0.009$ & 0.004 & $0.032$ & 2.769 \\
+Tardía & Decaimiento $\lambda_w = 0.50$ & $+0.011$ & 0.004 & $0.008$ & 2.769 \\
+Tardía & Decaimiento $\lambda_w = 0.75$ & $+0.011$ & 0.004 & $0.011$ & 2.769 \\
+Tardía & Falsificación: exposición futura & $+0.010$ & 0.004 & $0.004$ & 1.742 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\vspace{0.05cm}
+\nota{Ningún $\hat\lambda$ supera $0.011$; los pocos significativos de la ventana tardía vienen acompañados de una falsificación igual de significativa y de la misma magnitud.}
+\end{frame}
+
+\begin{frame}{Tres razones para creerle al nulo}
 \begin{enumerate}
-  \item \emphr{Falsificación fina}: exposición pasada y futura están pegadas ($r=0.995$); el test limpio separa la \emph{novedad} del futuro — y es la novedad la que predice el cambio de hoy ($+0.06$, $p=.007$), con el pasado en cero. \nota{Me muevo hacia donde \emph{estará} mi vecindario: definición operativa de selección.}
-  \item \emphr{Espacio}: la selección cerró 74\% de la distancia — pero el 0.59 restante era espacio real donde la influencia se habría visto.
-  \item \emphr{Instrumento}: efecto mínimo detectable $\lambda = 0.011$; lo estimado ($0.007$) queda debajo.
-  \item \emphr{Error de medición propagado}: bootstrap paramétrico del dynIRT (el ruido de $\theta$ es 3.6$\times$ el movimiento corto) $\to$ el EE de $\lambda$ apenas se mueve ($0.0036 \to 0.0039$): el nulo \emphr{no es artefacto del termómetro}.
+  \item \emphr{Había espacio para ver influencia.} Podría ser que no hubiera nada que copiar: si mi vecindario ya piensa exactamente como yo, la influencia no deja huella. Lo medimos: la distancia promedio entre cada convencional y su vecindario es $0.59$ (contra $2.25$ si los vecindarios fueran al azar). La selección cerró el 74\% del espacio — pero el $0.59$ restante es espacio real donde un arrastre se habría notado.
+  \vspace{0.25cm}
+  \item \emphr{Había instrumento para verla.} ¿Y si el efecto existe pero nuestros datos no alcanzan a detectarlo? El efecto mínimo detectable — el $\lambda$ más chico que este diseño habría distinguido de cero — es $0.011$: una influencia que cerrara apenas el 1\% de la distancia por onda. Lo estimado ($0.007$) queda \emph{debajo} incluso de eso.
+  \vspace{0.25cm}
+  \item \emphr{El termómetro no es el culpable.} $\theta$ se estima desde los votos, con error (grande: 3.6$\times$ el movimiento típico entre períodos). Lo propagamos: re-simulamos las votaciones 50 veces, re-estimamos $\theta$ y el modelo completo en cada réplica. El error estándar de $\lambda$ apenas se mueve ($0.0036 \to 0.0039$), porque el ruido individual se promedia sobre 154 personas y todas las ondas: el nulo no es un artefacto de medición.
 \end{enumerate}
 \end{frame}
 
-\begin{frame}{RQ2b: ¿compra conducta? Sí — la defección viaja en red}
+\begin{frame}{RQ2b: la conducta — qué es defección, y qué mide $\phi$}
 \begin{itemize}
-  \item Defección: votar contra la mayoría del propio bloque (7.9\% de los votos). ¿Defecciono más cuando defeccionan \emph{mis co-firmantes}?
+  \item \emphr{Defección}: en una votación $v$, votar \emph{distinto} de la mayoría del propio bloque electoral. Casi siempre se respeta el libreto: ocurre en el \emphr{7.9\%} de los votos.
+  \item La pregunta: cuando alguien se sale del libreto, ¿se sale \emph{solo}, o acompañado de la gente con la que \emph{escribió iniciativas}? Exposición de $i$ en $v$:
 \end{itemize}
-\begin{center}\small
-\begin{tabular}{lcc}
+$$X_{iv} = \frac{\sum_{j \neq i} w_{ij}\, D_{jv}}{\sum_{j \neq i} w_{ij}}
+\qquad\qquad
+\Pr(D_{iv} = 1) = \Lambda\big(\eta_i + \mu_v + \phi\, X_{iv}\big)$$
+\begin{itemize}
+  \item $w_{ij}$ = iniciativas co-firmadas; $\eta_i$ absorbe personalidades díscolas; $\mu_v$ absorbe votaciones que rompen a todos.
+  \item \emphr{$\phi$} mide: ¿cuánto sube mi propensión (en log-odds) a defeccionar cuando la fracción ponderada de mis co-firmantes que defecciona \emph{en esta misma votación} pasa de 0 a 1?
+  \item El riesgo: si una votación parte a mi lista, defeccionamos juntos \emph{sin conocernos}. El antídoto: \emphr{permutación} — barajar los nombres de los defectores dentro de cada bloque $\times$ votación y re-estimar 200 veces.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{RQ2b: la tabla completa}
+\begin{center}\footnotesize
+\begin{tabular}{llccc}
 \toprule
- & $\phi$ & \\
+Modelo & Variable & Coef. & EE & $p$ \\
 \midrule
-Exposición a defectores (FE persona + votación) & $+11.2$ & $p<10^{-100}$ \\
-\emphr{Benchmark permutado} (mecánica de bloques) & $6.0$ & [p95: $6.1$] \\
-Split: co-firmantes de \emph{otras} comisiones & $+8.7$ & \\
-Split: co-firmantes de \emph{mi} comisión & $+3.0$ & \\
-Rezago: defección de vecinos en $v-1$ (junto a contemporánea) & $+0.7$ & $p<10^{-11}$ \\
+Principal & Exposición a defectores ($\phi$) & $+11.21$ & 0.52 & $<10^{-100}$ \\
+Benchmark permutado (200 réplicas) & $\phi$ esperado por mecánica & $6.02$ [p95: $6.08$] & --- & $<0.005$ \\
+Período completo (robustez) & $\phi$ & $+11.06$ & 0.47 & $<10^{-121}$ \\
+Split por comisión & Exposición co-firmantes de \emph{otra} comisión & $+8.67$ & 0.46 & $<10^{-15}$ \\
+ & Exposición co-firmantes de \emph{mi} comisión & $+2.99$ & 0.32 & $<10^{-15}$ \\
+ & Tasa de defección de mi comisión & $-3.01$ & 0.45 & $<10^{-10}$ \\
+Rezagada: votación anterior (sola) & Exposición en $v-1$ & $+2.98$ & 0.17 & $<10^{-65}$ \\
+Horse race & Contemporánea ($\phi$) & $+11.08$ & 0.52 & $<10^{-100}$ \\
+ & Exposición en $v-1$ & $+0.72$ & 0.11 & $<10^{-11}$ \\
+Rezagada: día anterior de Pleno & Exposición del día anterior & $-0.10$ & 0.30 & $0.75$ \\
 \bottomrule
 \end{tabular}
 \end{center}
 \vspace{0.15cm}
 \begin{itemize}
-  \item La mitad del efecto crudo era mecánica; \emphr{lo que sobra es enorme}, viaja entre comisiones, y deja un eco corto (muere a escala de días).
+  \item La mitad del efecto crudo era mecánica ($11.2$ vs $6.0$ del mundo barajado); \emphr{lo que sobra es enorme}, viaja más fuerte \emph{entre} comisiones, y deja un eco corto que muere a escala de días.
   \item \nota{Marco honesto (Manski, Angrist, Shalizi-Thomas): clustering de defección por líneas de red más allá de lo mecánico; influencia es la lectura natural, homofilia fina la alternativa.}
 \end{itemize}
 \end{frame}
@@ -444,23 +519,39 @@ Experiencia institucional & $+2.6$ & $+9.3$ & $<0.001$ \\
 
 \begin{frame}{RQ3: el modelo de supervivencia}
 \begin{itemize}
-  \item Unidad: el \emphr{artículo} (1.565, con coalición firmante de 2--16). ¿Llega al borrador?
+  \item Unidad: el \emphr{artículo} (1.565, con coalición firmante $S_a$ de 2--16; 389 coaliciones). ¿Llega al borrador? (20.2\% lo logra.)
 \end{itemize}
-$$\Pr(sobrevive_a) = \Lambda\Big(\alpha_c + \gamma_1 \underbrace{|\bar\theta_{1,S_a} - \theta_{1,(103)}|}_{\text{distancia al pívot}} + \gamma_2\, sd(\theta_{1,S_a}) + \boldsymbol{\gamma}^\top \big[\text{red}, \text{capital humano}\big]\Big)$$
-\begin{center}\small
-\begin{tabular}{lcc}
+$$\Pr(sobrevive_a = 1) = \Lambda\Big(\alpha_c + \gamma_1\, \big|\bar\theta_{1,S_a} - \theta_{1,(103)}\big| + \gamma_2\, sd(\theta_{1,S_a}) + \gamma_3\, |S_a| + \boldsymbol{\gamma_4}^\top C_{S_a} + \boldsymbol{\gamma_5}^\top H_{S_a}\Big)$$
+\begin{itemize}
+  \item $C_{S_a}$ = bloque de red de la coalición (betweenness media, constraint media, densidad interna); $H_{S_a}$ = capital humano (prop.\ abogados, experiencia, grado medio); $\alpha_c$ = FE de comisión; EE por coalición; predictores estandarizados.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{RQ3: la tabla completa (tres modelos anidados)}
+\begin{center}\footnotesize
+\begin{tabular}{lccc}
 \toprule
- & Coef.\ (est.) & $p$ \\
+ & (1) Pivotal & (2) + Red & (3) + Capital humano \\
 \midrule
-Distancia de la coalición al pívot & $-0.61$ & $.002$ \\
-Heterogeneidad ideológica $sd(\theta_1)$ & $+0.53$ & $<10^{-4}$ \\
-\emphr{Densidad interna} (pares con historia de co-firma) & $+0.32$ & $.002$ \\
-Prop.\ abogados / experiencia / grado medio & $\approx 0$ & n.s. \\
+\multicolumn{4}{l}{\emphr{--- Geometría ideológica de la coalición}}\\
+Distancia de la coalición al pívot & $-0.35$ ($p=.001$) & $-0.48$ ($p=.009$) & $-0.61$ ($p=.002$) \\
+Heterogeneidad ideológica $sd(\theta_1)$ & $+0.27$ ($p=.008$) & $+0.46$ ($p=.001$) & $+0.53$ ($p<10^{-4}$) \\
+Tamaño de la coalición & $+0.20$ ($p=.12$) & $+0.18$ ($p=.12$) & $+0.15$ ($p=.21$) \\
+\multicolumn{4}{l}{\emphr{--- Red de la coalición}}\\
+Betweenness media & & $-0.22$ ($p=.083$) & $-0.23$ ($p=.076$) \\
+Constraint media & & $+0.01$ ($p=.97$) & $+0.26$ ($p=.28$) \\
+Densidad interna (pares con historia) & & $+0.25$ ($p=.024$) & $+0.32$ ($p=.002$) \\
+\multicolumn{4}{l}{\emphr{--- Capital humano de la coalición}}\\
+Prop.\ abogados & & & $-0.09$ ($p=.58$) \\
+Prop.\ con experiencia previa & & & $-0.16$ ($p=.44$) \\
+Grado académico medio & & & $-0.06$ ($p=.67$) \\
+\midrule
+AIC & 1393 & 1384 & 1386 \\
 \bottomrule
 \end{tabular}
 \end{center}
 \vspace{0.1cm}
-\nota{Ganan las coaliciones bien paradas, anchas y con historia interna — no las tituladas.}
+\nota{Ganan las coaliciones bien paradas, anchas y con historia interna — no las tituladas. La densidad interna: de las parejas posibles entre los firmantes, ¿qué fracción ya había co-firmado en \emph{otras} iniciativas?}
 \end{frame}
 
 \begin{frame}{El premio a ensancharse, quintil a quintil}
@@ -503,7 +594,7 @@ Q5: centro y derecha $[-0.17, +0.81]$ & 15\% & $+0.18$ & $.72$ \\
 \begin{itemize}
   \item En una asamblea de extraños, la colaboración se organizó con lo que la gente \emphr{traía puesto}: lista, ideología, territorio — no credenciales; y la estructura completa muestra coaliciones que \emphr{mezclan} género, educación y generación.
   \vspace{0.2cm}
-  \item Ese capital \emphr{no compró mentes} (selección, con el nulo defendido cuatro veces), pero \emphr{sí conducta} (la defección viaja por los lazos, transportada por los novatos) y \emphr{sí textos} (equipos con historia, cerca del pívot, anchos).
+  \item Ese capital \emphr{no movió posiciones} (selección, con el nulo defendido), pero \emphr{sí coordinó conducta} (la defección viaja por los lazos, transportada por los novatos) y \emphr{sí ganó textos} (equipos con historia, cerca del pívot, anchos).
   \vspace{0.2cm}
   \item Y la institución cierra el círculo: la regla de 2/3 fijó un pívot, y la red fue el mecanismo por el que esa aritmética se volvió comportamiento.
   \vspace{0.2cm}
