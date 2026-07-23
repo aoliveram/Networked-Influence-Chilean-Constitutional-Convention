@@ -1,111 +1,44 @@
-# Networked Influence in a Tabula Rasa Legislature
+# Collaboration Networks in a Tabula Rasa Legislature
 
-**[📄 Extended Abstract (5 pages)](docs/extended-abstract.pdf)** — Full mathematical specifications, results tables, and discussion.
+Network formation, behavior, and legislative success in Chile's Constitutional Convention (2021–2022).
+A. Olivera M. & J. Fábrega — CICS, Universidad del Desarrollo.
 
-## Overview
+> **Status: work in progress.** Findings below reflect the current state of the analysis and may change. Earlier versions of this README described preliminary results (e.g., "strategic gatekeeping") that were later traced to measurement artifacts and are superseded.
 
-The 2021–2022 Chilean Constitutional Convention offers a rare natural experiment for studying political network formation and legislative effectiveness. Delegates were largely unfamiliar with each other, including both career politicians and civically recruited citizens, established their own procedural rules, and required co-sponsorships for constitutional proposals. This *tabula rasa* legislature—where networks were not predetermined by party structure—enables us to trace how alliances form and translate into political success.
+## The case
 
-We analyze 154 delegates across 5 thematic commissions over 91 temporal periods using a three-stage modeling pipeline:
+The 2021–2022 Chilean Constitutional Convention offers a rare natural experiment for studying how political collaboration organizes from scratch: a majority of political newcomers, a body that dissolved upon delivering its draft, and procedural rules written by its own members. Two of those rules structure the study: every constitutional initiative required 8–16 sponsors (signing = forming a visible, dated coalition), and every norm required a two-thirds floor majority (103 of 154).
 
-1. **Model 1** — Co-sponsorship network formation via **Valued ERGM**
-2. **Model 2** — Ideological dynamics via **panel regression** with individual fixed effects
-3. **Model 3** — Legislative success via **Spatial Durbin Model** (SDM)
+## Data
 
-## Findings
+Built from the complete documentary record of the Convention, curated in the companion repository **[constitutional-proposal-tracking](https://github.com/aoliveram/constitutional-proposal-tracking)** (CPT):
 
-### 1. Strategic Gatekeeping in Co-sponsorship Networks
+- **995 constitutional initiatives** from the official platform (947 usable with 2–16 person signers, 100% dated), with harmonized signer lists.
+- **1,565 genesis articles** with known outcomes against the draft (20% survival), including dated amendment histories across the 7 thematic commissions.
+- **4,707 roll-call votes** of the floor (basis for first-month W-NOMINATE ideal points and dynamic IRT revealed votes).
+- Curated profiles of the 154 delegates (profession, prior institutional experience, education, age, gender, district/pueblo, electoral list, commission).
 
-While political homophily is the expected baseline, delegates with prior **institutional experience** and **lawyers** exhibit *negative* homophily—they co-sponsor *less* with peers sharing these attributes. Rather than clustering densely, these "privileged" actors disperse across coalitions, consistent with strategic gatekeeping behavior where they mentor novices and maintain leadership through representational diversity.
+## Models
 
-### 2. Selection, Not Influence
+- **Formation (RQ1):** conditional logit over initiative "menus"; bipartite ERGMs per commission (person × document — the real unit of analysis) estimated by MPLE with initiative-bootstrap standard errors; relational hyperevent model (RHEM) over the dated event sequence.
+- **Effects on people (RQ2):** individual fixed-effects panels for position change (with parametric-bootstrap measurement-error propagation); two-way fixed-effects models of voting defection with permutation benchmarks.
+- **Effects on texts (RQ3):** article-level survival models (2/3-pivot geometry, coalition heterogeneity, internal density); spatial Durbin model of individual success with exact impact decomposition.
 
-Despite strong positive correlation in pooled OLS ($\beta = +0.033$, $p < 0.001$), **fixed-effects models show a null causal effect** of network exposure on ideological dynamics ($\beta = +0.0004$, $p = 0.91$). A falsification test (future networks predicting past ideology) fails, confirming that apparent network effects reflect **endogenous selection**—delegates choose co-sponsors aligned with preexisting positions—not genuine influence.
+## Current headline findings
 
-### 3. Legislative Success is Collective
+1. **The network was predictable from pre-Convention endowments**: electoral list, ideology (first-month W-NOMINATE), and — conditional on commission — territory. Credentials did not weave it: lawyers show no homophily under any of three designs.
+2. **Positions did not move** (selection, not influence — a null defended on power, instrument, and measurement-error grounds), but **behavior did travel**: defection clusters along co-sponsorship lines, beyond block mechanics, carried by newcomer peers.
+3. **Articles survived through 2/3-pivot geometry** (the heterogeneity premium decays toward the pivot) **and through coalitions with internal co-signing history** — not through human capital.
 
-Lexical retention (TF-IDF similarity between genesis and final constitutional text) is not an individual achievement but a **collective network phenomenon**. The Spatial Durbin Model dominates OLS/SAR/SEM (AIC = -383.35, 44+ points better). Spatial autocorrelation $\hat{\rho} = 0.997$ indicates that delegate success depends overwhelmingly on co-author characteristics and collective success—success "spills over" through co-authorship ties. Ideological consistency and intra-coalitional ties predict retention; cross-coalitional bridges reduce it.
+## Repository map
 
-## Methods Summary
+- `docs/networked-influence-study.md` / `.pdf` — the living report (pedagogical, full tables).
+- `docs/playground.md` / `.pdf` — methods explainers (RHEM, bipartite ERGM estimation, implementation plans).
+- `docs/revision-critica.md` / `.pdf` — critical-review log (pending items + closed responses).
+- `code/` — reproducible pipeline (numbered scripts; data live as versioned snapshots, no runtime dependence on external repositories).
+- `presentations/` — slide decks.
+- `results/` — figures (PDF + PNG) and model tables (CSV).
 
-| Model | Method | Dependent Variable | Key Finding |
-|-------|--------|---------------------|-------------|
-| **1** | Valued ERGM (Poisson reference) | Co-sponsorship counts | Negative homophily in privileged groups |
-| **2** | Panel FE regression | $\Delta\theta_{i,t}$ (ideological change) | Causal effect ≈ 0; only selection |
-| **3** | Spatial Durbin Model | Mean TF-IDF retention | $\rho \approx 1$; success is collective |
+## Data source
 
-Ideological positions are estimated via a **Dynamic Bayesian IRT** (dynIRT) model with Random Walk prior, anchored by Teresa Marinovic (right) and Jorge Baradit (left), producing a $154 \times 91$ matrix of delegate-period ideal points.
-
-Lexical retention is measured via **TF-IDF cosine similarity** (primary) and **Sentence-BERT embeddings** (robustness) on 236 mapped articles (125 identical + 111 similar) from commissions C1, C3, and C5.
-
-## Repository Structure
-
-```
-Networked-Influence-Chilean-Constitutional-Convention/
-├── README.md                      # This file
-├── docs/
-│   ├── extended-abstract.pdf      # 5-page extended abstract (LaTeX source included)
-│   ├── extended-abstract.tex
-│   ├── research-proposal.pdf      # Original research proposal
-│   └── research-proposal.tex
-├── code/
-│   ├── 00-build_dynamic_networks.py     # Build co-authorship networks
-│   ├── 01-model-valued-ergm.R           # Model 1: Valued ERGM
-│   ├── 02-extract-emirt-temporal.R      # Align emIRT to commission time
-│   ├── 03-model-network-influence.R     # Model 2: Panel regression
-│   ├── 04-build-article-mapping.py      # Map articles to final draft
-│   ├── 05-nlp-text-similarity.py        # TF-IDF + BERT similarity
-│   ├── 06-build-integrated-dataset.py   # Merge all sources
-│   ├── 07-model-spatial-durbin.R        # Model 3: SDM
-│   └── 08-robustness-checks.R           # Robustness across all models
-├── data/
-│   ├── raw/
-│   │   ├── commissions/                 # Enriched commission JSONs (C1, C3, C5, C6, C7)
-│   │   ├── conventional-profiles.json   # BCN-scraped delegate profiles
-│   │   └── emirt/                       # Dynamic IRT model outputs
-│   └── processed/                       # Pipeline outputs (networks, metrics, panels)
-└── results/
-    ├── figures/
-    └── tables/
-```
-
-## Running the Pipeline
-
-The pipeline is sequential: each script consumes outputs from earlier steps.
-
-```bash
-# Model 1: Network formation
-python code/00-build_dynamic_networks.py
-Rscript code/01-model-valued-ergm.R
-
-# Model 2: Ideological dynamics
-Rscript code/02-extract-emirt-temporal.R
-Rscript code/03-model-network-influence.R
-
-# Model 3: Legislative success
-python code/04-build-article-mapping.py
-python code/05-nlp-text-similarity.py
-python code/06-build-integrated-dataset.py
-Rscript code/07-model-spatial-durbin.R
-
-# Robustness
-Rscript code/08-robustness-checks.R
-```
-
-### Dependencies
-
-**Python (≥3.9):** `numpy`, `scipy`, `scikit-learn`, `pandas`, `sentence-transformers`, `openpyxl`
-
-**R (≥4.0):** `statnet`, `ergm.count`, `plm`, `lmtest`, `sandwich`, `spdep`, `spatialreg`, `jsonlite`, `emIRT`
-
-## Data Sources
-
-- **Commission proposals**: Manually enriched JSONs from the Convention's five thematic commissions, containing article-level text, authorship, and final-status metadata.
-- **Delegate profiles**: Web-scraped from the Biblioteca del Congreso Nacional (BCN) biographical portal.
-- **Legislative votes** (for emIRT): Roll-call data from 91 voting sessions (2021-07-13 to 2022-06-24).
-
-Only derived and manually enriched data files are included in this repository; raw scraping inputs are excluded to keep the repository focused on analysis.
-
----
-
-This is a working paper: we are expanding the dataset to include all seven commissions (C2, C4, C6, C7 are currently excluded from Models 2–3 pending completion of modification mapping).
+All documentary data come from **[constitutional-proposal-tracking](https://github.com/aoliveram/constitutional-proposal-tracking)**, which reconstructs and harmonizes the Convention's initiatives, committee reports, amendment histories, and signer records.
