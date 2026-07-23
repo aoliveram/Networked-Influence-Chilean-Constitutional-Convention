@@ -250,7 +250,7 @@ C7 & Conocimientos & 15 & 13 & 0 & 51.7 & 1.33 & 64 & 8 & 332 & 54 \\
 
 \begin{frame}{Herramienta 1: el logit condicional (elección dado el menú)}
 \begin{itemize}
-  \item Utilidad latente de firmar; lo que se estima es la \emphr{probabilidad condicional} de la coalición observada, dado su tamaño — el atractivo del texto ($\alpha_a$) \emphr{se cancela}:
+  \item Utilidad latente de firmar; lo que se estima es la \emphr{probabilidad condicional} de la coalición observada, dado su tamaño:
 \end{itemize}
 $$U_{ia} = \beta^\top x_{ia} + \alpha_a + \varepsilon_{ia}
 \qquad\Rightarrow\qquad
@@ -311,8 +311,8 @@ Distancia en $\theta_1$ & $-5.1^{***}$ & $-2.8^{**}$ & $-0.8$ & $+0.1$ & $-6.1^{
 \end{center}
 \vspace{0.25cm}
 \begin{itemize}
-  \item El territorio es de \emphr{derecha y centro}; la izquierda organizada coordina por lista e ideología, no por geografía; el género vive en la centro-izquierda.
-  \item La pendiente ideológica: la derecha casi no cruza distancias; la izquierda las cruza todas.
+  \item La izquierda organizada coordina por lista e ideología, no por geografía; el género vive en la centro-izquierda.
+  \item La derecha casi no cruza distancias.
 \end{itemize}
 \end{frame}
 
@@ -321,16 +321,19 @@ Distancia en $\theta_1$ & $-5.1^{***}$ & $-2.8^{**}$ & $-0.8$ & $+0.1$ & $-6.1^{
   \item Modelo de probabilidad sobre la red convencional $\times$ documento entera:
 \end{itemize}
 $$\Pr(Y = y) = \frac{\exp\big(\theta^\top s(y)\big)}{\kappa(\theta)}$$
-\nota{$s(y)$: firmas de miembros, pares de co-firmantes que comparten atributo, \dots}
+{\footnotesize
+$$s(y) = \Big(\underbrace{\sum_{i,a} y_{ia}\,\mathbf{1}[i \in M_a]}_{\text{firmas de miembros}},\;\;
+\underbrace{\sum_{a}\sum_{i<j} y_{ia}\,y_{ja}\,\mathbf{1}[\ell_i = \ell_j]}_{\text{pares de misma lista}},\;\;
+\underbrace{\sum_{a}\big(\max_{i:\,y_{ia}=1}\theta_{1i} - \min_{i:\,y_{ia}=1}\theta_{1i}\big)}_{\text{rango ideológico por documento}},\;\dots\Big)$$}
 \begin{itemize}
   \item Cada término pregunta: ¿este patrón aparece \emphr{más que en redes aleatorias comparables}?
-  \item \emphr{Siete modelos, uno por comisión}: la comisión es el mayor confundidor de composición (el modelo agregado con intercepto único invierte los signos — Simpson verificado).
-  \item \nota{El denominador $\kappa(\theta)$ suma sobre \emph{todas} las redes posibles ($2^{154 \times n}$) — incalculable. MCMC lo \emph{aproxima simulando} redes (aquí resultó infactible); \emphr{MPLE lo esquiva}: estima cada lazo condicional al resto (una logística sobre estadísticas de cambio) — los puntos en segundos. Los EE de la tabla son por \emphr{bootstrap de iniciativas} (B = 500): re-sortear las iniciativas, reconstruir la red, re-estimar.}
+  \item El denominador $\kappa(\theta)$ suma sobre \emph{todas} las redes posibles ($2^{154 \times n}$) — incalculable; simularlo (MCMC) resultó infactible.
+  \item MPLE lo \emphr{esquiva} (cada lazo, condicional al resto); EE por \emphr{bootstrap de iniciativas} (B = 500), no inflados.
 \end{itemize}
 \end{frame}
 
 \begin{frame}{La misma pregunta con la estructura completa}
-\begin{center}\tiny
+\begin{center}\tiny\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.25}
 \begin{tabular}{lccccccc}
 \toprule
 Término & C1 & C2 & C3 & C4 & C5 & C6 & C7 \\
@@ -357,31 +360,17 @@ Parejas repetidas (\texttt{gwdsp}) & $-0.42^{***}$ & $-0.28^{***}$ & $-0.38^{***
 \end{tabular}
 \end{center}
 \vspace{0.05cm}
-\nota{Variables continuas solo en forma continua (rango por documento); EE por bootstrap de iniciativas (B = 500). La ideología opera en ambas dimensiones; la lista se achica al condicionar en estructura; y las \emph{parejas no se sobre-usan} (gwdsp $<$ 0 en las 7) — la firma estructural de la tabula rasa: sin décadas de inercia institucional, no hay duplas atrincheradas; las coaliciones se re-arman con pares frescos.}
+\nota{La ideología opera en ambas dimensiones; la lista se achica al condicionar en estructura.} \\
+\nota{Las \emph{parejas no se sobre-usan} (gwdsp $<$ 0 en las 7).}
 \end{frame}
 
-\begin{frame}{Dónde coinciden las lentes, y dónde no}
-\begin{center}\footnotesize
-\begin{tabular}{lccl}
-\toprule
-Covariable & CLogit (menú) & ERGM bipartito (estructura) & Lectura \\
-\midrule
-Misma lista & $+0.9$ a $+1.4^{***}$ & $+0.06$ a $+0.23$, se achica & \emphr{coinciden}; parte era estructura \\
-Ideología $\theta_1$ & $-3.6^{***}$ & rango $-2.0$ a $-3.6^{***}$ (las 7) & \emphr{coinciden} \\
-Ideología $\theta_2$ & $-1.4^{***}$ & rango $-0.7$ a $-2.4$ (6/7) & \emphr{coinciden} \\
-Distrito/pueblo & $+2.5^{***}$ (global) & fuerte en 6/7; nulo en C4 & el bipartito \emphr{matiza} \\
-Experiencia & $+0.5^{*}$ & $+0.01$ a $+0.08$, parejo & coinciden (chico) \\
-Abogado & $+0.1$ (n.s.) & nulo (C6: $+0.08^{***}$) & \emphr{nulo robusto} \\
-Género & $+0.3^{+}$ & neutro & nulo bajo espec completa \\
-Educación / edad & n.s. & rangos débiles / $\approx 0$ & no organizan \\
---- & --- & gwdsp $-0.2$ a $-0.4^{***}$ (las 7) & \emphr{las parejas no se sobre-usan} \\
-\bottomrule
-\end{tabular}
-\end{center}
-\vspace{0.25cm}
+\begin{frame}{Qué aprendimos con la unidad real}
 \begin{itemize}
-  \item Aprendizaje 1 — \emphr{qué importa}: lista, ideología (en ambas dimensiones) y territorio-condicionado predicen la red; el perfil personal, no.
-  \item Aprendizaje 2 — \emphr{la herramienta importa}: la unidad real (persona $\times$ documento) cambia magnitudes y agrega hechos nuevos — la lista se achica, y las duplas no se reciclan.
+  \item La unidad de análisis real es \emphr{persona $\times$ documento}: cada firma es una decisión sobre un texto concreto, no un lazo proyectado entre personas.
+  \vspace{0.35cm}
+  \item Diferencias con el CLogit: la \emphr{lista se achica} (parte era estructura de actividad), el \emphr{distrito se apaga en C4}, y el género pierde su marginal.
+  \vspace{0.35cm}
+  \item Un hecho que el CLogit no puede ver: las \emphr{parejas no se sobre-usan} (gwdsp $<$ 0 en las 7) — la firma estructural de la \emphr{tabula rasa}: sin inercia institucional no hay duplas atrincheradas; las coaliciones se re-arman con pares frescos.
 \end{itemize}
 \end{frame}
 
@@ -405,7 +394,7 @@ $$E_{i,t} = \frac{\sum_{j \neq i} w_{ij,t}\,\theta_{j,t}}{\sum_{j \neq i} w_{ij,
 \qquad\qquad
 \Delta\theta_{i,t} = \alpha_i + \beta\,\theta_{i,t-1} + \lambda\,E_{i,t-1} + \varepsilon_{it}$$
 \begin{itemize}
-  \item Efectos fijos individuales (solo variación \emph{dentro} de cada persona), EE cluster; 4.355 obs.
+  \item Efectos fijos individuales (solo variación \emph{dentro} de cada persona); 4.355 obs.
   \item Resultado: $\hat\lambda = +0.007$ (EE $0.004$), \emphr{nulo}. Robusto a 3 ventanas temporales $\times$ 7 dosis de exposición.
 \end{itemize}
 \end{frame}
@@ -416,45 +405,29 @@ $$E_{i,t} = \frac{\sum_{j \neq i} w_{ij,t}\,\theta_{j,t}}{\sum_{j \neq i} w_{ij,
 \nota{(a) Entre personas: posición y vecindario van pegados ($r=0.95$) — elegimos vecindarios que se nos parecen. (b) Dentro de cada persona, los cambios no se siguen. Ámbar: el 5\% más desalineado — los únicos con espacio para ser arrastrados — cae en (b) sin pendiente ($r=-0.04$).}
 \end{frame}
 
-\begin{frame}{La tabla completa: tres ventanas $\times$ siete dosis de exposición}
-\begin{center}\tiny
-\begin{tabular}{llcccc}
+\begin{frame}{La exposición con decaimiento temporal (ventana completa)}
+\begin{center}\small
+\begin{tabular}{lcccc}
 \toprule
-Ventana & Definición de exposición & $\hat\lambda$ & EE & $p$ & N \\
+Definición de exposición & $\hat\lambda$ & EE & $p$ & N \\
 \midrule
-Completa & Acumulada desde T0 & $+0.007$ & 0.004 & $0.119$ & 4.355 \\
-Completa & Solo última onda & $+0.007$ & 0.013 & $0.60$ & 463 \\
-Completa & Últimas 2 ondas & $+0.003$ & 0.009 & $0.72$ & 1.504 \\
-Completa & Últimas 3 ondas & $-0.002$ & 0.007 & $0.76$ & 2.447 \\
-Completa & Decaimiento $\lambda_w = 0.25$ & $+0.008$ & 0.004 & $0.051$ & 4.355 \\
-Completa & Decaimiento $\lambda_w = 0.50$ & $+0.008$ & 0.004 & $0.042$ & 4.355 \\
-Completa & Decaimiento $\lambda_w = 0.75$ & $+0.007$ & 0.004 & $0.078$ & 4.355 \\
-Completa & Falsificación: exposición futura & $+0.010$ & 0.004 & $0.030$ & 3.329 \\
-Temprana ($\leq$ 31-mar) & Acumulada & $+0.005$ & 0.007 & $0.50$ & 1.586 \\
-Temprana & Últimas 2 ondas & $+0.013$ & 0.014 & $0.35$ & 955 \\
-Temprana & Últimas 3 ondas & $+0.002$ & 0.010 & $0.81$ & 1.466 \\
-Temprana & Decaimiento $\lambda_w = 0.25$ & $+0.005$ & 0.007 & $0.46$ & 1.586 \\
-Temprana & Decaimiento $\lambda_w = 0.50$ & $+0.005$ & 0.007 & $0.48$ & 1.586 \\
-Temprana & Decaimiento $\lambda_w = 0.75$ & $+0.005$ & 0.007 & $0.49$ & 1.586 \\
-Temprana & Falsificación: exposición futura & $+0.006$ & 0.007 & $0.41$ & 1.587 \\
-Tardía ($\geq$ 1-abr) & Acumulada & $+0.011$ & 0.005 & $0.018$ & 2.769 \\
-Tardía & Solo última onda & $-0.002$ & 0.018 & $0.92$ & 332 \\
-Tardía & Últimas 2 ondas & $-0.006$ & 0.008 & $0.45$ & 549 \\
-Tardía & Últimas 3 ondas & $-0.011$ & 0.008 & $0.21$ & 981 \\
-Tardía & Decaimiento $\lambda_w = 0.25$ & $+0.009$ & 0.004 & $0.032$ & 2.769 \\
-Tardía & Decaimiento $\lambda_w = 0.50$ & $+0.011$ & 0.004 & $0.008$ & 2.769 \\
-Tardía & Decaimiento $\lambda_w = 0.75$ & $+0.011$ & 0.004 & $0.011$ & 2.769 \\
-Tardía & Falsificación: exposición futura & $+0.010$ & 0.004 & $0.004$ & 1.742 \\
+Decaimiento $\lambda_w = 0.25$ & $+0.008$ & 0.004 & $0.051$ & 4.355 \\
+Decaimiento $\lambda_w = 0.50$ & $+0.008$ & 0.004 & $0.042$ & 4.355 \\
+Decaimiento $\lambda_w = 0.75$ & $+0.007$ & 0.004 & $0.078$ & 4.355 \\
 \bottomrule
 \end{tabular}
 \end{center}
-\vspace{0.05cm}
-\nota{Ningún $\hat\lambda$ supera $0.011$; los pocos significativos de la ventana tardía vienen acompañados de una falsificación igual de significativa y de la misma magnitud.}
+\vspace{0.25cm}
+\begin{itemize}
+  \item Con memoria que descuenta el pasado, el lag roza la significancia ($\lambda_w = 0.50$: $p = .042$).
+  \item Pero la falsificación es igual de "significativa" ($+0.010$, $p = .030$): la firma de la selección.
+  \item La tabla completa (3 ventanas $\times$ 7 dosis) queda en backup.
+\end{itemize}
 \end{frame}
 
-\begin{frame}{Tres razones para creerle al nulo}
+\begin{frame}{A considerar antes de declarar nulo el efecto de influencia}
 \begin{enumerate}
-  \item \emphr{Había espacio para ver influencia.} Podría ser que no hubiera nada que copiar: si mi vecindario ya piensa exactamente como yo, la influencia no deja huella. Lo medimos: la distancia promedio entre cada convencional y su vecindario es $0.59$ (contra $2.25$ si los vecindarios fueran al azar). La selección cerró el 74\% del espacio — pero el $0.59$ restante es espacio real donde un arrastre se habría notado.
+  \item La distancia promedio entre cada convencional y su vecindario es $0.59$ (contra $2.25$ si los vecindarios fueran al azar).
   \vspace{0.25cm}
   \item \emphr{Había instrumento para verla.} ¿Y si el efecto existe pero nuestros datos no alcanzan a detectarlo? El efecto mínimo detectable — el $\lambda$ más chico que este diseño habría distinguido de cero — es $0.011$: una influencia que cerrara apenas el 1\% de la distancia por onda. Lo estimado ($0.007$) queda \emph{debajo} incluso de eso.
   \vspace{0.25cm}
