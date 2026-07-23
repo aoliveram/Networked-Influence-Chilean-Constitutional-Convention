@@ -322,7 +322,7 @@ $$\Pr(Y = y) = \frac{\exp\big(\theta^\top s(y)\big)}{\kappa(\theta)}$$
 \begin{itemize}
   \item Cada término pregunta: ¿este patrón aparece \emphr{más que en redes aleatorias comparables}?
   \item \emphr{Siete modelos, uno por comisión}: la comisión es el mayor confundidor de composición (el modelo agregado con intercepto único invierte los signos — Simpson verificado).
-  \item \nota{El denominador $\kappa(\theta)$ suma sobre \emph{todas} las redes posibles ($2^{154 \times n}$) — incalculable. MCMC lo \emph{aproxima simulando} redes (aquí resultó infactible); \emphr{MPLE lo esquiva}: estima cada lazo condicional al resto (una logística sobre estadísticas de cambio) — mismos puntos en segundos; los EE honestos vienen de \emphr{bootstrap de iniciativas}.}
+  \item \nota{El denominador $\kappa(\theta)$ suma sobre \emph{todas} las redes posibles ($2^{154 \times n}$) — incalculable. MCMC lo \emph{aproxima simulando} redes (aquí resultó infactible); \emphr{MPLE lo esquiva}: estima cada lazo condicional al resto (una logística sobre estadísticas de cambio) — los puntos en segundos. Los EE de la tabla son por \emphr{bootstrap de iniciativas} (B = 500): re-sortear las iniciativas, reconstruir la red, re-estimar.}
 \end{itemize}
 \end{frame}
 
@@ -333,26 +333,28 @@ $$\Pr(Y = y) = \frac{\exp\big(\theta^\top s(y)\big)}{\kappa(\theta)}$$
 Término & C1 & C2 & C3 & C4 & C5 & C6 & C7 \\
 \midrule
 \multicolumn{8}{l}{\emphr{--- Controles: base, pertenencia e ideología}}\\
-Edges (base) & $-3.14^{***}$ & $-3.90^{***}$ & $-3.70^{***}$ & $-3.60^{***}$ & $-3.78^{***}$ & $-3.38^{***}$ & $-3.79^{***}$ \\
-Miembro de la comisión & $+0.73^{***}$ & $+1.24^{***}$ & $+1.77^{***}$ & $+0.57^{***}$ & $+1.56^{***}$ & $+1.31^{***}$ & $+2.29^{***}$ \\
-Mismo quintil $\theta_1$ & $+0.16^{***}$ & $+0.16^{***}$ & $+0.12^{***}$ & $+0.14^{***}$ & $+0.16^{***}$ & $+0.13^{***}$ & $+0.16^{***}$ \\
+Edges (base) & $+0.16$ & $-0.51$ & $-0.28$ & $-0.28$ & $-0.16$ & $-0.62$ & $-1.18^{**}$ \\
+Miembro de la comisión & $+0.79^{***}$ & $+1.58^{***}$ & $+0.86^{***}$ & $+1.05^{***}$ & $+1.61^{***}$ & $+1.94^{***}$ & $+2.24^{***}$ \\
+Rango de $\theta_1$ por documento & $-2.29^{***}$ & $-2.91^{***}$ & $-3.56^{***}$ & $-3.44^{***}$ & $-2.01^{***}$ & $-2.02^{**}$ & $-2.58^{***}$ \\
+Rango de $\theta_2$ por documento & $-2.11^{***}$ & $-1.60^{**}$ & $-1.64^{*}$ & $-2.39^{***}$ & $-2.21^{***}$ & $-1.58^{*}$ & $-0.72$ \\
 \multicolumn{8}{l}{\emphr{--- Listas electorales}}\\
-Misma lista & $+0.21^{***}$ & $+0.18^{***}$ & $+0.20^{***}$ & $+0.18^{***}$ & $+0.18^{***}$ & $+0.21^{***}$ & $+0.22^{***}$ \\
+Misma lista & $+0.07^{+}$ & $+0.07^{**}$ & $+0.09^{+}$ & $+0.06^{***}$ & $+0.10^{***}$ & $+0.07^{**}$ & $+0.23^{***}$ \\
 \multicolumn{8}{l}{\emphr{--- Territorio}}\\
-Mismo distrito/pueblo & $+0.23^{***}$ & $+0.19^{***}$ & $+0.36^{***}$ & $-0.01$ & $+0.07$ & $-0.02$ & $+0.30^{***}$ \\
+Mismo distrito/pueblo & $+0.40^{***}$ & $+0.28^{***}$ & $+0.43^{**}$ & $+0.08$ & $+0.23^{**}$ & $+0.16^{+}$ & $+0.35^{***}$ \\
 \multicolumn{8}{l}{\emphr{--- Perfil pre-Convención}}\\
-Ambos abogados & $-0.08^{***}$ & $-0.02^{+}$ & $-0.08^{***}$ & $-0.01^{+}$ & $-0.03^{**}$ & $-0.02$ & $-0.01$ \\
-Ambos con experiencia & $+0.04^{**}$ & $+0.06^{***}$ & $+0.05^{**}$ & $+0.06^{***}$ & $+0.06^{***}$ & $+0.05^{***}$ & $+0.02$ \\
-Mismo género & $-0.03^{+}$ & $-0.00$ & $-0.05^{*}$ & $-0.01$ & $-0.06^{***}$ & $-0.08^{***}$ & $-0.04^{+}$ \\
-Mismo nivel educativo & $-0.10^{***}$ & $-0.08^{***}$ & $-0.03^{+}$ & $-0.09^{***}$ & $+0.02^{*}$ & $-0.05^{***}$ & $+0.00$ \\
-Mismo quintil de edad & $-0.06^{*}$ & $-0.04^{+}$ & $-0.01$ & $-0.05^{***}$ & $-0.08^{***}$ & $-0.05^{*}$ & $-0.09^{**}$ \\
-\midrule
-\multicolumn{8}{l}{Rangos continuos por documento (\texttt{b2covrange}): $\theta_1 \in [-9.7, -3.3]$, $p<.001$ en las 7 (\emphr{evitan} dispersión ideológica); grado $-$ en 5/7; edad $\approx 0$.}\\
+Ambos abogados & $+0.02$ & $-0.02$ & $-0.00$ & $-0.01$ & $-0.05^{***}$ & $+0.08^{***}$ & $+0.01$ \\
+Ambos con experiencia & $+0.08^{**}$ & $+0.05^{**}$ & $+0.05$ & $+0.01$ & $-0.00$ & $+0.04^{*}$ & $-0.02$ \\
+Mismo género & $+0.05^{+}$ & $+0.04$ & $+0.09^{+}$ & $+0.01$ & $+0.01$ & $+0.06^{*}$ & $+0.01$ \\
+Rango de grado & $-0.26$ & $-0.59^{**}$ & $-0.27$ & $+0.05$ & $-0.39^{*}$ & $-0.33$ & $-0.01$ \\
+Rango de edad (décadas) & $-0.28$ & $+0.15$ & $-0.22$ & $+0.02$ & $-0.49^{**}$ & $+0.02$ & $+0.16$ \\
+\multicolumn{8}{l}{\emphr{--- Estructura (más allá de los atributos)}}\\
+Firmadores seriales (\texttt{gwb1degree}) & $-0.57$ & $-0.75$ & $+0.04$ & $-8.04^{*}$ & $-1.92^{***}$ & $+1.34^{**}$ & $-0.49$ \\
+Parejas repetidas (\texttt{gwdsp}) & $-0.42^{***}$ & $-0.28^{***}$ & $-0.38^{***}$ & $-0.16^{***}$ & $-0.23^{***}$ & $-0.35^{***}$ & $-0.24^{***}$ \\
 \bottomrule
 \end{tabular}
 \end{center}
-\vspace{0.1cm}
-\nota{Homofilia de co-firma medida sin proyección, dentro de cada pool temático.}
+\vspace{0.05cm}
+\nota{Variables continuas solo en forma continua (rango por documento); EE por bootstrap de iniciativas (B = 500). La ideología opera en ambas dimensiones; la lista se achica al condicionar en estructura; las \emph{parejas no se sobre-usan} (gwdsp $<$ 0 en las 7).}
 \end{frame}
 
 \begin{frame}{Dónde coinciden las lentes, y dónde no}
@@ -361,21 +363,22 @@ Mismo quintil de edad & $-0.06^{*}$ & $-0.04^{+}$ & $-0.01$ & $-0.05^{***}$ & $-
 \toprule
 Covariable & CLogit (menú) & ERGM bipartito (estructura) & Lectura \\
 \midrule
-Misma lista & $+0.9$ a $+1.4^{***}$ & $+0.18$ a $+0.22^{***}$ en las 7 & \emphr{coinciden} \\
-Ideología ($\theta_1$) & $-3.6^{***}$ & quintil $+^{***}$; rango $-3$ a $-10^{***}$ & \emphr{coinciden} (más nítida) \\
-Distrito/pueblo & $+2.5^{***}$ (global) & fuerte en C1/C2/C3/C7; nulo C4/C5/C6 & el bipartito \emphr{matiza} \\
-Experiencia & $+0.5^{*}$ & $+0.02$ a $+0.06$, parejo & coinciden (chico) \\
-Abogado & $+0.1$ (n.s.) & levemente \emphr{negativo} (6/7) & difieren de signo \\
-Género & $+0.3^{+}$ & \emphr{negativo} casi en las 7 & difieren: \emph{mezcla} \\
-Educación & $-0.1$ (n.s.) & match $-$ y rango $-$ & el bipartito \emphr{revela} mezcla moderada \\
-Edad & $-0.1$ (n.s.) & quintil $-$; rango $\approx 0$ & mezcla generacional \\
+Misma lista & $+0.9$ a $+1.4^{***}$ & $+0.06$ a $+0.23$, se achica & \emphr{coinciden}; parte era estructura \\
+Ideología $\theta_1$ & $-3.6^{***}$ & rango $-2.0$ a $-3.6^{***}$ (las 7) & \emphr{coinciden} \\
+Ideología $\theta_2$ & $-1.4^{***}$ & rango $-0.7$ a $-2.4$ (6/7) & \emphr{coinciden} \\
+Distrito/pueblo & $+2.5^{***}$ (global) & fuerte en 6/7; nulo en C4 & el bipartito \emphr{matiza} \\
+Experiencia & $+0.5^{*}$ & $+0.01$ a $+0.08$, parejo & coinciden (chico) \\
+Abogado & $+0.1$ (n.s.) & nulo (C6: $+0.08^{***}$) & \emphr{nulo robusto} \\
+Género & $+0.3^{+}$ & neutro & nulo bajo espec completa \\
+Educación / edad & n.s. & rangos débiles / $\approx 0$ & no organizan \\
+--- & --- & gwdsp $-0.2$ a $-0.4^{***}$ (las 7) & \emphr{las parejas no se sobre-usan} \\
 \bottomrule
 \end{tabular}
 \end{center}
 \vspace{0.25cm}
 \begin{itemize}
-  \item Aprendizaje 1 — \emphr{qué importa}: lista, ideología y (condicionado a comisión) territorio predicen la red; las credenciales no la tejen — y en la estructura completa, las coaliciones \emph{mezclan} género, educación y generación.
-  \item Aprendizaje 2 — \emphr{la herramienta importa}: la unidad real (persona $\times$ documento) revela signos y heterogeneidades que el menú promedia.
+  \item Aprendizaje 1 — \emphr{qué importa}: lista, ideología (en ambas dimensiones) y territorio-condicionado predicen la red; el perfil personal, no.
+  \item Aprendizaje 2 — \emphr{la herramienta importa}: la unidad real (persona $\times$ documento) con estructura cambia respuestas — las continuas cargan la señal, la lista se achica, y aparece un hecho nuevo: las duplas no se reciclan.
 \end{itemize}
 \end{frame}
 
