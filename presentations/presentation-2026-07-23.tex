@@ -238,7 +238,7 @@ C7 & Conocimientos & 15 & 13 & 0 & 51.7 & 1.33 & 64 & 8 & 332 & 54 \\
 \begin{itemize}
   \item Si la Convención es un cuasi-experimento, la pregunta natural es: ¿cuánto de la red de colaboración se \emphr{predice con lo que ya se sabía} de cada convencional antes del día uno?
   \vspace{0.25cm}
-  \item La respuesta \emphr{depende de la herramienta} — y esa es parte de la lección:
+  \item Las dos lentes \emphr{convergen en el qué} — y la herramienta correcta \emphr{cambia el cuánto y revela lo que solo la estructura ve}:
   \begin{itemize}
     \item \emphr{Logit condicional}: cada iniciativa como un \emph{menú}; compara firmantes contra no-firmantes \emph{dentro} del mismo menú. Condiciona en que la iniciativa existe y en su tamaño.
     \item \emphr{ERGM bipartito}: modela la \emph{estructura completa} convencional $\times$ documento — la unidad real del dato — sin proyectar ni condicionar.
@@ -250,14 +250,15 @@ C7 & Conocimientos & 15 & 13 & 0 & 51.7 & 1.33 & 64 & 8 & 332 & 54 \\
 
 \begin{frame}{Herramienta 1: el logit condicional (elección dado el menú)}
 \begin{itemize}
-  \item Utilidad latente de firmar; el atractivo propio del texto ($\alpha_a$: tema, redactor, momento) \emphr{se cancela} al comparar dentro del menú:
+  \item Utilidad latente de firmar; lo que se estima es la \emphr{probabilidad condicional} de la coalición observada, dado su tamaño — el atractivo del texto ($\alpha_a$) \emphr{se cancela}:
 \end{itemize}
 $$U_{ia} = \beta^\top x_{ia} + \alpha_a + \varepsilon_{ia}
 \qquad\Rightarrow\qquad
 P(S_a \mid |S_a|) = \frac{\exp(\sum_{i \in S_a}\beta^\top x_{ia})}{\sum_{|R|=|S_a|}\exp(\sum_{i \in R}\beta^\top x_{ia})}$$
 \begin{itemize}
-  \item 947 menús $\times$ 154 candidatos = 145.838 decisiones; covariables leave-one-out respecto de la coalición; EE cluster por convencional.
-  \item \nota{Fortaleza: inferencia exacta y control total de composición del menú. Costo: solo ve la elección \emph{dado} que el evento existe — no modela la estructura.}
+  \item 947 menús $\times$ 154 candidatos = 145.838 decisiones.
+  \item Costo: no modela la estructura; solo ve la elección \emph{dado} que el evento existe.
+  \item Covariables: ideología (2D), lista electoral, distrito/pueblo, perfil pre-Convención (abogado, experiencia, edad, educación, género).
 \end{itemize}
 \end{frame}
 
@@ -380,7 +381,7 @@ Educación / edad & n.s. & rangos débiles / $\approx 0$ & no organizan \\
 \vspace{0.25cm}
 \begin{itemize}
   \item Aprendizaje 1 — \emphr{qué importa}: lista, ideología (en ambas dimensiones) y territorio-condicionado predicen la red; el perfil personal, no.
-  \item Aprendizaje 2 — \emphr{la herramienta importa}: la unidad real (persona $\times$ documento) con estructura cambia respuestas — las continuas cargan la señal, la lista se achica, y aparece un hecho nuevo: las duplas no se reciclan.
+  \item Aprendizaje 2 — \emphr{la herramienta importa}: la unidad real (persona $\times$ documento) cambia magnitudes y agrega hechos nuevos — la lista se achica, y las duplas no se reciclan.
 \end{itemize}
 \end{frame}
 
