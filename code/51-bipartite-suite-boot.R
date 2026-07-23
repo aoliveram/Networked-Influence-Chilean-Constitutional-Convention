@@ -68,6 +68,10 @@ RHS <- paste("~ edges + b1cov(\"miembro\") + b1nodematch(\"conglomerado\") +",
              "gwb1degree(0.5, fixed = TRUE) + gwdsp(0.5, fixed = TRUE)")
 
 fit_mple <- function(reg, ATR) {
+  # timeout duro por fit: algunos re-muestreos producen optimizaciones
+  # patológicas que cuelgan un worker (straggler observado 2026-07-22)
+  setTimeLimit(elapsed = 30, transient = TRUE)
+  on.exit(setTimeLimit(elapsed = Inf, transient = TRUE), add = TRUE)
   net <- build_net(reg, ATR)
   coef(ergm(as.formula(paste("net", RHS)), estimate = "MPLE",
             control = control.ergm(seed = 42)))
@@ -82,7 +86,7 @@ for (k in 1:7) {
   boot <- mclapply(1:B, function(b) {
     set.seed(7000 + k * 1000 + b)
     tryCatch(fit_mple(regk[sample(nE, nE, replace = TRUE), ], ATR), error = function(e) NULL)
-  }, mc.cores = 8)
+  }, mc.cores = 8, mc.preschedule = FALSE)
   boot <- boot[!sapply(boot, is.null)]
   bm <- do.call(rbind, boot)
   se_boot <- apply(bm, 2, sd)

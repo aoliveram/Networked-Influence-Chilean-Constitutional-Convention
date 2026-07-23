@@ -15,6 +15,7 @@
 \usepackage{booktabs}
 \usepackage{array}
 \usepackage{xcolor}
+\usepackage{qrcode}
 
 % ---------- Fuentes ----------
 \usefonttheme{professionalfonts}
@@ -606,14 +607,21 @@ Q5: centro y derecha $[-0.17, +0.81]$ & 15\% & $+0.18$ & $.72$ \\
 
 \begin{frame}{Limitaciones y trabajo en curso}
 \begin{itemize}
-  \item Ideología medida con votos: la frontera ideología/disciplina es parcialmente circular; error de medición de $\theta$ propagado a la parte de influencia, pendiente en el resto.
-  \item ERGM bipartito: EE definitivos por bootstrap de iniciativas (en curso); términos estructurales (heterogeneidad de grado, reciclaje de pares) aún fuera por costo computacional.
-  \item En curso: supervivencia en dos etapas (iniciativa $\to$ informe $\to$ borrador), el panel dinámico con enmendadores, y el modelo de eventos dirigido (quién recluta).
+  \item \emphr{Las indicaciones aún no entran como red dinámica}: el panel artículo $\times$ onda con "equipo de custodia" (firmantes génesis $\cup$ enmendadores) está diseñado, no corrido.
+  \item Ideología medida con votos: la frontera ideología/disciplina es parcialmente circular; error de medición de $\theta$ propagado a RQ2a, pendiente en el resto.
+  \item ERGM bipartito: EE por bootstrap de iniciativas y términos estructurales recién incorporados; sensibilidad de los decaimientos \emph{gw} pendiente.
+  \item Sin identificación causal en la co-defección (homofilia latente no descartable) ni en el acoplamiento espacial del éxito.
+  \item En curso: supervivencia en dos etapas (iniciativa $\to$ informe $\to$ borrador), el modelo de eventos dirigido (quién recluta), y el vínculo votación-artículo.
 \end{itemize}
 \vfill
 \begin{center}
-  {\large Gracias}\\[4pt]
-  {\color{ndred}\rule{0.2\textwidth}{1.1pt}}\\[6pt]
+\begin{tabular}{c@{\hspace{2.2cm}}c}
+  \qrcode[height=1.9cm]{https://github.com/aoliveram/Networked-Influence-Chilean-Constitutional-Convention} &
+  \qrcode[height=1.9cm]{https://github.com/aoliveram/constitutional-proposal-tracking} \\[4pt]
+  {\scriptsize\color{ndgray} Proyecto (código y reporte)} & {\scriptsize\color{ndgray} Datos (CPT)} \\
+\end{tabular}\\[8pt]
+  {\large Gracias}\\[2pt]
+  {\color{ndred}\rule{0.2\textwidth}{1.1pt}}\\[4pt]
   \nota{anibal.olivera.m@gmail.com}
 \end{center}
 \end{frame}
