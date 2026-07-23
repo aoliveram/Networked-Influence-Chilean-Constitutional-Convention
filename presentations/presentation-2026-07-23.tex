@@ -421,7 +421,6 @@ Decaimiento $\lambda_w = 0.75$ & $+0.007$ & 0.004 & $0.078$ & 4.355 \\
 \begin{itemize}
   \item Con memoria que descuenta el pasado, el lag roza la significancia ($\lambda_w = 0.50$: $p = .042$).
   \item Pero la falsificación es igual de "significativa" ($+0.010$, $p = .030$): la firma de la selección.
-  \item La tabla completa (3 ventanas $\times$ 7 dosis) queda en backup.
 \end{itemize}
 \end{frame}
 
@@ -429,32 +428,11 @@ Decaimiento $\lambda_w = 0.75$ & $+0.007$ & 0.004 & $0.078$ & 4.355 \\
 \begin{enumerate}
   \item La distancia promedio entre cada convencional y su vecindario es $0.59$ (contra $2.25$ si los vecindarios fueran al azar).
   \vspace{0.25cm}
-  \item \emphr{Había instrumento para verla.} ¿Y si el efecto existe pero nuestros datos no alcanzan a detectarlo? El efecto mínimo detectable — el $\lambda$ más chico que este diseño habría distinguido de cero — es $0.011$: una influencia que cerrara apenas el 1\% de la distancia por onda. Lo estimado ($0.007$) queda \emph{debajo} incluso de eso.
-  \vspace{0.25cm}
-  \item \emphr{El termómetro no es el culpable.} $\theta$ se estima desde los votos, con error (grande: 3.6$\times$ el movimiento típico entre períodos). Lo propagamos: re-simulamos las votaciones 50 veces, re-estimamos $\theta$ y el modelo completo en cada réplica. El error estándar de $\lambda$ apenas se mueve ($0.0036 \to 0.0039$), porque el ruido individual se promedia sobre 154 personas y todas las ondas: el nulo no es un artefacto de medición.
+  \item $\theta$ se estima desde los votos, con error (grande: 3.6$\times$ el movimiento típico entre períodos). Lo propagamos: re-simulamos las votaciones 50 veces, re-estimamos $\theta$ y el modelo completo en cada réplica. El error estándar de $\lambda$ es similar ($0.0036 \to 0.0039$): el nulo no es un artefacto de medición.
 \end{enumerate}
 \end{frame}
 
-\begin{frame}{La excepción con sello: la era de normas}
-\footnotesize
-La ventana de normas (15-feb--14-may, regla de 2/3) es casi todo el panel: lo que puede cambiar no es la muestra sino el \emphr{termómetro} — $\theta$ re-estimado solo con votaciones de la era (un único régimen de agenda). El mismo \emph{horse race} (pasada + innovación del futuro, juntas):
-\begin{center}\scriptsize
-\begin{tabular}{lcccc}
-\toprule
-Termómetro & Pasada (sola) & \emphr{Horse race: pasada} & Horse race: innovación & N \\
-\midrule
-$\theta$ estándar & $+0.007$ ($p=.12$) & $+0.002$ ($p=.71$) & $+0.062^{**}$ & 3.328 \\
-$\theta$ era-2/3 & $+0.021^{***}$ & $\mathbf{+0.016^{**}}$ & $+0.053^{*}$ & 3.038 \\
-\bottomrule
-\end{tabular}
-\end{center}
-\vspace{0.15cm}
-\begin{itemize}
-  \item \emphr{Sobrevive el termómetro}: 50 réplicas propagando el error de medición del dynIRT de la era $\Rightarrow$ EE total (Rubin) $0.0063$, $z = 2.53$.
-  \item \emphr{Y tiene fecha}: feb--mar $+0.021$ (EE $0.008$), con innovación nula; abr--may $+0.007$ ($p \approx .08$) — la selección vuelve a mandar.
-  \item Lectura: \emphr{selección como regla; acomodo breve al estrenarse la aritmética del 103} ($\approx$ cerrar 1.6\% de la distancia al vecindario por onda). No es causalidad limpia: lag e innovación \emph{conviven}.
-\end{itemize}
-\end{frame}
+
 
 \begin{frame}{RQ2b: la conducta — qué es defección, y qué mide $\phi$}
 \begin{itemize}
@@ -467,33 +445,23 @@ $$X_{iv} = \frac{\sum_{j \neq i} w_{ij}\, D_{jv}}{\sum_{j \neq i} w_{ij}}
 \begin{itemize}
   \item $w_{ij}$ = iniciativas co-firmadas; $\eta_i$ absorbe personalidades díscolas; $\mu_v$ absorbe votaciones que rompen a todos.
   \item \emphr{$\phi$} mide: ¿cuánto sube mi propensión (en log-odds) a defeccionar cuando la fracción ponderada de mis co-firmantes que defecciona \emph{en esta misma votación} pasa de 0 a 1?
-  \item El riesgo: si una votación parte a mi lista, defeccionamos juntos \emph{sin conocernos}. El antídoto: \emphr{permutación} — barajar los nombres de los defectores dentro de cada bloque $\times$ votación y re-estimar 200 veces.
 \end{itemize}
 \end{frame}
 
-\begin{frame}{RQ2b: la tabla completa}
-\begin{center}\footnotesize
-\begin{tabular}{llccc}
+\begin{frame}{RQ2b: el resultado central}
+\begin{center}\small
+\begin{tabular}{lcc}
 \toprule
-Modelo & Variable & Coef. & EE & $p$ \\
+ & $\phi$ & $p$ \\
 \midrule
-Principal & Exposición a defectores ($\phi$) & $+11.21$ & 0.52 & $<10^{-100}$ \\
-Benchmark permutado (200 réplicas) & $\phi$ esperado por mecánica & $6.02$ [p95: $6.08$] & --- & $<0.005$ \\
-Período completo (robustez) & $\phi$ & $+11.06$ & 0.47 & $<10^{-121}$ \\
-Split por comisión & Exposición co-firmantes de \emph{otra} comisión & $+8.67$ & 0.46 & $<10^{-15}$ \\
- & Exposición co-firmantes de \emph{mi} comisión & $+2.99$ & 0.32 & $<10^{-15}$ \\
- & Tasa de defección de mi comisión & $-3.01$ & 0.45 & $<10^{-10}$ \\
-Rezagada: votación anterior (sola) & Exposición en $v-1$ & $+2.98$ & 0.17 & $<10^{-65}$ \\
-Horse race & Contemporánea ($\phi$) & $+11.08$ & 0.52 & $<10^{-100}$ \\
- & Exposición en $v-1$ & $+0.72$ & 0.11 & $<10^{-11}$ \\
-Rezagada: día anterior de Pleno & Exposición del día anterior & $-0.10$ & 0.30 & $0.75$ \\
+Exposición a defectores (real) & $+11.2$ & $<10^{-100}$ \\
+Esperado por pura mecánica (permutación, 200 réplicas) & $+6.0$ [p95: $6.1$] & $<0.005$ \\
 \bottomrule
 \end{tabular}
 \end{center}
-\vspace{0.15cm}
+\vspace{0.25cm}
 \begin{itemize}
   \item La mitad del efecto crudo era mecánica ($11.2$ vs $6.0$ del mundo barajado); \emphr{lo que sobra es enorme}, viaja más fuerte \emph{entre} comisiones, y deja un eco corto que muere a escala de días.
-  \item \nota{Marco honesto (Manski, Angrist, Shalizi-Thomas): clustering de defección por líneas de red más allá de lo mecánico; influencia es la lectura natural, homofilia fina la alternativa.}
 \end{itemize}
 \end{frame}
 
@@ -512,7 +480,7 @@ Experiencia institucional & $+2.6$ & $+9.3$ & $<0.001$ \\
 \vspace{0.25cm}
 \begin{itemize}
   \item Contra la hipótesis de los emisores de élite: los abogados transmiten \emphr{igual} que el resto; los senior transmiten \emphr{menos}.
-  \item La co-defección viaja por los \emphr{pares novatos}: la mayoría nueva se mueve junta; la vieja guardia no arrastra a nadie.
+  \item La co-defección viaja por los \emphr{pares novatos}.
 \end{itemize}
 \end{frame}
 
@@ -520,8 +488,10 @@ Experiencia institucional & $+2.6$ & $+9.3$ & $<0.001$ \\
 
 \begin{frame}{RQ3: el modelo de supervivencia}
 \begin{itemize}
-  \item Unidad: el \emphr{artículo} (1.565, con coalición firmante $S_a$ de 2--16; 389 coaliciones). ¿Llega al borrador? (20.2\% lo logra.)
+  \item La unidad es el \emph{artículo} (1.565, con coalición firmante $S_a$ de 2--16). 
+  \item Tasa de supervivencia: 20.2\% logra llegar al borrador.
 \end{itemize}
+\vspace{0.5cm}
 $$\Pr(sobrevive_a = 1) = \Lambda\Big(\alpha_c + \gamma_1\, \big|\bar\theta_{1,S_a} - \theta_{1,(103)}\big| + \gamma_2\, sd(\theta_{1,S_a}) + \gamma_3\, |S_a| + \boldsymbol{\gamma_4}^\top C_{S_a} + \boldsymbol{\gamma_5}^\top H_{S_a}\Big)$$
 \begin{itemize}
   \item $C_{S_a}$ = bloque de red de la coalición (betweenness media, constraint media, densidad interna); $H_{S_a}$ = capital humano (prop.\ abogados, experiencia, grado medio); $\alpha_c$ = FE de comisión; EE por coalición; predictores estandarizados.
