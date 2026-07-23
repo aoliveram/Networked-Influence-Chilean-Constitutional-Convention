@@ -1,0 +1,16 @@
+"bloque","cantidad","valor"
+"medición era-2/3","lag medio entre réplicas",0.0271234566815646
+"medición era-2/3","EE muestral medio",0.00561386187719411
+"medición era-2/3","DE entre réplicas (medición)",0.00277427076401447
+"medición era-2/3","EE total (Rubin)",0.00627422943585267
+"medición era-2/3","z del lag con EE total",2.53087193124901
+"sub-ventana feb15-mar31","lag",0.0212088866641509
+"sub-ventana feb15-mar31","EE lag",0.00812564150575641
+"sub-ventana feb15-mar31","innov",0.0333977978178058
+"sub-ventana feb15-mar31","EE innov",0.0292652695339096
+"sub-ventana feb15-mar31","n",1296
+"sub-ventana abr1-may14","lag",0.00683719624329813
+"sub-ventana abr1-may14","EE lag",0.00394531792008095
+"sub-ventana abr1-may14","innov",0.0407395712654407
+"sub-ventana abr1-may14","EE innov",0.0189383397995454
+"sub-ventana abr1-may14","n",1742
