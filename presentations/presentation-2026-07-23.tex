@@ -238,13 +238,11 @@ C7 & Conocimientos & 15 & 13 & 0 & 51.7 & 1.33 & 64 & 8 & 332 & 54 \\
 \begin{itemize}
   \item Si la Convención es un cuasi-experimento, la pregunta natural es: ¿cuánto de la red de colaboración se \emphr{predice con lo que ya se sabía} de cada convencional antes del día uno?
   \vspace{0.25cm}
-  \item Las dos lentes \emphr{convergen en el qué} — y la herramienta correcta \emphr{cambia el cuánto y revela lo que solo la estructura ve}:
+  \item Las dos lentes están de acuerdo, pero la herramienta correcta \emphr{cambia la magnitud y revela} el factor de estructura:
   \begin{itemize}
     \item \emphr{Logit condicional}: cada iniciativa como un \emph{menú}; compara firmantes contra no-firmantes \emph{dentro} del mismo menú. Condiciona en que la iniciativa existe y en su tamaño.
     \item \emphr{ERGM bipartito}: modela la \emph{estructura completa} convencional $\times$ documento — la unidad real del dato — sin proyectar ni condicionar.
   \end{itemize}
-  \vspace{0.25cm}
-  \item Veremos qué covariables sobreviven a ambas lentes, cuáles cambian de cara — y qué se aprende de usar la herramienta que aprovecha toda la riqueza del dato.
 \end{itemize}
 \end{frame}
 
@@ -368,9 +366,14 @@ Parejas repetidas (\texttt{gwdsp}) & $-0.42^{***}$ & $-0.28^{***}$ & $-0.38^{***
 \begin{itemize}
   \item La unidad de análisis real es \emphr{persona $\times$ documento}: cada firma es una decisión sobre un texto concreto, no un lazo proyectado entre personas.
   \vspace{0.35cm}
-  \item Diferencias con el CLogit: la \emphr{lista se achica} (parte era estructura de actividad), el \emphr{distrito se apaga en C4}, y el género pierde su marginal.
+  \item Diferencias con el CLogit: 
+  \begin{itemize}
+    \item La \emphr{lista se achica} (parte era estructura de actividad).
+    \item El \emphr{distrito se apaga en C4}, y el género pierde su marginal.
+  \end{itemize}
   \vspace{0.35cm}
-  \item Un hecho que el CLogit no puede ver: las \emphr{parejas no se sobre-usan} (gwdsp $<$ 0 en las 7) — la firma estructural de la \emphr{tabula rasa}: sin inercia institucional no hay duplas atrincheradas; las coaliciones se re-arman con pares frescos.
+  \item Un hecho que el CLogit no puede ver: las \emphr{parejas no se sobre-usan} (gwdsp $<$ 0 en las 7).
+  \item La firma estructural de la \emphr{tabula rasa}: sin inercia institucional no hay duplas estables que sobrevivan a las covariables.
 \end{itemize}
 \end{frame}
 
@@ -395,14 +398,14 @@ $$E_{i,t} = \frac{\sum_{j \neq i} w_{ij,t}\,\theta_{j,t}}{\sum_{j \neq i} w_{ij,
 \Delta\theta_{i,t} = \alpha_i + \beta\,\theta_{i,t-1} + \lambda\,E_{i,t-1} + \varepsilon_{it}$$
 \begin{itemize}
   \item Efectos fijos individuales (solo variación \emph{dentro} de cada persona); 4.355 obs.
-  \item Resultado: $\hat\lambda = +0.007$ (EE $0.004$), \emphr{nulo}. Robusto a 3 ventanas temporales $\times$ 7 dosis de exposición.
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Selección, no influencia — en una imagen}
 \fig{0.88}{m2_selection_vs_influence_preview.pdf}
 \vspace{0.05cm}
-\nota{(a) Entre personas: posición y vecindario van pegados ($r=0.95$) — elegimos vecindarios que se nos parecen. (b) Dentro de cada persona, los cambios no se siguen. Ámbar: el 5\% más desalineado — los únicos con espacio para ser arrastrados — cae en (b) sin pendiente ($r=-0.04$).}
+\nota{(a) Entre personas: posición y vecindario van pegados ($r=0.95$) — elegimos vecindarios que se nos parecen. (b) Dentro de cada persona, los cambios no se siguen.} \\
+\nota{Ámbar: el 5\% más desalineado cae en (b) sin pendiente ($r=-0.04$).}
 \end{frame}
 
 \begin{frame}{La exposición con decaimiento temporal (ventana completa)}
@@ -461,7 +464,7 @@ Esperado por pura mecánica (permutación, 200 réplicas) & $+6.0$ [p95: $6.1$] 
 \end{center}
 \vspace{0.25cm}
 \begin{itemize}
-  \item La mitad del efecto crudo era mecánica ($11.2$ vs $6.0$ del mundo barajado); \emphr{lo que sobra es enorme}, viaja más fuerte \emph{entre} comisiones, y deja un eco corto que muere a escala de días.
+  \item La defección viaja más fuerte \emph{entre} comisiones.
 \end{itemize}
 \end{frame}
 
@@ -494,7 +497,8 @@ Experiencia institucional & $+2.6$ & $+9.3$ & $<0.001$ \\
 \vspace{0.5cm}
 $$\Pr(sobrevive_a = 1) = \Lambda\Big(\alpha_c + \gamma_1\, \big|\bar\theta_{1,S_a} - \theta_{1,(103)}\big| + \gamma_2\, sd(\theta_{1,S_a}) + \gamma_3\, |S_a| + \boldsymbol{\gamma_4}^\top C_{S_a} + \boldsymbol{\gamma_5}^\top H_{S_a}\Big)$$
 \begin{itemize}
-  \item $C_{S_a}$ = bloque de red de la coalición (betweenness media, constraint media, densidad interna); $H_{S_a}$ = capital humano (prop.\ abogados, experiencia, grado medio); $\alpha_c$ = FE de comisión; EE por coalición; predictores estandarizados.
+  \item $C_{S_a}$ = bloque de red de la coalición (betweenness media, constraint media, densidad interna).
+  \item $H_{S_a}$ = capital humano (prop.\ abogados, experiencia, grado medio).
 \end{itemize}
 \end{frame}
 
@@ -522,10 +526,9 @@ AIC & 1393 & 1384 & 1386 \\
 \end{tabular}
 \end{center}
 \vspace{0.1cm}
-\nota{Ganan las coaliciones bien paradas, anchas y con historia interna — no las tituladas. La densidad interna: de las parejas posibles entre los firmantes, ¿qué fracción ya había co-firmado en \emph{otras} iniciativas?}
 \end{frame}
 
-\begin{frame}{El premio a ensancharse, quintil a quintil}
+\begin{frame}{Los artículos separados por quintiles de posición media de la coalición}
 \begin{center}\small
 \begin{tabular}{lccc}
 \toprule
@@ -541,8 +544,7 @@ Q5: centro y derecha $[-0.17, +0.81]$ & 15\% & $+0.18$ & $.72$ \\
 \end{center}
 \vspace{0.25cm}
 \begin{itemize}
-  \item El premio vive donde ensancharse \emphr{alcanza el pívot}: máximo en Q2 (desde $-0.7$ el brazo llega al 103); en el extremo, menor (ni estirándose); desde Q3, innecesario.
-  \item Decaimiento monótono hacia cero: \emphr{la lógica de los 103 votos, por dentro}.
+  \item El decaimiento monótono es una estampa de la lógica de los 2/3 votos.
 \end{itemize}
 \end{frame}
 
@@ -555,18 +557,16 @@ Q5: centro y derecha $[-0.17, +0.81]$ & 15\% & $+0.18$ & $.72$ \\
 % ================================================================ RESUMEN
 \begin{frame}{Resumen}
 \begin{itemize}
-  \item La red de colaboración \emphr{se podía predecir} con lo pre-existente: lista, ideología y — condicionado a comisión — territorio. Las credenciales no la tejieron: los abogados no muestran homofilia bajo ninguno de los tres diseños.
+  \item La red de colaboración \emphr{se podía predecir} con lo pre-existente: lista, ideología y territorio. 
   \vspace{0.25cm}
-  \item Lección de método: \emphr{la unidad de análisis real} (persona $\times$ documento) no es un tecnicismo — cambia respuestas frente al menú proyectado.
+  \item Las credenciales no la tejieron: los abogados no muestran homofilia generalizada.
   \vspace{0.25cm}
-  \item Las \emphr{posiciones casi no se mueven}: selección, con el nulo defendido por espacio, instrumento y termómetro — y una excepción fechada: un acomodo breve, robusto a todo, al estrenarse la regla de 2/3.
+  \item Las \emphr{posiciones}: con exposición con decaimiento hay \emphr{indicios de influencia} ($p \approx .04$) — pero la falsificación también dispara, y separarlos exige análisis \emphr{aún en curso}: horse race contra la \emph{innovación} del futuro, $\theta$ re-estimado solo con la era de normas, sub-ventanas.
   \vspace{0.25cm}
-  \item La \emphr{conducta sí viaja}: la defección se agrupa por los lazos de co-firma (el doble de lo mecánico), transportada por los pares novatos.
+  \item La \emphr{conducta sí viaja}: la defección se agrupa por los lazos de co-firma.
   \vspace{0.25cm}
-  \item Los \emphr{textos ganan por geometría} — el premio a ensancharse decae hacia el pívot de 2/3 — y por equipos con historia interna; no por títulos.
+  \item Los \emphr{textos ganan por "geometría"} (el premio a ensancharse decae hacia el pívot de 2/3) y por equipos con historia interna.
 \end{itemize}
-\vspace{0.2cm}
-\nota{Conclusiones provisorias: el análisis sigue en curso.}
 \end{frame}
 
 \begin{frame}{Limitaciones y trabajo en curso}
