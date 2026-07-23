@@ -97,7 +97,7 @@
 % ---------------------------------------------------------------- ÍNDICE
 \begin{frame}{Índice}
 \begin{itemize}
-  \item[{\color{ndred}\textbf{1.}}] La Convención: el cuasi-experimento y los datos
+  \item[{\color{ndred}\textbf{1.}}] La Convención
   \item[{\color{ndred}\textbf{2.}}] RQ1 — Formación: ¿podíamos predecir la red?
   \begin{itemize}
     \item[{\color{ndred}2.1}] {\color{black}Herramienta 1: el logit condicional (elección dado el menú)}
@@ -114,43 +114,31 @@
 \end{itemize}
 \end{frame}
 
+\sectionslide{Parte 0}{La Convención}
+
 % ---------------------------------------------------------------- APERTURA
 \begin{frame}{Un cuasi-experimento natural}
 \begin{itemize}
-  \item En una legislatura ordinaria, las redes de colaboración son el \emphr{sedimento} de décadas: carreras, comités, favores, disciplinas de partido. Imposible ver cómo \emph{nacen}.
+  \item En una legislatura ordinaria, las redes de colaboración son el producto de décadas: partidos, comités, favores, etc.
   \vspace{0.35cm}
-  \item La Convención Constitucional chilena (2021--22) ofrece lo que casi nunca se observa: \emphr{colaboración política organizándose desde cero}.
+  \item La Convención Constitucional chilena (2021--2022) ofrece lo que casi nunca se observa: \emphr{colaboración política desde una tabula rasa}.
   \vspace{0.35cm}
-  \item Mayoría de novatos, órgano que se disuelve al terminar, reglas escritas por sus propios miembros — y \emphr{registro documental completo} de cada firma, enmienda y voto.
+  \item Mayoría de novatos, órgano que se disuelve al terminar, reglas escritas por sus propios miembros.
   \vspace{0.35cm}
-  \item Lo que emerja, emergió de lo que la gente \emphr{traía puesto}. Ese es el experimento.
+  \item Tenemos \emphr{registro documental (casi) completo} de cada firma de iniciativa, indicación y voto en pleno.
 \end{itemize}
 \end{frame}
 
 % ---------------------------------------------------------------- RQs
-\begin{frame}{Las preguntas de investigación}
-\begin{itemize}
-  \item El registro documental completo permite muchas preguntas (formación, agenda, género, especialización, \dots). Hoy: \emphr{las de redes}.
-  \vspace{0.3cm}
-  \item \emphr{RQ1 — Formación}: ¿podíamos \emph{predecir} la red de colaboración solo con lo que se sabía de cada convencional \emph{antes} del día uno?
-  \vspace{0.3cm}
-  \item ¿Qué compra el capital relacional?
-  \begin{itemize}
-    \item \emphr{RQ2a — Posiciones}: ¿la red mueve las \emph{posiciones} de los convencionales?
-    \item \emphr{RQ2b — Conducta}: ¿la red coordina su \emph{conducta} de voto?
-    \item \emphr{RQ3 — Textos}: ¿qué hace que un artículo \emph{sobreviva} hasta el borrador?
-  \end{itemize}
-\end{itemize}
-\end{frame}
+
 
 % ================================================================ PARTE 0
-\sectionslide{Parte 0}{La Convención}
 
 \begin{frame}{La Convención: Tabula Rasa}
 \begin{itemize}
   \item 155 electos (154 en ejercicio), julio 2021 -- julio 2022; mayoría inédita de independientes y novatos; 17 escaños reservados para pueblos originarios; paridad de género.
   \vspace{0.25cm}
-  \item El órgano \emphr{se disolvía al entregar el texto}: sin sombra electoral del futuro.
+  \item El órgano \emphr{se disolvía al entregar el texto}.
   \vspace{0.25cm}
   \item Dos reglas, escritas por los propios convencionales, estructuran el estudio:
   \begin{itemize}
@@ -158,7 +146,6 @@
     \item Cada norma requería \emphr{2/3 del Pleno (103 de 154)}; en comisión bastaba mayoría simple.
   \end{itemize}
   \vspace{0.25cm}
-  \item[] \nota{Nacer era barato; sobrevivir, caro.}
 \end{itemize}
 \end{frame}
 
@@ -169,13 +156,11 @@
 \begin{frame}{Los datos: el proceso documental completo}
 \begin{itemize}
   \item \emphr{Actores}: los 154 convencionales, con perfil curado por doble fuente (BCN + Wikipedia): profesión (39\% abogados/as), experiencia institucional previa, educación (0--3), edad, género, distrito/pueblo, lista, comisión.
-  \item \emphr{Iniciativas}: 995 ingresadas a la plataforma oficial (nov-21 a feb-22); \emphr{947} con 2--16 firmantes-persona forman el set de análisis; \emphr{100\% fechadas}.
-  \item \emphr{Trazabilidad de textos}: 1.565 artículos génesis con desenlace conocido frente al borrador (supervivencia 20\%), con historial fechado de indicaciones.
+  \item \emphr{Iniciativas}: 995 ingresadas a la plataforma oficial (nov-21 -- feb-22; \emphr{947} con 2--16 firmantes); 100\% fechadas. \\
+  1.565 artículos génesis (supervivencia 20\%), con historial fechado de indicaciones.
   \item \emphr{Indicaciones}: 2.326 actos de enmienda con autoría; 1.004 eventos multi-firmantes.
   \item \emphr{Votaciones}: 4.707 votaciones nominales del Pleno.
 \end{itemize}
-\vspace{0.15cm}
-\nota{Pipeline reproducible; los datos viven como snapshot versionado. La reconstrucción de este registro (armonización de 75.616 menciones de nombres, cruce plataforma-informes) es parte de la contribución.}
 \end{frame}
 
 \begin{frame}{Las siete comisiones temáticas}
@@ -196,32 +181,49 @@ C7 & Conocimientos & 15 & 13 & 0 & 51.7 & 1.33 & 64 & 8 & 332 & 54 \\
 \end{center}
 \vspace{0.2cm}
 \begin{itemize}
-  \item Composición y productividad \emphr{fuertemente heterogéneas} — los modelos las explotan y controlan.
-  \item \nota{Iniciativas = con 2--16 firmantes asignadas a la comisión (otras 120 sin comisión asignada). Multifirm. = indicaciones con $\geq 2$ firmantes, las únicas que agregan lazos. El cero de C5 es limitación de registro.}
+  \item \nota{Iniciativas = con 2--16 firmantes asignadas a la comisión (otras 120 sin comisión asignada).} 
+  \item \nota{Multifirm. = indicaciones con $\geq 2$ firmantes, las únicas que agregan lazos.}
+  \item \nota{El cero de C5 es limitación de registro.}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Las preguntas de investigación}
+\begin{itemize}
+  \item El registro documental completo permite muchas preguntas. Hoy abordaremos solo algunas.
+  \vspace{0.3cm}
+  \item \emphr{RQ1 — Formación}: ¿podíamos \emph{predecir} la red de colaboración solo con lo que se sabía de cada convencional \emph{antes} del día uno?
+  \vspace{0.3cm}
+  \item ¿Qué compra el capital relacional?
+  \begin{itemize}
+    \item \emphr{RQ2a — Posiciones}: ¿la red mueve las \emph{posiciones} de los convencionales?
+    \item \emphr{RQ2b — Conducta}: ¿la red coordina su \emph{conducta} de voto?
+    \item \emphr{RQ3 — Textos}: ¿qué hace que un artículo \emph{sobreviva} hasta el borrador?
+  \end{itemize}
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Red de colaboración: 1}
 \fig{0.84}{bipartite_initiative.pdf}
 \vspace{0.05cm}
-\nota{\emphr{Esta es la unidad de análisis real}: convencional $\times$ documento — una firma, un lazo. No partimos de una red actor--actor: la proyección persona-persona es una \emph{decisión de modelamiento} (una iniciativa de 16 firmantes fabricaría 120 pares de una sola vez).}
+\nota{\emphr{Esta es la unidad de análisis real}: convencional $\times$ documento.} \\
+\nota{La proyección persona-persona de una iniciativa de 16 firmantes fabricaría 120 pares de una vez.}
 \end{frame}
 
 \begin{frame}{Red de colaboración: 2}
 \fig{0.95}{indication_events_timeline.pdf}
 \vspace{0.05cm}
-\nota{El segundo reloj: la enmienda. Cada barra es un día de informe de comisión; sólido = eventos multi-firmantes (los que agregan lazos a la red dinámica); claro = total fechado.}
+\nota{Cada barra es un día de informe de comisión.} \\
+\nota{Sólido = eventos multi-firmantes; Claro = total fechado.}
 \end{frame}
 
 \begin{frame}{Cómo medimos la ideología}
 \begin{itemize}
   \item \emphr{Pre-red}: W-NOMINATE 2D con \emph{solo el primer mes} de votaciones del Pleno (147, jul--ago 2021), replicando a Fábrega (2022, \emph{RCP}).
   \begin{itemize}
-    \item Esa ventana es anterior a las comisiones (oct), a las iniciativas (nov) y a la regla de 2/3 operativa (feb) $\Rightarrow$ $\theta_1, \theta_2$ son covariables \emphr{exógenas a la red que estudiamos}.
-    \item De aquí sale el \emphr{pívot de 2/3}: ordenados los 154, el convencional 103 marca $\theta_{1,(103)} = -0.15$.
+    \item Esa ventana es anterior a las comisiones (oct), a las iniciativas (nov) y a la regla de 2/3 operativa (feb).
   \end{itemize}
   \vspace{0.3cm}
-  \item \emphr{Voto revelado dinámico}: dynIRT sobre las 4.707 votaciones $\to$ trayectoria $\theta_{i,t}$ en 91 períodos (insumo de la parte de influencia; se lee como conducta de voto, no como ideología latente pura).
+  \item \emphr{Voto revelado dinámico}: dynIRT sobre las 4.707 votaciones $\to$ trayectoria $\theta_{i,t}$ en 91 períodos.
 \end{itemize}
 \end{frame}
 
@@ -676,13 +678,7 @@ Dispersión ideológica $\theta_1$ & $-2.66$ & $10^{-39}$ \\
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Backup: el modelo espacial del éxito (SDM) y sus impactos exactos}
-\begin{itemize}
-  \item Éxito acoplado en la red: $\rho = 0.89$ (Durbin, robusto 0.63--0.95 entre variantes de $W$).
-  \item Impactos exactos con $(I-\rho W)^{-1}$ denso: directos chicos ($\approx$ OLS); totales amplificados $\sim 9\times$ por el multiplicador — la lectura de equilibrio literal no es creíble; $\rho$ se lee como composición + selección.
-  \item Contrafactual tangible: pasar del vecindario P10 al P90 de éxito asocia $+0.078$ = \emphr{1.3 sd del éxito}.
-\end{itemize}
-\end{frame}
+
 
 \begin{frame}{Backup: ¿por qué no un solo ERGM de las 947? (Simpson)}
 \begin{itemize}
