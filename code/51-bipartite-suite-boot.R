@@ -68,13 +68,25 @@ RHS <- paste("~ edges + b1cov(\"miembro\") + b1nodematch(\"conglomerado\") +",
              "gwb1degree(0.5, fixed = TRUE) + gwdsp(0.5, fixed = TRUE)")
 
 fit_mple <- function(reg, ATR) {
-  # timeout duro por fit: algunos re-muestreos producen optimizaciones
-  # patológicas que cuelgan un worker (straggler observado 2026-07-22)
-  setTimeLimit(elapsed = 30, transient = TRUE)
-  on.exit(setTimeLimit(elapsed = Inf, transient = TRUE), add = TRUE)
   net <- build_net(reg, ATR)
   coef(ergm(as.formula(paste("net", RHS)), estimate = "MPLE",
             control = control.ergm(seed = 42)))
+}
+
+# timeout DURO por fit: el cuelgue observado vive en código C (setTimeLimit
+# no lo interrumpe) -> cada fit corre en un proceso hijo que se mata de
+# verdad si excede el límite (mcparallel + pskill; straggler 2026-07-22)
+fit_mple_hard <- function(reg, ATR, timeout = 25) {
+  job <- parallel::mcparallel(fit_mple(reg, ATR))
+  out <- parallel::mccollect(job, wait = FALSE, timeout = timeout)
+  if (is.null(out)) {
+    tools::pskill(job$pid, tools::SIGKILL)
+    parallel::mccollect(job, wait = FALSE)
+    return(NULL)
+  }
+  res <- out[[1]]
+  if (inherits(res, "try-error") || is.character(res) || is.null(res)) return(NULL)
+  res
 }
 
 res <- list()
@@ -85,7 +97,8 @@ for (k in 1:7) {
   punto <- fit_mple(regk, ATR)
   boot <- mclapply(1:B, function(b) {
     set.seed(7000 + k * 1000 + b)
-    tryCatch(fit_mple(regk[sample(nE, nE, replace = TRUE), ], ATR), error = function(e) NULL)
+    tryCatch(fit_mple_hard(regk[sample(nE, nE, replace = TRUE), ], ATR),
+             error = function(e) NULL)
   }, mc.cores = 8, mc.preschedule = FALSE)
   boot <- boot[!sapply(boot, is.null)]
   bm <- do.call(rbind, boot)
