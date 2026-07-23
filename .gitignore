@@ -53,3 +53,6 @@ Thumbs.db
 docs/report-archive.txt
 old-version/
 logs_overnight_bipartite.log
+
+# papers de terceros (copyright) — no publicar
+docs/papers/

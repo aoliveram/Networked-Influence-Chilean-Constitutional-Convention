@@ -271,7 +271,7 @@ El bootstrap paramétrico del dynIRT (code/40) y su propagación a M2 (code/45) 
 - Crosswalk fino de conglomerado para los 21 convencionales de listas locales ("REVISAR").
 - Auditoría en CPT: 46 iniciativas >16 firmantes; 24 grupos de texto casi duplicado; 210 indicaciones sueltas; 142 linajes sin autores.
 - IV.Q7 (color del borrador): drag_i y serie X_t.
-- Decisión editorial: ¿promover el hallazgo M2-régimen (lag>lead con theta de era 2/3) o mantener el nulo como titular? (Con la red-plataforma la asimetría desapareció: hoy el nulo es el titular.)
+- Decisión editorial — **resuelta**: con la red-plataforma el hallazgo M2-régimen reapareció *refinado* — no como lag>lead en niveles (siguen simétricos) sino en el horse race con $\theta$ era-2/3 (lag $+0.016$, $p=.007$, junto a la innovación) — y fue blindado por `code/53` (propagación del error de medición: $z=2.53$ con EE total de Rubin; sub-ventanas: feb--mar fuerte $+0.021$, abr--may marginal $+0.007$). Promovido a §4.1 (Tablas 9b/9c), a la síntesis y al beamer como *excepción acotada y fechada*; el titular sigue siendo selección.
 
 # Anexo — Bitácora de respuestas ejecutadas (cerradas; referencia histórica)
 
