@@ -56,3 +56,6 @@ logs_overnight_bipartite.log
 
 # papers de terceros (copyright) — no publicar
 docs/papers/
+
+# comentarios de charlas (registro local)
+presentations/comentarios-*.md
