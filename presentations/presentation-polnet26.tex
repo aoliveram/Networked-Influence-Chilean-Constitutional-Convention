@@ -1,0 +1,499 @@
+% ============================================================================
+% Networked Influence in a Tabula Rasa Legislature — Political Networks 2026
+% Manchester. Slot: 25 min (18 talk + 7 Q&A). v1.
+% Style: replicated from presentation-cpin2.tex / presentation-2026-07-23.tex.
+% Compile: pdflatex presentation-polnet26.tex   (run twice: tikzmark overlays)
+% ============================================================================
+\documentclass[aspectratio=169,11pt]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{qrcode}
+\usepackage{tikz}
+\usetikzlibrary{tikzmark, calc}
+
+\usefonttheme{professionalfonts}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+\definecolor{ndred}{RGB}{222,32,38}
+\definecolor{ndreddark}{RGB}{176,22,28}
+\definecolor{ndgray}{RGB}{90,90,90}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamercolor{normal text}{fg=black,bg=white}
+\setbeamercolor{structure}{fg=ndreddark}
+\setbeamertemplate{itemize item}{\color{ndreddark}\textbullet}
+\setbeamertemplate{itemize subitem}{\color{ndgray}\textendash}
+\setbeamercolor{frametitle}{fg=black,bg=white}
+\setbeamerfont{frametitle}{size=\large, series=\mdseries}
+\setbeamertemplate{frametitle}{%
+  \vspace{0.12cm}%
+  \begin{center}\insertframetitle\end{center}%
+  \vspace{-0.20cm}%
+  {\color{ndred}\hrule height 1.1pt}}
+\setbeamertemplate{footline}{%
+  \hfill{\color{ndgray}\scriptsize\insertframenumber}\hspace{0.5cm}\vspace{0.2cm}}
+
+\newcommand{\emphr}[1]{{\color{ndreddark}\textbf{#1}}}
+\newcommand{\nota}[1]{{\footnotesize\color{ndgray} #1}}
+\newcommand{\sectionslide}[2]{%
+  \begin{frame}[plain]
+    \vfill
+    \begin{center}
+      {\footnotesize\color{ndgray} #1}\\[6pt]
+      {\Large #2}\\[2pt]
+      {\color{ndred}\rule{0.30\textwidth}{1.1pt}}
+    \end{center}
+    \vfill
+  \end{frame}}
+% oval highlight: rounded rectangle between two tikzmark anchors
+\newcommand{\ovalmark}[2]{\draw[ndred, very thick, rounded corners=7pt]
+  ([shift={(-4pt,10pt)}]pic cs:#1) rectangle ([shift={(5pt,-4pt)}]pic cs:#2);}
+
+% ---------------- Table A: profile homophily by bloc (macro, marks inside) ----
+\newcommand{\TablaPerfil}{%
+\begin{center}\tiny\setlength{\tabcolsep}{3.5pt}\renewcommand{\arraystretch}{0.92}
+\begin{tabular}{lccccccc}
+\toprule
+Same status, by bloc of the pair & C1 & C2 & C3 & C4 & C5 & C6 & C7 \\
+\midrule
+\multicolumn{8}{l}{\emphr{--- Lawyer}}\\
+\tikzmark{abogL}Center-left & $+0.11$ & $+0.11$ & $+0.13$ & $-0.03$ & $+0.15^{*}$ & $-0.26$ & $-0.00$ \\
+Right & $-0.11$ & $-0.15^{**}$ & $-0.01$ & $+0.01$ & $+0.10$ & $+0.13^{*}$ & $-0.06$ \\
+Left & $-0.07$ & $+0.06$ & $+0.02$ & $+0.06^{+}$ & $+0.00$ & $+0.11^{*}$ & $-0.07$ \\
+Local lists & $+0.12$ & $-0.11$ & $-0.09$ & $+0.09^{+}$ & $-0.00$ & $-0.13$ & $-0.15$ \\
+Reserved seats & $+0.06$ & $+0.24$ & $+0.10$ & $-0.26^{+}$ & $+0.20^{*}$ & $-0.21$ & $-0.04$ \\
+Across blocs & $+0.06$ & $-0.08^{*}$ & $+0.02$ & $+0.04^{*}$ & $-0.05^{+}$ & $+0.07^{+}$ & $+0.06^{+}$\tikzmark{abogR} \\
+\multicolumn{8}{l}{\emphr{--- Prior institutional experience}}\\
+Center-left & $+0.11$ & $-0.03$ & $+0.09$ & $+0.09^{**}$ & $-0.09$ & $-0.01$ & $+0.12$ \\
+Right & $-0.13$ & $-0.14$ & $-0.03$ & $+0.05$ & $-0.14$ & $+0.00$ & $-0.11$ \\
+\tikzmark{expL}Left & $+0.12^{+}$ & $+0.13^{*}$ & $+0.09$ & $+0.11^{**}$ & $+0.04^{+}$ & $+0.06$ & $+0.00$\tikzmark{expR} \\
+Local lists & $-0.25$ & $-0.26$ & $[+11.1^{***}]$ & $+0.05$ & $[+8.1^{***}]$ & $-0.20$ & $-0.30$ \\
+Reserved seats & $+0.06$ & $+0.00$ & $-0.08$ & $-0.05$ & $-0.11$ & $-0.10$ & $-0.05$ \\
+Across blocs & $+0.04$ & $+0.06^{+}$ & $+0.03$ & $+0.06^{**}$ & $+0.04^{*}$ & $+0.04$ & $+0.04$ \\
+\multicolumn{8}{l}{\emphr{--- Gender}}\\
+Center-left & $-0.08$ & $-0.10$ & $-0.07$ & $+0.00$ & $+0.02$ & $-0.02$ & $+0.05$ \\
+Right & $+0.14^{*}$ & $+0.03$ & $+0.05$ & $-0.06$ & $+0.04$ & $-0.03$ & $+0.09$ \\
+Left & $-0.12$ & $-0.03$ & $-0.06$ & $-0.03$ & $-0.02$ & $-0.04$ & $-0.09$ \\
+Local lists & $-0.21$ & $-0.26$ & $-0.61$ & $-0.20^{**}$ & $-0.38^{*}$ & $+0.19$ & $-0.37$ \\
+\tikzmark{genL}Reserved seats & $-0.11$ & $-0.50$ & $-1.77$ & $-0.60^{**}$ & $-1.64^{***}$ & $+0.04$ & $-0.26$ \\
+Across blocs & $+0.04$ & $+0.12^{**}$ & $+0.20^{*}$ & $+0.13^{***}$ & $+0.12^{***}$ & $+0.08^{+}$ & $+0.11^{*}$\tikzmark{genR} \\
+\multicolumn{8}{l}{\emphr{--- District}}\\
+\tikzmark{distL}Center-left & $-0.09$ & $-0.80$ & $-0.48$ & $+0.73^{*}$ & $+0.18$ & $-0.74$ & $+0.30$ \\
+Right & $+1.00^{***}$ & $+1.36^{***}$ & $+0.42$ & $+0.41^{***}$ & $+0.08$ & $+0.23$ & $+0.88^{*}$ \\
+Left & $-0.64^{*}$ & $-0.48^{*}$ & $+0.45$ & $-0.45^{***}$ & $-0.29$ & $-0.45^{*}$ & $-0.04$ \\
+Local lists & $+1.98^{+}$ & EMPTY & $-1.92^{**}$ & EMPTY & $-0.29$ & $+0.26$ & EMPTY \\
+Reserved seats & $-0.07$ & $+0.13$ & $-0.03$ & $-0.27^{+}$ & $+0.30$ & $-0.03$ & $+0.19$ \\
+Across blocs & $+0.54^{***}$ & $+0.28^{*}$ & $+0.67^{**}$ & $+0.39^{***}$ & $+0.47^{***}$ & $+0.34^{*}$ & $+0.46^{**}$\tikzmark{distR} \\
+\bottomrule
+\end{tabular}
+\end{center}}
+
+% ---------------- Table B: bloc discipline + controls -------------------------
+\newcommand{\TablaControles}{%
+\begin{center}\scriptsize\setlength{\tabcolsep}{4.5pt}\renewcommand{\arraystretch}{1.1}
+\begin{tabular}{lccccccc}
+\toprule
+ & C1 & C2 & C3 & C4 & C5 & C6 & C7 \\
+\midrule
+\multicolumn{8}{l}{\emphr{--- Ideological range of the bloc's own contingent, per document}}\\
+Center-left & $-1.76$ & $+0.23$ & $+0.23$ & $+0.16$ & $-2.07$ & $+3.35^{+}$ & $-1.54$ \\
+Right & $+0.20$ & $-0.30$ & $-5.29$ & $-5.33^{*}$ & $-6.92$ & $-0.45$ & $-3.03$ \\
+\tikzmark{rngL}Left & $-1.21$ & $-1.16$ & $-2.75$ & $-3.70^{***}$ & $-3.81^{***}$ & $+0.40$ & $-1.80$\tikzmark{rngR} \\
+Local lists & $-4.82$ & $-2.71^{+}$ & $+0.55$ & $-2.03^{**}$ & $-2.81^{***}$ & $-4.73^{*}$ & $-0.92$ \\
+Reserved seats & $-0.87$ & $+0.94$ & $+3.26$ & $-1.40$ & $-5.43^{+}$ & $+0.15$ & $+0.93$ \\
+\multicolumn{8}{l}{\emphr{--- Controls and structure}}\\
+Edges (baseline) & $+0.16$ & $-0.49$ & $-0.19$ & $-0.28$ & $-0.68$ & $-0.55$ & $-0.77$ \\
+Commission member & $+0.79^{***}$ & $+1.60^{***}$ & $+0.87^{***}$ & $+1.06^{***}$ & $+1.66^{***}$ & $+1.96^{***}$ & $+2.20^{***}$ \\
+Range of $\theta_1$ per document (global) & $-2.06^{***}$ & $-2.51^{***}$ & $-3.85^{**}$ & $-3.07^{***}$ & $-0.09$ & $-1.89^{*}$ & $-1.55$ \\
+Range of $\theta_2$ per document & $-2.10^{***}$ & $-1.49^{*}$ & $-1.73$ & $-2.35^{***}$ & $-2.02^{**}$ & $-1.49^{+}$ & $-0.71$ \\
+Range of age per document & $-0.26$ & $+0.16$ & $-0.20$ & $+0.03$ & $-0.57^{**}$ & $+0.01$ & $+0.17$ \\
+Range of education per document & $-0.27$ & $-0.57^{**}$ & $-0.28$ & $+0.04$ & $-0.39^{*}$ & $-0.33$ & $-0.02$ \\
+Serial signers (\texttt{gwb1degree}) & $-0.63$ & $-0.85$ & $-0.05$ & $-6.94^{*}$ & $-1.88^{***}$ & $+1.22^{*}$ & $-0.55$ \\
+\tikzmark{dspL}Repeated pairs (\texttt{gwdsp}) & $-0.42^{***}$ & $-0.28^{***}$ & $-0.38^{***}$ & $-0.16^{***}$ & $-0.23^{***}$ & $-0.35^{***}$ & $-0.24^{***}$\tikzmark{dspR} \\
+\bottomrule
+\end{tabular}
+\end{center}}
+
+% ============================================================================
+\title{Networked Influence in a Tabula Rasa Legislature}
+\author{Aníbal Olivera M. \& Jorge Fábrega}
+\date{}
+
+\begin{document}
+
+% ------------------------------------------------------------------ 1 TITLE
+\begin{frame}[plain]
+  \vspace{0.6cm}
+  \begin{center}
+    {\footnotesize\color{ndgray} Political Networks 2026 $\cdot$ Manchester}
+  \end{center}
+  \vspace{0.9cm}
+  \begin{center}
+    {\LARGE \textbf{Networked Influence in a Tabula Rasa Legislature}}\\[0.45cm]
+    {\large \color{ndreddark} Co-authorship, Ideological Dynamics, and Political Success\\in the Chilean Constitutional Convention (2021--2022)}
+  \end{center}
+  \vspace{1.0cm}
+  \begin{center}
+    {\normalsize Aníbal Olivera M. \quad$\cdot$\quad Jorge Fábrega}\\[2pt]
+    {\footnotesize PhD(c) in Social Complexity Sciences, CICS--UDD, Chile}
+  \end{center}
+  \vfill
+\end{frame}
+
+% ------------------------------------------------------------------ 2 SETUP
+\begin{frame}{A natural quasi-experiment}
+\begin{itemize}
+  \item In an ordinary legislature, today's collaboration network is the sediment of decades: careers, committees, party discipline. Any estimate of ``what organizes collaboration'' is contaminated by that history.
+  \vspace{0.25cm}
+  \item The Chilean Constitutional Convention (Jul 2021 -- Jul 2022) started from \emphr{zero relational stock}: a majority of newcomers and independents, 17 reserved indigenous seats, a body that dissolved on delivery — no electoral shadow of the future.
+  \vspace{0.25cm}
+  \item Two rules structure everything. Each constitutional initiative required \emphr{8--16 sponsors}: signing = forming a visible, dated coalition. Each norm needed \emphr{two thirds of the floor (103 of 154)}: being born was cheap, surviving was expensive.
+\end{itemize}
+\vspace{0.3cm}
+\nota{A note on standpoint: I am a methodologist coming from the natural sciences. I report what the models find and comment on some of it; the political reading is ongoing joint work with Jorge F\'abrega (sociologist, UDD).}
+\end{frame}
+
+% ------------------------------------------------------------------ 3 DATA
+\begin{frame}{The data: one year, fully linked}
+\begin{center}
+  \includegraphics[width=0.94\textwidth]{../results/figures/data_infographic.pdf}
+\end{center}
+\end{frame}
+
+% ------------------------------------------------------------------ 4 COMMISSIONS
+\begin{frame}{The seven thematic commissions}
+\begin{center}\scriptsize\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{clccccccccc}
+\toprule
+ & Name (short) & Members & \% lawyers & \% exper. & Age & Degree & Initiatives & Waves & Amendments & Multi-sign. \\
+\midrule
+C1 & Political system & 25 & 60 & 36 & 42.2 & 1.44 & 89 & 4 & 365 & 266 \\
+C2 & Const.\ principles & 18 & 22 & 22 & 45.8 & 1.28 & 114 & 3 & 53 & 1 \\
+C3 & Form of the state & 30 & 37 & 40 & 45.1 & 1.43 & 51 & 6 & 241 & 212 \\
+C4 & Fundamental rights & 30 & 30 & 13 & 45.9 & 1.03 & 283 & 5 & 395 & 154 \\
+C5 & Environment & 19 & 21 & 16 & 44.7 & 1.26 & 133 & 5 & 559 & 0 \\
+C6 & Justice systems & 17 & 88 & 18 & 42.6 & 1.65 & 93 & 6 & 381 & 317 \\
+C7 & Knowledge systems & 15 & 13 & 0 & 51.7 & 1.33 & 64 & 8 & 332 & 54 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\vspace{0.2cm}
+\begin{itemize}
+  \item Composition varies wildly across commissions — C6 is 88\% lawyers, C7 has no politically experienced member. \emphr{Every model below is estimated within commission.}
+\end{itemize}
+\end{frame}
+
+% ------------------------------------------------------------------ 5 IDEOLOGY
+\begin{frame}{Pre-network ideology: measured before the network existed}
+\begin{itemize}
+  \item \emphr{Pre-network positions}: 2-D W-NOMINATE on the \emph{first month} of floor votes only (147 roll calls, Jul--Aug 2021), replicating F\'abrega (2022).
+  \begin{itemize}
+    \item That window predates the commissions (Oct), the initiatives (Nov) and the operative two-thirds rule (Feb) — so $\theta$ is exogenous to the network we study.
+    \item Why 2-D: the second dimension separates the reserved indigenous seats from the classic left--right cleavage; correct classification rises from 89.4\% to 91.6\%.
+  \end{itemize}
+  \vspace{0.3cm}
+  \item \emphr{Dynamic revealed positions}: dynamic IRT over all 4,707 roll calls $\to$ trajectories $\theta_{i,t}$ over 91 periods,
+  $$\Pr(\text{yes}_{iv}) = \Phi\big(\beta_v\,\theta_{i,t(v)} - \alpha_v\big), \qquad \theta_{i,t} \sim \mathcal N(\theta_{i,t-1}, \omega^2).$$
+\end{itemize}
+\end{frame}
+
+% ------------------------------------------------------------------ 6 RQs
+\begin{frame}{Research questions}
+\begin{itemize}
+  \item \emphr{RQ1 — Formation}: with zero relational stock, could the co-sponsorship network be predicted from what people \emph{brought with them} (ideology, bloc, district, profile)?
+  \vspace{0.3cm}
+  \item \emphr{RQ2a — Positions}: does network exposure \emph{move} members' ideological positions, or do members select into like-minded coalitions?
+  \vspace{0.3cm}
+  \item \emphr{RQ2b — Behavior}: does voting \emph{defection} travel along co-sponsorship ties?
+  \vspace{0.3cm}
+  \item \emphr{RQ3 — Success}: what makes an article survive into the draft — and does the \emph{context} an initiative is born into matter?
+\end{itemize}
+\end{frame}
+
+\sectionslide{RQ1 — Formation}{Could we predict the network?}
+
+% ------------------------------------------------------------------ 7 ERGM TOOL
+\begin{frame}{The tool: a hybrid bipartite ERGM, by commission and by bloc}
+\begin{itemize}
+  \item Unit of analysis: the \emphr{person $\times$ initiative} signature ($y_{ia} = 1$ if member $i$ signed initiative $a$). No projection — one signature counts once.
+\end{itemize}
+{\small $$\Pr(Y = y) = \frac{\exp\big(\theta^\top s(y)\big)}{\kappa(\theta)},\qquad
+s(y) = \Big(\underbrace{\sum_{i,a} y_{ia}}_{\text{edges}},\;
+\underbrace{\sum_{a}\sum_{i<j} y_{ia} y_{ja}\,\mathbf 1\{b_i,b_j\}{=}\{g,h\}}_{\text{bloc mixing: 15 cells}},\;
+\underbrace{\sum_{a}\sum_{i<j} y_{ia} y_{ja}\,\mathbf 1[x_i = x_j]\,\mathbf 1[b_i = b_j = g]}_{\text{profile homophily within bloc } g},\;\dots\Big)$$}
+\begin{itemize}
+  \item Separating by bloc \emphr{never cuts the network} (that would mutilate coalitions): the network stays whole and the \emph{counters} specialize by bloc. Each homophily counter partitions exactly into 5 within-bloc + 1 across-bloc terms.
+  \item Plus: per-document ranges of $\theta_1, \theta_2$, age, education; the bloc contingent's own $\theta_1$ range; \texttt{gwb1degree}; \texttt{gwdsp}. Seven models, one per commission (pooling inverts homophily signs — Simpson's paradox, verified).
+  \item Estimation: MPLE as a logistic on change statistics (certified against \texttt{ergm} to $10^{-11}$); SEs by \emphr{initiative bootstrap} (B = 500: resample initiatives, rebuild network, re-estimate).
+\end{itemize}
+\end{frame}
+
+% ------------------------------------------------------------------ 8 TABLE A (4 overlays)
+\begin{frame}{Profile homophily, by bloc of the pair (I): territory}
+\nota{District: the right's glue, suppressed in the left, the bridge across blocs (14 vs 42 possible pairs).}
+\vspace{-0.22cm}
+\TablaPerfil
+\begin{tikzpicture}[remember picture, overlay]\ovalmark{distL}{distR}\end{tikzpicture}
+\end{frame}
+
+\begin{frame}{Profile homophily, by bloc of the pair (II): gender}
+\nota{Gender: null or negative \emph{within} blocs; small and positive \emph{across} blocs.}
+\vspace{-0.22cm}
+\TablaPerfil
+\begin{tikzpicture}[remember picture, overlay]\ovalmark{genL}{genR}\end{tikzpicture}
+\end{frame}
+
+\begin{frame}{Profile homophily, by bloc of the pair (III): the lawyer null}
+\nota{The law degree organizes co-signing in \emph{no} bloc.}
+\vspace{-0.22cm}
+\TablaPerfil
+\begin{tikzpicture}[remember picture, overlay]\ovalmark{abogL}{abogR}\end{tikzpicture}
+\end{frame}
+
+\begin{frame}{Profile homophily, by bloc of the pair (IV): experience lives in the left}
+\nota{Experience clusters only inside the left (brackets = quasi-separation; EMPTY = never observed).}
+\vspace{-0.22cm}
+\TablaPerfil
+\begin{tikzpicture}[remember picture, overlay]\ovalmark{expL}{expR}\end{tikzpicture}
+\end{frame}
+
+% ------------------------------------------------------------------ 9 TABLE B (2 overlays)
+\begin{frame}{Bloc discipline and structure (I): contingents stay compact}
+\TablaControles
+\begin{tikzpicture}[remember picture, overlay]\ovalmark{rngL}{rngR}\end{tikzpicture}
+\nota{Where significant, the own-contingent range is negative — the left in C4/C5 ($-3.7$, $-3.8$), local lists in three commissions: blocs add signers who do \emph{not} stretch their delegation's ideological range.}
+\end{frame}
+
+\begin{frame}{Bloc discipline and structure (II): the tabula rasa signature}
+\TablaControles
+\begin{tikzpicture}[remember picture, overlay]\ovalmark{dspL}{dspR}\end{tikzpicture}
+\nota{\texttt{gwdsp} $< 0$ in all seven commissions: conditional on activity, bloc mixing and all homophilies, \emphr{repeated pairs are under-used} — coalitions re-form with fresh pairs. In a legislature with entrenched partnerships the sign would be positive; here there was no inherited stock of partnerships, and the model detects its absence.}
+\end{frame}
+
+\sectionslide{RQ2 — People}{Does the network move positions (RQ2a) or behavior (RQ2b)?}
+
+% ------------------------------------------------------------------ 10 RQ2a DESIGN
+\begin{frame}{RQ2a design: exposure and within-person change}
+\begin{itemize}
+  \item Exposure of $i$ at wave $t$: mean position of co-signers, weighted by accumulated collaboration $w_{ij,t}$; the model uses only \emph{within-person} variation:
+\end{itemize}
+$$E_{i,t} = \frac{\sum_{j \neq i} w_{ij,t}\,\theta_{j,t}}{\sum_{j \neq i} w_{ij,t}}
+\qquad\qquad
+\Delta\theta_{i,t} = \alpha_i + \beta\,\theta_{i,t-1} + \lambda\,E_{i,t-1} + \varepsilon_{it}$$
+\begin{itemize}
+  \item Individual fixed effects $\alpha_i$; SEs clustered by member; 4,355 person-wave observations.
+  \item If the network drags positions, $\lambda > 0$. Result: $\hat\lambda = +0.007$ (SE $0.004$) — \emphr{null}.
+\end{itemize}
+\end{frame}
+
+% ------------------------------------------------------------------ 11 F11
+\begin{frame}{Selection, not influence — in one picture}
+\begin{center}
+  \includegraphics[width=0.80\textwidth]{../results/figures/m2_selection_vs_influence_preview.pdf}
+\end{center}
+\nota{(a) Between persons: own position and neighborhood position correlate $0.95$ — we choose neighborhoods that already resemble us. (b) Within person: if influence existed, the cloud would slope upward — the farther my neighborhood, the more I should move toward it. It does not ($r$ flat); the amber 5\% (the only people with room to be dragged) show $r = -0.04$.}
+\end{frame}
+
+% ------------------------------------------------------------------ 12 DECAY
+\begin{frame}{Exposure with temporal decay: a hint, and its shadow}
+\begin{center}\small
+\begin{tabular}{lccc}
+\toprule
+ & $\lambda_w = 0.25$ & $\lambda_w = 0.50$ & $\lambda_w = 0.75$ \\
+\midrule
+Lagged exposure $\hat\lambda$ & $+0.008$ & $+0.008$ & $+0.007$ \\
+SE (clustered) & $0.004$ & $0.004$ & $0.004$ \\
+$p$ & $0.051$ & $0.042$ & $0.078$ \\
+N (person-waves) & 4,355 & 4,355 & 4,355 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\vspace{0.25cm}
+\begin{itemize}
+  \item With memory that discounts the past, the lag grazes significance.
+  \item But the falsification fires too: \emph{future} exposure ``predicts'' today's change ($+0.010$, $p = .030$) — the signature of selection, not influence.
+\end{itemize}
+\end{frame}
+
+% ------------------------------------------------------------------ 13 ERA 2/3
+\begin{frame}{A dated exception: the norms era, measured with its own thermometer}
+\begin{itemize}
+  \item Clean test: decompose future exposure into its predictable part and its \emph{innovation} $\tilde E_{i,t+1}$ (the within-residual of lead on lag), and race them:
+\end{itemize}
+$$\Delta\theta_{i,t} = \alpha_i + \beta\,\theta_{i,t-1} + \lambda_{\text{lag}}\,E_{i,t-1} + \lambda_{\text{innov}}\,\tilde E_{i,t+1} + \varepsilon_{it}$$
+\begin{center}\small
+\begin{tabular}{lccc}
+\toprule
+Thermometer & Lag $\lambda_{\text{lag}}$ & Innovation $\lambda_{\text{innov}}$ & N \\
+\midrule
+Standard $\theta$ (all 4,707 votes) & $+0.002$ ($p=.71$) & $+0.062^{**}$ & 3,328 \\
+Regime-homogeneous $\theta$ (two-thirds era only) & $\mathbf{+0.016^{**}}$ & $+0.053^{*}$ & 3,038 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\vspace{0.2cm}
+\begin{itemize}
+  \item Survives measurement propagation (50 replicate re-fits of the era IRT; Rubin total SE $\Rightarrow z = 2.53$) and concentrates at the \emph{onset} of the two-thirds regime (Feb--Mar $+0.021$; Apr--May $+0.007$).
+  \item Reading: selection is the rule; a bounded, dated accommodation appears when the 103-vote arithmetic was new. Lag and innovation \emph{coexist} — not clean causality.
+\end{itemize}
+\end{frame}
+
+% ------------------------------------------------------------------ 14 RQ2b
+\begin{frame}{RQ2b: defection travels along co-sponsorship ties}
+\begin{itemize}
+  \item Defection: in roll call $v$, voting against the modal vote of one's own bloc. Exposure: the $w$-weighted share of $i$'s co-signers defecting \emph{in the same roll call}:
+\end{itemize}
+$$X_{iv} = \frac{\sum_{j \neq i} w_{ij}\, D_{jv}}{\sum_{j \neq i} w_{ij}},
+\qquad
+\Pr(D_{iv} = 1) = \Lambda\big(\eta_i + \mu_v + \phi\, X_{iv}\big)$$
+\begin{center}\small
+\begin{tabular}{lcc}
+\toprule
+ & $\phi$ & $p$ \\
+\midrule
+Exposure to defectors (observed) & $+11.2$ & $<10^{-100}$ \\
+Expected mechanically (permutation within bloc $\times$ vote, 200 draws) & $+6.0$ [p95: $6.1$] & $<0.005$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\vspace{0.2cm}
+\begin{itemize}
+  \item Half the raw effect is mechanical; \emphr{what remains is large}, travels more strongly \emph{across} commissions, and leaves a short echo that dies within days. Carried by the \emph{newcomer} pairs, not the old guard.
+\end{itemize}
+\end{frame}
+
+\sectionslide{RQ3 — Texts}{What makes an article survive?}
+
+% ------------------------------------------------------------------ 15 SURVIVAL
+\begin{frame}{The survival model: article-level, complete}
+\begin{itemize}
+  \item Unit: the \emph{article} (1,565 with sponsor coalition $S_a$ of 2--16); 20.2\% reach the draft.
+\end{itemize}
+$$\Pr(\text{survives}_a) = \Lambda\Big(\alpha_c + \gamma_1\, \big|\bar\theta_{1,S_a} - \theta_{1,(103)}\big| + \gamma_2\, sd(\theta_{1,S_a}) + \gamma_3\, |S_a| + \boldsymbol{\gamma_4}^\top C_{S_a} + \boldsymbol{\gamma_5}^\top H_{S_a}\Big)$$
+\begin{center}\scriptsize\setlength{\tabcolsep}{5pt}
+\begin{tabular}{lccc}
+\toprule
+ & (1) Pivotal & (2) + Network & (3) + Human capital \\
+\midrule
+Coalition's distance to the $\tfrac{2}{3}$ pivot & $-0.35$ ($p=.001$) & $-0.48$ ($p=.009$) & $-0.61$ ($p=.002$) \\
+Ideological heterogeneity $sd(\theta_1)$ & $+0.27$ ($p=.008$) & $+0.46$ ($p=.001$) & $+0.53$ ($p<10^{-4}$) \\
+Coalition size & $+0.20$ ($p=.12$) & $+0.18$ ($p=.12$) & $+0.15$ ($p=.21$) \\
+Mean betweenness & & $-0.22$ ($p=.083$) & $-0.23$ ($p=.076$) \\
+Mean constraint & & $+0.01$ ($p=.97$) & $+0.26$ ($p=.28$) \\
+Internal density (pairs with history) & & $+0.25$ ($p=.024$) & $+0.32$ ($p=.002$) \\
+Share of lawyers & & & $-0.09$ ($p=.58$) \\
+Share with prior experience & & & $-0.16$ ($p=.44$) \\
+Mean academic degree & & & $-0.06$ ($p=.67$) \\
+\midrule
+AIC & 1393 & 1384 & 1386 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\nota{Articles win by geometry (near the pivot, ideologically wide) and by teams with internal history — not by credentials.}
+\end{frame}
+
+% ------------------------------------------------------------------ 16 F12
+\begin{frame}{Survival by coalition position: the arithmetic of 103}
+\begin{center}
+  \includegraphics[width=0.78\textwidth]{../results/figures/survival_by_position.pdf}
+\end{center}
+\nota{The two-thirds rule fixed a pivot at $\theta_{1,(103)} = -0.15$. The premium for widening lives in left coalitions that can still reach the pivot by stretching; the sweet spot sits slightly left of the pivot — the center of mass of the drafting majority.}
+\end{frame}
+
+% ------------------------------------------------------------------ 17 SDM
+\begin{frame}{Does the context an initiative is born into matter?}
+\begin{itemize}
+  \item Member-level success: $y_i$ = mean textual retention of the articles $i$ co-signed. It clusters on the co-sponsorship network (Moran's $I = 0.44$). The spatial Durbin model asks whether that context matters:
+\end{itemize}
+$$y = \rho\, W y + X\beta + W X \gamma + \varepsilon, \qquad W = \text{row-normalized co-sponsorship network}$$
+\begin{itemize}
+  \item $\rho = 0.891$ ($p < 10^{-15}$; robust $0.63$--$0.95$ across $W$ variants). So ``context matters'' — \emphr{which by itself explains nothing}. The question is \emphr{what the context is}.
+  \vspace{0.2cm}
+  \item Decomposition: the neighborhood's success $Wy$ is predictable from one's \emph{own} covariates ($R^2 = 0.81$); and the only covariate that matters — distance to the $\tfrac{2}{3}$ pivot — \emphr{migrates entirely from the person to the neighborhood} when moving from OLS to the Durbin model (own: $p = .95$; neighborhood's: $-0.27$, $p < .05$).
+  \vspace{0.2cm}
+  \item Answer: \emphr{the context is the coalition you stand in} — its composition and its position in the coalition landscape. Success is a coalition good, not diffusion; $\rho$ is read as clustering, not influence.
+\end{itemize}
+\end{frame}
+
+% ------------------------------------------------------------------ 18 TAKEAWAYS
+\begin{frame}{Takeaways}
+\begin{itemize}
+  \item The network \emphr{was predictable} from pre-existing traits: bloc, 2-D ideology, and — conditionally — territory. Credentials organized nothing, in any bloc.
+  \item The bloc partition pays: territory is the right's internal glue and the system's bridge; gender crosses blocs; experience lives in the left; \texttt{gwdsp} $< 0$ everywhere — the structural signature of a tabula rasa.
+  \item Positions barely move: \emphr{selection}, with one dated exception at the onset of the two-thirds regime.
+  \item Behavior does travel: defection clusters along co-sponsorship ties at twice the mechanical rate, carried by newcomers.
+  \item Texts win by \emphr{geometry and team history}, not credentials; and the ``context'' of success is the coalition itself.
+\end{itemize}
+\vspace{0.2cm}
+\nota{Political interpretation: ongoing joint work with Jorge F\'abrega. Preliminary conclusions — the analysis continues.}
+\end{frame}
+
+% ------------------------------------------------------------------ 19 THANKS
+\begin{frame}[plain]
+  \vfill
+  \begin{center}
+    {\Large ¡Gracias! — Thank you}\\[0.8cm]
+    \qrcode[height=2.6cm]{https://github.com/aoliveram/Networked-Influence-Chilean-Constitutional-Convention}\\[0.35cm]
+    {\footnotesize Project repository}\\[0.5cm]
+    {\footnotesize\color{ndgray} anibal.olivera.m@gmail.com $\cdot$ aoliveram.cl}
+  \end{center}
+  \vfill
+\end{frame}
+
+\sectionslide{Backup}{Supporting material}
+
+% ------------------------------------------------------------------ B1 MIXING
+\begin{frame}{Backup: the bloc mixing matrix (pure closure, no profile counters)}
+\begin{center}
+  \includegraphics[width=0.9\textwidth]{../results/figures/nodemix_heatmap.pdf}
+\end{center}
+\end{frame}
+
+% ------------------------------------------------------------------ B2 WINDOWS
+\begin{frame}{Backup: the influence null, 3 windows $\times$ 7 exposure doses}
+\begin{center}\tiny\setlength{\tabcolsep}{5pt}
+\begin{tabular}{llcccc}
+\toprule
+Window & Exposure definition & $\hat\lambda$ & SE & $p$ & N \\
+\midrule
+Full & Accumulated since T0 & $+0.007$ & 0.004 & $0.119$ & 4,355 \\
+Full & Last wave only & $+0.007$ & 0.013 & $0.60$ & 463 \\
+Full & Last 2 waves & $+0.003$ & 0.009 & $0.72$ & 1,504 \\
+Full & Last 3 waves & $-0.002$ & 0.007 & $0.76$ & 2,447 \\
+Full & Decay $\lambda_w = 0.25 / 0.50 / 0.75$ & $+0.008/+0.008/+0.007$ & 0.004 & $.051/.042/.078$ & 4,355 \\
+Full & Falsification: future exposure & $+0.010$ & 0.004 & $0.030$ & 3,329 \\
+Early ($\leq$ Mar 31) & Accumulated & $+0.005$ & 0.007 & $0.50$ & 1,586 \\
+Late ($\geq$ Apr 1) & Accumulated & $+0.011$ & 0.005 & $0.018$ & 2,769 \\
+Late & Falsification: future exposure & $+0.010$ & 0.004 & $0.004$ & 1,742 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\nota{No $\hat\lambda$ exceeds $0.011$; the few significant late-window lags come with an equally significant falsification of the same size.}
+\end{frame}
+
+% ------------------------------------------------------------------ B3 CLOGIT
+\begin{frame}{Backup: how does each sector decide? (conditional logit, same data)}
+\begin{center}\footnotesize
+\begin{tabular}{lccccc}
+\toprule
+ & Right & Ctr-left & Left & Res.\ seats & Local lists \\
+\midrule
+Distance in $\theta_1$ & $-5.1^{***}$ & $-2.8^{**}$ & $-0.8$ & $+0.1$ & $-6.1^{***}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\vspace{0.2cm}
+\begin{itemize}
+  \item The complementary lens: the conditional logit conditions within each initiative (menu) and can split by the \emph{decider's} bloc: the right almost never crosses ideological distance; the left crosses it all.
+  \item The hybrid ERGM and the conditional logit agree on the substantive ranking — the tool changes what is visible, not what matters.
+\end{itemize}
+\end{frame}
+
+\end{document}
