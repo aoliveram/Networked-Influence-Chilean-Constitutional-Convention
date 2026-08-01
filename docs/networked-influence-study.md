@@ -347,70 +347,55 @@ Sobre esa red estimamos un ERGM (exponential random graph model), que conviene e
 - **Disciplina ideológica interna** (5 términos): el *rango de $\theta_1$ del contingente del propio bloque* por documento — cuando alguien se suma a un texto donde ya hay gente de su bloque, ¿estira el rango ideológico de esa delegación o entra dentro del rango que ya cubría? Negativo = los contingentes se mantienen compactos.
 - Y los dos términos **estructurales** de siempre. `gwb1degree` pregunta si hay *firmadores seriales* (¿la distribución de firmas por persona está más concentrada de lo que los atributos predicen?; la ponderación geométrica evita que los mega-firmantes dominen el término). `gwdsp` pregunta si las *parejas se repiten*: para cada par de convencionales cuenta los documentos que ambos firmaron (y para cada par de documentos, los firmantes que comparten), premiando menos cada repetición adicional.
 
-Cómo leer un coeficiente, con tres ejemplos concretos. Todos comparten la misma gramática, heredada de la estimación condicional: *cuánto cambia la log-odds de que una persona firme un documento, por cada firmante ya presente que forma con ella el patrón del término*. (1) Celda de mezcla Derecha $\times$ Derecha $= +0.06$: para una persona de derecha, cada firmante de derecha ya presente en el documento sube su log-odds de sumarse en $0.06$ — nada, una vez controlado lo demás. (2) Distrito — dentro de Derecha $= +1.00$: si además ese firmante de derecha ya presente *comparte su distrito*, la log-odds sube $1.00$ adicional — el territorio organiza a la derecha por dentro. (3) Rango $\theta_1$ del contingente — Izquierda $= -3.7$: por cada unidad que la entrada de una persona de izquierda *estiraría* el rango ideológico del contingente de izquierda ya presente, su log-odds de entrar cae $3.7$ — las delegaciones de izquierda se arman compactas.
+Cómo leer un coeficiente, con tres ejemplos concretos. Todos comparten la misma gramática, heredada de la estimación condicional: *cuánto cambia la log-odds de que una persona firme un documento, por cada firmante ya presente que forma con ella el patrón del término*. (1) Celda de mezcla Derecha $\times$ Derecha $= +0.06$ (las 15 celdas viven en el modelo y se reportan en el CSV): para una persona de derecha, cada firmante de derecha ya presente en el documento sube su log-odds de sumarse en $0.06$ — nada, una vez controlado lo demás. (2) Distrito — dentro de Derecha $= +1.00$: si además ese firmante de derecha ya presente *comparte su distrito*, la log-odds sube $1.00$ adicional — el territorio organiza a la derecha por dentro. (3) Rango $\theta_1$ del contingente — Izquierda $= -3.7$: por cada unidad que la entrada de una persona de izquierda *estiraría* el rango ideológico del contingente de izquierda ya presente, su log-odds de entrar cae $3.7$ — las delegaciones de izquierda se arman compactas.
 
 ¿Por qué siete modelos y no uno? La razón sustantiva de siempre: la comisión es el mayor confundidor de composición (la sección 3.4 mostró que los temas arman las coaliciones), y estimar dentro de cada comisión es condicionar por ese confundidor por diseño — en un modelo único de las 947 iniciativas, con un solo intercepto, las diferencias de composición *entre* comisiones contaminan la homofilia *dentro* de cada una (lo verificamos: el modelo agregado invierte los signos, la paradoja de Simpson de manual). La estimación: la MCMC completa resultó computacionalmente infactible en estas redes (documentado); usamos máxima pseudo-verosimilitud (MPLE), que convierte el ERGM en una logística sobre *estadísticas de cambio* — cada par (documento, individuo) es una fila; cada término, una columna. Esa lectura no es una metáfora sino la implementación literal: los contadores por bloque se construyen como columnas de esa logística, y la maquinaria queda certificada reproduciendo los coeficientes de `ergm` hasta $10^{-11}$ en la especificación base. Las celdas sin pares observados (p. ej., Derecha–PPOO en C3: ni un solo par en 51 iniciativas) tienen coeficiente $-\infty$ y se reportan como "---"; igual que hace `ergm`, sus díadas quedan excluidas al estimar el resto. Los errores estándar son por *bootstrap de iniciativas* (B = 500 por comisión: re-sortear las iniciativas con reemplazo, reconstruir la red, re-estimar todo), que corrigen el optimismo de los EE logísticos ingenuos. Los siete modelos completos ($^{+}$ $p<.1$, $^{*}$ $p<.05$, $^{**}$ $p<.01$, $^{***}$ $p<.001$; EE completos en `M1_bipartite_hybrid_boot.csv`):
 
-**Tabla 8 — ERGM bipartito híbrido por comisión (siete modelos): mezcla de bloques + contadores de perfil por bloque + disciplina ideológica interna + estructura. MPLE certificado con EE por bootstrap de iniciativas (B = 500). "---" = par nunca observado (coeficiente $-\infty$).**
+**Tabla 8 — ERGM bipartito híbrido por comisión, vista compacta: perfil particionado por bloque del par, disciplina ideológica interna, y controles. MPLE certificado con EE por bootstrap de iniciativas (B = 500). Cada modelo incluye además las 15 celdas de la matriz de mezcla de bloques (coeficientes completos en `M1_bipartite_hybrid_boot.csv`). "VACÍA" = par nunca observado en esa comisión (coeficiente $-\infty$); entre corchetes, celdas casi vacías (cuasi-separación) que se leen como "sin información".**
 
 | Término | C1 | C2 | C3 | C4 | C5 | C6 | C7 |
 |:---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-| ***— Controles: base, pertenencia e ideología*** | | | | | | | |
+| ***— Abogado (mismo estatus, según el bloque del par)*** | | | | | | | |
+| Centro-izq | $+0.11$ | $+0.11$ | $+0.13$ | $-0.03$ | $+0.15^{*}$ | $-0.26$ | $-0.00$ |
+| Derecha | $-0.11$ | $-0.15^{**}$ | $-0.01$ | $+0.01$ | $+0.10$ | $+0.13^{*}$ | $-0.06$ |
+| Izquierda | $-0.07$ | $+0.06$ | $+0.02$ | $+0.06^{+}$ | $+0.00$ | $+0.11^{*}$ | $-0.07$ |
+| Otras (locales) | $+0.12$ | $-0.11$ | $-0.09$ | $+0.09^{+}$ | $-0.00$ | $-0.13$ | $-0.15$ |
+| PPOO | $+0.06$ | $+0.24$ | $+0.10$ | $-0.26^{+}$ | $+0.20^{*}$ | $-0.21$ | $-0.04$ |
+| Entre bloques | $+0.06$ | $-0.08^{*}$ | $+0.02$ | $+0.04^{*}$ | $-0.05^{+}$ | $+0.07^{+}$ | $+0.06^{+}$ |
+| ***— Experiencia (mismo estatus)*** | | | | | | | |
+| Centro-izq | $+0.11$ | $-0.03$ | $+0.09$ | $+0.09^{**}$ | $-0.09$ | $-0.01$ | $+0.12$ |
+| Derecha | $-0.13$ | $-0.14$ | $-0.03$ | $+0.05$ | $-0.14$ | $+0.00$ | $-0.11$ |
+| Izquierda | $+0.12^{+}$ | $+0.13^{*}$ | $+0.09$ | $+0.11^{**}$ | $+0.04^{+}$ | $+0.06$ | $+0.00$ |
+| Otras (locales) | $-0.25$ | $-0.26$ | $[+11.1^{***}]$ | $+0.05$ | $[+8.1^{***}]$ | $-0.20$ | $-0.30$ |
+| PPOO | $+0.06$ | $+0.00$ | $-0.08$ | $-0.05$ | $-0.11$ | $-0.10$ | $-0.05$ |
+| Entre bloques | $+0.04$ | $+0.06^{+}$ | $+0.03$ | $+0.06^{**}$ | $+0.04^{*}$ | $+0.04$ | $+0.04$ |
+| ***— Género (mismo)*** | | | | | | | |
+| Centro-izq | $-0.08$ | $-0.10$ | $-0.07$ | $+0.00$ | $+0.02$ | $-0.02$ | $+0.05$ |
+| Derecha | $+0.14^{*}$ | $+0.03$ | $+0.05$ | $-0.06$ | $+0.04$ | $-0.03$ | $+0.09$ |
+| Izquierda | $-0.12$ | $-0.03$ | $-0.06$ | $-0.03$ | $-0.02$ | $-0.04$ | $-0.09$ |
+| Otras (locales) | $-0.21$ | $-0.26$ | $-0.61$ | $-0.20^{**}$ | $-0.38^{*}$ | $+0.19$ | $-0.37$ |
+| PPOO | $-0.11$ | $-0.50$ | $-1.77$ | $-0.60^{**}$ | $-1.64^{***}$ | $+0.04$ | $-0.26$ |
+| Entre bloques | $+0.04$ | $+0.12^{**}$ | $+0.20^{*}$ | $+0.13^{***}$ | $+0.12^{***}$ | $+0.08^{+}$ | $+0.11^{*}$ |
+| ***— Distrito (mismo)*** | | | | | | | |
+| Centro-izq | $-0.09$ | $-0.80$ | $-0.48$ | $+0.73^{*}$ | $+0.18$ | $-0.74$ | $+0.30$ |
+| Derecha | $+1.00^{***}$ | $+1.36^{***}$ | $+0.42$ | $+0.41^{***}$ | $+0.08$ | $+0.23$ | $+0.88^{*}$ |
+| Izquierda | $-0.64^{*}$ | $-0.48^{*}$ | $+0.45$ | $-0.45^{***}$ | $-0.29$ | $-0.45^{*}$ | $-0.04$ |
+| Otras (locales) | $+1.98^{+}$ | VACÍA | $-1.92^{**}$ | VACÍA | $-0.29$ | $+0.26$ | VACÍA |
+| PPOO | $-0.07$ | $+0.13$ | $-0.03$ | $-0.27^{+}$ | $+0.30$ | $-0.03$ | $+0.19$ |
+| Entre bloques | $+0.54^{***}$ | $+0.28^{*}$ | $+0.67^{**}$ | $+0.39^{***}$ | $+0.47^{***}$ | $+0.34^{*}$ | $+0.46^{**}$ |
+| ***— Rango $\theta_1$ del contingente del bloque (por documento)*** | | | | | | | |
+| Centro-izq | $-1.76$ | $+0.23$ | $+0.23$ | $+0.16$ | $-2.07$ | $+3.35^{+}$ | $-1.54$ |
+| Derecha | $+0.20$ | $-0.30$ | $-5.29$ | $-5.33^{*}$ | $-6.92$ | $-0.45$ | $-3.03$ |
+| Izquierda | $-1.21$ | $-1.16$ | $-2.75$ | $-3.70^{***}$ | $-3.81^{***}$ | $+0.40$ | $-1.80$ |
+| Otras (locales) | $-4.82$ | $-2.71^{+}$ | $+0.55$ | $-2.03^{**}$ | $-2.81^{***}$ | $-4.73^{*}$ | $-0.92$ |
+| PPOO | $-0.87$ | $+0.94$ | $+3.26$ | $-1.40$ | $-5.43^{+}$ | $+0.15$ | $+0.93$ |
+| ***— Controles y estructura*** | | | | | | | |
 | Edges (base) | $+0.11$ | $-0.25$ | $-0.19$ | $+0.64^{***}$ | $+0.70^{**}$ | $-0.28$ | $-0.68$ |
 | Miembro de la comisión | $+0.79^{**}$ | $+1.72^{***}$ | $+0.83^{***}$ | $+1.06^{***}$ | $+1.58^{***}$ | $+1.98^{***}$ | $+2.20^{***}$ |
 | Rango de $\theta_1$ por documento (global) | $-1.83^{*}$ | $-3.19^{***}$ | $-3.85$ | $-2.77^{***}$ | $-0.09$ | $-3.15^{**}$ | $-2.24^{**}$ |
 | Rango de $\theta_2$ por documento | $-1.93^{**}$ | $-1.47^{*}$ | $-1.08$ | $-2.35^{***}$ | $-2.02^{***}$ | $-1.27^{+}$ | $-0.71$ |
-| ***— Bloques políticos: la matriz de mezcla (pares de co-firmantes)*** | | | | | | | |
-| Centro-izq $\times$ Centro-izq | $+0.26$ | $+0.30^{**}$ | $+0.28$ | $-0.03$ | $+0.08$ | $+0.35^{*}$ | $+0.10$ |
-| Centro-izq $\times$ Derecha | $+0.10$ | $+0.01$ | $+0.04$ | $-0.24^{***}$ | $-0.41$ | $-0.01$ | $-0.09$ |
-| Derecha $\times$ Derecha | $+0.13$ | $+0.16^{+}$ | $+0.13$ | $-0.04$ | $-0.02$ | $+0.05$ | $+0.19$ |
-| Centro-izq $\times$ Izquierda | $+0.05$ | $-0.01$ | $-0.10$ | $-0.23^{***}$ | $-0.16^{***}$ | $-0.01$ | $-0.16^{**}$ |
-| Derecha $\times$ Izquierda | $+0.08$ | $+0.12$ | $+0.09$ | $-0.24^{**}$ | $-0.40^{***}$ | $+0.16^{+}$ | $-0.18^{*}$ |
-| Izquierda $\times$ Izquierda | $+0.24^{*}$ | $+0.01$ | $+0.19$ | $-0.11^{*}$ | $-0.03$ | $+0.09^{+}$ | $+0.17^{*}$ |
-| Centro-izq $\times$ Otras (locales) | $+0.12$ | $+0.04$ | $+0.06$ | $-0.24^{***}$ | $-0.14^{**}$ | $+0.00$ | $-0.08$ |
-| Derecha $\times$ Otras (locales) | $-0.02$ | $+0.13$ | $+0.10$ | $-0.24^{***}$ | $-0.41^{***}$ | $+0.09$ | $-0.32$ |
-| Izquierda $\times$ Otras (locales) | $+0.01$ | $-0.06$ | $-0.12$ | $-0.26^{***}$ | $-0.22^{***}$ | $-0.08$ | $-0.18^{**}$ |
-| Otras (locales) $\times$ Otras (locales) | $+0.62$ | $+0.76$ | $-10.26^{***}$ | $+0.15$ | $-7.80^{***}$ | $+0.56$ | $+0.91$ |
-| Centro-izq $\times$ PPOO | $-0.03$ | $-0.01$ | $-0.11$ | $-0.23^{***}$ | $-0.38^{***}$ | $-0.02$ | $-0.19^{*}$ |
-| Derecha $\times$ PPOO | $-0.08$ | $-0.19$ | --- | $-0.23^{*}$ | $-0.62^{**}$ | $+0.14$ | $-0.11$ |
-| Izquierda $\times$ PPOO | $+0.01$ | $-0.09$ | $-0.10$ | $-0.27^{***}$ | $-0.13^{**}$ | $-0.07$ | $-0.19^{**}$ |
-| Otras (locales) $\times$ PPOO | $-0.01$ | $-0.09$ | $-0.26$ | $-0.38^{***}$ | $-0.29^{***}$ | $-0.04$ | $-0.32^{**}$ |
-| PPOO $\times$ PPOO | $+0.34^{+}$ | $+0.46$ | $+1.20$ | $+0.62^{***}$ | $+0.76^{***}$ | $+0.47$ | $+0.52$ |
-| ***— Bloques políticos: disciplina ideológica interna*** | | | | | | | |
-| Rango $\theta_1$ del contingente — Centro-izq | $-1.76$ | $+0.23$ | $+0.23$ | $+0.16$ | $-2.07$ | $+3.35^{+}$ | $-1.54$ |
-| Rango $\theta_1$ del contingente — Derecha | $+0.20$ | $-0.30$ | $-5.29$ | $-5.33^{*}$ | $-6.92$ | $-0.45$ | $-3.03$ |
-| Rango $\theta_1$ del contingente — Izquierda | $-1.21$ | $-1.16$ | $-2.75$ | $-3.70^{***}$ | $-3.81^{***}$ | $+0.40$ | $-1.80$ |
-| Rango $\theta_1$ del contingente — Otras (locales) | $-4.82$ | $-2.71^{+}$ | $+0.55$ | $-2.03^{**}$ | $-2.81^{***}$ | $-4.73^{*}$ | $-0.92$ |
-| Rango $\theta_1$ del contingente — PPOO | $-0.87$ | $+0.94$ | $+3.26$ | $-1.40$ | $-5.43^{+}$ | $+0.15$ | $+0.93$ |
-| ***— Territorio: mismo distrito, según el bloque del par*** | | | | | | | |
-| Distrito — dentro de Centro-izq | $-0.09$ | $-0.80$ | $-0.48$ | $+0.73^{*}$ | $+0.18$ | $-0.74$ | $+0.30$ |
-| Distrito — dentro de Derecha | $+1.00^{***}$ | $+1.36^{***}$ | $+0.42$ | $+0.41^{***}$ | $+0.08$ | $+0.23$ | $+0.88^{*}$ |
-| Distrito — dentro de Izquierda | $-0.64^{*}$ | $-0.48^{*}$ | $+0.45$ | $-0.45^{***}$ | $-0.29$ | $-0.45^{*}$ | $-0.04$ |
-| Distrito — dentro de Otras (locales) | $+1.98^{+}$ | --- | $-1.92^{**}$ | --- | $-0.29$ | $+0.26$ | --- |
-| Distrito — dentro de PPOO | $-0.07$ | $+0.13$ | $-0.03$ | $-0.27^{+}$ | $+0.30$ | $-0.03$ | $+0.19$ |
-| Distrito — entre bloques | $+0.54^{***}$ | $+0.28^{*}$ | $+0.67^{**}$ | $+0.39^{***}$ | $+0.47^{***}$ | $+0.34^{*}$ | $+0.46^{**}$ |
-| ***— Perfil pre-Convención: mismo estatus, según el bloque del par*** | | | | | | | |
-| Abogado — dentro de Centro-izq | $+0.11$ | $+0.11$ | $+0.13$ | $-0.03$ | $+0.15^{*}$ | $-0.26$ | $-0.00$ |
-| Abogado — dentro de Derecha | $-0.11$ | $-0.15^{**}$ | $-0.01$ | $+0.01$ | $+0.10$ | $+0.13^{*}$ | $-0.06$ |
-| Abogado — dentro de Izquierda | $-0.07$ | $+0.06$ | $+0.02$ | $+0.06^{+}$ | $+0.00$ | $+0.11^{*}$ | $-0.07$ |
-| Abogado — dentro de Otras (locales) | $+0.12$ | $-0.11$ | $-0.09$ | $+0.09^{+}$ | $-0.00$ | $-0.13$ | $-0.15$ |
-| Abogado — dentro de PPOO | $+0.06$ | $+0.24$ | $+0.10$ | $-0.26^{+}$ | $+0.20^{*}$ | $-0.21$ | $-0.04$ |
-| Abogado — entre bloques | $+0.06$ | $-0.08^{*}$ | $+0.02$ | $+0.04^{*}$ | $-0.05^{+}$ | $+0.07^{+}$ | $+0.06^{+}$ |
-| Experiencia — dentro de Centro-izq | $+0.11$ | $-0.03$ | $+0.09$ | $+0.09^{**}$ | $-0.09$ | $-0.01$ | $+0.12$ |
-| Experiencia — dentro de Derecha | $-0.13$ | $-0.14$ | $-0.03$ | $+0.05$ | $-0.14$ | $+0.00$ | $-0.11$ |
-| Experiencia — dentro de Izquierda | $+0.12^{+}$ | $+0.13^{*}$ | $+0.09$ | $+0.11^{**}$ | $+0.04^{+}$ | $+0.06$ | $+0.00$ |
-| Experiencia — dentro de Otras (locales) | $-0.25$ | $-0.26$ | $+11.07^{***}$ | $+0.05$ | $+8.13^{***}$ | $-0.20$ | $-0.30$ |
-| Experiencia — dentro de PPOO | $+0.06$ | $+0.00$ | $-0.08$ | $-0.05$ | $-0.11$ | $-0.10$ | $-0.05$ |
-| Experiencia — entre bloques | $+0.04$ | $+0.06^{+}$ | $+0.03$ | $+0.06^{**}$ | $+0.04^{*}$ | $+0.04$ | $+0.04$ |
-| Género — dentro de Centro-izq | $-0.08$ | $-0.10$ | $-0.07$ | $+0.00$ | $+0.02$ | $-0.02$ | $+0.05$ |
-| Género — dentro de Derecha | $+0.14^{*}$ | $+0.03$ | $+0.05$ | $-0.06$ | $+0.04$ | $-0.03$ | $+0.09$ |
-| Género — dentro de Izquierda | $-0.12$ | $-0.03$ | $-0.06$ | $-0.03$ | $-0.02$ | $-0.04$ | $-0.09$ |
-| Género — dentro de Otras (locales) | $-0.21$ | $-0.26$ | $-0.61$ | $-0.20^{**}$ | $-0.38^{*}$ | $+0.19$ | $-0.37$ |
-| Género — dentro de PPOO | $-0.11$ | $-0.50$ | $-1.77$ | $-0.60^{**}$ | $-1.64^{***}$ | $+0.04$ | $-0.26$ |
-| Género — entre bloques | $+0.04$ | $+0.12^{**}$ | $+0.20^{*}$ | $+0.13^{***}$ | $+0.12^{***}$ | $+0.08^{+}$ | $+0.11^{*}$ |
-| Rango de grado por documento | $-0.09$ | $-0.57^{**}$ | $-0.23$ | $-0.05$ | $-0.38^{*}$ | $-0.27$ | $+0.04$ |
 | Rango de edad por documento (décadas) | $-0.29$ | $+0.08$ | $-0.46$ | $+0.06$ | $-0.57^{**}$ | $-0.02$ | $+0.01$ |
-| ***— Estructura (más allá de los atributos)*** | | | | | | | |
+| Rango de grado por documento | $-0.09$ | $-0.57^{**}$ | $-0.23$ | $-0.05$ | $-0.38^{*}$ | $-0.27$ | $+0.04$ |
 | Firmadores seriales (`gwb1degree`) | $-0.42$ | $-1.19^{**}$ | $-0.10$ | $-6.94^{+}$ | $-1.89^{***}$ | $+1.22^{*}$ | $-0.39$ |
 | Parejas repetidas (`gwdsp`) | $-0.47^{***}$ | $-0.31^{***}$ | $-0.43^{***}$ | $-0.16^{***}$ | $-0.23^{***}$ | $-0.38^{***}$ | $-0.25^{***}$ |
 
