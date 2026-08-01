@@ -106,9 +106,9 @@ Advertencias prácticas de esa literatura, aplicadas a nuestro caso:
 
 **La decisión (2026-07-10), tras verificación con instalación y benchmark local.** `amorem` ("Augmented Modelling of Relational Events") **está en CRAN** — v1.0.0 publicada el 2026-06-29, checks de CRAN limpios, 50 archivos de test, y viene del mismo grupo que la literatura RHEM (Boschi, Lerner & Wit 2025, arXiv:2509.05289). Verificado en esta máquina: `hyperedge_log(I, J, time)` acepta exactamente nuestro formato (conjuntos de firmantes, no dirigido), `hyperedge_features()` calcula `subrep_1` (actividad), `subrep_2` (familiaridad diádica) y `activity` (repetición del conjunto completo), y `rem(..., method = "clogit", case =, stratum =)` estima la verosimilitud caso-control con `survival::clogit` — ajuste en centésimas de segundo.
 
-**Lo que falta y cómo se cubre** (la "capa fina", ~100 líneas, **ya escrita en `code/26`**): (a) el muestreador de controles de `amorem` es solo diádico → sorteamos nosotros $m$ coaliciones del mismo tamaño entre los 154; (b) las covariables de composición (dispersión ideológica del grupo, proporción misma lista, misma comisión) se calculan a mano por candidato — ya lo hacíamos en el clogit de M1; (c) el `closure` poliádico no está en el catálogo → codificarlo sobre el log si un revisor lo pide, o correr `eventnet` una vez como verificación.
+**Lo que falta y cómo se cubre** (la "capa fina", ~100 líneas, **ya escrita en `old-version/scripts/26-rhem-pilot.R`**): (a) el muestreador de controles de `amorem` es solo diádico → sorteamos nosotros $m$ coaliciones del mismo tamaño entre los 154; (b) las covariables de composición (dispersión ideológica del grupo, proporción misma lista, misma comisión) se calculan a mano por candidato — ya lo hacíamos en el clogit de M1; (c) el `closure` poliádico no está en el catálogo → codificarlo sobre el log si un revisor lo pide, o correr `eventnet` una vez como verificación.
 
-**Piloto de timing ejecutado sobre los datos reales (2026-07-14; `code/26-rhem-pilot.R`).** Escalera mínimo→complejo con los 487 hipereventos $\leq 16$:
+**Piloto de timing ejecutado sobre los datos reales (2026-07-14; `old-version/scripts/26-rhem-pilot.R`).** Escalera mínimo→complejo con los 487 hipereventos $\leq 16$:
 
 | Nivel | Configuración | Tiempo |
 |:---|:---|:-:|
@@ -153,7 +153,7 @@ Esta sección fija, pieza por pieza, el run real — con los datos de fechas que
 
 ## 9.1 El reloj: las fechas de ingreso de las ICC
 
-**Qué tenemos.** El snapshot `data/raw/initiative_submission_dates.csv` (extraído de CPT `submitted_initiatives` con `code/27`; el pipeline nunca lee de CPT en runtime) contiene las **996 ICC** con su fecha de ingreso a la plataforma (**916 con fecha**; 78 sin dato en el origen y 2 con día irrecuperable), el **autor principal** (`autor_matched`, ya armonizado a nuestros 154 nombres) y los firmantes. De nuestras **487 iniciativas de análisis** ($\leq 16$, D8), **448 (92%) quedan fechadas**; 34 cruzan pero sin fecha y 5 no cruzan (ids anómalos heredados de `sources`). Limpieza documentada con flag `fecha_corregida`: 53 fechas tenían typos evidentes de año ("enero de *2021*", "diciembre de *2022*" — imposibles: la plataforma operó de nov-2021 al 1-feb-2022) y un año truncado ("202"); corregidas a la ventana real. Resultado: rango **2021-11-03 → 2022-02-02**, cero anomalías.
+**Qué tenemos.** El snapshot `data/raw/initiative_submission_dates.csv` (extraído de CPT `submitted_initiatives` con `code/20-extract-initiative-dates.py`; el pipeline nunca lee de CPT en runtime) contiene las **996 ICC** con su fecha de ingreso a la plataforma (**916 con fecha**; 78 sin dato en el origen y 2 con día irrecuperable), el **autor principal** (`autor_matched`, ya armonizado a nuestros 154 nombres) y los firmantes. De nuestras **487 iniciativas de análisis** ($\leq 16$, D8), **448 (92%) quedan fechadas**; 34 cruzan pero sin fecha y 5 no cruzan (ids anómalos heredados de `sources`). Limpieza documentada con flag `fecha_corregida`: 53 fechas tenían typos evidentes de año ("enero de *2021*", "diciembre de *2022*" — imposibles: la plataforma operó de nov-2021 al 1-feb-2022) y un año truncado ("202"); corregidas a la ventana real. Resultado: rango **2021-11-03 → 2022-02-02**, cero anomalías.
 
 **Por qué las fechas importan tanto en este modelo** — cuatro razones, de la más obvia a la más fina:
 
@@ -198,7 +198,7 @@ Por el piloto (§6): **~4 min por estimación** (8 cores), **~40 min** el protoc
 
 # 10. El run real, contado en fácil (2026-07-14)
 
-Esta sección reescribe los resultados como se los contaría a un compañero de doctorado que no ha seguido el proyecto. Los archivos: `code/28-rhem-run.R`, `results/tables/RHEM_summary.csv` (tabla principal), `RHEM_aux.csv` (lecturas auxiliares).
+Esta sección reescribe los resultados como se los contaría a un compañero de doctorado que no ha seguido el proyecto. Los archivos: `code/21-rhem-run.R`, `results/tables/RHEM_summary.csv` (tabla principal), `RHEM_aux.csv` (lecturas auxiliares).
 
 ## 10.1 Qué hicimos, en dos párrafos
 
@@ -323,7 +323,7 @@ Y la pregunta de fondo — "¿el 154×947 sigue siendo el modelo ansiado?" — t
 
 El plan ya está andando:
 
-1. **Esta noche** (lanzado hoy con `nohup`, script `code/43-bipartite-mcmc-overnight.R`): MCMLE completo de las siete comisiones + el agregado, con presupuesto generoso (60 iteraciones, muestras de 8.192, 8 cadenas), guardando cada resultado apenas termina (un corte a medias no pierde nada). Salida en `results/tables/M1_bipartite_mcmc_overnight.csv` y los `.rds` de cada ajuste.
+1. **Esta noche** (lanzado hoy con `nohup`, script `old-version/scripts/43-bipartite-mcmc-overnight.R`): MCMLE completo de las siete comisiones + el agregado, con presupuesto generoso (60 iteraciones, muestras de 8.192, 8 cadenas), guardando cada resultado apenas termina (un corte a medias no pierde nada). Salida en `results/tables/M1_bipartite_mcmc_overnight.csv` y los `.rds` de cada ajuste.
 2. **Validación mañana**: si los puntos MCMLE quedan cerca de los MPLE (lo esperable), la Tabla 8 del reporte se re-etiqueta con los EE válidos y el asunto queda cerrado. Si se alejan, tenemos un problema más interesante que contar.
 3. **Mediano plazo**: `ergm.multi` con intercepto por red y homofilia común como "el número único por término" del paper; y si algún referee pide EE para MPLE, bootstrap por iniciativa (la maquinaria del script 25 sirve tal cual).
 4. **Lo que no haremos**: perseguir el agregado de intercepto único (modelo equivocado) ni modificar `ergm` (no es el cuello).

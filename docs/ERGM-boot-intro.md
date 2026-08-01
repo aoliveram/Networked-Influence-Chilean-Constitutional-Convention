@@ -1,7 +1,7 @@
 ---
 title: "ERGM con bootstrap por iniciativas"
 subtitle: "Introducción pedagógica para el proyecto Networked Influence — qué hace el bootstrap, por qué responde al problema de los cliques, y en qué se diferencia (y por qué) del logit condicional"
-author: "Documento de trabajo del proyecto (M1); acompaña a code/23 y code/25"
+author: "Documento de trabajo del proyecto (M1); acompaña a old-version/scripts/23-ergm-bootstrap-pilot.R y old-version/scripts/25-ergm-initiative-bootstrap.R"
 date: \today
 geometry: "margin=2.5cm"
 fontsize: 10pt
@@ -40,7 +40,7 @@ con estadísticas $g(w)$ del tipo sum, nodematch, absdiff y nodecov, y referenci
 
 $$w_{ij} \sim \text{Poisson}\big(\exp(\theta^\top x_{ij})\big) \quad \text{independientes},$$
 
-una regresión de Poisson sobre las 11.781 díadas. Lo verificamos empíricamente (`code/23`): los coeficientes del `glm` coinciden con el MCMLE archivado hasta la tercera decimal (max $|\Delta| = 0.0017$). El aparato MCMC no aportaba nada para esta especificación — solo se vuelve necesario con términos **estructurales** (transitividad, grados), que hacen que la probabilidad de un lazo dependa de otros lazos (§7).
+una regresión de Poisson sobre las 11.781 díadas. Lo verificamos empíricamente (`old-version/scripts/23-ergm-bootstrap-pilot.R`): los coeficientes del `glm` coinciden con el MCMLE archivado hasta la tercera decimal (max $|\Delta| = 0.0017$). El aparato MCMC no aportaba nada para esta especificación — solo se vuelve necesario con términos **estructurales** (transitividad, grados), que hacen que la probabilidad de un lazo dependa de otros lazos (§7).
 
 Esto deja el diagnóstico en limpio: el problema del ERGM proyectado nunca fue el estimador puntual (es un MLE razonable de tasas de co-ocurrencia), sino su **matriz de varianza**, calculada como si las celdas fueran independientes cuando la iniciativa las fabrica en bloques.
 
@@ -69,7 +69,7 @@ $$\widehat{\text{EE}}_{boot}(\hat\theta_k) = \sqrt{\tfrac{1}{B-1}\textstyle\sum_
 - **La unidad de re-muestreo coincide con la unidad de independencia.** Al sortear iniciativas completas, los $\binom{|S_a|}{2}$ pares de cada evento viajan siempre juntos: entran juntos o salen juntos de cada réplica. El bootstrap *nunca* trata las díadas de un clique como información separable — que es precisamente el error de la verosimilitud ingenua. Formalmente, la varianza bootstrap de $w_{ij}$ y la covarianza entre $w_{ij}$ y $w_{kl}$ heredan la estructura del proceso de eventos: dos díadas que comparten iniciativas quedan correlacionadas exactamente en la medida en que las comparten.
 - **Resuelve lo que el cluster-robusto no puede.** Como las "pertenencias a cluster" se solapan (una díada vive en muchas iniciativas), no hay agrupación válida de filas; re-muestrear el *generador* (los eventos) es la generalización natural del cluster bootstrap a dependencia solapada.
 - **Es agnóstico al modelo de varianza.** No usa la varianza Poisson para nada: si los pesos están sobredispersos, subdispersos o correlacionados por bloques, el bootstrap lo captura, porque solo re-usa los eventos observados.
-- **El precio quedó medido.** En nuestros datos los EE honestos son **2 a 4 veces** los ingenuos (`code/25`, $B = 1000$, ~20 s): la afiliación pasa de EE 0.012 a 0.047, la distancia ideológica de 0.024 a 0.091. Los $|z|$ bajan de 30--130 a 5--30 — y aun así **todas las homofilias sustantivas conservan IC lejos de cero**. La corrección era necesaria; los hallazgos la sobreviven.
+- **El precio quedó medido.** En nuestros datos los EE honestos son **2 a 4 veces** los ingenuos (`old-version/scripts/25-ergm-initiative-bootstrap.R`, $B = 1000$, ~20 s): la afiliación pasa de EE 0.012 a 0.047, la distancia ideológica de 0.024 a 0.091. Los $|z|$ bajan de 30--130 a 5--30 — y aun así **todas las homofilias sustantivas conservan IC lejos de cero**. La corrección era necesaria; los hallazgos la sobreviven.
 
 ## 3.3 Qué supone (y qué no)
 
@@ -117,7 +117,7 @@ la misma aritmética del contraste OLS-agrupado vs. efectos-fijos de M2. La lect
 **En principio sí; en la práctica, en estos datos, no — y lo medimos.**
 
 - *La promesa.* La gracia del ERGM es que $g(w)$ puede incluir términos **endógenos**: transitividad (`transitiveweights`), heterogeneidad de grados, estrellas — "la red explicando la red". Eso es lo que ninguna regresión diádica ni ningún clogit de menús puede expresar.
-- *El costo.* Con cualquier término endógeno la verosimilitud **deja de factorizar** ($\kappa(\theta)$ vuelve a acoplar todas las celdas) y cada ajuste exige MCMC. El bootstrap multiplica ese costo por $B$: nuestro piloto (`code/23`) mostró que un ajuste *corto* (3 iteraciones MCMLE) con `transitiveweights` no completa ni su primera iteración en 35 minutos — un bootstrap estructural de $B = 200$ costaría **cientos de horas** incluso en 8 núcleos. A eso se suma el riesgo documentado de **degeneración** (los tres intentos del ERGM bipartito fallaron por eso), que dentro de un loop de bootstrap se vuelve inmanejable: réplicas que no convergen contaminan silenciosamente la distribución.
+- *El costo.* Con cualquier término endógeno la verosimilitud **deja de factorizar** ($\kappa(\theta)$ vuelve a acoplar todas las celdas) y cada ajuste exige MCMC. El bootstrap multiplica ese costo por $B$: nuestro piloto (`old-version/scripts/23-ergm-bootstrap-pilot.R`) mostró que un ajuste *corto* (3 iteraciones MCMLE) con `transitiveweights` no completa ni su primera iteración en 35 minutos — un bootstrap estructural de $B = 200$ costaría **cientos de horas** incluso en 8 núcleos. A eso se suma el riesgo documentado de **degeneración** (los tres intentos del ERGM bipartito fallaron por eso), que dentro de un loop de bootstrap se vuelve inmanejable: réplicas que no convergen contaminan silenciosamente la distribución.
 - *La flexibilidad que sí es real y barata.* El bootstrap por iniciativas no está casado con el glm: **cualquier funcional de los eventos** se puede re-muestrear con el mismo esquema y costo trivial — centralidades, constraint de Burt, el índice E-I de Q5, la regresión de brokerage de D9. Es una *máquina general de inferencia honesta* para todos los descriptivos de la red proyectada, y esa es probablemente su contribución más útil al paper.
 - *El lugar correcto de la dependencia estructural.* Para "más términos de red" en serio (repetición, cierre, actividad endógena), la ruta viable en estos datos no es el ERGM-boot sino el **RHEM** (`docs/RHEM-intro.pdf`): su verosimilitud caso-control estima efectos estructurales *sin* constante de normalización global, sin MCMC y sin degeneración, sobre la unidad nativa (el evento fechado).
 

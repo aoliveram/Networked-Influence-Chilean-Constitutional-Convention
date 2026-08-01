@@ -191,7 +191,7 @@ if __name__ == "__main__":
 
     # ------------------------------------------------------------------
     # Registro de iniciativas: DESDE LA PLATAFORMA (decisión 2026-07-20).
-    # data/raw/platform_initiatives.csv (refresco code/27) trae las 995 ICC
+    # data/raw/platform_initiatives.csv (refresco code/20-extract-initiative-dates.py) trae las 995 ICC
     # presentadas, con firmantes armonizados y fecha_iso al 100%. El registro
     # TRACK anterior (solo ICC que entraron a informes de comisión, ~528)
     # queda superado; TRACK sigue siendo la fuente de artículos e indicaciones.
