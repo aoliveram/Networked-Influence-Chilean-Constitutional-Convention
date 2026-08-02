@@ -272,6 +272,7 @@ El bootstrap paramétrico del dynIRT (code/29-dynirt-param-bootstrap.R) y su pro
 - Auditoría en CPT: 46 iniciativas >16 firmantes; 24 grupos de texto casi duplicado; 210 indicaciones sueltas; 142 linajes sin autores.
 - IV.Q7 (color del borrador): drag_i y serie X_t.
 - Decisión editorial — **resuelta**: con la red-plataforma el hallazgo M2-régimen reapareció *refinado* — no como lag>lead en niveles (siguen simétricos) sino en el horse race con $\theta$ era-2/3 (lag $+0.016$, $p=.007$, junto a la innovación) — y fue blindado por `code/39-norms-influence-robustness.R` (propagación del error de medición: $z=2.53$ con EE total de Rubin; sub-ventanas: feb--mar fuerte $+0.021$, abr--may marginal $+0.007$). Promovido a §4.1 (Tablas 9b/9c), a la síntesis y al beamer como *excepción acotada y fechada*; el titular sigue siendo selección.
+- Test futuro (Battaglini et al. 2020, Prop. 1): computar la **centralidad de Katz-Bonacich** $b = (I - \phi G)^{-1}A$ con $A = X\hat\beta$ del SDM — los valores ajustados del SDM *son* esa centralidad (equivalencia formal juego de esfuerzo $\to$ SAR). Entregable: ranking de convencionales por efectividad de equilibrio + correlación con el éxito observado; una tarde usando la inversa densa de `code/35-sdm-impacts.R`. Sirve como puente teórico del paper; el lenguaje de 'spillover de equilibrio' queda condicionado al tratamiento de endogeneidad (ruta alumni-BCN).
 
 # Anexo — Bitácora de respuestas ejecutadas (cerradas; referencia histórica)
 

@@ -493,7 +493,7 @@ Y los tres modelos de decaimiento — los únicos de la Tabla 9 que rozan la sig
 |:---|:-:|:-:|:-:|
 | Exposición rezagada $\hat\lambda$ | $+0.008^{+}$ | $+0.008^{*}$ | $+0.007^{+}$ |
 | (EE) | (0.004) | (0.004) | (0.004) |
-| Reversión a la media $\hat\beta$ ($\theta_{i,t-1}$) | $-0.663^{***}$ | $-0.663^{***}$ | $-0.663^{***}$ |
+| Posición rezagada $\theta_{i,t-1}$ ($\hat\beta$, reversión a la media) | $-0.663^{***}$ | $-0.663^{***}$ | $-0.663^{***}$ |
 | (EE) | (0.024) | (0.024) | (0.024) |
 | N (persona-onda) | 4.355 | 4.355 | 4.355 |
 | $R^2$ within | 0.353 | 0.353 | 0.353 |
@@ -524,6 +524,18 @@ La Figura 11 resume la sección completa en dos paneles. En (a), entre personas,
 | $\theta$ era-2/3 | Horse race: innovación del futuro | $+0.053$ | 0.022 | 0.014 | 3.038 |
 
 Con el termómetro del propio régimen el resultado cambia de naturaleza: la exposición pasada sobrevive al test limpio ($+0.016$, $p = 0.007$) *junto a* la innovación ($+0.053$) — las dos cosas a la vez: el componente de selección sigue ahí (y grande), y aparece un componente de acomodo hacia el vecindario que el $\theta$ estándar no dejaba ver, probablemente porque mezclar dos regímenes de agenda en la estimación de $\theta$ diluye justo el movimiento fino dentro de la era.
+
+El horse race, reportado completo (los dos termómetros, todas las covariables del modelo):
+
+**Tabla 9e — El horse race completo: $\Delta\theta_{i,t} = \alpha_i + \beta\,\theta_{i,t-1} + \lambda_{lag}\,E_{i,t-1} + \lambda_{innov}\,\tilde E_{i,t+1} + \varepsilon_{it}$ (FE por convencional, EE cluster).**
+
+| | $\theta$ estándar | $\theta$ era-2/3 |
+|:---|:-:|:-:|
+| Posición rezagada $\theta_{i,t-1}$ ($\hat\beta$) | $-0.651^{***}$ (0.026) | $-0.723^{***}$ (0.029) |
+| Exposición pasada $\hat\lambda_{lag}$ | $+0.002$ (0.005), $p=.71$ | $\mathbf{+0.016^{**}}$ (0.006), $p=.007$ |
+| Innovación del futuro $\hat\lambda_{innov}$ | $+0.061^{**}$ (0.023), $p=.007$ | $+0.053^{*}$ (0.022), $p=.014$ |
+| N (persona-onda) | 3.328 | 3.038 |
+| $R^2$ within | 0.366 | 0.404 |
 
 Antes de creerle, lo sometimos a los dos ataques obvios (Tabla 9c). Primero: ¿no será un artefacto del termómetro nuevo? El $\theta$ era-2/3 se estima con menos votaciones que el estándar, así que carga más error de medición. Lo propagamos entero — 50 réplicas que re-simulan las votaciones de la era desde el propio modelo, re-estiman el dynIRT, reconstruyen el panel y re-corren el *horse race* —: la dispersión del lag entre réplicas (0.0028) es la mitad del error muestral (0.0056), la media entre réplicas ($+0.027$) queda incluso por encima del estimado base — si algo, el error de medición *atenúa* —, y con el error total de Rubin el lag queda en $z = 2.53$ ($p \approx 0.011$). Segundo: ¿cuándo ocurre? Partimos la era en dos. En el arranque (feb--mar) el acomodo es fuerte ($+0.021$, EE 0.008) y la innovación no se distingue de cero; hacia el final (abr--may) el acomodo se desvanece a marginal ($+0.007$, EE 0.004, $p \approx 0.08$) y vuelve a mandar la selección (innovación $+0.041$, $p = 0.03$).
 
