@@ -138,6 +138,7 @@ Target: 18 minutes of talk + 7 of questions. Slide numbers are *logical* slides 
 ## Slide 16 — The decay hint and its shadow (12:30–13:15)
 
 > One specification grazes significance: exposure with temporal decay — recent collaboration weighted more. Point zero zero eight, p around point zero four.
+> The full models are on the slide: the fit is carried almost entirely by mean reversion — minus point six six, identical across the three decays — and the exposure adds this small marginal signal on top.
 > But before you get excited: the falsification fires too. *Future* exposure "predicts" today's change just as well — plus point zero one zero, p point zero three. When the future predicts the present, that's not influence — that's selection: I sign with people I'm already moving toward.
 
 ---
@@ -244,6 +245,5 @@ Target: 18 minutes of talk + 7 of questions. Slide numbers are *logical* slides 
 - *"District effect for the right — gerrymander of few districts?"* → No: the right is the most spread-out bloc (26 districts, one 4-member delegation in eastern Santiago); it has 14 possible same-district pairs against the left's 42. Usage, not opportunity.
 
 ### Pending before the talk
-- Fill the reversion coefficient (β) and within-R² rows in the decay table (slide 16) — quick re-run of the M2 windows script.
 - Author's review of the data infographic (slide 3).
 - Decide whether Table B pass I needs the "local lists" row highlighted too.

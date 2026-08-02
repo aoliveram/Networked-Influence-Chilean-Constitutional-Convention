@@ -58,7 +58,7 @@
 
 % ---------------- Table A: profile homophily by bloc (macro, marks inside) ----
 \newcommand{\TablaPerfil}{%
-\begin{center}\tiny\setlength{\tabcolsep}{3.5pt}\renewcommand{\arraystretch}{0.92}
+\begin{center}\tiny\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.12}
 \begin{tabular}{lccccccc}
 \toprule
 Same status, by bloc of the pair & C1 & C2 & C3 & C4 & C5 & C6 & C7 \\
@@ -236,45 +236,35 @@ s(y) = \Big(\underbrace{\sum_{i,a} y_{ia}}_{\text{edges}},\;
 \end{frame}
 
 % ------------------------------------------------------------------ 8 TABLE A (4 overlays)
-\begin{frame}{Profile homophily, by bloc of the pair (I): territory}
-\nota{District: the right's glue, suppressed in the left, the bridge across blocs (14 vs 42 possible pairs).}
-\vspace{-0.22cm}
+\begin{frame}[plain]
 \TablaPerfil
 \begin{tikzpicture}[remember picture, overlay]\ovalmark{distL}{distR}\end{tikzpicture}
 \end{frame}
 
-\begin{frame}{Profile homophily, by bloc of the pair (II): gender}
-\nota{Gender: null or negative \emph{within} blocs; small and positive \emph{across} blocs.}
-\vspace{-0.22cm}
+\begin{frame}[plain]
 \TablaPerfil
 \begin{tikzpicture}[remember picture, overlay]\ovalmark{genL}{genR}\end{tikzpicture}
 \end{frame}
 
-\begin{frame}{Profile homophily, by bloc of the pair (III): the lawyer null}
-\nota{The law degree organizes co-signing in \emph{no} bloc.}
-\vspace{-0.22cm}
+\begin{frame}[plain]
 \TablaPerfil
 \begin{tikzpicture}[remember picture, overlay]\ovalmark{abogL}{abogR}\end{tikzpicture}
 \end{frame}
 
-\begin{frame}{Profile homophily, by bloc of the pair (IV): experience lives in the left}
-\nota{Experience clusters only inside the left (brackets = quasi-separation; EMPTY = never observed).}
-\vspace{-0.22cm}
+\begin{frame}[plain]
 \TablaPerfil
 \begin{tikzpicture}[remember picture, overlay]\ovalmark{expL}{expR}\end{tikzpicture}
 \end{frame}
 
 % ------------------------------------------------------------------ 9 TABLE B (2 overlays)
-\begin{frame}{Bloc discipline and structure (I): contingents stay compact}
+\begin{frame}[plain]
 \TablaControles
 \begin{tikzpicture}[remember picture, overlay]\ovalmark{rngL}{rngR}\end{tikzpicture}
-\nota{Where significant, the own-contingent range is negative — the left in C4/C5 ($-3.7$, $-3.8$), local lists in three commissions: blocs add signers who do \emph{not} stretch their delegation's ideological range.}
 \end{frame}
 
-\begin{frame}{Bloc discipline and structure (II): the tabula rasa signature}
+\begin{frame}[plain]
 \TablaControles
 \begin{tikzpicture}[remember picture, overlay]\ovalmark{dspL}{dspR}\end{tikzpicture}
-\nota{\texttt{gwdsp} $< 0$ in all seven commissions: conditional on activity, bloc mixing and all homophilies, \emphr{repeated pairs are under-used} — coalitions re-form with fresh pairs. In a legislature with entrenched partnerships the sign would be positive; here there was no inherited stock of partnerships, and the model detects its absence.}
 \end{frame}
 
 \sectionslide{RQ2 — People}{Does the network move positions (RQ2a) or behavior (RQ2b)?}
@@ -309,9 +299,11 @@ $$E_{i,t} = \frac{\sum_{j \neq i} w_{ij,t}\,\theta_{j,t}}{\sum_{j \neq i} w_{ij,
  & $\lambda_w = 0.25$ & $\lambda_w = 0.50$ & $\lambda_w = 0.75$ \\
 \midrule
 Lagged exposure $\hat\lambda$ & $+0.008$ & $+0.008$ & $+0.007$ \\
-SE (clustered) & $0.004$ & $0.004$ & $0.004$ \\
-$p$ & $0.051$ & $0.042$ & $0.078$ \\
+\quad SE (clustered); $p$ & $0.004$;\ $.051$ & $0.004$;\ $.042$ & $0.004$;\ $.078$ \\
+Mean reversion $\hat\beta$ ($\theta_{i,t-1}$) & $-0.663^{***}$ & $-0.663^{***}$ & $-0.663^{***}$ \\
+\quad SE (clustered) & $0.024$ & $0.024$ & $0.024$ \\
 N (person-waves) & 4,355 & 4,355 & 4,355 \\
+$R^2$ within & 0.353 & 0.353 & 0.353 \\
 \bottomrule
 \end{tabular}
 \end{center}
