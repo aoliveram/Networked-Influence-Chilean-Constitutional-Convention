@@ -1,20 +1,15 @@
 # =============================================================================
-# 46-m2-era23-family.R  (ronda polnet26: elevar la familia era-2/3 como los
-# modelos principales de RQ2a — de lo básico al horse race, más un modelo
-# extendido con variables de la historia interna de la CC)
-# Todos con theta de régimen homogéneo (era 2/3). Modelos:
-#   M0: delta ~ theta_lag + E_lag                       (básico)
-#   M1: delta ~ theta_lag + E_lead                      (falsificación)
-#   M2: delta ~ theta_lag + E_lag + innov               (horse race, = Tabla 9e)
-#   M3: M2 + FE de fecha de onda + actividad rezagada   (shocks comunes + carga)
-#   M4: theta_lag + E_own_lag + E_cross_lag + innov + FE fecha + actividad
-#       (la exposición partida: ¿tira el propio bloque o el resto?)
-# Variables nuevas:
-#   - FE de fecha (mu_t): absorbe los shocks comunes de la era (plebiscito,
-#     acuerdos transversales de abril-mayo).
-#   - actividad_lag: co-firmas NUEVAS de i en la onda anterior (rowSums(dW)).
-#   - E_own / E_cross: exposición a co-firmantes del MISMO bloque vs de OTROS
-#     bloques (los 5 bloques del 44-clogit... hoy 31-clogit-by-bloc.R).
+# 46-m2-era23-family.R  (v2, estructura del autor: M0 basico -> +FE fecha ->
+# +innovacion; y la correccion de TIMING: como el dynIRT suaviza a dos lados,
+# theta_{t+1} carga votos casi-contemporaneos al outcome -> innovacion tambien
+# desde t+2; y simetricamente el lag desde t-2 como robustez)
+# Todos con theta de regimen homogeneo (era 2/3):
+#   M0: delta ~ theta_lag + E_lag                        (basico)
+#   M1: M0 + FE de fecha de onda                         (shocks comunes)
+#   M2: M1 + innovacion desde t+1                        (horse race estandar)
+#   M2b: M1 + innovacion desde t+2                       (timing estricto)
+#   R1: M1 con E_lag desde t-2 + innovacion t+2          (ambos lados estrictos)
+#   A1 (anexo): exposicion partida propio/otros bloques + innov + FE fecha
 #
 # Output: results/tables/M2_era23_family.csv
 # =============================================================================
@@ -95,20 +90,42 @@ fitm <- function(d, f, label, terms) {
   out
 }
 
-# innovacion (misma construccion del 45) sobre la muestra con lead
+# leads/lags adicionales para el timing estricto
+mkvar <- function(x, k) ave(x, d$key, FUN = function(z) {
+  if (k > 0) c(tail(z, -k), rep(NA, k)) else c(rep(NA, -k), head(z, k)) })
+d$E_lead2 <- mkvar(d$E_reg, 2)     # exposicion en t+2
+d$E_lag2 <- mkvar(d$E_reg, -2)    # exposicion en t-2
+
+innovar <- function(d2, leadvar) {
+  pd <- pdata.frame(d2, index = "legislator")
+  aux <- plm(as.formula(paste(leadvar, "~ E_lag")), data = pd, model = "within")
+  as.numeric(residuals(aux))
+}
 d2 <- d[complete.cases(d[, c("delta", "theta_lag", "E_lag", "E_lead")]), ]
-pd <- pdata.frame(d2, index = "legislator")
-aux <- plm(E_lead ~ E_lag, data = pd, model = "within")
-d2$innov <- as.numeric(residuals(aux))
+d2$innov <- innovar(d2, "E_lead")
+d3 <- d[complete.cases(d[, c("delta", "theta_lag", "E_lag", "E_lead2")]), ]
+d3$innov2 <- innovar(d3, "E_lead2")
+d4 <- d[complete.cases(d[, c("delta", "theta_lag", "E_lag2", "E_lead2")]), ]
+pd4 <- pdata.frame(d4, index = "legislator")
+aux4 <- plm(E_lead2 ~ E_lag2, data = pd4, model = "within")
+d4$innov2b <- as.numeric(residuals(aux4))
+d5 <- d[complete.cases(d[, c("delta", "theta_lag", "E_own_lag", "E_cross_lag", "E_lead")]), ]
+d5$innov <- {
+  pd5 <- pdata.frame(d5, index = "legislator")
+  aux5 <- plm(E_lead ~ E_own_lag + E_cross_lag, data = pd5, model = "within")
+  as.numeric(residuals(aux5)) }
 
 res <- list(
   fitm(d,  delta ~ theta_lag + E_lag, "M0 basico", c("theta_lag", "E_lag")),
-  fitm(d,  delta ~ theta_lag + E_lead, "M1 falsificacion", c("theta_lag", "E_lead")),
-  fitm(d2, delta ~ theta_lag + E_lag + innov, "M2 horse race", c("theta_lag", "E_lag", "innov")),
-  fitm(d2, delta ~ theta_lag + E_lag + innov + factor(fecha) + act_lag, "M3 + FE fecha + actividad",
-       c("theta_lag", "E_lag", "innov", "act_lag")),
-  fitm(d2, delta ~ theta_lag + E_own_lag + E_cross_lag + innov + factor(fecha) + act_lag,
-       "M4 exposicion partida", c("theta_lag", "E_own_lag", "E_cross_lag", "innov", "act_lag")))
+  fitm(d,  delta ~ theta_lag + E_lag + factor(fecha), "M1 + FE fecha", c("theta_lag", "E_lag")),
+  fitm(d2, delta ~ theta_lag + E_lag + innov + factor(fecha), "M2 + innovacion t+1",
+       c("theta_lag", "E_lag", "innov")),
+  fitm(d3, delta ~ theta_lag + E_lag + innov2 + factor(fecha), "M2b innovacion t+2",
+       c("theta_lag", "E_lag", "innov2")),
+  fitm(d4, delta ~ theta_lag + E_lag2 + innov2b + factor(fecha), "R1 lag t-2 + innov t+2",
+       c("theta_lag", "E_lag2", "innov2b")),
+  fitm(d5, delta ~ theta_lag + E_own_lag + E_cross_lag + innov + factor(fecha),
+       "A1 anexo exposicion partida", c("theta_lag", "E_own_lag", "E_cross_lag", "innov")))
 tab <- do.call(rbind, res)
 write.csv(tab, file.path(RESULTS_TABLES, "M2_era23_family.csv"), row.names = FALSE)
 print(tab, row.names = FALSE, digits = 4)
