@@ -187,6 +187,8 @@ Target: 18 minutes of talk + 7 of questions. Slide numbers are *logical* slides 
 > Rho is point eight nine. So yes, "context matters" — and by itself that explains *nothing*. The interesting question is *what the context is*.
 > Two decompositions answer it. Your neighborhood's success is predictable from your *own* covariates with R-squared point eight one. And the only covariate that matters — distance to the pivot — *migrates* entirely from the person to the neighborhood when you go from OLS to the Durbin model: own distance, p point nine five; your neighborhood's distance, significant.
 > So the context is not some diffuse influence field. **The context is the coalition you stand in** — who they are and where they sit relative to the pivot. Success is a coalition good. And that's why we read rho as clustering, not as influence.
+>
+> And let me state our position plainly: taken together — the coupling, the covariate migration, and the coalition-level mechanism — **our evidence supports the network-influence view of success**: where you stand in the network shapes how well you do, beyond who you are. What we have not yet done is certify that causally; that requires instrumenting the network itself — the design is ready, and it's ongoing work.
 
 ---
 
