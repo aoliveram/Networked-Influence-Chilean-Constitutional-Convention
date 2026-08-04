@@ -441,118 +441,52 @@ La relación con 3.1 es de triangulación, no de redundancia — y con el híbri
 
 # 4. RQ2 — ¿Qué le hace la red a las personas?
 
-## 4.1 Posiciones: selección, no influencia — con una excepción en la era de normas
+## 4.1 Posiciones: la dinámica de la era de normas
 
-Si la red influyera sobre las ideas, la posición de tus co-firmantes debería arrastrar la tuya con el tiempo. Definimos la exposición de $i$ en la onda $t$ de su comisión como la posición media de sus co-firmantes, ponderada por la intensidad de la colaboración acumulada:
+¿La red mueve las posiciones? Esta sección responde usando *solo* el tramo del proceso donde las posiciones tenían espacio real para moverse: la **era de normas** (15-feb a 14-may-2022), cuando el Pleno votó contenido constitucional bajo la regla de 2/3. La decisión de restringirse a esa era tiene dos motivos. Primero, es donde vive la dinámica: antes de febrero se votaba reglamento y procedimiento por mayoría simple — otra agenda, otro juego. Segundo, el termómetro: las posiciones $\theta_{i,t}$ se estiman de los votos, y mezclar dos regímenes de agenda en una sola estimación diluye justo el movimiento fino que queremos medir; aquí todo usa el $\theta$ de **régimen homogéneo** — re-estimado exclusivamente con las votaciones de la era. (La ruta original — el panel completo con el $\theta$ estándar, que entrega un nulo global — queda íntegra en el Anexo A.)
 
-$$E_{i,t} = \frac{\sum_{j \neq i} w_{ij,t}\, \theta_{j,t}}{\sum_{j \neq i} w_{ij,t}},$$
+El modelo. La exposición de $i$ en la onda $t$ es la posición media de sus co-firmantes, ponderada por la intensidad de colaboración acumulada:
 
-donde $w_{ij,t}$ es el número de veces que $i$ y $j$ co-firmaron desde el inicio hasta la onda $t$ (las ondas son los informes de indicaciones de cada comisión; ver Figura 1), y $\theta_{j,t}$ es el voto revelado de $j$ en ese momento. El modelo de regresión estimado es un panel con efectos fijos individuales:
+$$E_{i,t} = \frac{\sum_{j \neq i} w_{ij,t}\,\theta_{j,t}}{\sum_{j \neq i} w_{ij,t}},$$
 
-$$\Delta\theta_{i,t} = \alpha_i + \beta\,\theta_{i,t-1} + \lambda\,E_{i,t-1} + \varepsilon_{it},$$
+y la familia de modelos es un panel de efectos fijos sobre el cambio de posición:
 
-donde $\Delta\theta_{i,t} = \theta_{i,t} - \theta_{i,t-1}$ es el cambio de posición, $\alpha_i$ absorbe todo lo estable de cada convencional (el estimador "within" usa solo la variación de cada persona respecto de su propia media), $\beta$ captura la reversión a la media y $\lambda$ es el parámetro de interés: si $\lambda > 0$, me muevo hacia donde está mi vecindario. Errores agrupados por convencional; 4.355 observaciones persona-onda.
+$$\Delta\theta_{i,t} \;=\; \alpha_i \;+\; \mu_t \;+\; \beta\,\theta_{i,t-1} \;+\; \lambda\,E_{i,t-1} \;+\; \lambda_{innov}\,\tilde E_{i,t+2} \;+\; \varepsilon_{it},$$
 
-La tabla completa, incluyendo las dos preguntas de robustez que importan — ¿cambia el resultado según la ventana temporal? (¿pudo la influencia operar temprano, sobre los novatos, y agotarse?) y ¿cambia según cuánta historia carga la exposición? (¿cuál es la "dosis" relevante?):
+donde cada pieza tiene un trabajo intuitivo: $\alpha_i$ (efecto fijo por convencional) absorbe todo lo estable de cada persona — el modelo solo usa cómo cada uno se mueve respecto de su propio promedio; $\mu_t$ (efecto fijo por fecha de onda) absorbe los *shocks comunes* de la era — el pánico de las encuestas, los acuerdos transversales de abril-mayo: todo lo que movía a todos a la vez; $\beta$ captura la reversión a la media; y $\lambda$ es el parámetro de interés: si $\lambda > 0$, me muevo hacia donde estaba mi vecindario.
 
-**Tabla 9 — M2: influencia de la exposición sobre el cambio de posición, por ventana temporal y dosis de exposición (FE por convencional).**
+**El reloj de las exposiciones merece su propio párrafo, porque es fácil equivocarse.** Las posiciones se estiman de los votos, así que con los votos emitidos en $t$ se calcula la posición — y por tanto la exposición — de $t{+}1$. Dos consecuencias. Hacia adelante: si queremos una "exposición futura" genuinamente futura — no contaminada por votos contemporáneos al cambio que estamos explicando — no basta $t{+}1$ (que se construyó con votos de $t$): hay que ir a $t{+}2$. Hacia atrás: si queremos saber qué influyó en un convencional cuando decidió cómo votar en $t$, habría que usar al menos los votos de $t{-}1$ — es decir, la exposición medida en $t$; pero usar la exposición contemporánea como explicación es demasiado contraintuitivo (y quien no lo encuentre contraintuitivo dirá, con razón, "ándate uno más atrás"), así que usamos los votos de $t{-}2$: la **exposición medida en $t{-}1$**. En resumen: rezago en $t{-}1$, innovación desde $t{+}2$. (La raíz técnica es la misma en ambas puntas: el dynIRT es un suavizador de dos lados, y $t{\pm}1$ queda demasiado cerca de la ventana del cambio. Y no es precaución de papel: si se usa la exposición contemporánea $E_{i,t}$ como regresor, los coeficientes se disparan a valores mecánicamente contaminados.)
 
-| Ventana temporal | Definición de exposición | $\hat\lambda$ | EE | $p$ | N |
-|:---|:---|:-:|:-:|:-:|:-:|
-| Completa | Acumulada desde T0 | $+0.007$ | 0.004 | $0.119$ | 4.355 |
-| Completa | Solo última onda | $+0.007$ | 0.013 | $0.60$ | 463 |
-| Completa | Últimas 2 ondas | $+0.003$ | 0.009 | $0.72$ | 1.504 |
-| Completa | Últimas 3 ondas | $-0.002$ | 0.007 | $0.76$ | 2.447 |
-| Completa | Decaimiento $\lambda_w = 0.25$ | $+0.008$ | 0.004 | $0.051$ | 4.355 |
-| Completa | Decaimiento $\lambda_w = 0.50$ | $+0.008$ | 0.004 | $0.042$ | 4.355 |
-| Completa | Decaimiento $\lambda_w = 0.75$ | $+0.007$ | 0.004 | $0.078$ | 4.355 |
-| Completa | Falsificación: exposición futura | $+0.010$ | 0.004 | $0.030$ | 3.329 |
-| Temprana (ondas $\leq$ 31-mar) | Acumulada | $+0.005$ | 0.007 | $0.50$ | 1.586 |
-| Temprana | Últimas 2 ondas | $+0.013$ | 0.014 | $0.35$ | 955 |
-| Temprana | Últimas 3 ondas | $+0.002$ | 0.010 | $0.81$ | 1.466 |
-| Temprana | Decaimiento $\lambda_w = 0.25$ | $+0.005$ | 0.007 | $0.46$ | 1.586 |
-| Temprana | Decaimiento $\lambda_w = 0.50$ | $+0.005$ | 0.007 | $0.48$ | 1.586 |
-| Temprana | Decaimiento $\lambda_w = 0.75$ | $+0.005$ | 0.007 | $0.49$ | 1.586 |
-| Temprana | Falsificación: exposición futura | $+0.006$ | 0.007 | $0.41$ | 1.587 |
-| Tardía (ondas $\geq$ 1-abr) | Acumulada | $+0.011$ | 0.005 | $0.018$ | 2.769 |
-| Tardía | Solo última onda | $-0.002$ | 0.018 | $0.92$ | 332 |
-| Tardía | Últimas 2 ondas | $-0.006$ | 0.008 | $0.45$ | 549 |
-| Tardía | Últimas 3 ondas | $-0.011$ | 0.008 | $0.21$ | 981 |
-| Tardía | Decaimiento $\lambda_w = 0.25$ | $+0.009$ | 0.004 | $0.032$ | 2.769 |
-| Tardía | Decaimiento $\lambda_w = 0.50$ | $+0.011$ | 0.004 | $0.008$ | 2.769 |
-| Tardía | Decaimiento $\lambda_w = 0.75$ | $+0.011$ | 0.004 | $0.011$ | 2.769 |
-| Tardía | Falsificación: exposición futura | $+0.010$ | 0.004 | $0.004$ | 1.742 |
+La *innovación* $\tilde E_{i,t+2}$ es la parte de la exposición futura que la pasada no contenía (el residuo within de $E_{t+2}$ sobre $E_{t-1}$). Es el test del árbitro contra la selección: si lo que llamamos "influencia" fuera en realidad que elijo co-firmantes hacia cuya posición ya me estoy moviendo, entonces *hacia dónde va* mi vecindario debería predecir mi cambio de hoy, y la exposición pasada debería morir al controlarla. Los tres modelos:
 
-Sobre las ventanas: la ventana ideal para la hipótesis "la influencia operó temprano sobre los nuevos" sería el primer mes de la Convención, pero ahí la red de co-firma no existía todavía (las primeras iniciativas son de noviembre; los primeros informes, de enero-febrero — Figura 1). Las ventanas factibles cortan la era de colaboración activa en sus dos primeros meses (febrero-marzo de 2022) y el resto (abril-junio). El patrón: en la ventana temprana no hay nada; en la tardía varios coeficientes se vuelven significativos ($+0.009$ a $+0.011$) — pero su falsificación también ($+0.010$, $p = 0.004$), y con la misma magnitud. La historia de los novatos susceptibles exigiría exactamente lo contrario (efecto temprano, falsificación limpia).
+**Tabla 9 — La familia de la era de normas: básico, shocks comunes, y el test del árbitro (FE por convencional; EE cluster por convencional).**
 
-Y los tres modelos de decaimiento — los únicos de la Tabla 9 que rozan la significancia — reportados completos:
+| | M0 básico | M1 + FE fecha | M2 + innovación $t{+}2$ |
+|:---|:-:|:-:|:-:|
+| Posición rezagada $\theta_{i,t-1}$ ($\hat\beta$) | $-0.699^{***}$ (0.027) | $-0.702^{***}$ (0.028) | $-0.755^{***}$ (0.038) |
+| Exposición pasada $\hat\lambda$ ($E_{i,t-1}$) | $+0.021^{***}$ (0.005) | $+0.020^{***}$ (0.005) | $\mathbf{+0.020^{**}}$ (0.007), $p=.003$ |
+| Innovación $\hat\lambda_{innov}$ ($\tilde E_{i,t+2}$) | — | — | $-0.002$ (0.018), $p=.91$ |
+| FE de fecha ($\mu_t$) | no | sí | sí |
+| N (persona-onda) | 4.065 | 4.065 | 2.011 |
+| $R^2$ within | 0.366 | 0.383 | 0.369 |
 
-**Tabla 9d — Los tres modelos de decaimiento, completos (ventana completa; FE por convencional, EE cluster por convencional).**
+Cómo leer la secuencia. **M0** establece la asociación básica: dentro de cada persona, moverse sigue a la exposición pasada ($+0.021$, $p < 10^{-4}$) — cerrar un 2% de la distancia al vecindario por onda. **M1** le quita la explicación más barata: no son los shocks comunes de la era — con efectos fijos de fecha el coeficiente casi no se mueve ($+0.020$). **M2** es el test decisivo: la innovación estrictamente futura no predice nada ($-0.002$, $p = .91$) y la exposición pasada queda en pie ($+0.020$, $p = .003$). La firma de la selección — el futuro "prediciendo" el presente — no sobrevive el reloj estricto; el componente de influencia sí. (La media-vuelta honesta: que la innovación a $t{+}2$ muera admite dos lecturas — que la selección aparente de los tests con $t{+}1$ era fuga contemporánea del suavizador, o que $t{+}2$ es un proxy demasiado lejano de hacia-dónde-va-el-vecindario. La primera favorece la influencia; la segunda solo dice que el test perdió filo. Ambas conviven con un hecho: el rezago no se cae.)
+
+¿Y si la memoria relacional no es acumulada sino que se desvanece? La exposición con *decaimiento* pondera más la colaboración reciente ($w_{ij}$ con pesos $\lambda_w^{t-s}$ sobre los incrementos de co-firma):
+
+**Tabla 9b — Los tres modelos de decaimiento en la era de normas (FE por convencional y por fecha; EE cluster).**
 
 | | $\lambda_w = 0.25$ | $\lambda_w = 0.50$ | $\lambda_w = 0.75$ |
 |:---|:-:|:-:|:-:|
-| Exposición rezagada $\hat\lambda$ | $+0.008^{+}$ | $+0.008^{*}$ | $+0.007^{+}$ |
-| (EE) | (0.004) | (0.004) | (0.004) |
-| Posición rezagada $\theta_{i,t-1}$ ($\hat\beta$, reversión a la media) | $-0.663^{***}$ | $-0.663^{***}$ | $-0.663^{***}$ |
-| (EE) | (0.024) | (0.024) | (0.024) |
-| N (persona-onda) | 4.355 | 4.355 | 4.355 |
-| $R^2$ within | 0.353 | 0.353 | 0.353 |
+| Posición rezagada $\theta_{i,t-1}$ ($\hat\beta$) | $-0.700^{***}$ (0.028) | $-0.701^{***}$ (0.028) | $-0.701^{***}$ (0.028) |
+| Exposición con decaimiento $\hat\lambda$ | $+0.017^{***}$ (0.004) | $+0.018^{***}$ (0.004) | $+0.019^{***}$ (0.005) |
+| FE de fecha | sí | sí | sí |
+| N (persona-onda) | 4.065 | 4.065 | 4.065 |
+| $R^2$ within | 0.383 | 0.383 | 0.383 |
 
-La lectura es idéntica en las tres columnas: el ajuste del modelo lo carga casi entero la reversión a la media ($\hat\beta \approx -0.66$, invariante a la definición de exposición), y la exposición aporta un margen chico que roza la significancia — el mismo margen que la falsificación de la Tabla 9 deja sin interpretación causal.
+La lectura: con memoria que descuenta el pasado el resultado no se debilita — se afirma ($p < 10^{-4}$ en las tres). Vale el contraste con el termómetro estándar (Anexo A, Tabla A4): allí las mismas especificaciones rozaban apenas la significancia ($p \approx .04$--$.08$); con el régimen homogéneo, la señal es nítida. El termómetro importaba.
 
-La falsificación merece su propia explicación. Si el coeficiente de la exposición *pasada* reflejara influencia causal, la exposición *futura* no debería "predecir" el cambio de hoy. Pero lo hace — en la ventana completa incluso algo más que la pasada ($+0.010$ contra $+0.007$), y en la tardía exactamente igual. Esa simetría es la firma de la selección: la exposición no causa el cambio — acompaña al cambio, antes y después, porque elijo co-firmantes hacia cuya posición ya me estoy moviendo. Una precaución que verificamos en serio: como la exposición es acumulada, la pasada y la futura son casi la misma variable (correlación 0.995 en niveles; 0.93 dentro de cada persona), así que compararlas por separado no basta. El test limpio separa la *novedad*: descomponemos la exposición futura en la parte que ya estaba en la pasada y la parte nueva (las co-firmas que voy a agregar y los movimientos de mis socios futuros), y ponemos ambas en la misma regresión. El resultado es nítido: la parte nueva del futuro predice mi cambio de hoy ($+0.062$, $p = 0.007$) y la exposición pasada, condicional en ella, queda en cero ($p = 0.71$). Me muevo hoy hacia donde estará mi vecindario de mañana — no hacia donde estuvo el de ayer. Es la definición operativa de selección. Un chequeo adicional en la misma línea: como casi todas las ondas caen después del cambio de reglas del 15-feb-2022, re-estimamos el panel usando un $\theta$ recalculado solo con las votaciones de la era de dos tercios (mismo régimen de agenda para toda la serie). Los coeficientes suben — $+0.021$ la exposición pasada, $+0.020$ la futura, ambos $p < 10^{-3}$ — y la simetría en *niveles* se mantiene. Pero ese chequeo tiene una segunda parte — correr el test limpio de innovación con ese termómetro de régimen homogéneo — y lo que aparece ahí merece espacio propio: lo contamos al cierre de la sección.
-
-¿Y si el nulo fuera falta de poder? La versión para la abuela: imagina que quieres saber si tu grupo de amigas te cambia los gustos musicales. Hay dos formas de que el experimento fracase sin que signifique nada: que tus amigas ya tengan exactamente tus gustos (no habría nada que copiar — sin espacio), o que tu termómetro de gustos sea tan malo que no note cambios chicos (sin instrumento). Verificamos ambas. Espacio: la distancia promedio entre la posición de cada convencional y la de su vecindario es 0.59; si los vecindarios se armaran al azar sería 2.25 — la selección cerró el 74% del espacio, pero el 0.59 restante es espacio real donde la influencia se habría notado. Instrumento: el efecto mínimo detectable con nuestros datos es $\lambda = 0.012$ (es decir, habríamos detectado una influencia que cerrara apenas 1.2% de la distancia por onda); lo estimado es $0.007$, por debajo incluso de eso. Conclusión: hubo espacio y hubo instrumento — la influencia simplemente no está, o es sustantivamente despreciable. Y la última objeción posible: $\theta$ no se observa — se estima desde los votos, con error. ¿No estará el nulo fabricado por ese ruido? Lo medimos y lo propagamos. Primero el tamaño del ruido: re-simulamos 50 veces las votaciones desde el propio modelo dinIRT y re-estimamos $\theta$ en cada réplica (bootstrap paramétrico); el error de medición resultante tiene mediana 0.14 — grande: 3.6 veces el movimiento mediano de $\theta$ entre períodos consecutivos (0.04). Después la propagación: para cada una de las 50 versiones de $\theta$ reconstruimos exposición, cambios y el modelo FE completo, y miramos cuánto se mueve $\hat\lambda$ entre réplicas. Respuesta: poco — desviación 0.0014 entre réplicas contra un error muestral de 0.0036, porque el ruido de cada persona-período se promedia sobre 154 convencionales y todas las ondas. El error total honesto (regla de Rubin: muestral más medición) es 0.0039, casi igual al muestral solo, y el efecto mínimo detectable queda en $\lambda = 0.011$: aun cobrándole al modelo todo el error de medición, habríamos detectado una influencia que cerrara 1.1% de la distancia por onda, y lo estimado ($+0.007$) sigue por debajo. El nulo no es un artefacto del termómetro.
-
-La Figura 11 resume la sección completa en dos paneles. En (a), entre personas, posición y exposición van pegadas ($r = 0.95$): elegimos vecindarios que se nos parecen. En (b), dentro de cada persona, la nube de cambios es casi vertical (el $r = 0.36$ crudo que queda es el co-movimiento común de cada fecha — todos los $\theta$ se mueven algo en los mismos días — y es exactamente lo que el modelo FE absorbe). Y el detalle más exigente: los puntos ámbar de (a) son el 5% más alejado de la recta — la gente cuyo vecindario *no* se le parece, es decir, los únicos con espacio grande para ser arrastrados. Si hubiera influencia, ahí debería vérsele. En (b) esos mismos puntos caen como nube sin pendiente ($r = -0.04$): ni siquiera los más desalineados se mueven hacia su vecindario.
-
-![Figura 11. Selección vs. influencia: (a) entre personas, posición propia y del vecindario correlacionan 0.95; en ámbar, el 5% más alejado de la recta. (b) Los cambios onda a onda dentro de cada persona: los mismos puntos ámbar caen sin pendiente ($r = -0.04$).](../results/figures/m2_selection_vs_influence_preview.pdf){width=100%}
-
-**La excepción con sello: la era de normas, medida con su propio termómetro.** El chequeo de régimen que cerró la discusión de la falsificación tiene una segunda parte, y es la más interesante del arco de influencia. El razonamiento: si la ventana que importa es la de las *normas* (del 15-feb al 14-may-2022, cuando el Pleno votó contenido constitucional bajo la regla de 2/3), el termómetro conceptualmente correcto para esa ventana es el $\theta$ estimado *solo* con las votaciones de esa era — un único régimen de agenda para toda la serie, sin mezclar la política reglamentaria de 2021 con la constitucional de 2022. Dos precisiones de diseño. Primera: la "ventana de normas" resulta ser casi todo el panel — todas las ondas de indicaciones caen entre febrero y mayo — así que no estamos sub-muestreando: la muestra es la misma y lo que cambia es el instrumento de medición (las filas de $\theta$ estándar de la tabla reproducen, por eso, los resultados de la ventana completa). Segunda: el test es el mismo *horse race* de arriba — exposición pasada e innovación del futuro en la misma regresión — que con el $\theta$ estándar mata al lag ($p = 0.71$).
-
-**Tabla 9b — La ventana de normas con dos termómetros: $\theta$ estándar vs. $\theta$ de régimen homogéneo (era 2/3). FE por convencional; errores agrupados por convencional.**
-
-| Termómetro | Término | Coef. | EE | $p$ | N |
-|:---|:---|:-:|:-:|:-:|:-:|
-| $\theta$ estándar | Exposición pasada (sola) | $+0.007$ | 0.004 | 0.12 | 4.355 |
-| $\theta$ estándar | Exposición futura (falsificación) | $+0.010$ | 0.004 | 0.030 | 3.329 |
-| $\theta$ estándar | Horse race: pasada | $+0.002$ | 0.005 | 0.71 | 3.328 |
-| $\theta$ estándar | Horse race: innovación del futuro | $+0.062$ | 0.023 | 0.007 | 3.328 |
-| $\theta$ era-2/3 | Exposición pasada (sola) | $+0.021$ | 0.005 | $<10^{-4}$ | 4.065 |
-| $\theta$ era-2/3 | Exposición futura (falsificación) | $+0.020$ | 0.006 | $2\times 10^{-4}$ | 3.038 |
-| $\theta$ era-2/3 | **Horse race: pasada** | $\mathbf{+0.016}$ | 0.006 | $\mathbf{0.007}$ | 3.038 |
-| $\theta$ era-2/3 | Horse race: innovación del futuro | $+0.053$ | 0.022 | 0.014 | 3.038 |
-
-Con el termómetro del propio régimen el resultado cambia de naturaleza: la exposición pasada sobrevive al test limpio ($+0.016$, $p = 0.007$) *junto a* la innovación ($+0.053$) — las dos cosas a la vez: el componente de selección sigue ahí (y grande), y aparece un componente de acomodo hacia el vecindario que el $\theta$ estándar no dejaba ver, probablemente porque mezclar dos regímenes de agenda en la estimación de $\theta$ diluye justo el movimiento fino dentro de la era.
-
-El horse race, reportado completo (los dos termómetros, todas las covariables del modelo):
-
-**Tabla 9e — El horse race completo: $\Delta\theta_{i,t} = \alpha_i + \beta\,\theta_{i,t-1} + \lambda_{lag}\,E_{i,t-1} + \lambda_{innov}\,\tilde E_{i,t+1} + \varepsilon_{it}$ (FE por convencional, EE cluster).**
-
-| | $\theta$ estándar | $\theta$ era-2/3 |
-|:---|:-:|:-:|
-| Posición rezagada $\theta_{i,t-1}$ ($\hat\beta$) | $-0.651^{***}$ (0.026) | $-0.723^{***}$ (0.029) |
-| Exposición pasada $\hat\lambda_{lag}$ | $+0.002$ (0.005), $p=.71$ | $\mathbf{+0.016^{**}}$ (0.006), $p=.007$ |
-| Innovación del futuro $\hat\lambda_{innov}$ | $+0.061^{**}$ (0.023), $p=.007$ | $+0.053^{*}$ (0.022), $p=.014$ |
-| N (persona-onda) | 3.328 | 3.038 |
-| $R^2$ within | 0.366 | 0.404 |
-
-Antes de creerle, lo sometimos a los dos ataques obvios (Tabla 9c). Primero: ¿no será un artefacto del termómetro nuevo? El $\theta$ era-2/3 se estima con menos votaciones que el estándar, así que carga más error de medición. Lo propagamos entero — 50 réplicas que re-simulan las votaciones de la era desde el propio modelo, re-estiman el dynIRT, reconstruyen el panel y re-corren el *horse race* —: la dispersión del lag entre réplicas (0.0028) es la mitad del error muestral (0.0056), la media entre réplicas ($+0.027$) queda incluso por encima del estimado base — si algo, el error de medición *atenúa* —, y con el error total de Rubin el lag queda en $z = 2.53$ ($p \approx 0.011$). Segundo: ¿cuándo ocurre? Partimos la era en dos. En el arranque (feb--mar) el acomodo es fuerte ($+0.021$, EE 0.008) y la innovación no se distingue de cero; hacia el final (abr--may) el acomodo se desvanece a marginal ($+0.007$, EE 0.004, $p \approx 0.08$) y vuelve a mandar la selección (innovación $+0.041$, $p = 0.03$).
-
-**Tabla 9c — Blindaje del hallazgo era-2/3: propagación del error de medición y sub-ventanas.**
-
-| Chequeo | Cantidad | Valor |
-|:---|:---|:-:|
-| Medición (B = 50 réplicas del dynIRT de la era) | Lag medio entre réplicas | $+0.027$ |
-| | DE entre réplicas (solo medición) | 0.0028 |
-| | EE total (Rubin: muestral + medición) | 0.0063 |
-| | $z$ del lag con EE total | $\mathbf{2.53}$ |
-| Sub-ventana feb15--mar31 ($N = 1.296$) | Lag (EE) | $+0.021$ (0.008) |
-| | Innovación (EE) | $+0.033$ (0.029), n.s. |
-| Sub-ventana abr1--may14 ($N = 1.742$) | Lag (EE) | $+0.007$ (0.004) |
-| | Innovación (EE) | $+0.041$ (0.019) |
-
-La lectura que defendemos, con su etiqueta honesta: dentro de la era de normas, y medido con posiciones de régimen homogéneo, aparece un componente de influencia acotado — del orden de cerrar 1.6% de la distancia al vecindario por onda — que sobrevive la falsificación de innovación y la propagación del error de medición, y que se concentra en el *arranque* del régimen de 2/3: cuando la aritmética de los 103 votos se estrenó y las posiciones tuvieron que asentarse bajo la regla nueva, los convencionales se acomodaron algo hacia sus vecindarios de trabajo; con el régimen ya rodado, el margen se agotó y quedó de nuevo solo la selección. El titular de la sección no se voltea — se refina: selección como regla del proceso completo; acomodo temprano bajo la regla nueva como excepción acotada y fechada. (La cautela de siempre aplica aquí con más fuerza: lag e innovación conviven, así que esto es evidencia de *coexistencia* de canales, no una estimación causal limpia — la homofilia latente no desaparece por cambiar el termómetro.)
+Dos cautelas para cerrar. Primera, la de siempre: esto es un panel observacional con red elegida por los propios actores — la homofilia latente (elegir co-firmantes por afinidades no observadas que también predicen el movimiento) no es descartable por diseño en ningún estudio de este tipo, y por eso hablamos de un *componente de influencia* que sobrevive los tests disponibles, no de causalidad certificada. Segunda, la magnitud: $+0.02$ por onda es un acomodo — cerrar 2% de la distancia al vecindario entre informes — no una conversión; la reversión a la media ($\hat\beta \approx -0.7$) sigue siendo, por lejos, la fuerza dominante del movimiento de posiciones.
 
 ## 4.2 Conducta: la defección viaja por la red
 
@@ -715,11 +649,11 @@ La Figura 14 muestra la materia prima de este éxito en el tiempo: la similitud 
 
 # 6. Síntesis
 
-En una asamblea de extraños, la colaboración se organizó con lo que la gente traía puesto: el territorio (compartir distrito multiplica por casi doce las odds de firmar juntos), la etiqueta electoral (todas las listas coordinan patrocinio, las ad hoc igual que los pactos tradicionales — aunque ninguna compra unidad de voto más allá de su alineamiento), y la afinidad ideológica; no la profesión (los abogados no se eligen entre sí — los juntan los temas; la experiencia previa deja apenas un eco en la elección de socios que no llega a marcar coaliciones reales). Sobre esos primeros encuentros la red se rigidiza rápido: el mejor predictor de la próxima coalición es qué pares ya trabajaron juntos, y aun así la afinidad ideológica conserva fuerza propia — conocerse y parecerse operan a la vez. Esa red casi no cambia las posiciones de nadie (selección, no influencia: exposición pasada y futura predicen igual, y el nulo tiene espacio e instrumento verificados; la única excepción, acotada y fechada, es un acomodo breve hacia el vecindario al estrenarse la regla de 2/3 — sobrevive falsificación y error de medición, y se apaga con el régimen ya rodado), pero sí coordina la conducta en el margen: las rupturas de disciplina viajan por los lazos de co-firma, incluso entre comisiones distintas. Y cuando los textos llegan al Pleno, sobreviven los de coaliciones cercanas al pívot de 2/3, ideológicamente anchas — el ensancharse salva artículos precisamente a las coaliciones de izquierda, que necesitan estirarse hacia el 103 — y relacionalmente consolidadas; no los de coaliciones con más títulos. El capital que rindió fue territorial, posicional y relacional. Se colaboró por cercanía; se ganó por amplitud.
+En una asamblea de extraños, la colaboración se organizó con lo que la gente traía puesto: el territorio (compartir distrito multiplica por casi doce las odds de firmar juntos), la etiqueta electoral (todas las listas coordinan patrocinio, las ad hoc igual que los pactos tradicionales — aunque ninguna compra unidad de voto más allá de su alineamiento), y la afinidad ideológica; no la profesión (los abogados no se eligen entre sí — los juntan los temas; la experiencia previa deja apenas un eco en la elección de socios que no llega a marcar coaliciones reales). Sobre esos primeros encuentros la red se rigidiza rápido: el mejor predictor de la próxima coalición es qué pares ya trabajaron juntos, y aun así la afinidad ideológica conserva fuerza propia — conocerse y parecerse operan a la vez. En la era de normas — el único tramo con dinámica real de posiciones — la exposición pasada predice el cambio de cada convencional ($+0.02$ por onda, robusto a efectos fijos de fecha y al reloj estricto de las exposiciones; la firma de la selección no sobrevive ese reloj — sección 4.1, con la ruta del termómetro estándar y su nulo global en el Anexo A), aunque la reversión a la media sigue dominando el movimiento; y la red además coordina la conducta en el margen: las rupturas de disciplina viajan por los lazos de co-firma, incluso entre comisiones distintas. Y cuando los textos llegan al Pleno, sobreviven los de coaliciones cercanas al pívot de 2/3, ideológicamente anchas — el ensancharse salva artículos precisamente a las coaliciones de izquierda, que necesitan estirarse hacia el 103 — y relacionalmente consolidadas; no los de coaliciones con más títulos. El capital que rindió fue territorial, posicional y relacional. Se colaboró por cercanía; se ganó por amplitud.
 
 # 7. Limitaciones y trabajo en curso
 
-1. Los puntos ideales se estiman de votos: la distinción entre ideología y disciplina estable (sección 3.2) es parcialmente circular. El error de medición de $\theta$ ya está cuantificado y propagado a M2 (bootstrap paramétrico, sección 4.1: el nulo global sobrevive, y la excepción de la era de normas también — $z = 2.53$ con el EE total); su propagación a los demás modelos que usan $\theta$ (formación, supervivencia) queda pendiente.
+1. Los puntos ideales se estiman de votos: la distinción entre ideología y disciplina estable (sección 3.2) es parcialmente circular. El error de medición de $\theta$ ya está cuantificado y propagado a M2 (bootstrap paramétrico; Anexo A: el nulo con termómetro estándar sobrevive, y el lag de la era de normas también — $z = 2.53$ con el EE total —; la propagación específica a la familia final de 4.1 queda pendiente); su propagación a los demás modelos que usan $\theta$ (formación, supervivencia) queda pendiente.
 2. La familiaridad del modelo de eventos mezcla dependencia del estado con afinidades estables no observadas; la ventana es corta (tres meses), un 36% de los eventos cae el día del plazo (donde no existe orden intradiario) y 123 fechas están imputadas desde las notas del registro.
 3. 46 iniciativas con más de 16 firmantes están excluidas mientras se auditan como duplicaciones transversales (quedan además 24 grupos de texto casi duplicado sin resolver en la fuente); 120 iniciativas utilizables no tienen comisión asignada en la plataforma (entran a la red agregada y al modelo de eventos, no a los análisis por comisión); 21 convencionales de listas locales esperan un crosswalk fino de conglomerado.
 4. El ERGM bipartito (Tabla 8) se estima por MPLE con EE por bootstrap de iniciativas — el MCMC completo resultó infactible en estas redes (orden semanas; documentado). Los dos términos estructurales básicos ya están incorporados; queda pendiente la sensibilidad a los decaimientos *gw* (0.25/0.75) y los de orden superior (tríos repetidos requerirían un término de usuario).
@@ -727,3 +661,118 @@ En una asamblea de extraños, la colaboración se organizó con lo que la gente 
 6. Con $\rho \approx 0.9$, la descomposición de impactos del modelo espacial se calcula exacta (Tabla 14) pero sus totales son efectos de equilibrio amplificados $\sim 9\times$ y su inferencia Monte Carlo no es utilizable (sorteos con $\rho \to 1$); se leen como diagnóstico del acoplamiento, no como tamaños de efecto.
 
 En curso: robustez del modelo de eventos (excluir el bloque del plazo; imputar fechas faltantes); la variante dirigida (quién recluta a quién, con el autor principal de cada iniciativa); la extensión del modelo de eventos y de supervivencia a las indicaciones (incorporar a quienes modificaron cada artículo, no solo a quienes lo iniciaron); y el vínculo votación-artículo para clasificar artículos por su coalición de votantes.
+
+# Anexo A. RQ2a con el termómetro estándar: la ruta original
+
+*Este anexo conserva, tal como se construyó, el análisis original de RQ2a: el panel completo con el $\theta$ estándar (todas las votaciones), sus ventanas y dosis, las defensas del nulo, y la primera versión del hallazgo de la era de normas con su blindaje. La sección 4.1 del cuerpo principal lo supersede: allí la familia de modelos usa solo la era de normas, el termómetro de régimen homogéneo y el reloj estricto de las exposiciones.*
+
+Si la red influyera sobre las ideas, la posición de tus co-firmantes debería arrastrar la tuya con el tiempo. Definimos la exposición de $i$ en la onda $t$ de su comisión como la posición media de sus co-firmantes, ponderada por la intensidad de la colaboración acumulada:
+
+$$E_{i,t} = \frac{\sum_{j \neq i} w_{ij,t}\, \theta_{j,t}}{\sum_{j \neq i} w_{ij,t}},$$
+
+donde $w_{ij,t}$ es el número de veces que $i$ y $j$ co-firmaron desde el inicio hasta la onda $t$ (las ondas son los informes de indicaciones de cada comisión; ver Figura 1), y $\theta_{j,t}$ es el voto revelado de $j$ en ese momento. El modelo de regresión estimado es un panel con efectos fijos individuales:
+
+$$\Delta\theta_{i,t} = \alpha_i + \beta\,\theta_{i,t-1} + \lambda\,E_{i,t-1} + \varepsilon_{it},$$
+
+donde $\Delta\theta_{i,t} = \theta_{i,t} - \theta_{i,t-1}$ es el cambio de posición, $\alpha_i$ absorbe todo lo estable de cada convencional (el estimador "within" usa solo la variación de cada persona respecto de su propia media), $\beta$ captura la reversión a la media y $\lambda$ es el parámetro de interés: si $\lambda > 0$, me muevo hacia donde está mi vecindario. Errores agrupados por convencional; 4.355 observaciones persona-onda.
+
+La tabla completa, incluyendo las dos preguntas de robustez que importan — ¿cambia el resultado según la ventana temporal? (¿pudo la influencia operar temprano, sobre los novatos, y agotarse?) y ¿cambia según cuánta historia carga la exposición? (¿cuál es la "dosis" relevante?):
+
+**Tabla A1 — M2: influencia de la exposición sobre el cambio de posición, por ventana temporal y dosis de exposición (FE por convencional).**
+
+| Ventana temporal | Definición de exposición | $\hat\lambda$ | EE | $p$ | N |
+|:---|:---|:-:|:-:|:-:|:-:|
+| Completa | Acumulada desde T0 | $+0.007$ | 0.004 | $0.119$ | 4.355 |
+| Completa | Solo última onda | $+0.007$ | 0.013 | $0.60$ | 463 |
+| Completa | Últimas 2 ondas | $+0.003$ | 0.009 | $0.72$ | 1.504 |
+| Completa | Últimas 3 ondas | $-0.002$ | 0.007 | $0.76$ | 2.447 |
+| Completa | Decaimiento $\lambda_w = 0.25$ | $+0.008$ | 0.004 | $0.051$ | 4.355 |
+| Completa | Decaimiento $\lambda_w = 0.50$ | $+0.008$ | 0.004 | $0.042$ | 4.355 |
+| Completa | Decaimiento $\lambda_w = 0.75$ | $+0.007$ | 0.004 | $0.078$ | 4.355 |
+| Completa | Falsificación: exposición futura | $+0.010$ | 0.004 | $0.030$ | 3.329 |
+| Temprana (ondas $\leq$ 31-mar) | Acumulada | $+0.005$ | 0.007 | $0.50$ | 1.586 |
+| Temprana | Últimas 2 ondas | $+0.013$ | 0.014 | $0.35$ | 955 |
+| Temprana | Últimas 3 ondas | $+0.002$ | 0.010 | $0.81$ | 1.466 |
+| Temprana | Decaimiento $\lambda_w = 0.25$ | $+0.005$ | 0.007 | $0.46$ | 1.586 |
+| Temprana | Decaimiento $\lambda_w = 0.50$ | $+0.005$ | 0.007 | $0.48$ | 1.586 |
+| Temprana | Decaimiento $\lambda_w = 0.75$ | $+0.005$ | 0.007 | $0.49$ | 1.586 |
+| Temprana | Falsificación: exposición futura | $+0.006$ | 0.007 | $0.41$ | 1.587 |
+| Tardía (ondas $\geq$ 1-abr) | Acumulada | $+0.011$ | 0.005 | $0.018$ | 2.769 |
+| Tardía | Solo última onda | $-0.002$ | 0.018 | $0.92$ | 332 |
+| Tardía | Últimas 2 ondas | $-0.006$ | 0.008 | $0.45$ | 549 |
+| Tardía | Últimas 3 ondas | $-0.011$ | 0.008 | $0.21$ | 981 |
+| Tardía | Decaimiento $\lambda_w = 0.25$ | $+0.009$ | 0.004 | $0.032$ | 2.769 |
+| Tardía | Decaimiento $\lambda_w = 0.50$ | $+0.011$ | 0.004 | $0.008$ | 2.769 |
+| Tardía | Decaimiento $\lambda_w = 0.75$ | $+0.011$ | 0.004 | $0.011$ | 2.769 |
+| Tardía | Falsificación: exposición futura | $+0.010$ | 0.004 | $0.004$ | 1.742 |
+
+Sobre las ventanas: la ventana ideal para la hipótesis "la influencia operó temprano sobre los nuevos" sería el primer mes de la Convención, pero ahí la red de co-firma no existía todavía (las primeras iniciativas son de noviembre; los primeros informes, de enero-febrero — Figura 1). Las ventanas factibles cortan la era de colaboración activa en sus dos primeros meses (febrero-marzo de 2022) y el resto (abril-junio). El patrón: en la ventana temprana no hay nada; en la tardía varios coeficientes se vuelven significativos ($+0.009$ a $+0.011$) — pero su falsificación también ($+0.010$, $p = 0.004$), y con la misma magnitud. La historia de los novatos susceptibles exigiría exactamente lo contrario (efecto temprano, falsificación limpia).
+
+Y los tres modelos de decaimiento — los únicos de la Tabla A1 que rozan la significancia — reportados completos:
+
+**Tabla A4 — Los tres modelos de decaimiento, completos (ventana completa; FE por convencional, EE cluster por convencional).**
+
+| | $\lambda_w = 0.25$ | $\lambda_w = 0.50$ | $\lambda_w = 0.75$ |
+|:---|:-:|:-:|:-:|
+| Exposición rezagada $\hat\lambda$ | $+0.008^{+}$ | $+0.008^{*}$ | $+0.007^{+}$ |
+| (EE) | (0.004) | (0.004) | (0.004) |
+| Posición rezagada $\theta_{i,t-1}$ ($\hat\beta$, reversión a la media) | $-0.663^{***}$ | $-0.663^{***}$ | $-0.663^{***}$ |
+| (EE) | (0.024) | (0.024) | (0.024) |
+| N (persona-onda) | 4.355 | 4.355 | 4.355 |
+| $R^2$ within | 0.353 | 0.353 | 0.353 |
+
+La lectura es idéntica en las tres columnas: el ajuste del modelo lo carga casi entero la reversión a la media ($\hat\beta \approx -0.66$, invariante a la definición de exposición), y la exposición aporta un margen chico que roza la significancia — el mismo margen que la falsificación de la Tabla A1 deja sin interpretación causal.
+
+La falsificación merece su propia explicación. Si el coeficiente de la exposición *pasada* reflejara influencia causal, la exposición *futura* no debería "predecir" el cambio de hoy. Pero lo hace — en la ventana completa incluso algo más que la pasada ($+0.010$ contra $+0.007$), y en la tardía exactamente igual. Esa simetría es la firma de la selección: la exposición no causa el cambio — acompaña al cambio, antes y después, porque elijo co-firmantes hacia cuya posición ya me estoy moviendo. Una precaución que verificamos en serio: como la exposición es acumulada, la pasada y la futura son casi la misma variable (correlación 0.995 en niveles; 0.93 dentro de cada persona), así que compararlas por separado no basta. El test limpio separa la *novedad*: descomponemos la exposición futura en la parte que ya estaba en la pasada y la parte nueva (las co-firmas que voy a agregar y los movimientos de mis socios futuros), y ponemos ambas en la misma regresión. El resultado es nítido: la parte nueva del futuro predice mi cambio de hoy ($+0.062$, $p = 0.007$) y la exposición pasada, condicional en ella, queda en cero ($p = 0.71$). Me muevo hoy hacia donde estará mi vecindario de mañana — no hacia donde estuvo el de ayer. Es la definición operativa de selección. Un chequeo adicional en la misma línea: como casi todas las ondas caen después del cambio de reglas del 15-feb-2022, re-estimamos el panel usando un $\theta$ recalculado solo con las votaciones de la era de dos tercios (mismo régimen de agenda para toda la serie). Los coeficientes suben — $+0.021$ la exposición pasada, $+0.020$ la futura, ambos $p < 10^{-3}$ — y la simetría en *niveles* se mantiene. Pero ese chequeo tiene una segunda parte — correr el test limpio de innovación con ese termómetro de régimen homogéneo — y lo que aparece ahí merece espacio propio: lo contamos al cierre de la sección.
+
+¿Y si el nulo fuera falta de poder? La versión para la abuela: imagina que quieres saber si tu grupo de amigas te cambia los gustos musicales. Hay dos formas de que el experimento fracase sin que signifique nada: que tus amigas ya tengan exactamente tus gustos (no habría nada que copiar — sin espacio), o que tu termómetro de gustos sea tan malo que no note cambios chicos (sin instrumento). Verificamos ambas. Espacio: la distancia promedio entre la posición de cada convencional y la de su vecindario es 0.59; si los vecindarios se armaran al azar sería 2.25 — la selección cerró el 74% del espacio, pero el 0.59 restante es espacio real donde la influencia se habría notado. Instrumento: el efecto mínimo detectable con nuestros datos es $\lambda = 0.012$ (es decir, habríamos detectado una influencia que cerrara apenas 1.2% de la distancia por onda); lo estimado es $0.007$, por debajo incluso de eso. Conclusión: hubo espacio y hubo instrumento — la influencia simplemente no está, o es sustantivamente despreciable. Y la última objeción posible: $\theta$ no se observa — se estima desde los votos, con error. ¿No estará el nulo fabricado por ese ruido? Lo medimos y lo propagamos. Primero el tamaño del ruido: re-simulamos 50 veces las votaciones desde el propio modelo dinIRT y re-estimamos $\theta$ en cada réplica (bootstrap paramétrico); el error de medición resultante tiene mediana 0.14 — grande: 3.6 veces el movimiento mediano de $\theta$ entre períodos consecutivos (0.04). Después la propagación: para cada una de las 50 versiones de $\theta$ reconstruimos exposición, cambios y el modelo FE completo, y miramos cuánto se mueve $\hat\lambda$ entre réplicas. Respuesta: poco — desviación 0.0014 entre réplicas contra un error muestral de 0.0036, porque el ruido de cada persona-período se promedia sobre 154 convencionales y todas las ondas. El error total honesto (regla de Rubin: muestral más medición) es 0.0039, casi igual al muestral solo, y el efecto mínimo detectable queda en $\lambda = 0.011$: aun cobrándole al modelo todo el error de medición, habríamos detectado una influencia que cerrara 1.1% de la distancia por onda, y lo estimado ($+0.007$) sigue por debajo. El nulo no es un artefacto del termómetro.
+
+La Figura 11 resume la sección completa en dos paneles. En (a), entre personas, posición y exposición van pegadas ($r = 0.95$): elegimos vecindarios que se nos parecen. En (b), dentro de cada persona, la nube de cambios es casi vertical (el $r = 0.36$ crudo que queda es el co-movimiento común de cada fecha — todos los $\theta$ se mueven algo en los mismos días — y es exactamente lo que el modelo FE absorbe). Y el detalle más exigente: los puntos ámbar de (a) son el 5% más alejado de la recta — la gente cuyo vecindario *no* se le parece, es decir, los únicos con espacio grande para ser arrastrados. Si hubiera influencia, ahí debería vérsele. En (b) esos mismos puntos caen como nube sin pendiente ($r = -0.04$): ni siquiera los más desalineados se mueven hacia su vecindario.
+
+![Figura 11. Selección vs. influencia: (a) entre personas, posición propia y del vecindario correlacionan 0.95; en ámbar, el 5% más alejado de la recta. (b) Los cambios onda a onda dentro de cada persona: los mismos puntos ámbar caen sin pendiente ($r = -0.04$).](../results/figures/m2_selection_vs_influence_preview.pdf){width=100%}
+
+**La excepción con sello: la era de normas, medida con su propio termómetro.** El chequeo de régimen que cerró la discusión de la falsificación tiene una segunda parte, y es la más interesante del arco de influencia. El razonamiento: si la ventana que importa es la de las *normas* (del 15-feb al 14-may-2022, cuando el Pleno votó contenido constitucional bajo la regla de 2/3), el termómetro conceptualmente correcto para esa ventana es el $\theta$ estimado *solo* con las votaciones de esa era — un único régimen de agenda para toda la serie, sin mezclar la política reglamentaria de 2021 con la constitucional de 2022. Dos precisiones de diseño. Primera: la "ventana de normas" resulta ser casi todo el panel — todas las ondas de indicaciones caen entre febrero y mayo — así que no estamos sub-muestreando: la muestra es la misma y lo que cambia es el instrumento de medición (las filas de $\theta$ estándar de la tabla reproducen, por eso, los resultados de la ventana completa). Segunda: el test es el mismo *horse race* de arriba — exposición pasada e innovación del futuro en la misma regresión — que con el $\theta$ estándar mata al lag ($p = 0.71$).
+
+**Tabla A2 — La ventana de normas con dos termómetros: $\theta$ estándar vs. $\theta$ de régimen homogéneo (era 2/3). FE por convencional; errores agrupados por convencional.**
+
+| Termómetro | Término | Coef. | EE | $p$ | N |
+|:---|:---|:-:|:-:|:-:|:-:|
+| $\theta$ estándar | Exposición pasada (sola) | $+0.007$ | 0.004 | 0.12 | 4.355 |
+| $\theta$ estándar | Exposición futura (falsificación) | $+0.010$ | 0.004 | 0.030 | 3.329 |
+| $\theta$ estándar | Horse race: pasada | $+0.002$ | 0.005 | 0.71 | 3.328 |
+| $\theta$ estándar | Horse race: innovación del futuro | $+0.062$ | 0.023 | 0.007 | 3.328 |
+| $\theta$ era-2/3 | Exposición pasada (sola) | $+0.021$ | 0.005 | $<10^{-4}$ | 4.065 |
+| $\theta$ era-2/3 | Exposición futura (falsificación) | $+0.020$ | 0.006 | $2\times 10^{-4}$ | 3.038 |
+| $\theta$ era-2/3 | **Horse race: pasada** | $\mathbf{+0.016}$ | 0.006 | $\mathbf{0.007}$ | 3.038 |
+| $\theta$ era-2/3 | Horse race: innovación del futuro | $+0.053$ | 0.022 | 0.014 | 3.038 |
+
+Con el termómetro del propio régimen el resultado cambia de naturaleza: la exposición pasada sobrevive al test limpio ($+0.016$, $p = 0.007$) *junto a* la innovación ($+0.053$) — las dos cosas a la vez: el componente de selección sigue ahí (y grande), y aparece un componente de acomodo hacia el vecindario que el $\theta$ estándar no dejaba ver, probablemente porque mezclar dos regímenes de agenda en la estimación de $\theta$ diluye justo el movimiento fino dentro de la era.
+
+El horse race, reportado completo (los dos termómetros, todas las covariables del modelo):
+
+**Tabla A5 — El horse race completo: $\Delta\theta_{i,t} = \alpha_i + \beta\,\theta_{i,t-1} + \lambda_{lag}\,E_{i,t-1} + \lambda_{innov}\,\tilde E_{i,t+1} + \varepsilon_{it}$ (FE por convencional, EE cluster).**
+
+| | $\theta$ estándar | $\theta$ era-2/3 |
+|:---|:-:|:-:|
+| Posición rezagada $\theta_{i,t-1}$ ($\hat\beta$) | $-0.651^{***}$ (0.026) | $-0.723^{***}$ (0.029) |
+| Exposición pasada $\hat\lambda_{lag}$ | $+0.002$ (0.005), $p=.71$ | $\mathbf{+0.016^{**}}$ (0.006), $p=.007$ |
+| Innovación del futuro $\hat\lambda_{innov}$ | $+0.061^{**}$ (0.023), $p=.007$ | $+0.053^{*}$ (0.022), $p=.014$ |
+| N (persona-onda) | 3.328 | 3.038 |
+| $R^2$ within | 0.366 | 0.404 |
+
+Antes de creerle, lo sometimos a los dos ataques obvios (Tabla A3). Primero: ¿no será un artefacto del termómetro nuevo? El $\theta$ era-2/3 se estima con menos votaciones que el estándar, así que carga más error de medición. Lo propagamos entero — 50 réplicas que re-simulan las votaciones de la era desde el propio modelo, re-estiman el dynIRT, reconstruyen el panel y re-corren el *horse race* —: la dispersión del lag entre réplicas (0.0028) es la mitad del error muestral (0.0056), la media entre réplicas ($+0.027$) queda incluso por encima del estimado base — si algo, el error de medición *atenúa* —, y con el error total de Rubin el lag queda en $z = 2.53$ ($p \approx 0.011$). Segundo: ¿cuándo ocurre? Partimos la era en dos. En el arranque (feb--mar) el acomodo es fuerte ($+0.021$, EE 0.008) y la innovación no se distingue de cero; hacia el final (abr--may) el acomodo se desvanece a marginal ($+0.007$, EE 0.004, $p \approx 0.08$) y vuelve a mandar la selección (innovación $+0.041$, $p = 0.03$).
+
+**Tabla A3 — Blindaje del hallazgo era-2/3: propagación del error de medición y sub-ventanas.**
+
+| Chequeo | Cantidad | Valor |
+|:---|:---|:-:|
+| Medición (B = 50 réplicas del dynIRT de la era) | Lag medio entre réplicas | $+0.027$ |
+| | DE entre réplicas (solo medición) | 0.0028 |
+| | EE total (Rubin: muestral + medición) | 0.0063 |
+| | $z$ del lag con EE total | $\mathbf{2.53}$ |
+| Sub-ventana feb15--mar31 ($N = 1.296$) | Lag (EE) | $+0.021$ (0.008) |
+| | Innovación (EE) | $+0.033$ (0.029), n.s. |
+| Sub-ventana abr1--may14 ($N = 1.742$) | Lag (EE) | $+0.007$ (0.004) |
+| | Innovación (EE) | $+0.041$ (0.019) |
+
+La lectura que defendemos, con su etiqueta honesta: dentro de la era de normas, y medido con posiciones de régimen homogéneo, aparece un componente de influencia acotado — del orden de cerrar 1.6% de la distancia al vecindario por onda — que sobrevive la falsificación de innovación y la propagación del error de medición, y que se concentra en el *arranque* del régimen de 2/3: cuando la aritmética de los 103 votos se estrenó y las posiciones tuvieron que asentarse bajo la regla nueva, los convencionales se acomodaron algo hacia sus vecindarios de trabajo; con el régimen ya rodado, el margen se agotó y quedó de nuevo solo la selección. El titular de la sección no se voltea — se refina: selección como regla del proceso completo; acomodo temprano bajo la regla nueva como excepción acotada y fechada. (La cautela de siempre aplica aquí con más fuerza: lag e innovación conviven, así que esto es evidencia de *coexistencia* de canales, no una estimación causal limpia — la homofilia latente no desaparece por cambiar el termómetro.)
