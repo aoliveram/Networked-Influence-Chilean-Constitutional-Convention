@@ -168,6 +168,20 @@ Serial signers (\texttt{gwb1degree}) & $-0.63$ & $-0.85$ & $-0.05$ & $-6.94^{*}$
 \end{frame}
 
 % ------------------------------------------------------------------ 4 COMMISSIONS
+\begin{frame}{What we know about each member}
+\begin{itemize}
+  \item \emphr{Political}: electoral list and bloc (Right / Center-left / Left / Reserved seats / Local lists); district of election.
+  \vspace{0.2cm}
+  \item \emphr{Profile}: age; gender; profession — in particular the \emph{law degree}; education level (none / university / master's / PhD).
+  \vspace{0.2cm}
+  \item \emphr{Prior institutional experience}: had held elective or appointed public office before the Convention (former MPs, mayors, officials) — 35 of 154 members.
+  \vspace{0.2cm}
+  \item \emphr{Ideology}: two-dimensional ideal points from the first month of roll calls — measured \emph{before} the collaboration network existed.
+\end{itemize}
+\vspace{0.2cm}
+\nota{Sources: electoral service records and official biographies, audited against two sources per member.}
+\end{frame}
+
 \begin{frame}{The seven thematic commissions}
 \begin{center}\scriptsize\setlength{\tabcolsep}{3.5pt}
 \begin{tabular}{clccccccc}
@@ -186,34 +200,29 @@ C7 & Knowledge systems & 15 & 13 & 0 & 51.7 & 1.33 & 64 & 8 \\
 \end{center}
 \vspace{0.2cm}
 \begin{itemize}
-  \item Composition varies wildly across commissions — C6 is 88\% lawyers, C7 has no politically experienced member. \emphr{Every model below is estimated within commission.}
+  \item Composition varies wildly across commissions — C6 is 88\% lawyers, C7 has no politically experienced member.
 \end{itemize}
 \end{frame}
 
 % ------------------------------------------------------------------ 5 IDEOLOGY
-\begin{frame}{Pre-network ideology: measured before the network existed}
-\begin{itemize}
-  \item \emphr{Pre-network positions}: 2-D W-NOMINATE on the \emph{first month} of floor votes only (147 roll calls, Jul--Aug 2021), replicating F\'abrega (2022).
-  \begin{itemize}
-    \item That window predates the commissions (Oct), the initiatives (Nov) and the operative two-thirds rule (Feb) — so $\theta$ is exogenous to the network we study.
-    \item Why 2-D: the second dimension separates the reserved indigenous seats from the classic left--right cleavage; correct classification rises from 89.4\% to 91.6\%.
-  \end{itemize}
-  \vspace{0.3cm}
-  \item \emphr{Dynamic revealed positions}: dynamic IRT over all 4,707 roll calls $\to$ trajectories $\theta_{i,t}$ over 91 periods,
-  $$\Pr(\text{yes}_{iv}) = \Phi\big(\beta_v\,\theta_{i,t(v)} - \alpha_v\big), \qquad \theta_{i,t} \sim \mathcal N(\theta_{i,t-1}, \omega^2).$$
-\end{itemize}
+\begin{frame}[plain]
+\begin{center}
+  \includegraphics[width=0.92\textwidth]{../results/figures/positions_dynamics_by_commission.pdf}
+\end{center}
 \end{frame}
 
 % ------------------------------------------------------------------ 6 RQs
 \begin{frame}{Research questions}
 \begin{itemize}
-  \item \emphr{RQ1 — Formation}: with zero relational stock, could the co-sponsorship network be predicted from what people \emph{brought with them} (ideology, bloc, district, profile)?
+  \item \emphr{RQ1 — Formation}: can the co-sponsorship network be predicted from what people \emph{brought with them} (ideology, bloc, district, profile)?
   \vspace{0.3cm}
-  \item \emphr{RQ2a — Positions}: does network exposure \emph{move} members' ideological positions, or do members select into like-minded coalitions?
+  \item \emphr{RQ2a — Positions}: does network exposure \emph{move} members' ideological positions?
   \vspace{0.3cm}
   \item \emphr{RQ2b — Behavior}: does voting \emph{defection} travel along co-sponsorship ties?
   \vspace{0.3cm}
-  \item \emphr{RQ3 — Success}: what makes an article survive into the draft — and does the \emph{context} an initiative is born into matter?
+  \item \emphr{RQ3a — Texts}: what makes an \emph{article} survive into the draft?
+  \vspace{0.3cm}
+  \item \emphr{RQ3b — Members}: does the \emph{context} an initiative is born into matter for its authors' success?
 \end{itemize}
 \end{frame}
 
@@ -361,7 +370,7 @@ Expected (permutation within bloc $\times$ vote, 200 draws) & $+6.0$ [p95: $6.1$
 \end{itemize}
 \end{frame}
 
-\sectionslide{RQ3 — Texts}{What makes an article survive?}
+\sectionslide{RQ3a — Texts}{What makes an article survive?}
 
 % ------------------------------------------------------------------ 15 SURVIVAL
 \begin{frame}{The survival model: article-level, complete}
@@ -400,6 +409,8 @@ AIC & 1393 & 1384 & 1386 \\
 \end{frame}
 
 % ------------------------------------------------------------------ 17 SDM
+\sectionslide{RQ3b — Members}{Whose success is it?}
+
 \begin{frame}{Does the context an initiative is born into matter?}
 \begin{itemize}
   \item Each member's \emphr{success}: of all the article text you co-signed, how much survived into the draft? ($y_i$ = mean textual retention of $i$'s articles, 0 to 1.)

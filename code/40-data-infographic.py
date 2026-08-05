@@ -34,6 +34,9 @@ ax.set_xlim(0, 100)
 ax.set_ylim(0, 100)
 ax.axis("off")
 
+ax.text(4.0, 96.5, "Chile's Constitutional Convention", fontsize=15, fontweight="bold", color=INK)
+ax.plot([4.0, 36.0], [93.8, 93.8], color=RED, lw=1.4)
+
 # ============================== TIMELINE (arriba) ==============================
 T0, T1 = date(2021, 7, 1), date(2022, 7, 31)
 X0, X1 = 6.0, 97.0
@@ -73,8 +76,8 @@ for d, lab in ((date(2021, 10, 1), "start\ncommissions"), (date(2022, 5, 14), "e
     ax.plot([x], [AXY], marker="o", ms=7, mfc=INK, mec=SURF, mew=1.2, zorder=5)
     ax.text(x, AXY - 7.0, lab, ha="center", va="top", fontsize=9, color=INK2, linespacing=1.1)
 
-# leyenda de tacheos (arriba a la derecha)
-LX, LY = 77.0, 96.0
+# leyenda de tacheos (espacio vacio entre May y Jul '22, sobre el eje)
+LX, LY = 82.0, 76.5
 ax.add_patch(Rectangle((LX, LY - 1.0), 4.2, 2.0, fc=GRID, ec="none"))
 ax.add_patch(Rectangle((LX, LY - 1.0), 4.2, 2.0, fc="none", ec=RED, lw=0, hatch="//"))
 ax.text(LX + 5.2, LY, "roll-call votes, 1/2 rule", ha="left", va="center", fontsize=8.5, color=INK2)
@@ -83,7 +86,8 @@ ax.add_patch(Rectangle((LX, LY - 5.4), 4.2, 2.0, fc="none", ec=RED, lw=0, hatch=
 ax.text(LX + 5.2, LY - 4.4, "roll-call votes, 2/3 rule", ha="left", va="center", fontsize=8.5, color=INK2)
 
 # ============================== PIPELINE (abajo) ==============================
-ax.text(4.0, 41.0, "The pipeline", fontsize=13, fontweight="bold", color=INK)
+ax.text(4.0, 41.5, "The pipeline", fontsize=13, fontweight="bold", color=INK)
+ax.plot([4.0, 17.5], [39.2, 39.2], color=RED, lw=1.4)
 
 BY = 20.0          # centro vertical de las cajas
 BH = 11.0

@@ -77,6 +77,7 @@ df$theta_lag <- shift(df$theta_reg, -1)
 df$E_lag <- shift(df$E_reg, -1)
 df$E_lead2 <- shift(df$E_reg, 2)
 df$E_d25_lag <- shift(df$E_d25, -1); df$E_d50_lag <- shift(df$E_d50, -1); df$E_d75_lag <- shift(df$E_d75, -1)
+df$Ed25_lead2 <- shift(df$E_d25, 2); df$Ed50_lead2 <- shift(df$E_d50, 2); df$Ed75_lead2 <- shift(df$E_d75, 2)
 df$E_own_lag <- shift(df$E_own, -1); df$E_cross_lag <- shift(df$E_cross, -1)
 df$fecha_lag <- ave(df$fecha, df$key, FUN = function(x) c(NA, head(x, -1)))
 df$delta <- df$theta_reg - df$theta_lag
@@ -111,6 +112,15 @@ d5$innov <- {
   aux5 <- plm(E_lead2 ~ E_own_lag + E_cross_lag, data = pd5, model = "within")
   as.numeric(residuals(aux5)) }
 
+hr_dec <- function(lagvar, leadvar, label) {
+  dd <- d[complete.cases(d[, c("delta", "theta_lag", lagvar, leadvar)]), ]
+  pd <- pdata.frame(dd, index = "legislator")
+  aux <- plm(as.formula(paste(leadvar, "~", lagvar)), data = pd, model = "within")
+  dd$innovd <- as.numeric(residuals(aux))
+  fitm(dd, as.formula(paste("delta ~ theta_lag +", lagvar, "+ innovd + factor(fecha)")),
+       label, c("theta_lag", lagvar, "innovd"))
+}
+
 res <- list(
   fitm(d,  delta ~ theta_lag + E_lag, "M0 basico", c("theta_lag", "E_lag")),
   fitm(d,  delta ~ theta_lag + E_lag + factor(fecha), "M1 + FE fecha", c("theta_lag", "E_lag")),
@@ -122,7 +132,10 @@ res <- list(
   fitm(dC, delta ~ theta_lag + E_reg + innovC + factor(fecha), "C chat: lag contemporaneo",
        c("theta_lag", "E_reg", "innovC")),
   fitm(d5, delta ~ theta_lag + E_own_lag + E_cross_lag + innov + factor(fecha),
-       "A1 anexo exposicion partida", c("theta_lag", "E_own_lag", "E_cross_lag", "innov")))
+       "A1 anexo exposicion partida", c("theta_lag", "E_own_lag", "E_cross_lag", "innov")),
+  hr_dec("E_d25_lag", "Ed25_lead2", "H025 decaimiento+HR"),
+  hr_dec("E_d50_lag", "Ed50_lead2", "H050 decaimiento+HR"),
+  hr_dec("E_d75_lag", "Ed75_lead2", "H075 decaimiento+HR"))
 tab <- do.call(rbind, res)
 write.csv(tab, file.path(RESULTS_TABLES, "M2_era23_family.csv"), row.names = FALSE)
 print(tab, row.names = FALSE, digits = 4)

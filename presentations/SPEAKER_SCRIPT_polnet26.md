@@ -28,40 +28,49 @@ Target: 18 minutes of talk + 7 of questions. Slide numbers are *logical* slides 
 
 > Let me walk you through the data.
 >
-> The top is the year. The hatched bars are roll calls: the light hatch at the start is the **votes on rules** — under simple majority — and we use that first month to measure ideology *before the network existed*. The dense hatch is the **votes on norms**, under the two-thirds rule: that's where the constitution actually got written.
-> In between: initiatives run from November to February, commissions work from October to May — those two dots — and their amendment reports give us the collaboration network in waves.
+> The top is the year: The light hatch at the start is when conventionals **voted the rules** for the construction of the final draft, and we use that first month to measure ideology *before the network existed*. The dense hatch is the **votes on norms**, under the two-thirds rule: that's where the constitution actually got written.
+> Commissions worked from October to May, and they started making initiatives that contained one or more articles, and their amendment if the articles were not approved in plenarium.
 >
-> The bottom is the pipeline, fully linked: 154 members, nine thousand seven hundred signatures, 947 initiatives — every one dated —, 1,809 genesis articles, 4,707 roll calls, and 498 articles that survive into the draft. Twenty-seven and a half percent.
->
-> So we can follow one object — a signature, an article, a vote — through the entire year.
+> The bottom is the pipeline: 
+> We had 154 members (some of them had potilical experience, some not),
+> 947 initiatives (all segned by up to 16 conventionals),
+> which gave us 18-hundred genesis articles, which,
+> after more than 4,000 roll calls (from wich we calculated political positions of each member),
+> resultad in 498 articles that survive into the draft.
+> 
+> And all this information is fully mapped, and it will be available to anyone soon.
+
+---
+
+## Slide 3b — What we know about each member
+
+> Beyond the documents and the votes, we know who each member *was* before day one: their list and political bloc, their district, age, gender, profession — in particular whether they held a law degree —, their education level, and whether they had **prior institutional experience** — meaning they had held public office before: former members of Congress, mayors, officials. Thirty-five of the 154 had.
+> Keep that word, "experience" — it comes back several times.
 
 ---
 
 ## Slide 4 — The seven commissions (3:30–4:15)
 
 > The Convention worked in seven thematic commissions, and they are *very* different worlds. Justice is 88 percent lawyers; Knowledge Systems has zero members with prior political experience; Fundamental Rights is a monster with 283 initiatives.
->
-> Two things to keep: every model is estimated *within* commission — pooling flips homophily signs, it's Simpson's paradox and we verified it —, and the "waves" column is the backbone of the dynamics later: each amendment report is a snapshot of the network.
 
 ---
 
-## Slide 5 — Pre-network ideology (4:15–5:15)
+## Slide 5 — Positions over time, by commission (4:15–5:15)
 
-> Ideology is our key covariate, and it has to be *pre-network*.
-> Two-dimensional W-NOMINATE on that first month of votes only, replicating Fábrega 2022. That window predates everything relational.
-> Why two dimensions? The second one is not noise: it separates the reserved indigenous seats from the classic left–right axis.
->
-> And for the dynamics, a dynamic IRT over all 4,707 roll calls: each member's trajectory, with the equation you see — a probit on each vote, positions evolving as a random walk.
+> These are the revealed positions of all 154 members over the year, commission by commission — estimated from every roll call with a dynamic IRT.
+> Two things to see: the left-right separation is stable, and the movement *within* each person is small — that's the thing we'll try to explain in a moment.
+> (If asked about dimensions: positions are 2-D at baseline — the second axis separates the reserved indigenous seats; trajectories shown are the first dimension.)
 
 ---
 
 ## Slide 6 — Research questions (5:15–6:00)
 
 > Four questions.
-> One: formation — could the network be *predicted* from what people brought with them?
+> One: formation — with zero relational stock, could the network be *predicted* from what people brought with them?
 > Two-a: positions — does exposure to your co-signers *move* your ideal point?
 > Two-b: behavior — does voting *defection* travel along co-sponsorship ties?
-> Three: success — what makes an article survive, and does the *context* an initiative is born into matter?
+> Three-a: texts — what makes an *article* survive into the draft?
+> Three-b: members — does the *context* an initiative is born into matter for its authors' success?
 
 *(RQ1 divider: "First: could we predict the network?")*
 
@@ -69,12 +78,12 @@ Target: 18 minutes of talk + 7 of questions. Slide numbers are *logical* slides 
 
 ## Slide 7 — Bipartite ERGM (6:00–7:15)
 
-> Our unit of analysis is the real one: person times initiative. A signature is one tie in a bipartite network — we never project it into person-to-person ties, because projection makes one sixteen-sponsor initiative fabricate a hundred and twenty pairs at once.
+> The real unit of analysis we have are the ties person-document, in the sense that a signature is one tie in a bipartite network.
 >
-> The model is an ERGM on that network. Read it as a set of *counters*: each statistic counts a pattern — plain signatures, pairs of co-signers by political-bloc combination, pairs sharing a profile trait *within* each bloc — and each coefficient asks: does this pattern appear more, or less, than in comparable random networks?
->
+> The model is an ERGM on that network.
 > The continuous variables enter as per-document *ranges* — how spread out a document's signers are in ideology, age, education — plus two structural terms I'll come back to.
-> Seven models, one per commission. Estimation is maximum pseudo-likelihood — a logistic on change statistics — with standard errors from an initiative bootstrap: resample initiatives, rebuild the network, re-estimate, five hundred times.
+> We ran seven models, one per commission.
+> Estimation is maximum pseudo-likelihood — a logistic on change statistics — with standard errors from an initiative bootstrap.
 
 ---
 
@@ -82,8 +91,10 @@ Target: 18 minutes of talk + 7 of questions. Slide numbers are *logical* slides 
 
 **Pass I — Lawyers (7:15–7:45):**
 
-> Here's the profile table — one row per bloc, one column per commission — and I'll walk it top to bottom with these red boxes.
-> First group: the law degree. In *no* bloc does sharing it organize co-signing. Scattered, small, patternless. In a body drafting a constitution, you'd expect lawyers to seek lawyers. They don't — in any political sector.
+> Here are the results. They look intimidating, but is just because we have 7 models and each variable is decomposed in 6 political sub-groups.
+> I'll walk it top to bottom with these red boxes.
+> 
+> The first group is the law degree — and it's a null, with one honest nuance. A handful of cells do reach significance — five of thirty-five, slightly more than chance — but their signs contradict each other: the right is *negative* in one commission and *positive* in another, and nothing replicates across commissions. So: no bloc shows a *consistent* pattern. In a body drafting a constitution, you'd expect lawyers to seek lawyers; there is no consistent trace of that in any political sector.
 
 **Pass II — Experience (7:45–8:15):**
 
@@ -156,7 +167,7 @@ Target: 18 minutes of talk + 7 of questions. Slide numbers are *logical* slides 
 > Phi is eleven point two. But part of that is mechanical — if a vote splits my bloc, my co-signers and I defect together without any transmission. So: the permutation. In each bloc-and-vote, keep *how many* defected, and shuffle *who*. Two hundred times. Mechanics alone gives six point zero.
 > Half the raw effect was mechanical — and what remains is still enormous. It travels more strongly *across* commissions, dies within days, and it's carried by the newcomer pairs. The old guard drags nobody.
 
-*(RQ3 divider: "What makes an article survive?")*
+*(RQ3a divider: "What makes an article survive?")*
 
 ---
 
@@ -177,6 +188,8 @@ Target: 18 minutes of talk + 7 of questions. Slide numbers are *logical* slides 
 ---
 
 ## Slides 20–22 — Does the birth context matter? (16:20–18:00) ← sell it
+
+*(RQ3b divider: "Whose success is it?")*
 
 **Slide 20 — The question (16:20–16:50):**
 

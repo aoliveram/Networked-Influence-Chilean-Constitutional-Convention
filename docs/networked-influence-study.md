@@ -27,7 +27,8 @@ Sobre ese escenario hacemos tres preguntas:
 
 - RQ1 (formación): ¿qué organiza la decisión de co-firmar entre extraños? En particular, ¿cuánto se puede predecir con lo que ya se sabía de cada convencional *antes* de que la Convención empezara — su distrito, su lista, su profesión, su experiencia — y cuánto requiere lo que ocurrió adentro?
 - RQ2 (efectos sobre las personas): ¿la red mueve las posiciones de los convencionales (influencia), o los convencionales eligen la red según sus posiciones (selección)? ¿Y mueve su conducta?
-- RQ3 (efectos sobre los textos): ¿qué hace que un artículo sobreviva hasta el borrador final — y cuánto de eso se debe al grupo concreto de convencionales que firmó la iniciativa que lo contenía (su "coalición firmante", que no debe confundirse con la lista electoral)?
+- RQ3a (efectos sobre los textos): ¿qué hace que un artículo sobreviva hasta el borrador final — y cuánto de eso se debe al grupo concreto de convencionales que firmó la iniciativa que lo contenía (su "coalición firmante", que no debe confundirse con la lista electoral)?
+- RQ3b (efectos sobre las personas): ¿importa el contexto en que nace una iniciativa para el éxito de sus autores — es el éxito individual atribuible al individuo?
 
 ## 1.1 El argumento, contado de corrido
 
@@ -531,7 +532,7 @@ El estante en contra es igual de serio, y hay que decirlo con todas sus letras. 
 
 # 5. RQ3 — ¿Qué hace ganar?
 
-## 5.1 El mecanismo: la supervivencia de cada artículo
+## 5.1 RQ3a — El mecanismo: la supervivencia de cada artículo
 
 Lo que sobrevive o muere no es el convencional sino el artículo. El modelo de mecanismo se estima entonces a nivel de artículo: 1.565 artículos génesis con coalición firmante de 2 a 16 personas (389 coaliciones distintas), desenlace binario $sobrevive_a = 1$ si el artículo llegó al borrador (idéntico o similar; ocurre en el 20.2% de los casos). El modelo de regresión estimado es un logit con efectos fijos de comisión:
 
@@ -583,7 +584,7 @@ La Figura 12 muestra esta geometría directamente, sin cortar en tramos: la tasa
 
 ![Figura 12. Tasa de supervivencia de los artículos según la posición media de su coalición firmante (bins de igual tamaño; el tamaño del punto es el n del bin). Las bandas sombreadas son los terciles de los puntos ideales de los 154 convencionales — y como $103 = 2/3 \times 154$, el corte entre T2 y T3 es *exactamente* el pívot $\theta_{(103)}$ — con la tasa de supervivencia de las coaliciones cuya media cae en cada banda; las barandillas rojas sobre el plano marcan los cortes por quintiles (fila superior) y cuartiles (fila inferior) de las medias de coalición; la línea roja discontinua es el pívot.](../results/figures/survival_by_position.pdf){width=100%}
 
-## 5.2 La vista agregada: el éxito se comparte
+## 5.2 RQ3b — La vista agregada: el éxito se comparte
 
 A nivel de convencional, definimos el éxito de $i$ como su retención léxica media: $y_i = \frac{1}{|A_i|} \sum_{a \in A_i} sim(a)$, donde $A_i$ son los artículos que $i$ co-firmó y $sim(a)$ es la similitud textual (coseno TF-IDF) entre el texto génesis del artículo y su versión en el borrador — con $sim(a) = 0$ si el artículo murió. El éxito así medido está fuertemente correlacionado entre vecinos de red ($I$ de Moran 0.44, $p \approx 10^{-163}$), y el modelo que lo formaliza es el espacial de Durbin:
 
