@@ -12,7 +12,19 @@ Target: 18 minutes of talk + 7 of questions. Slide numbers are *logical* slides 
 
 ---
 
-## Slide 2 — A natural quasi-experiment (0:30–2:00)
+## Slide 1b — The hook: October 2019 (0:30–1:30)
+
+*(three photos appear one by one — advance twice)*
+
+> Before any model, let me show you where this all comes from.
+> *(photo 1)* October 2019. A thirty-peso metro fare hike in Santiago turned into the largest protests in Chile's modern history — more than a million people in this square. This photo — a protester on top of the statue — became the icon of what Chileans call the *estallido social*, the social outburst.
+> The political answer was unique. Not a cabinet change, not a reform package — a cross-party agreement to write a **new constitution from scratch**, through a brand-new institution where almost *any* citizen could potentially get elected: full gender parity — the first constituent body in the world with it —, seventeen reserved indigenous seats, and independents running on equal footing with parties.
+> *(photo 2)* This is that institution at work. *(photo 3)* And this is the draft it delivered, one year later.
+> So Chile went from the street to a draft constitution in under three years — and left behind a perfect dataset for network science. That's this talk.
+
+---
+
+## Slide 2 — A natural quasi-experiment (1:30–2:30)
 
 > Here's the problem with studying collaboration in any normal parliament: the network you observe today is the sediment of decades. Careers, committees, party discipline, old favors.
 >
@@ -179,19 +191,18 @@ Target: 18 minutes of talk + 7 of questions. Slide numbers are *logical* slides 
 
 ---
 
-## Slide 18 — The survival model (14:50–15:50)
+## Slide 18 — What survives? (14:50–15:30)
 
-> Now the texts themselves. 1,565 articles; twenty percent reach the draft.
-> A logistic with commission intercepts and three families of coalition traits: ideological geometry, network properties, human capital. The bold p-values are the survivors.
-> Three results. Distance to the two-thirds pivot: negative, strong — coalitions far from the pivot die. Ideological *heterogeneity*: positive — wide coalitions survive more. Internal density — pairs with a common history — positive and significant.
-> And human capital: lawyers, experience, degrees — all null. Articles win by geometry and team history, not by credentials.
+> Now the texts themselves. We have 1,565 articles, and only twenty percent of them reach the draft — and not evenly.
+> This is survival by where the signing coalition stands ideologically: it varies a lot, and it peaks close to the two-thirds pivot — the dashed line. Where your coalition stands matters for whether your text lives.
 
 ---
 
-## Slide 19 — The arithmetic of 103 (15:50–16:20)
+## Slide 19 — The survival model (15:30–16:20)
 
-> The geometry in one picture. The two-thirds rule fixed a pivot at minus point one five. Survival peaks slightly left of the pivot — the center of mass of the drafting majority — and the premium for widening lives exactly in the left coalitions that can still reach the pivot by stretching.
-> The quorum rule became behavior, through the network.
+> Here's the model behind that picture: a logistic with commission intercepts and three families of coalition traits — ideological geometry, network properties, and human capital. The bold p-values are the survivors.
+> Three results. Distance to the two-thirds pivot: negative, strong — coalitions far from the pivot die. Ideological *heterogeneity*: positive — wide coalitions survive more. And internal density — pairs with a common history — positive and significant: teams with shared history keep their articles alive.
+> Human capital — lawyers, experience, degrees — all null. Articles win by geometry and team history, not by credentials.
 
 ---
 

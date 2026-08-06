@@ -69,17 +69,18 @@ for i, lab in enumerate(["T1 (delegates 1-51)", "T2 (52-103)", "T3 (104-154)"]):
 # barandillas ARRIBA del plano del plot (coordenadas de ejes >1), en ingles
 import matplotlib.transforms as mtransforms
 trans = mtransforms.blended_transform_factory(ax.transData, ax.transAxes)
+RAILS = []
 def bracket_row(y, cuts, label):
     tick = 0.022
     for i in range(len(cuts) - 1):
         x0, x1 = cuts[i] + 0.004, cuts[i + 1] - 0.004
-        ax.plot([x0, x1], [y, y], color=RED, lw=1.0, alpha=0.45, zorder=5,
-                transform=trans, clip_on=False)
+        RAILS.extend(ax.plot([x0, x1], [y, y], color=RED, lw=1.0, alpha=0.45, zorder=5,
+                transform=trans, clip_on=False))
         for xx in (x0, x1):
-            ax.plot([xx, xx], [y - tick, y + tick], color=RED, lw=1.0, alpha=0.45,
-                    zorder=5, transform=trans, clip_on=False)
-    ax.text(cuts[0] - 0.02, y, label, ha="right", va="center", fontsize=7.2,
-            color=RED, alpha=0.8, transform=trans)
+            RAILS.extend(ax.plot([xx, xx], [y - tick, y + tick], color=RED, lw=1.0, alpha=0.45,
+                    zorder=5, transform=trans, clip_on=False))
+    RAILS.append(ax.text(cuts[0] - 0.02, y, label, ha="right", va="center", fontsize=7.2,
+            color=RED, alpha=0.8, transform=trans))
 bracket_row(1.12, list(np.quantile(mt, np.linspace(0, 1, 6))), "quintile cuts")
 bracket_row(1.05, list(np.quantile(mt, np.linspace(0, 1, 5))), "quartile cuts")
 ax.plot(centers, rates, "-", color=BLUE, lw=1.6, zorder=2)
@@ -103,4 +104,11 @@ os.makedirs(RESULTS_FIGURES, exist_ok=True)
 for ext in ("pdf", "png"):
     fig.savefig(os.path.join(RESULTS_FIGURES, f"survival_by_position.{ext}"), dpi=300,
                 bbox_inches="tight")
-print("figura: survival_by_position.pdf/.png")
+# variante para lamina: sin rieles ni titulo (comentario del autor, polnet26)
+for art in RAILS:
+    art.remove()
+ax.set_title("")
+for ext in ("pdf", "png"):
+    fig.savefig(os.path.join(RESULTS_FIGURES, f"survival_by_position_slide.{ext}"), dpi=300,
+                bbox_inches="tight")
+print("figura: survival_by_position(.pdf/.png) + _slide")

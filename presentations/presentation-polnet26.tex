@@ -146,6 +146,22 @@ Serial signers (\texttt{gwb1degree}) & $-0.63$ & $-0.85$ & $-0.05$ & $-6.94^{*}$
     {\footnotesize PhD(c) in Social Complexity Sciences, CICS--UDD, Chile}
   \end{center}
   \vfill
+  \begin{center}
+    \includegraphics[height=0.85cm]{CICS.png}\hspace{1.2cm}\includegraphics[height=0.85cm]{UDD.png}
+  \end{center}
+  \vspace{0.25cm}
+\end{frame}
+
+% ------------------------------------------------------------- 1b ESTALLIDO
+\begin{frame}[plain]
+\begin{tikzpicture}[remember picture, overlay]
+  \node<1-> [rotate=-5] at ([xshift=-3.6cm, yshift=0.1cm]current page.center)
+    {\setlength{\fboxsep}{5pt}\setlength{\fboxrule}{0.4pt}\fcolorbox{ndgray!40}{white}{\includegraphics[height=5.6cm]{estallido_imagen.jpg}}};
+  \node<2-> [rotate=4] at ([xshift=0.6cm, yshift=-0.3cm]current page.center)
+    {\setlength{\fboxsep}{5pt}\setlength{\fboxrule}{0.4pt}\fcolorbox{ndgray!40}{white}{\includegraphics[height=4.6cm]{camara.jpg}}};
+  \node<3-> [rotate=-3] at ([xshift=4.6cm, yshift=0.2cm]current page.center)
+    {\setlength{\fboxsep}{5pt}\setlength{\fboxrule}{0.4pt}\fcolorbox{ndgray!40}{white}{\includegraphics[height=5.6cm]{borrador_imagen.jpg}}};
+\end{tikzpicture}
 \end{frame}
 
 % ------------------------------------------------------------------ 2 SETUP
@@ -377,10 +393,16 @@ N (member-votes) & \multicolumn{2}{c}{186,988} \\
 \sectionslide{RQ3a — Texts}{What makes an article survive?}
 
 % ------------------------------------------------------------------ 15 SURVIVAL
-\begin{frame}{The survival model: article-level, complete}
+\begin{frame}{What survives?}
 \begin{itemize}
-  \item We have 1,565 \emph{articles}, and 20.2\% of them reach the draft.
+  \item We have 1,565 \emph{articles}, and 20.2\% of them reach the draft — unevenly:
 \end{itemize}
+\begin{center}
+  \includegraphics[width=0.72\textwidth]{../results/figures/survival_by_position_slide.pdf}
+\end{center}
+\end{frame}
+
+\begin{frame}{The survival model: article-level, complete}
 $$\Pr(\text{survives}_a) = \Lambda\Big(\alpha_c + \gamma_1\, \big|\bar\theta_{1,S_a} - \theta_{1,(103)}\big| + \gamma_2\, sd(\theta_{1,S_a}) + \gamma_3\, |S_a| + \boldsymbol{\gamma_4}^\top C_{S_a} + \boldsymbol{\gamma_5}^\top H_{S_a}\Big)$$
 \begin{center}\scriptsize\setlength{\tabcolsep}{5pt}
 \begin{tabular}{lccc}
@@ -405,12 +427,7 @@ AIC & 1393 & 1384 & 1386 \\
 \end{frame}
 
 % ------------------------------------------------------------------ 16 F12
-\begin{frame}{Survival by coalition position: the arithmetic of 103}
-\begin{center}
-  \includegraphics[width=0.78\textwidth]{../results/figures/survival_by_position.pdf}
-\end{center}
-\nota{The two-thirds rule fixed a pivot at $\theta_{1,(103)} = -0.15$. The premium for widening lives in left coalitions that can still reach the pivot by stretching; the sweet spot sits slightly left of the pivot — the center of mass of the drafting majority.}
-\end{frame}
+
 
 % ------------------------------------------------------------------ 17 SDM
 \sectionslide{RQ3b — Members}{Whose success is it?}
