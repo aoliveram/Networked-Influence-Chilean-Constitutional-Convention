@@ -57,6 +57,10 @@ Target: 18 minutes of talk + 7 of questions. Slide numbers are *logical* slides 
 > And they are *very* different worlds. Look at the numbers: in Justice, fifteen of the seventeen members are lawyers — almost all of them. In Principles, only four. Fundamental Rights is a monster with 283 initiatives, and its education level is basically a bachelor's degree — one point zero on our scale. Knowledge Systems is the oldest commission, average age fifty-two, and has *zero* members with prior political experience.
 > Every model I'll show is estimated within commission — these worlds are too different to pool.
 
+> So this is just a glimpse of the research you can do with this rich new dataset.
+> I'll show you some of the first research questions I've been working on, but it is still a work in progress, and it's not meant to be included in a single paper since they address more that one particular topic.
+> That's why your comments are so welcomed.
+
 ---
 
 ## Slide 5 — Positions over time, by commission (4:15–5:15)
@@ -94,7 +98,8 @@ Target: 18 minutes of talk + 7 of questions. Slide numbers are *logical* slides 
 **Pass I — Lawyers (7:15–7:45):**
 
 > Here are the results. They look intimidating, but is just because we have 7 models and each variable is decomposed in 6 political sub-groups.
-> What each coefficient tells us is this: how much one more co-signer of that same group, already on the initiative, changes the chances that I join it too — positive means the pattern is over-used, negative means under-used, always compared against comparable random networks.
+> What each coefficient tells us is this: how much one more co-signer of that same group changes the chances that I join it too
+> positive values means the pattern is over-used, negative means under-used, always compared against comparable random networks.
 > I'll walk it top to bottom with these red boxes.
 >
 > The first group is the law degree — and it's a null, with one honest nuance. A handful of cells do reach significance — five of thirty-five, slightly more than chance — but their signs contradict each other: the right is *negative* in one commission and *positive* in another, and nothing replicates across commissions. So: no bloc shows a *consistent* pattern. In a body drafting a constitution, you'd expect lawyers to seek lawyers; there is no consistent trace of that in any political sector.
@@ -273,3 +278,42 @@ Target: 18 minutes of talk + 7 of questions. Slide numbers are *logical* slides 
 ### Pending before the talk
 - Author's review of the data infographic (slide 3) — v2 just rebuilt.
 - Any trimming to fit 18:00 flat (current script ~18:40; use the release valves).
+
+--------------------------------------------------------------------------------
+
+### Vocabulary to practice (term — approx. pronunciation — meaning here)
+
+| Term | Pronunciation | Meaning in this talk |
+|---|---|---|
+| roll call | *ROL-col* | votación nominal (cada voto queda registrado) |
+| co-sponsorship | *cou-SPON-sor-ship* | co-patrocinio (firmar juntos una iniciativa) |
+| ideal point | *ai-DÍL point* | posición ideológica estimada de los votos |
+| lagged / lag | *lagd* | rezagado; "the lag" = la exposición pasada |
+| decayed exposure | *di-KEID ex-POU-yer* | exposición con memoria que se desvanece |
+| bounded memory | *BAUN-did MÉ-mo-ri* | memoria acotada (la cota temporal) |
+| within-person | *ui-DÍN PER-son* | dentro de cada persona (efectos fijos) |
+| clustered standard errors | *CLÁS-terd* | EE agrupados por convencional |
+| referee's test | *RE-fe-rís test* | el test del árbitro (la innovación futura) |
+| quasi-experiment | *KUA-sai ex-PÉ-ri-ment* | cuasi-experimento |
+| homophily | *jo-MÓ-fi-li* (acento en MO) | juntarse con los parecidos |
+| bipartite | *bai-PAR-tait* | red de dos tipos de nodos |
+| pseudo-likelihood | *SU-dou LAIK-li-jud* | pseudo-verosimilitud (MPLE) |
+| bootstrap / resample | *BUT-strap / ri-SÁM-pel* | re-sortear iniciativas para los EE |
+| breaks ranks / off script | *breiks ranks* | romper filas / salirse del libreto |
+| shuffle | *SHÁ-fel* | barajar (la permutación) |
+| marginality / outsider | *mar-yi-NÁ-li-ti* | el periférico ideológico del bloque |
+| spillover | *SPIL-ou-ver* | derrame (el rho como externalidad) |
+| draft | *draft* | el borrador constitucional |
+| retention | *ri-TÉN-shon* | cuánto texto sobrevivió |
+| pivot / quorum | *PÍ-vot / KUÓ-rum* | el pívot de 2/3 / el quórum |
+| breadth / widening | *bredz / UAI-de-ning* | anchura ideológica / ensancharse |
+| credentials | *cri-DÉN-shals* | títulos y experiencia |
+| newcomers / old guard | *NIU-ca-mers / ould gard* | novatos / vieja guardia |
+| tie / dyad | *tai / DAI-ad* | lazo / par de personas |
+
+**Full sentences to rehearse** (they carry the talk):
+- "closing about two percent of the distance to their recent neighborhood, per wave"
+- "the strictly-future innovation predicts nothing"
+- "same bloc, same vote, same pressure"
+- "coalitions re-form with fresh pairs"
+- "the context is the coalition you stand in"

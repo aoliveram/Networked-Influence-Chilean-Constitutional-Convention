@@ -63,28 +63,28 @@
 \toprule
 \textbf{Same status}, by bloc of the pair & C1 & C2 & C3 & C4 & C5 & C6 & C7 \\
 \midrule
-\multicolumn{8}{l}{\emphr{--- Lawyer}}\\
+\multicolumn{8}{l}{\emphr{--- pre-net: Lawyer}}\\
 \tikzmark{abogL}Left & $-0.07$ & $0.06$ & $0.02$ & $0.06^{+}$ & $0.00$ & $0.11^{*}$ & $-0.07$ \\
 Center-left & $0.11$ & $0.11$ & $0.13$ & $-0.03$ & $0.15^{*}$ & $-0.26$ & $-0.00$ \\
 Right & $-0.11$ & $-0.15^{**}$ & $-0.01$ & $0.01$ & $0.10$ & $0.13^{*}$ & $-0.06$ \\
 Reserved seats & $0.06$ & $0.24$ & $0.10$ & $-0.26^{+}$ & $0.20^{*}$ & $-0.21$ & $-0.04$ \\
 Others & $0.12$ & $-0.11$ & $-0.09$ & $0.09^{+}$ & $-0.00$ & $-0.13$ & $-0.15$ \\
 Across blocs & $0.06$ & $-0.08^{*}$ & $0.02$ & $0.04^{*}$ & $-0.05^{+}$ & $0.07^{+}$ & $0.06^{+}$\tikzmark{abogR} \\
-\multicolumn{8}{l}{\emphr{--- Prior institutional experience}}\\
+\multicolumn{8}{l}{\emphr{--- pre-net: Prior institutional experience}}\\
 \tikzmark{expL}Left & $0.12^{+}$ & $0.13^{*}$ & $0.09$ & $0.11^{**}$ & $0.04^{+}$ & $0.06$ & $0.00$\tikzmark{expR} \\
 Center-left & $0.11$ & $-0.03$ & $0.09$ & $0.09^{**}$ & $-0.09$ & $-0.01$ & $0.12$ \\
 Right & $-0.13$ & $-0.14$ & $-0.03$ & $0.05$ & $-0.14$ & $0.00$ & $-0.11$ \\
 Reserved seats & $0.06$ & $0.00$ & $-0.08$ & $-0.05$ & $-0.11$ & $-0.10$ & $-0.05$ \\
 Others & $-0.25$ & $-0.26$ & $--$ & $0.05$ & $--$ & $-0.20$ & $-0.30$ \\
 Across blocs & $0.04$ & $0.06^{+}$ & $0.03$ & $0.06^{**}$ & $0.04^{*}$ & $0.04$ & $0.04$ \\
-\multicolumn{8}{l}{\emphr{--- Gender}}\\
+\multicolumn{8}{l}{\emphr{--- pre-net: Gender}}\\
 Left & $-0.12$ & $-0.03$ & $-0.06$ & $-0.03$ & $-0.02$ & $-0.04$ & $-0.09$ \\
 Center-left & $-0.08$ & $-0.10$ & $-0.07$ & $0.00$ & $0.02$ & $-0.02$ & $0.05$ \\
 Right & $0.14^{*}$ & $0.03$ & $0.05$ & $-0.06$ & $0.04$ & $-0.03$ & $0.09$ \\
 Reserved seats & $-0.11$ & $-0.50$ & $-1.77$ & $-0.60^{**}$ & $-1.64^{***}$ & $0.04$ & $-0.26$ \\
 Others & $-0.21$ & $-0.26$ & $-0.61$ & $-0.20^{**}$ & $-0.38^{*}$ & $0.19$ & $-0.37$ \\
 \tikzmark{genL}Across blocs & $0.04$ & $0.12^{**}$ & $0.20^{*}$ & $0.13^{***}$ & $0.12^{***}$ & $0.08^{+}$ & $0.11^{*}$\tikzmark{genR} \\
-\multicolumn{8}{l}{\emphr{--- District}}\\
+\multicolumn{8}{l}{\emphr{--- pre-net: District}}\\
 \tikzmark{distL}Left & $-0.64^{*}$ & $-0.48^{*}$ & $0.45$ & $-0.45^{***}$ & $-0.29$ & $-0.45^{*}$ & $-0.04$ \\
 Center-left & $-0.09$ & $-0.80$ & $-0.48$ & $0.73^{*}$ & $0.18$ & $-0.74$ & $0.30$ \\
 Right & $1.00^{***}$ & $1.36^{***}$ & $0.42$ & $0.41^{***}$ & $0.08$ & $0.23$ & $0.88^{*}$ \\
@@ -312,11 +312,11 @@ $$
 \begin{center}\small
 \begin{tabular}{lccc}
 \toprule
-M2 (+ date FE + innovation $t{+}2$) & $m = 1$ ($\approx$ 2 wks) & $m = 2$ ($\approx$ 1 mo) & $m = 3$ ($\approx$ 6 wks) \\
+Variable & $m = 1$ & $m = 2$ & $m = 3$ \\
 \midrule
 Lagged position $\theta_{i,t-1}$ ($\hat\beta$) & $-0.756^{***}$ & $-0.756^{***}$ & $-0.756^{***}$ \\
-Decayed exposure $\hat\lambda$ ($E^{(m)}_{i,t-1}$) & $\mathbf{0.022^{***}}$ (0.006) & $\mathbf{0.022^{***}}$ (0.006) & $\mathbf{0.021^{***}}$ (0.006) \\
-Decayed innovation $\hat\lambda_{innov}$ & $-0.008$ ($p=.25$) & $-0.007$ ($p=.38$) & $-0.005$ ($p=.60$) \\
+Decayed exposure $\hat\lambda$ ($E^{(m)}_{i,t-1}$) & $\mathbf{0.022^{***}}$ & $\mathbf{0.022^{***}}$ & $\mathbf{0.021^{***}}$ \\
+Decayed innovation $\hat\lambda_{innov}$ & $-0.008$ & $-0.007$ & $-0.005$ \\
 Wave-date fixed effects & yes & yes & yes \\
 N (person-waves) & 2,011 & 2,011 & 2,011 \\
 $R^2$ within & 0.370 & 0.370 & 0.369 \\
@@ -353,19 +353,20 @@ $$X_{iv} = \frac{\sum_{j \neq i} w_{ij}\, D_{jv}}{\sum_{j \neq i} w_{ij}},
 \begin{center}\small
 \begin{tabular}{lcc}
 \toprule
- & Estimate & (SE) \\
+ & (1) & (2) \\
 \midrule
-Exposure to defecting co-signers ($\phi$) & $\mathbf{8.75^{***}}$ & (0.61) \\
-Marginality in own bloc ($\gamma$) & $1.09^{***}$ & (0.09) \\
+Exposure to defecting co-signers ($\phi$) & $\mathbf{8.82^{***}}$ (0.60) & $\mathbf{8.75^{***}}$ (0.61) \\
+Marginality in own bloc ($\gamma$) & — & $1.09^{***}$ (0.09) \\
 \midrule
-Fixed effects & \multicolumn{2}{c}{person + bloc $\times$ vote} \\
+Person Fixed effects & \multicolumn{2}{c}{yes} \\
+Bloc $\times$ vote Fixed effects & \multicolumn{2}{c}{yes} \\
 N (member-votes) & \multicolumn{2}{c}{186,988} \\
 \bottomrule
 \end{tabular}
 \end{center}
 \vspace{0.25cm}
 \begin{itemize}
-  \item Same bloc, same vote, same pressure: the members whose co-signers defect, \emphr{defect far more}.
+  \item The members whose co-signers defect, \emphr{defect far more}.
   \item Marginality predicts defection strongly — the bloc's outsider breaks ranks — but takes \emph{nothing} from $\phi$: two independent channels.
   \item Carried by \emphr{newcomers at both ends} of the tie: novice receivers ($\phi = 12.2$ vs $9.5$) and novice senders alike.
 \end{itemize}
@@ -420,15 +421,14 @@ AIC & 1393 & 1384 & 1386 \\
   \vspace{0.3cm}
   \item Success is \emphr{not individual}: it clusters on the co-sponsorship network (Moran's $I = 0.44$, $p \approx 10^{-163}$). Your success looks like your co-signers' success.
   \vspace{0.3cm}
-  \item To test whether the company an initiative is born into matters, we relate each member's success to the \emph{average success of their co-signers}:
+  \item To test whether the context an initiative is born into matters, we relate each member's success to the \emph{average success of their co-signers}:
   $$y = \rho\, W y + X\beta + W X \gamma + \varepsilon,$$
-  where $W$ is the row-normalized co-sponsorship network.
-  \item One coefficient, $\rho$, answers whether that company matters.
+  where $W$ is the row-normalized co-sponsorship network and $\rho$ answers whether that company matters.
 \end{itemize}
 \end{frame}
 
-\begin{frame}{The full model}
-\begin{center}\tiny\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.15}
+\begin{frame}
+\begin{center}\scriptsize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.15}
 \begin{tabular}{lcccc}
 \toprule
  & Own ($\beta$) & $p$ & Co-signers' ($\gamma$, lag) & $p$ \\
@@ -493,55 +493,6 @@ $\rho$ & $0.891$ & $\textbf{<.001}$ & — & — \\
     {\small\color{ndgray} anibal.olivera.m@gmail.com $\cdot$ aoliveram.cl}
   \end{center}
   \vfill
-\end{frame}
-
-\sectionslide{Backup}{Supporting material}
-
-% ------------------------------------------------------------------ B1 MIXING
-\begin{frame}{Backup: the bloc mixing matrix (pure closure, no profile counters)}
-\begin{center}
-  \includegraphics[width=0.9\textwidth]{../results/figures/nodemix_heatmap.pdf}
-\end{center}
-\end{frame}
-
-% ------------------------------------------------------------------ B2 WINDOWS
-\begin{frame}{Backup: the influence null, 3 windows $\times$ 7 exposure doses}
-\begin{center}\tiny\setlength{\tabcolsep}{5pt}
-\begin{tabular}{llcccc}
-\toprule
-Window & Exposure definition & $\hat\lambda$ & SE & $p$ & N \\
-\midrule
-Full & Accumulated since T0 & $+0.007$ & 0.004 & $0.119$ & 4,355 \\
-Full & Last wave only & $+0.007$ & 0.013 & $0.60$ & 463 \\
-Full & Last 2 waves & $+0.003$ & 0.009 & $0.72$ & 1,504 \\
-Full & Last 3 waves & $-0.002$ & 0.007 & $0.76$ & 2,447 \\
-Full & Decay $\lambda_w = 0.25 / 0.50 / 0.75$ & $+0.008/+0.008/+0.007$ & 0.004 & $.051/.042/.078$ & 4,355 \\
-Full & Falsification: future exposure & $+0.010$ & 0.004 & $0.030$ & 3,329 \\
-Early ($\leq$ Mar 31) & Accumulated & $+0.005$ & 0.007 & $0.50$ & 1,586 \\
-Late ($\geq$ Apr 1) & Accumulated & $+0.011$ & 0.005 & $0.018$ & 2,769 \\
-Late & Falsification: future exposure & $+0.010$ & 0.004 & $0.004$ & 1,742 \\
-\bottomrule
-\end{tabular}
-\end{center}
-\nota{No $\hat\lambda$ exceeds $0.011$; the few significant late-window lags come with an equally significant falsification of the same size.}
-\end{frame}
-
-% ------------------------------------------------------------------ B3 CLOGIT
-\begin{frame}{Backup: how does each sector decide? (conditional logit, same data)}
-\begin{center}\footnotesize
-\begin{tabular}{lccccc}
-\toprule
- & Right & Ctr-left & Left & Res.\ seats & Others \\
-\midrule
-Distance in $\theta_1$ & $-5.1^{***}$ & $-2.8^{**}$ & $-0.8$ & $+0.1$ & $-6.1^{***}$ \\
-\bottomrule
-\end{tabular}
-\end{center}
-\vspace{0.2cm}
-\begin{itemize}
-  \item The complementary lens: the conditional logit conditions within each initiative (menu) and can split by the \emph{decider's} bloc: the right almost never crosses ideological distance; the left crosses it all.
-  \item The hybrid ERGM and the conditional logit agree on the substantive ranking — the tool changes what is visible, not what matters.
-\end{itemize}
 \end{frame}
 
 \end{document}
