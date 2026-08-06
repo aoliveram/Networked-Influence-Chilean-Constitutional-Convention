@@ -55,6 +55,9 @@
 % oval highlight: rounded rectangle between two tikzmark anchors
 \newcommand{\ovalmark}[2]{\draw[ndred, very thick, rounded corners=7pt]
   ([shift={(-4pt,10pt)}]pic cs:#1) rectangle ([shift={(5pt,-4pt)}]pic cs:#2);}
+% variante delgada (tabla de supervivencia)
+\newcommand{\ovalmarkthin}[2]{\draw[ndred, thick, rounded corners=7pt]
+  ([shift={(-4pt,10pt)}]pic cs:#1) rectangle ([shift={(5pt,-4pt)}]pic cs:#2);}
 
 % ---------------- Table A: profile homophily by bloc (macro, marks inside) ----
 \newcommand{\TablaPerfil}{%
@@ -217,21 +220,21 @@ Serial signers (\texttt{gwb1degree}) & $-0.63$ & $-0.85$ & $-0.05$ & $-6.94^{*}$
 \begin{center}\scriptsize\setlength{\tabcolsep}{3.5pt}
 \begin{tabular}{clcccccccc}
 \toprule
- & Name (short) & Members & N lawyers & N exper. & Age & Education & Initiatives & Amd. Waves & In draft \\
+ & Name (short) & Members & N lawyers & N exper. & Age & Education & Initiatives & Amendments & In draft \\
 \midrule
-C1 & Political system & 25 & 15 & 9 & 42.2 & 1.44 & 89 & 4 & 51 \\
-C2 & Const.\ principles & 18 & 4 & 4 & 45.8 & 1.28 & 114 & 3 & 24 \\
-C3 & Form of the state & 30 & 11 & 12 & 45.1 & 1.43 & 51 & 6 & 67 \\
-C4 & Fundamental rights & 30 & 9 & 4 & 45.9 & 1.03 & 283 & 5 & 54 \\
-C5 & Environment & 19 & 4 & 3 & 44.7 & 1.26 & 133 & 5 & 30 \\
-C6 & Justice systems & 17 & 15 & 3 & 42.6 & 1.65 & 93 & 6 & 98 \\
-C7 & Knowledge systems & 15 & 2 & 0 & 51.7 & 1.33 & 64 & 8 & 35 \\
+C1 & Political system & 25 & 15 & 9 & 42.2 & 1.44 & 89 & 365 & 51 \\
+C2 & Const.\ principles & 18 & 4 & 4 & 45.8 & 1.28 & 114 & 53 & 24 \\
+C3 & Form of the state & 30 & 11 & 12 & 45.1 & 1.43 & 51 & 241 & 67 \\
+C4 & Fundamental rights & 30 & 9 & 4 & 45.9 & 1.03 & 283 & 395 & 54 \\
+C5 & Environment & 19 & 4 & 3 & 44.7 & 1.26 & 133 & 559 & 30 \\
+C6 & Justice systems & 17 & 15 & 3 & 42.6 & 1.65 & 93 & 381 & 98 \\
+C7 & Knowledge systems & 15 & 2 & 0 & 51.7 & 1.33 & 64 & 332 & 35 \\
 \bottomrule
 \end{tabular}
 \end{center}
 \begin{itemize}
   \item \footnotesize C4 (Fundamental rights): basically bachelor's degree, and 283 initiatives; 
-  \item C6 (Environment): 15/17 members were lawyers; 
+  \item C6 (Justice systems): 15/17 members were lawyers;
   \item C7 (Knowledge systems) has no politically experienced member.
 \end{itemize}
 \end{frame}
@@ -358,7 +361,7 @@ $R^2$ within & 0.370 & 0.370 & 0.369 \\
 \end{center}
 \vspace{0.25cm}
 \begin{itemize}
-  \item The lagged exposition is significant accross all memory $m$.
+  \item The lagged exposure is significant across all memories $m$.
   \item The \emphr{strictly future innovation predicts nothing}, at every memory.
   \item The \emphr{influence component} survives every test; but latent homophily cannot be excluded by design.
 \end{itemize}
@@ -408,12 +411,6 @@ N (member-votes) & \multicolumn{2}{c}{186,988} \\
 
 \sectionslide{RQ3a — Texts}{What makes an article survive?}
 
-\begin{frame}[plain]
-\begin{center}
-  \includegraphics[width=0.9\textwidth]{../results/figures/retention_dynamics_all_commissions.pdf}
-\end{center}
-\end{frame}
-
 % ------------------------------------------------------------------ 15 SURVIVAL
 \begin{frame}{What survives?}
 \begin{itemize}
@@ -447,7 +444,7 @@ AIC & 1393 & 1384 & 1386 \\
 \end{tabular}
 \end{center}
 \begin{tikzpicture}[remember picture, overlay]
-\ovalmark{pivL}{pivR}\ovalmark{hetL}{hetR}\ovalmark{denL}{denR}
+\ovalmarkthin{pivL}{hetR}\ovalmarkthin{denL}{denR}
 \end{tikzpicture}
 \end{frame}
 
@@ -460,9 +457,14 @@ AIC & 1393 & 1384 & 1386 \\
 \begin{frame}{Does the context an initiative is born into matter?}
 \begin{itemize}
   \item \emphr{Success}: of all the article text you co-signed, how much survived into the draft? ($y_i$ = mean textual retention of $i$'s articles, 0 to 1.)
-  
-  [PLOT]
-  \vspace{0.3cm}
+\end{itemize}
+\begin{center}
+  \includegraphics[width=0.72\textwidth]{../results/figures/retention_dynamics_all_commissions.pdf}
+\end{center}
+\end{frame}
+
+\begin{frame}{Does the context an initiative is born into matter?}
+\begin{itemize}
   \item Success is \emphr{not individual}: it clusters on the co-sponsorship network (Moran's $I = 0.44$, $p < .001$). Your success looks like your co-signers' success.
   \vspace{0.3cm}
   \item To test whether the context an initiative is born into matters, we relate each member's success to the \emph{average success of their co-signers}:

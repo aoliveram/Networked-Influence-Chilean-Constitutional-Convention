@@ -104,11 +104,12 @@ os.makedirs(RESULTS_FIGURES, exist_ok=True)
 for ext in ("pdf", "png"):
     fig.savefig(os.path.join(RESULTS_FIGURES, f"survival_by_position.{ext}"), dpi=300,
                 bbox_inches="tight")
-# variante para lamina: sin rieles ni titulo (comentario del autor, polnet26)
+# variante para lamina: sin rieles, con el titulo pegado al plot (polnet26)
 for art in RAILS:
     art.remove()
-ax.set_title("")
-ax.set_ylim(0, 0.42)
+ax.set_title("Article survival by coalition position", fontsize=10.5, color=INK,
+             loc="left")
+ax.set_ylim(0, 0.5)
 for ext in ("pdf", "png"):
     fig.savefig(os.path.join(RESULTS_FIGURES, f"survival_by_position_slide.{ext}"), dpi=300,
                 bbox_inches="tight")

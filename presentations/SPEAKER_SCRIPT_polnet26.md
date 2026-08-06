@@ -20,7 +20,7 @@ Target: 18 minutes of talk + 7 of questions. Slide numbers are *logical* slides 
 > *(photo 1)* In October 2019, a metro fare hike in Santiago turned into the largest protests in Chile's modern history, with more than a million people in this square. This photo became the icon of that social outburst.
 > The political answer was unique. *(photo 2)* A cross-party agreement to write a **new constitution from scratch**, through a brand-new institution where almost *any* citizen could potentially get elected: full gender parity, seventeen reserved indigenous seats, and independents running on equal footing with parties.
 > *(photo 3)* And this is the draft it delivered, one year later.
-> So Chile went from the street to a draft constitution in under three years — and left behind a great dataset that was useless because it was a big messy, with documents in different formats, each commission had his own way to report their work, and it was very hard to reconstruct the path towards the first draft of the new contitution.
+> So Chile went from the street to a draft constitution in under three years — and left behind a great dataset that was useless because it was a big mess, with documents in different formats, each commission had its own way to report their work, and it was very hard to reconstruct the path towards the first draft of the new constitution.
 
 ---
 
@@ -33,12 +33,12 @@ Target: 18 minutes of talk + 7 of questions. Slide numbers are *logical* slides 
 
 ## Slide 2 — A natural quasi-experiment (1:50–2:40)
 
-> So, why this institution was particularly interesting? in any normal parliament, the network you observe today is the sediment of decades of favors, committees, Careers, etc.
+> So, why was this institution particularly interesting? In any normal parliament, the network you observe today is the sediment of decades of favors, committees, careers, etc.
 >
 > The Chilean Constitutional Convention is the cleanest exception I know of. It ran for exactly one year. Most members were newcomers and independents, there were seventeen reserved indigenous seats, and the body *dissolved* when it delivered the draft.
 >
 > They set their own rules.
-> First: every constitutional initiative needed 8 to sixteen sponsors**. So signing was forming a visible, dated coalition.
+> First: every constitutional initiative needed 8 to sixteen sponsors. So signing was forming a visible, dated coalition.
 > Second: every norm needed two thirds of the floor — **103 out of 154 votes**. Being born was cheap; surviving was expensive.
 
 ---
@@ -66,7 +66,7 @@ Target: 18 minutes of talk + 7 of questions. Slide numbers are *logical* slides 
 
 > Beyond the documents and the votes, we have the profile of each member *before* day one: their electoral list, their district,
 > age, gender, whether they held a law degree, their education level,
-> and whether they had **prior institutional experience** — that is if they had held public office before: former members of Congress, mayors, etc... only Thirty-five of the 154 had.
+> and whether they had **prior institutional experience** — that is if they had held public office before: former members of Congress, mayors, etc... only thirty-five of the 154 had.
 > We calculated the 2D ideology using the first month of roll calls, before the initiatives showed the collaboration network.
 
 ---
@@ -74,7 +74,7 @@ Target: 18 minutes of talk + 7 of questions. Slide numbers are *logical* slides 
 ## Slide 4 — The seven commissions (3:30–4:15)
 
 > The Convention worked in seven thematic commissions. Quickly:
-> C1 political system: — branches of government, the presidential regime, etc.
+> C1 political system — branches of government, the presidential regime, etc.
 > C2 writes the constitutional principles.
 > C3 form of the state — the territorial organization.
 > C4 is fundamental rights.
@@ -92,24 +92,24 @@ Target: 18 minutes of talk + 7 of questions. Slide numbers are *logical* slides 
 > 
 > On the left side the lines look very stable — but that's mostly because there are *few votes* in those months,
 > and there is one window with a *lot of movement* — and that's exactly where the plenary voted the articles, under the two-thirds rule.
-> And third, the Environment commission holds the most left-wing positions of all commissions.
+> And the Environment commission holds the most left-wing positions of all commissions.
 >
-> Ok. As you can see, there are lots of possible reseach questions you can address using these data,
+> Ok. As you can see, there are lots of possible research questions you can address using these data,
 > and this is just a glimpse of the research you can do with this new rich dataset.
 
 ---
 
 ## Slide 6 — Research questions (5:15–6:00)
 
-> I'll show you some of the first research questions I've been working on, but it is still a work in progress, and it's not meant to be included in a single paper since they address more that one particular topic.
-> That's why your comments are so welcomed.
+> I'll show you some of the first research questions I've been working on, but it is still a work in progress, and it's not meant to be included in a single paper since they address more than one particular topic.
+> That's why your comments are so welcome.
 > 
 > Our questions come in three families.
 > Formation: can the co-sponsorship network be *predicted* from what people brought with them — their district, their profession, their profile?
 > Behavior, in two parts: does exposure to your co-signers *move* your ideological position? And does voting *defection* travel along co-sponsorship ties?
 > And success, also in two parts: what makes an *article* survive into the draft? And does the *context* an initiative is born into matter for its authors' success?
 >
-> Before moving on, I just want to comment that I'm not a sociologist, I'm more interested in the methofological aspects, so I'll report what the models find, and comment on some of it. But the deeper politological reading is an ongoing work with my Advisor.
+> Before moving on, I just want to comment that I'm not a sociologist, I'm more interested in the methodological aspects, so I'll report what the models find, and comment on some of it. But the deeper politological reading is an ongoing work with my advisor.
 
 
 *(RQ1 divider: "First: could we predict the network?")*
@@ -118,13 +118,13 @@ Target: 18 minutes of talk + 7 of questions. Slide numbers are *logical* slides 
 
 ## Slide 7 — Bipartite ERGM (6:00–7:15)
 
-> Here is worth to notice that the real unit of analysis we have are the person-document ties, so we have a bipartite network.
+> Here it is worth noticing that the real units of analysis we have are the person-document ties, so we have a bipartite network.
 >
 > The model we fit is an ERGM on that bipartite network.
 > 
 > So the continuous variables enter as per-document *ranges* — that is how diverse the signers are in ideology, age, education — plus two structural terms I'll come back to.
-> We ran seven models, one per commission.
-> using maximum pseudo-likelihood as estimatior with standard errors from an initiative bootstrap.
+> We ran seven models, one per commission,
+> using maximum pseudo-likelihood as the estimator with standard errors from an initiative bootstrap.
 
 ---
 
@@ -132,13 +132,13 @@ Target: 18 minutes of talk + 7 of questions. Slide numbers are *logical* slides 
 
 *Pass I — Lawyers (7:15–7:45):*
 
-> Here are the results. They look intimidating, but is just because we have 7 models and each variable is decomposed in 6 political sub-groups.
+> Here are the results. They look intimidating, but it's just because we have 7 models and each variable is decomposed in 6 political sub-groups.
 > What each coefficient tells us is this: how much one more co-signer of that same group changes the probability that I join it too;
-> positive values means the pattern is over-used, negative means under-used, always compared against comparable random networks.
+> positive values mean the pattern is over-used, negative means under-used, always compared against comparable random networks.
 > 
 > I'll walk it top to bottom with these red boxes.
 >
-> The first group is the law degree. In a body drafting a constitution, you'd expect lawyers to seek lawyers; but that pattern is present only in some cases, as the "Center-left" and "Reserved seats" in Enviroment, and the "Right" lawyers seek each other in Justice system, but they repealled in Constitutional principles, so they had their own niche in that commission.
+> The first group is the law degree. In a body drafting a constitution, you'd expect lawyers to seek lawyers; but that pattern is present only in some cases, as the "Center-left" and "Reserved seats" in Environment, and the "Right" lawyers seek each other in Justice system, but they repelled each other in Constitutional principles, so they had their own niche in that commission.
 
 *Pass II — Experience (7:45–8:15):*
 
@@ -151,9 +151,9 @@ Target: 18 minutes of talk + 7 of questions. Slide numbers are *logical* slides 
 *Pass IV — District (8:45–9:30) ← the star of this table:*
 
 > And fourth, district, the strongest result. 
-> He have positive coefficients "Across blocs", in all seven comissions, so *territory is the main bridge* over the political divide.
+> We have positive coefficients "Across blocs", in all seven commissions, so *territory is the main bridge* over the political divide.
 > But more interesting is that sharing a district organizes co-signing **inside the Right**, but inside the Left it's the *opposite*.
-> And this fits well with the notion that the right-wing is mainly concentrated in two specific regions in Chile, but, during the 2020 election, the left was well spreaded across the whole nation.
+> And this fits well with the notion that the right-wing is mainly concentrated in two specific regions in Chile, but, during the 2020 election, the left was well spread across the whole nation.
 
 ---
 
@@ -178,13 +178,13 @@ Target: 18 minutes of talk + 7 of questions. Slide numbers are *logical* slides 
 
 > First, influence on positions. Everything here uses only the *norms era* — that window with a lot of votes and dynamics.
 >
-> Here we use the exposure to you neightborhood to explain your dynamic.
+> Here we use the exposure to your neighborhood to explain your dynamic.
 > Your exposure is the weighted mean position of your co-signers, where
-network weights decay over time, so the effective windows are 2, 4, or 6 weeks.
+> network weights decay over time, so the effective windows are 2, 4, or 6 weeks.
 
-> The model is within-person, and aswer if my *change* follow where my recent neighborhood *was*.
+> The model is within-person, and answers if my *change* follows where my recent neighborhood *was*.
 >
-> To see if the "influence" was selection, we alse added a future exposure, as the future exposure should predict the dynamics and the lag should die. 
+> To see if the "influence" was selection, we also added a future exposure, as the future exposure should predict the dynamics and the lag should die. 
 
 ---
 
@@ -194,7 +194,7 @@ network weights decay over time, so the effective windows are 2, 4, or 6 weeks.
 > Movement follows *past* exposure with a coefficient of point zero two, so, if we aggregate all the waves, this could explain ~12% of the total dynamic. 
 > And future innovation predicts nothing.
 > That's great because, if this were really *selection* (I sign with people I'm already moving toward), then where my network is *heading* should predict my change today, and the past should die.
-> So there is no selection here, opposite of what one could think about a new institution…
+> So there is no selection here, the opposite of what one could think about a new institution…
 >
 > So the influence component survives every test; but latent homophily (unobserved trait that also predicts how I will move) cannot be excluded by design.
 
@@ -206,27 +206,21 @@ network weights decay over time, so the effective windows are 2, 4, or 6 weeks.
 
 > Now another type of behaviour: bloc discipline.
 > The question: when someone breaks ranks, do they break alone — or with the people they wrote initiatives with?
-> Again, The exposure here is the weighted share of your co-signers defecting in the *same* roll call.
+> Again, the exposure here is the weighted share of your co-signers defecting in the *same* roll call.
 > 
 > We have here three controls, each one with a job.
-> Person fixed effects absorb the born rebels, and this mu absorb "the divided votes" (if the defection is general, is not relevant to us),
+> Person fixed effects absorb the born rebels, and this mu absorbs "the divided votes" (if the defection is general, it is not relevant to us),
 > *marginality* is the distance to your own bloc's median position (because the ideological outsiders break ranks more),
 > and **Phi** is the parameter of interest: do I defect more when the people I wrote initiatives with defect?
 
 **Slide 17b — The result:**
 
-> In the results table we have two models, so we can see how, even when we control per marginality, Phi is high and significative.
+> In the results table we have two models, so we can see how, even when we control for marginality, Phi is high and significant.
 > So yes, the members whose co-signers defect, defect far more.
 > Marginality predicts defection strongly but it's an independent channel.
-> But the crucial result is that Defection travels along co-sponsorship ties.
+> But the crucial result is that defection travels along co-sponsorship ties.
 
 *(RQ3a divider: "What makes an article survive?")*
-
----
-
-## Slide 17c — Texts converge to the draft (14:50–15:10)
-
-> A quick picture before the model. Using text similarity — TF-IDF over each article's wording — we can follow every article through the year. And you can see it: as the process advances, the surviving texts look *more and more like the draft*. The "retention" number coming next is exactly that: how much of your text made it to the end.
 
 ---
 
@@ -234,27 +228,31 @@ network weights decay over time, so the effective windows are 2, 4, or 6 weeks.
 
 > Now the texts themselves. We have 1,565 articles, and only 20% of them reach the draft — and not evenly.
 > Each dot is a group of articles, ordered by the average position of the team that signed them — left to right. The height is the share that survived. And the peak is close to the 2/3 pivot — the dashed line.
-> So where your coalition stands matters for whether your text survives. What more is important?
+> So where your coalition stands matters for whether your text survives. What else matters?
 
 ---
 
 ## Slide 19 — The survival model (15:30–16:20)
 
-> To answer we fit a logistic regression with 1) commission intercepts, 2) how close is it to the 2/3, 3) how wide is the coalition in this the article born, 4) the size of the coalition, 5) some network properties, 6) and human capital.
+> To answer we fit a logistic regression with 1) commission intercepts, 2) how close is it to the 2/3, 3) how wide is the coalition where the article was born, 4) the size of the coalition, 5) some network properties, 6) and human capital.
 >
 > And, as the plot showed us, the distance to the pivot is negative and strong.
-> But Ideological *heterogeneity* is positive (wide coalitions survive more),
-> And internal density (pairs with more common history) predict better chances to keep their articles alive, *so the coalition's relational capital saves the articles*.
-> Interestingly, Human capital — lawyers, experience, degrees — are all null. The Articles do not win by credentials.
+> But ideological *heterogeneity* is positive (wide coalitions survive more),
+> And internal density (pairs with more common history) predicts better chances to keep their articles alive, *so the coalition's relational capital saves the articles*.
+> Interestingly, human capital — lawyers, experience, degrees — are all null. The articles do not win by credentials.
 >
 
 *(RQ3b divider: "Whose success is it?")*
 
-**Slide 20 — The question (16:20–16:50):**
+**Slide 20a — The question: success, and the retention plot (16:20–16:50):**
 
 > Last model, and the one I'm most excited about.
 > We will define Success as the mean textual retention of my articles calculated via TF-IDF.
-> But the success is *not individual*, but It clusters on the co-sponsorship network (we have a positive Moran's I), so there are more successful clusters than others.
+> The plot shows what that means: with text similarity — TF-IDF over each article's wording — we follow every article through the year. And you can see it: as the process advances, the surviving texts look *more and more like the draft*. "Retention" is exactly that: how much of your text made it to the end.
+
+**Slide 20b — Moran, and the model:**
+
+> But the success is *not individual*: it clusters on the co-sponsorship network (we have a positive Moran's I), so some clusters are more successful than others.
 > To test whether the context an initiative is born into matters, we relate each member’s success to the *average success of their co-signers* via a spatial autocorrelation model,
 > so **rho** answers whether the company an initiative is born into matters.
 
@@ -304,14 +302,14 @@ network weights decay over time, so the effective windows are 2, 4, or 6 weeks.
 | RQ2a: design, result, decay | 14–16 | 10:30–13:40 |
 | RQ2b: defection | 17 | 13:40–14:50 |
 | RQ3: survival + pivot picture | 18–19 | 14:50–16:20 |
-| SDM: question, model, reading | 20–22 | 16:20–18:00 |
+| SDM: question + plot, model | 20a–21 | 16:20–18:00 |
 | Takeaways + thanks | 23–24 | 18:00 onward |
 
 **Notes for delivery:**
 - The two spines: **counters, not cuts** (slide 7 → tables 8–13), and **the careful clock** (slide 14 → result 15). If the audience remembers two moves, those.
 - **Release valves if running long:** compress passes II+III of the profile table to one sentence each (saves ~45s); slide 16 (decay) can be one sentence ("with decaying memory it sharpens — p below ten to the minus four"); slide 19 can be one sentence over the figure.
 - Slide 15 is the freshest result — slow down. Keep verbatim: "an influence component that survives every test this panel supports."
-- Slide 22: never say "influence" or "contagion" for rho without the qualifier; the scripted qualifier is "up to an identification test currently in progress."
+- Slide 21 (full model): never say "influence" or "contagion" for rho without the qualifier; the scripted qualifier is "up to an identification test currently in progress" (now in the table's footnote).
 - If a political-reading question goes deep: "that's exactly the part my advisor and I are working on — what the model pins down is X."
 
 ### Anticipated questions
@@ -360,8 +358,8 @@ network weights decay over time, so the effective windows are 2, 4, or 6 weeks.
 | credentials | *cri-DÉN-shals* | títulos y experiencia |
 | newcomers / old guard | *NIU-ca-mers / ould gard* | novatos / vieja guardia |
 | tie / dyad | *tai / DAI-ad* | lazo / par de personas |
-| amendments |
-| former MPs |
+| amendments | *a-MÉND-ments* | indicaciones (las modificaciones a los artículos) |
+| former MPs | *FOR-mer em-PÍS* | exparlamentarios (exdiputados y exsenadores) |
 
 **Full sentences to rehearse** (they carry the talk):
 - "closing about two percent of the distance to their recent neighborhood, per wave"
