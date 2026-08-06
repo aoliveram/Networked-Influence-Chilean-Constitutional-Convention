@@ -464,7 +464,7 @@ $$E^{(m)}_{i,t} = \frac{\sum_{j \neq i} w^{(m)}_{ij,t}\,\theta_{j,t}}{\sum_{j \n
 
 y la familia de modelos es la misma escalera de efectos fijos:
 
-$$\Delta\theta_{i,t} \;=\; \alpha_i \;+\; \mu_t \;+\; \beta\,\theta_{i,t-1} \;+\; \lambda\,E^{(m)}_{i,t-1} \;+\; \lambda_{innov}\,\tilde E^{(m)}_{i,t+2} \;+\; \varepsilon_{it},$$
+$$\Delta\theta_{i,t} \;=\; \alpha_i \;+\; \mu_t \;+\; \beta\,\theta_{i,t-1} \;+\; \lambda\,E^{(m)}_{i,t-1} \;+\; \lambda_f\,\tilde E^{(m)}_{i,t+2} \;+\; \varepsilon_{it},$$
 
 con $\alpha_i$ (efecto fijo por convencional: solo variación dentro de cada persona), $\mu_t$ (efecto fijo por fecha de onda: los shocks comunes de la era), $\beta$ (reversión a la media) y $\lambda$ como parámetro de interés.
 
@@ -478,7 +478,7 @@ La *innovación* $\tilde E^{(m)}_{i,t+2}$ también es decaída: el promedio pond
 |:---|:-:|:-:|:-:|
 | Posición rezagada $\theta_{i,t-1}$ ($\hat\beta$) | $-0.698^{***}$ (0.027) | $-0.701^{***}$ (0.028) | $-0.756^{***}$ (0.037) |
 | Exposición decaída $\hat\lambda$ ($E^{(2)}_{i,t-1}$) | $+0.019^{***}$ (0.004) | $+0.017^{***}$ (0.004) | $\mathbf{+0.022^{***}}$ (0.006), $p=.0004$ |
-| Innovación decaída $\hat\lambda_{innov}$ | — | — | $-0.007$ (0.008), $p=.38$ |
+| Innovación decaída $\hat\lambda_f$ | — | — | $-0.007$ (0.008), $p=.38$ |
 | FE de fecha ($\mu_t$) | no | sí | sí |
 | N (persona-onda) | 4.065 | 4.065 | 2.011 |
 | $R^2$ within | 0.366 | 0.383 | 0.370 |
@@ -744,13 +744,13 @@ Con el termómetro del propio régimen el resultado cambia de naturaleza: la exp
 
 El horse race, reportado completo (los dos termómetros, todas las covariables del modelo):
 
-**Tabla A5 — El horse race completo: $\Delta\theta_{i,t} = \alpha_i + \beta\,\theta_{i,t-1} + \lambda_{lag}\,E_{i,t-1} + \lambda_{innov}\,\tilde E_{i,t+1} + \varepsilon_{it}$ (FE por convencional, EE cluster).**
+**Tabla A5 — El horse race completo: $\Delta\theta_{i,t} = \alpha_i + \beta\,\theta_{i,t-1} + \lambda_{lag}\,E_{i,t-1} + \lambda_f\,\tilde E_{i,t+1} + \varepsilon_{it}$ (FE por convencional, EE cluster).**
 
 | | $\theta$ estándar | $\theta$ era-2/3 |
 |:---|:-:|:-:|
 | Posición rezagada $\theta_{i,t-1}$ ($\hat\beta$) | $-0.651^{***}$ (0.026) | $-0.723^{***}$ (0.029) |
 | Exposición pasada $\hat\lambda_{lag}$ | $+0.002$ (0.005), $p=.71$ | $\mathbf{+0.016^{**}}$ (0.006), $p=.007$ |
-| Innovación del futuro $\hat\lambda_{innov}$ | $+0.061^{**}$ (0.023), $p=.007$ | $+0.053^{*}$ (0.022), $p=.014$ |
+| Innovación del futuro $\hat\lambda_f$ | $+0.061^{**}$ (0.023), $p=.007$ | $+0.053^{*}$ (0.022), $p=.014$ |
 | N (persona-onda) | 3.328 | 3.038 |
 | $R^2$ within | 0.366 | 0.404 |
 
@@ -783,7 +783,7 @@ $$E_{i,t} = \frac{\sum_{j \neq i} w_{ij,t}\,\theta_{j,t}}{\sum_{j \neq i} w_{ij,
 
 y la familia de modelos es un panel de efectos fijos sobre el cambio de posición:
 
-$$\Delta\theta_{i,t} \;=\; \alpha_i \;+\; \mu_t \;+\; \beta\,\theta_{i,t-1} \;+\; \lambda\,E_{i,t-1} \;+\; \lambda_{innov}\,\tilde E_{i,t+2} \;+\; \varepsilon_{it},$$
+$$\Delta\theta_{i,t} \;=\; \alpha_i \;+\; \mu_t \;+\; \beta\,\theta_{i,t-1} \;+\; \lambda\,E_{i,t-1} \;+\; \lambda_f\,\tilde E_{i,t+2} \;+\; \varepsilon_{it},$$
 
 donde cada pieza tiene un trabajo intuitivo: $\alpha_i$ (efecto fijo por convencional) absorbe todo lo estable de cada persona — el modelo solo usa cómo cada uno se mueve respecto de su propio promedio; $\mu_t$ (efecto fijo por fecha de onda) absorbe los *shocks comunes* de la era — el pánico de las encuestas, los acuerdos transversales de abril-mayo: todo lo que movía a todos a la vez; $\beta$ captura la reversión a la media; y $\lambda$ es el parámetro de interés: si $\lambda > 0$, me muevo hacia donde estaba mi vecindario.
 
@@ -797,7 +797,7 @@ La *innovación* $\tilde E_{i,t+2}$ es la parte de la exposición futura que la 
 |:---|:-:|:-:|:-:|
 | Posición rezagada $\theta_{i,t-1}$ ($\hat\beta$) | $-0.699^{***}$ (0.027) | $-0.702^{***}$ (0.028) | $-0.755^{***}$ (0.038) |
 | Exposición pasada $\hat\lambda$ ($E_{i,t-1}$) | $+0.021^{***}$ (0.005) | $+0.020^{***}$ (0.005) | $\mathbf{+0.020^{**}}$ (0.007), $p=.003$ |
-| Innovación $\hat\lambda_{innov}$ ($\tilde E_{i,t+2}$) | — | — | $-0.002$ (0.018), $p=.91$ |
+| Innovación $\hat\lambda_f$ ($\tilde E_{i,t+2}$) | — | — | $-0.002$ (0.018), $p=.91$ |
 | FE de fecha ($\mu_t$) | no | sí | sí |
 | N (persona-onda) | 4.065 | 4.065 | 2.011 |
 | $R^2$ within | 0.366 | 0.383 | 0.369 |

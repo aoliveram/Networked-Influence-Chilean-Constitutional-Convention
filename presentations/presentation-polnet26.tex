@@ -133,7 +133,7 @@ Serial signers (\texttt{gwb1degree}) & $-0.63$ & $-0.85$ & $-0.05$ & $-6.94^{*}$
 \begin{frame}[plain]
   \vspace{0.6cm}
   \begin{center}
-    {\footnotesize\color{ndgray} Political Networks 2026 $\cdot$ Manchester}
+    \includegraphics[height=0.85cm]{CICS.png}\hspace{1.2cm}\includegraphics[height=0.85cm]{UDD.png}
   \end{center}
   \vspace{0.9cm}
   \begin{center}
@@ -147,7 +147,7 @@ Serial signers (\texttt{gwb1degree}) & $-0.63$ & $-0.85$ & $-0.05$ & $-6.94^{*}$
   \end{center}
   \vfill
   \begin{center}
-    \includegraphics[height=0.85cm]{CICS.png}\hspace{1.2cm}\includegraphics[height=0.85cm]{UDD.png}
+    {\footnotesize\color{ndgray} Political Networks 2026 $\cdot$ Manchester}
   \end{center}
   \vspace{0.25cm}
 \end{frame}
@@ -164,16 +164,32 @@ Serial signers (\texttt{gwb1degree}) & $-0.63$ & $-0.85$ & $-0.05$ & $-6.94^{*}$
 \end{tikzpicture}
 \end{frame}
 
+% ------------------------------------------------------------- 1c DATA QR
+\begin{frame}[plain]
+  \vfill
+  \begin{center}
+    {\large All the data, cleaned and fully linked — \emphr{soon public}}\\[0.7cm]
+    \qrcode[height=3.2cm]{https://github.com/aoliveram/constitutional-proposal-tracking/tree/feature/dataverse-final-cleanup}\\[0.4cm]
+    {\small The data-cleaning repository}\\[0.3cm]
+    {\footnotesize\color{ndgray} A \emph{Data in Brief} paper announcing the release is in preparation.}
+  \end{center}
+  \vfill
+\end{frame}
+
 % ------------------------------------------------------------------ 2 SETUP
 \begin{frame}{A natural quasi-experiment}
 \begin{itemize}
-  \item In an ordinary legislature, today's collaboration network is the sediment of decades: careers, committees, party discipline.
+  \item The network you observe today is the sediment of decades of favors, committees, careers, etc.
   \vspace{0.25cm}
   \item The Chilean Constitutional Convention (Jul 2021 -- Jul 2022) started from \emphr{zero relational stock}: a majority of newcomers and independents, 17 reserved indigenous seats, a body that dissolved on delivery.
   \vspace{0.25cm}
-  \item Each constitutional initiative required \emphr{8--16 sponsors}: signing = forming a visible coalition. 
-  \vspace{0.25cm}
-  \item Each norm needed \emphr{2/3 of the floor (103 of 154)}, so being born was cheap, but surviving was expensive.
+  \item They set their own rules:
+  \begin{itemize}
+    \vspace{0.25cm}
+    \item Each constitutional initiative required \emphr{8--16 sponsors}. 
+    \vspace{0.25cm}
+    \item Each norm needed \emphr{2/3 of the floor (103 of 154)} to be approved.
+  \end{itemize}
 \end{itemize}
 \end{frame}
 
@@ -187,35 +203,36 @@ Serial signers (\texttt{gwb1degree}) & $-0.63$ & $-0.85$ & $-0.05$ & $-6.94^{*}$
 % ------------------------------------------------------------------ 4 COMMISSIONS
 \begin{frame}{What we know about each member}
 \begin{itemize}
-  \item \emphr{Political}: electoral list and bloc (Right / Center-left / Left / Reserved seats / Others); district of election.
+  \item \emphr{Political}: electoral list; district of election.
   \vspace{0.2cm}
   \item \emphr{Profile}: age; gender; law degree; education level (HS / univ / master / PhD).
   \vspace{0.2cm}
   \item \emphr{Prior institutional experience}: had held elective or appointed public office before the Convention (former MPs, mayors, officials) — 35 of 154 members.
   \vspace{0.2cm}
-  \item \emphr{Ideology}: two-dimensional ideal points from the first month of roll calls — measured \emph{before} the collaboration network existed.
+  \item \emphr{Ideology}: two-dimensional ideal points from the first month of roll calls, \emph{before} the collaboration network existed.
 \end{itemize}
 \end{frame}
 
 \begin{frame}{The seven thematic commissions}
 \begin{center}\scriptsize\setlength{\tabcolsep}{3.5pt}
-\begin{tabular}{clccccccc}
+\begin{tabular}{clcccccccc}
 \toprule
- & Name (short) & Members & N lawyers & N exper. & Age & Education & Initiatives & Amd. Waves \\
+ & Name (short) & Members & N lawyers & N exper. & Age & Education & Initiatives & Amd. Waves & In draft \\
 \midrule
-C1 & Political system & 25 & 15 & 9 & 42.2 & 1.44 & 89 & 4 \\
-C2 & Const.\ principles & 18 & 4 & 4 & 45.8 & 1.28 & 114 & 3 \\
-C3 & Form of the state & 30 & 11 & 12 & 45.1 & 1.43 & 51 & 6 \\
-C4 & Fundamental rights & 30 & 9 & 4 & 45.9 & 1.03 & 283 & 5 \\
-C5 & Environment & 19 & 4 & 3 & 44.7 & 1.26 & 133 & 5 \\
-C6 & Justice systems & 17 & 15 & 3 & 42.6 & 1.65 & 93 & 6 \\
-C7 & Knowledge systems & 15 & 2 & 0 & 51.7 & 1.33 & 64 & 8 \\
+C1 & Political system & 25 & 15 & 9 & 42.2 & 1.44 & 89 & 4 & 51 \\
+C2 & Const.\ principles & 18 & 4 & 4 & 45.8 & 1.28 & 114 & 3 & 24 \\
+C3 & Form of the state & 30 & 11 & 12 & 45.1 & 1.43 & 51 & 6 & 67 \\
+C4 & Fundamental rights & 30 & 9 & 4 & 45.9 & 1.03 & 283 & 5 & 54 \\
+C5 & Environment & 19 & 4 & 3 & 44.7 & 1.26 & 133 & 5 & 30 \\
+C6 & Justice systems & 17 & 15 & 3 & 42.6 & 1.65 & 93 & 6 & 98 \\
+C7 & Knowledge systems & 15 & 2 & 0 & 51.7 & 1.33 & 64 & 8 & 35 \\
 \bottomrule
 \end{tabular}
 \end{center}
-\vspace{0.2cm}
 \begin{itemize}
-  \item Composition varies wildly across commissions — 15 of C6's 17 members are lawyers; C7 has no politically experienced member.
+  \item \footnotesize C4 (Fundamental rights): basically bachelor's degree, and 283 initiatives; 
+  \item C6 (Environment): 15/17 members were lawyers; 
+  \item C7 (Knowledge systems) has no politically experienced member.
 \end{itemize}
 \end{frame}
 
@@ -307,14 +324,14 @@ s(y) = \Big(\underbrace{\sum_{i,a} y_{ia}}_{\#\text{ edges}},\;\;
 \begin{frame}{RQ2a design}
 \begin{itemize}
   \item Only the \emphr{norms era} (Feb 15 -- May 14, content voted under the 2/3 rule).
-  \item Exposure has \emphr{bounded memory}: network weights decay over time, parameterized by $m$ ($m=1 \approx 2$ weeks, $m=2 \approx 4$ weeks, $m=3 \approx 6$ weeks).
+  \item Exposure is the weighted mean position of your co-signers, where network weights decay over time ($m=1 \approx 2$ wks, $m=2 \approx 4$ wks, $m=3 \approx 6$ wks).
 \end{itemize}
 \vspace{0.3cm}
 $$E^{(m)}_{i,t} = \frac{\sum_{j \neq i} w^{(m)}_{ij,t}\,\theta_{j,t}}{\sum_{j \neq i} w^{(m)}_{ij,t}},
 \quad w^{(m)}_{ij,t} = \sum_{s \leq t} \lambda_m^{\,t-s} \Delta w_{ij,s}$$
 
 $$
-\Delta\theta_{i,t} = \alpha_i + \mu_t + \beta\,\theta_{i,t-1} + \lambda\,E^{(m)}_{i,t-1} + \lambda_{innov}\,\tilde E^{(m)}_{i,t+2} + \varepsilon_{it}$$
+\Delta\theta_{i,t} = \alpha_i + \mu_t + \beta\,\theta_{i,t-1} + \lambda\,E^{(m)}_{i,t-1} + \lambda_f\,\tilde E^{(m)}_{i,t+2} + \varepsilon_{it}$$
 \begin{itemize}
   \item $\tilde E^{(m)}_{i,t+2}$: decay-weighted average of \emph{future} exposures.
 \end{itemize}
@@ -324,7 +341,7 @@ $$
 
 
 % ------------------------------------------------------------------ 12 DECAY
-\begin{frame}{The result: the referee's test at three memories}
+\begin{frame}{The results}
 \begin{center}\small
 \begin{tabular}{lccc}
 \toprule
@@ -332,7 +349,7 @@ Variable & $m = 1$ & $m = 2$ & $m = 3$ \\
 \midrule
 Lagged position $\theta_{i,t-1}$ ($\hat\beta$) & $-0.756^{***}$ & $-0.756^{***}$ & $-0.756^{***}$ \\
 Decayed exposure $\hat\lambda$ ($E^{(m)}_{i,t-1}$) & $\mathbf{0.022^{***}}$ & $\mathbf{0.022^{***}}$ & $\mathbf{0.021^{***}}$ \\
-Decayed innovation $\hat\lambda_{innov}$ & $-0.008$ & $-0.007$ & $-0.005$ \\
+Decayed innovation $\hat\lambda_f$ & $-0.008$ & $-0.007$ & $-0.005$ \\
 Wave-date fixed effects & yes & yes & yes \\
 N (person-waves) & 2,011 & 2,011 & 2,011 \\
 $R^2$ within & 0.370 & 0.370 & 0.369 \\
@@ -341,8 +358,9 @@ $R^2$ within & 0.370 & 0.370 & 0.369 \\
 \end{center}
 \vspace{0.25cm}
 \begin{itemize}
-  \item The lag stands at $\sim$0.022 — closing $\sim$2\% of the distance to the recent neighborhood per wave — and the \emphr{strictly future innovation predicts nothing}, at every memory.
-  \item Honest label: an \emphr{influence component} that survives every test this panel supports; latent homophily cannot be excluded by design.
+  \item The lagged exposition is significant accross all memory $m$.
+  \item The \emphr{strictly future innovation predicts nothing}, at every memory.
+  \item The \emphr{influence component} survives every test; but latent homophily cannot be excluded by design.
 \end{itemize}
 \end{frame}
 
@@ -352,7 +370,7 @@ $R^2$ within & 0.370 & 0.370 & 0.369 \\
 % ------------------------------------------------------------------ 14 RQ2b
 \begin{frame}{RQ2b: defection — the design}
 \begin{itemize}
-  \item When someone breaks ranks: alone, or together with the people they wrote initiatives with?
+  \item When someone breaks ranks: alone, or with the people they wrote initiatives with?
 \end{itemize}
 \vspace{0.2cm}
 $$X_{iv} = \frac{\sum_{j \neq i} w_{ij}\, D_{jv}}{\sum_{j \neq i} w_{ij}},
@@ -360,12 +378,12 @@ $$X_{iv} = \frac{\sum_{j \neq i} w_{ij}\, D_{jv}}{\sum_{j \neq i} w_{ij}},
 \Pr(D_{iv} = 1) = \Lambda\big(\eta_i + \mu_{b(i),v} + \phi\, X_{iv} + \gamma\, marg_{iv}\big)$$
 \begin{itemize}
   \item $\eta_i$ absorbs the born rebels; $\mu_{b(i),v}$ absorbs ``this vote split this bloc''.
-  \item $\phi$ is the \emphr{parameter of interest}: do I defect more when my people defect?
   \item $marg_{iv}$: distance to one's own bloc's median position.
+  \item $\phi$ is the \emphr{parameter of interest}: do I defect more when the people I wrote initiatives with defect?
 \end{itemize}
 \end{frame}
 
-\begin{frame}{RQ2b: the result (final model)}
+\begin{frame}{RQ2b: the results}
 \begin{center}\small
 \begin{tabular}{lcc}
 \toprule
@@ -383,14 +401,18 @@ N (member-votes) & \multicolumn{2}{c}{186,988} \\
 \vspace{0.25cm}
 \begin{itemize}
   \item The members whose co-signers defect, \emphr{defect far more}.
-  \item Marginality predicts defection strongly — the bloc's outsider breaks ranks — but takes \emph{nothing} from $\phi$: two independent channels.
-  \item Carried by \emphr{newcomers at both ends} of the tie: novice receivers ($\phi = 12.2$ vs $9.5$) and novice senders alike.
+  \item Marginality predicts defection strongly but it's an \emphr{independent channel}.
+  \item Defection travels along co-sponsorship ties.
 \end{itemize}
-\vspace{0.15cm}
-\nota{Validation: shuffling \emph{who} defected within each bloc $\times$ vote (200 draws) puts the mechanics-only $\phi$ at 6.0; the raw two-way-FE number is 11.2. Full ladder in the paper.}
 \end{frame}
 
 \sectionslide{RQ3a — Texts}{What makes an article survive?}
+
+\begin{frame}[plain]
+\begin{center}
+  \includegraphics[width=0.9\textwidth]{../results/figures/retention_dynamics_all_commissions.pdf}
+\end{center}
+\end{frame}
 
 % ------------------------------------------------------------------ 15 SURVIVAL
 \begin{frame}{What survives?}
@@ -403,27 +425,30 @@ N (member-votes) & \multicolumn{2}{c}{186,988} \\
 \end{frame}
 
 \begin{frame}{The survival model: article-level, complete}
-$$\Pr(\text{survives}_a) = \Lambda\Big(\alpha_c + \gamma_1\, \big|\bar\theta_{1,S_a} - \theta_{1,(103)}\big| + \gamma_2\, sd(\theta_{1,S_a}) + \gamma_3\, |S_a| + \boldsymbol{\gamma_4}^\top C_{S_a} + \boldsymbol{\gamma_5}^\top H_{S_a}\Big)$$
-\begin{center}\scriptsize\setlength{\tabcolsep}{5pt}
+$$\Pr(\text{survives}_a) = \Lambda\Big(\alpha_c + \gamma_1\, \big|\bar\theta_{1,S_a} - \theta_{1,(103)}\big| + \gamma_2\, sd(\theta_{1,S_a}) + \gamma_3\, |S_a| + \gamma_4^\top C_{S_a} + \gamma_5^\top H_{S_a}\Big)$$
+\vspace{0.05cm}
+\begin{center}\footnotesize\setlength{\tabcolsep}{5pt}
 \begin{tabular}{lccc}
 \toprule
  & (1) Pivotal & (2) + Network & (3) + Human capital \\
 \midrule
-Coalition's distance to the $\tfrac{2}{3}$ pivot & $-0.35$ (\textbf{$p=.001$}) & $-0.48$ (\textbf{$p=.009$}) & $-0.61$ (\textbf{$p=.002$}) \\
-Ideological heterogeneity $sd(\theta_1)$ & $+0.27$ (\textbf{$p=.008$}) & $+0.46$ (\textbf{$p=.001$}) & $+0.53$ (\textbf{$p<10^{-4}$}) \\
-Coalition size & $+0.20$ ($p=.12$) & $+0.18$ ($p=.12$) & $+0.15$ ($p=.21$) \\
-Mean betweenness & & $-0.22$ ($p=.083$) & $-0.23$ ($p=.076$) \\
-Mean constraint & & $+0.01$ ($p=.97$) & $+0.26$ ($p=.28$) \\
-Internal density (pairs with history) & & $+0.25$ (\textbf{$p=.024$}) & $+0.32$ (\textbf{$p=.002$}) \\
-Share of lawyers & & & $-0.09$ ($p=.58$) \\
-Share with prior experience & & & $-0.16$ ($p=.44$) \\
-Mean academic degree & & & $-0.06$ ($p=.67$) \\
+\tikzmark{pivL}Coalition's distance to the $\tfrac{2}{3}$ pivot & $\mathbf{-0.35^{**}}$ & $\mathbf{-0.48^{**}}$ & $\mathbf{-0.61^{**}}$\tikzmark{pivR} \\
+\tikzmark{hetL}Ideological heterogeneity $sd(\theta_1)$ & $\mathbf{0.27^{**}}$ & $\mathbf{0.46^{**}}$ & $\mathbf{0.53^{***}}$\tikzmark{hetR} \\
+Coalition size & $0.20$ & $0.18$ & $0.15$ \\
+Mean betweenness & & $-0.22^{+}$ & $-0.23^{+}$ \\
+Mean constraint & & $0.01$ & $0.26$ \\
+\tikzmark{denL}Internal density (pairs with history) & & $\mathbf{0.25^{*}}$ & $\mathbf{0.32^{**}}$\tikzmark{denR} \\
+Share of lawyers & & & $-0.09$ \\
+Share with prior experience & & & $-0.16$ \\
+Mean academic degree & & & $-0.06$ \\
 \midrule
 AIC & 1393 & 1384 & 1386 \\
 \bottomrule
 \end{tabular}
 \end{center}
-\nota{Articles win by geometry (near the pivot, ideologically wide) and by teams with internal history — not by credentials.}
+\begin{tikzpicture}[remember picture, overlay]
+\ovalmark{pivL}{pivR}\ovalmark{hetL}{hetR}\ovalmark{denL}{denR}
+\end{tikzpicture}
 \end{frame}
 
 % ------------------------------------------------------------------ 16 F12
@@ -435,8 +460,10 @@ AIC & 1393 & 1384 & 1386 \\
 \begin{frame}{Does the context an initiative is born into matter?}
 \begin{itemize}
   \item \emphr{Success}: of all the article text you co-signed, how much survived into the draft? ($y_i$ = mean textual retention of $i$'s articles, 0 to 1.)
+  
+  [PLOT]
   \vspace{0.3cm}
-  \item Success is \emphr{not individual}: it clusters on the co-sponsorship network (Moran's $I = 0.44$, $p \approx 10^{-163}$). Your success looks like your co-signers' success.
+  \item Success is \emphr{not individual}: it clusters on the co-sponsorship network (Moran's $I = 0.44$, $p < .001$). Your success looks like your co-signers' success.
   \vspace{0.3cm}
   \item To test whether the context an initiative is born into matters, we relate each member's success to the \emph{average success of their co-signers}:
   $$y = \rho\, W y + X\beta + W X \gamma + \varepsilon,$$
@@ -445,7 +472,7 @@ AIC & 1393 & 1384 & 1386 \\
 \end{frame}
 
 \begin{frame}
-\begin{center}\scriptsize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.15}
+\begin{center}\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.0}
 \begin{tabular}{lcccc}
 \toprule
  & Own ($\beta$) & $p$ & Co-signers' ($\gamma$, lag) & $p$ \\
@@ -466,22 +493,11 @@ Academic degree & $-0.003$ & .49 & $-0.154$ & \textbf{.012} \\
 Female & $+0.002$ & .78 & $+0.208$ & .075 \\
 Age & $-0.0002$ & .53 & $-0.0033$ & .40 \\
 \multicolumn{5}{l}{\emphr{--- Coupling}}\\
-$\rho$ & $0.891$ & $\textbf{<.001}$ & — & — \\
+$\rho$* & $0.891$ & $\textbf{<.001}$ & — & — \\
 \bottomrule
 \end{tabular}
 \end{center}
-\end{frame}
-
-\begin{frame}{Reading $\rho$: a spillover, up to identification}
-\begin{itemize}
-  \item The term $\rho\, W y$ is the \emph{equilibrium of an effort game}, and tell us the \emphr{coalition-effectiveness spillover}*: connected members' effectiveness spills over into yours (Battaglini et al., AJPS 2020).
-  \vspace{0.3cm}
-  \item And the covariates tell you what the ``context'' is made of: your own distance to the pivot doesn't matter ($p=.95$), your \emph{co-signers'} distance does ($-0.27$). \emphr{The context is the coalition you stand in.}
-  \vspace{0.3cm}
-  \item Taken together: the evidence supports the network view of success — where you stand shapes how well you do, beyond who you are.
-\end{itemize}
-\vspace{0.5cm}
-\nota{* Up to an identification test currently in progress.}
+\nota{* Up to an identification test, $\rho$ is the coalition-effectiveness spillover (Battaglini et al., AJPS 2020).}
 \end{frame}
 
 % ------------------------------------------------------------------ 18 TAKEAWAYS

@@ -108,6 +108,7 @@ for ext in ("pdf", "png"):
 for art in RAILS:
     art.remove()
 ax.set_title("")
+ax.set_ylim(0, 0.42)
 for ext in ("pdf", "png"):
     fig.savefig(os.path.join(RESULTS_FIGURES, f"survival_by_position_slide.{ext}"), dpi=300,
                 bbox_inches="tight")
