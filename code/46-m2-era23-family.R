@@ -1,23 +1,23 @@
 # =============================================================================
-# 46-m2-era23-family.R  (v3, especificacion FINAL del autor)
-# Todo con theta de regimen homogeneo (era 2/3) y SOLO datos de la era.
-# El reloj de las exposiciones (argumento del autor): con los votos de t se
-# calcula la posicion/exposicion de t+1. Para explicar el voto decidido en t
-# habria que usar al menos los votos de t-1 (= exposicion en t); como la
-# exposicion contemporanea es contraintuitiva como explicacion, usamos los
-# votos de t-2 (= exposicion en t-1). Y para que la innovacion sea
-# genuinamente futura, no basta t+1 (construida con votos de t): se usa t+2.
-#   M0: delta ~ theta_lag + E_{t-1}                        (basico)
-#   M1: M0 + FE de fecha de onda                           (shocks comunes)
-#   M2: M1 + innovacion desde t+2                          (el test del arbitro)
-#   D025/D050/D075: M1 con exposicion de DECAIMIENTO (era) (memoria realista)
-#   C (solo chat): lag = E_t (contemporanea), innov = t+2
-#   A1 (anexo): exposicion partida propio/otros bloques
+# 46-m2-era23-family.R  (v4, familia OFICIAL de RQ2a)
+# Exposicion con DECAIMIENTO parametrizada por MEMORIA en ondas:
+#   m = 1, 2, 3 ondas; lambda_m = 0.1^(1/m) (el 90% del peso cae dentro de
+#   las ultimas m ondas). Nada acumulado: la exposicion tiene cota temporal.
+# Reloj estricto (argumento del autor): con los votos de t se calcula la
+# posicion/exposicion de t+1 -> rezago en t-1 (votos hasta t-2) e innovacion
+# desde t+2. La innovacion tambien es decaida: promedio ponderado de las
+# exposiciones futuras E^m_u (u >= t+2) con pesos lambda_m^(u-(t+2)) — el
+# futuro CERCANO pesa mas (espejo del decaimiento hacia atras).
+# Escalera, para cada memoria m:
+#   M0: delta ~ theta_lag + E^m_{t-1}
+#   M1: M0 + FE de fecha de onda
+#   M2: M1 + innovacion decaida desde t+2 (el test del arbitro)
+# Todo con theta de regimen homogeneo (era 2/3) y solo datos de la era.
 #
 # Output: results/tables/M2_era23_family.csv
 # =============================================================================
 
-cat("=== 46-m2-era23-family.R (v3) ===\n")
+cat("=== 46-m2-era23-family.R (v4: decay-memoria) ===\n")
 suppressPackageStartupMessages({ library(jsonlite); library(plm); library(lmtest) })
 set.seed(42)
 source("code/paths.R")
@@ -25,14 +25,6 @@ W0 <- as.Date("2022-02-15"); W1 <- as.Date("2022-05-14")
 
 panel <- read.csv(file.path(DATA_PROCESSED, "network_exposure_panel.csv"), stringsAsFactors = FALSE)
 roster <- sort(unique(panel$legislator)); n <- length(roster)
-listas <- read.csv(file.path(DATA_RAW, "electoral_lists.csv"), stringsAsFactors = FALSE)
-cg <- listas$conglomerado[match(roster, listas$nombre_armonizado)]
-bloque <- ifelse(cg == "Vamos por Chile", "Derecha",
-          ifelse(cg %in% c("Lista del Apruebo", "Independientes No Neutrales"), "CentroIzq",
-          ifelse(cg %in% c("Apruebo Dignidad", "Lista del Pueblo"), "Izquierda",
-          ifelse(cg == "Escaños Reservados PPOO", "PPOO", "Otras"))))
-same_bloc <- outer(bloque, bloque, `==`)
-
 reg2 <- read.csv(file.path(DATA_PROCESSED, "dynirt_regime_dostercios.csv"), stringsAsFactors = FALSE)
 fechas2 <- sort(unique(as.Date(reg2$date)))
 theta_reg_at <- function(fecha) {
@@ -43,6 +35,9 @@ theta_reg_at <- function(fecha) {
 expo <- function(W, th) { num <- W %*% ifelse(is.na(th), 0, th); den <- rowSums(W)
   out <- as.numeric(num) / den; out[den == 0] <- NA; out }
 
+MS <- c(1, 2, 3)
+LAM <- setNames(0.1^(1 / MS), paste0("m", MS))
+
 rows <- list()
 for (k in 1:7) {
   comm <- sprintf("C%d", k)
@@ -51,21 +46,20 @@ for (k in 1:7) {
   sub_p <- panel[panel$commission == comm, c("legislator", "step", "emirt_date")]
   fechas_onda <- sapply(seq_along(wn) - 1L, function(st) unique(sub_p$emirt_date[sub_p$step == st])[1])
   Wprev <- matrix(0, n, n)
-  Wd25 <- matrix(0, n, n); Wd50 <- matrix(0, n, n); Wd75 <- matrix(0, n, n)
+  Wd <- lapply(LAM, function(l) matrix(0, n, n))
   for (t in seq_along(wn)) {
     fecha <- as.Date(fechas_onda[t])
     ed <- waves[[wn[t]]]
     W <- matrix(0, n, n, dimnames = list(roster, roster))
     if (length(ed) && nrow(ed)) { W[cbind(ed$source, ed$target)] <- ed$weight; W[cbind(ed$target, ed$source)] <- ed$weight }
     dW <- W - Wprev; Wprev <- W
-    Wd25 <- 0.25 * Wd25 + dW; Wd50 <- 0.50 * Wd50 + dW; Wd75 <- 0.75 * Wd75 + dW
+    for (j in seq_along(LAM)) Wd[[j]] <- LAM[j] * Wd[[j]] + dW
     if (is.na(fecha) || fecha < min(fechas2)) next
     th <- theta_reg_at(fecha)
-    rows[[length(rows) + 1]] <- data.frame(
-      legislator = roster, commission = comm, step = t - 1L, fecha = as.character(fecha),
-      theta_reg = th, E_reg = expo(W, th),
-      E_d25 = expo(Wd25, th), E_d50 = expo(Wd50, th), E_d75 = expo(Wd75, th),
-      E_own = expo(W * same_bloc, th), E_cross = expo(W * !same_bloc, th))
+    r <- data.frame(legislator = roster, commission = comm, step = t - 1L,
+                    fecha = as.character(fecha), theta_reg = th)
+    for (j in seq_along(LAM)) r[[paste0("E_", names(LAM)[j])]] <- expo(Wd[[j]], th)
+    rows[[length(rows) + 1]] <- r
   }
 }
 df <- do.call(rbind, rows)
@@ -74,13 +68,29 @@ df$key <- paste(df$legislator, df$commission)
 shift <- function(x, k) ave(x, df$key, FUN = function(z) {
   if (k > 0) c(tail(z, -k), rep(NA, k)) else if (k < 0) c(rep(NA, -k), head(z, k)) else z })
 df$theta_lag <- shift(df$theta_reg, -1)
-df$E_lag <- shift(df$E_reg, -1)
-df$E_lead2 <- shift(df$E_reg, 2)
-df$E_d25_lag <- shift(df$E_d25, -1); df$E_d50_lag <- shift(df$E_d50, -1); df$E_d75_lag <- shift(df$E_d75, -1)
-df$Ed25_lead2 <- shift(df$E_d25, 2); df$Ed50_lead2 <- shift(df$E_d50, 2); df$Ed75_lead2 <- shift(df$E_d75, 2)
-df$E_own_lag <- shift(df$E_own, -1); df$E_cross_lag <- shift(df$E_cross, -1)
 df$fecha_lag <- ave(df$fecha, df$key, FUN = function(x) c(NA, head(x, -1)))
 df$delta <- df$theta_reg - df$theta_lag
+for (mm in names(LAM)) df[[paste0("Elag_", mm)]] <- shift(df[[paste0("E_", mm)]], -1)
+
+# innovacion decaida (cercana): promedio ponderado de E^m_u, u >= t+2
+for (mm in names(LAM)) {
+  lam <- LAM[mm]
+  Ecol <- df[[paste0("E_", mm)]]
+  fa <- rep(NA_real_, nrow(df))
+  for (idx in split(seq_len(nrow(df)), df$key)) {
+    Tn <- length(idx); Ev <- Ecol[idx]
+    for (t in seq_len(Tn)) {
+      if (t + 2 > Tn) next
+      us <- (t + 2):Tn
+      ev <- Ev[us]; okv <- !is.na(ev)
+      if (!any(okv)) next
+      wa <- lam^(us - (t + 2))
+      fa[idx[t]] <- sum(wa[okv] * ev[okv]) / sum(wa[okv])
+    }
+  }
+  df[[paste0("Ffut_", mm)]] <- fa
+}
+
 per_of <- function(f) sapply(as.Date(f), function(x) max(which(fechas2 <= x)))
 df <- df[as.Date(df$fecha) >= W0 & as.Date(df$fecha) <= W1, ]
 ok <- !is.na(df$delta) & !is.na(df$fecha_lag) & per_of(df$fecha) != per_of(df$fecha_lag)
@@ -96,46 +106,21 @@ fitm <- function(dd, f, label, terms) {
   out$n <- nrow(dd); out$r2w <- unname(summary(m)$r.squared["rsq"])
   out
 }
-innov_of <- function(dd, leadvar, lagvar) {
-  pd <- pdata.frame(dd, index = "legislator")
-  aux <- plm(as.formula(paste(leadvar, "~", lagvar)), data = pd, model = "within")
-  as.numeric(residuals(aux))
-}
 
-d2 <- d[complete.cases(d[, c("delta", "theta_lag", "E_lag", "E_lead2")]), ]
-d2$innov <- innov_of(d2, "E_lead2", "E_lag")
-dC <- d[complete.cases(d[, c("delta", "theta_lag", "E_reg", "E_lead2")]), ]
-dC$innovC <- innov_of(dC, "E_lead2", "E_reg")
-d5 <- d[complete.cases(d[, c("delta", "theta_lag", "E_own_lag", "E_cross_lag", "E_lead2")]), ]
-d5$innov <- {
-  pd5 <- pdata.frame(d5, index = "legislator")
-  aux5 <- plm(E_lead2 ~ E_own_lag + E_cross_lag, data = pd5, model = "within")
-  as.numeric(residuals(aux5)) }
-
-hr_dec <- function(lagvar, leadvar, label) {
-  dd <- d[complete.cases(d[, c("delta", "theta_lag", lagvar, leadvar)]), ]
+res <- list()
+for (mm in names(LAM)) {
+  lagv <- paste0("Elag_", mm); futv <- paste0("Ffut_", mm)
+  res[[length(res) + 1]] <- fitm(d, as.formula(paste("delta ~ theta_lag +", lagv)),
+                                 paste0("M0 ", mm), c("theta_lag", lagv))
+  res[[length(res) + 1]] <- fitm(d, as.formula(paste("delta ~ theta_lag +", lagv, "+ factor(fecha)")),
+                                 paste0("M1 ", mm), c("theta_lag", lagv))
+  dd <- d[complete.cases(d[, c("delta", "theta_lag", lagv, futv)]), ]
   pd <- pdata.frame(dd, index = "legislator")
-  aux <- plm(as.formula(paste(leadvar, "~", lagvar)), data = pd, model = "within")
+  aux <- plm(as.formula(paste(futv, "~", lagv)), data = pd, model = "within")
   dd$innovd <- as.numeric(residuals(aux))
-  fitm(dd, as.formula(paste("delta ~ theta_lag +", lagvar, "+ innovd + factor(fecha)")),
-       label, c("theta_lag", lagvar, "innovd"))
+  res[[length(res) + 1]] <- fitm(dd, as.formula(paste("delta ~ theta_lag +", lagv, "+ innovd + factor(fecha)")),
+                                 paste0("M2 ", mm), c("theta_lag", lagv, "innovd"))
 }
-
-res <- list(
-  fitm(d,  delta ~ theta_lag + E_lag, "M0 basico", c("theta_lag", "E_lag")),
-  fitm(d,  delta ~ theta_lag + E_lag + factor(fecha), "M1 + FE fecha", c("theta_lag", "E_lag")),
-  fitm(d2, delta ~ theta_lag + E_lag + innov + factor(fecha), "M2 + innovacion t+2",
-       c("theta_lag", "E_lag", "innov")),
-  fitm(d,  delta ~ theta_lag + E_d25_lag + factor(fecha), "D025 decaimiento", c("theta_lag", "E_d25_lag")),
-  fitm(d,  delta ~ theta_lag + E_d50_lag + factor(fecha), "D050 decaimiento", c("theta_lag", "E_d50_lag")),
-  fitm(d,  delta ~ theta_lag + E_d75_lag + factor(fecha), "D075 decaimiento", c("theta_lag", "E_d75_lag")),
-  fitm(dC, delta ~ theta_lag + E_reg + innovC + factor(fecha), "C chat: lag contemporaneo",
-       c("theta_lag", "E_reg", "innovC")),
-  fitm(d5, delta ~ theta_lag + E_own_lag + E_cross_lag + innov + factor(fecha),
-       "A1 anexo exposicion partida", c("theta_lag", "E_own_lag", "E_cross_lag", "innov")),
-  hr_dec("E_d25_lag", "Ed25_lead2", "H025 decaimiento+HR"),
-  hr_dec("E_d50_lag", "Ed50_lead2", "H050 decaimiento+HR"),
-  hr_dec("E_d75_lag", "Ed75_lead2", "H075 decaimiento+HR"))
 tab <- do.call(rbind, res)
 write.csv(tab, file.path(RESULTS_TABLES, "M2_era23_family.csv"), row.names = FALSE)
 print(tab, row.names = FALSE, digits = 4)

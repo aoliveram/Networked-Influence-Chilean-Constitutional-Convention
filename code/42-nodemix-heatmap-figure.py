@@ -33,7 +33,7 @@ plt.rcParams.update({"font.family": "sans-serif",
 # orden politico: espectro primero, los dos grupos fuera-del-eje al final
 ORDER = ["Izquierda", "CentroIzq", "Derecha", "PPOO", "Otras"]
 SHORT = {"Izquierda": "Left", "CentroIzq": "Ctr-left", "Derecha": "Right",
-         "PPOO": "Res. seats", "Otras": "Local lists"}
+         "PPOO": "Res. seats", "Otras": "Others"}
 COMM = {1: "Political system", 2: "Const. principles", 3: "Form of the state",
         4: "Fundamental rights", 5: "Environment", 6: "Justice systems",
         7: "Knowledge systems"}

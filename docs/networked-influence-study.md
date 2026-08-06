@@ -346,7 +346,9 @@ Sobre esa red estimamos un ERGM (exponential random graph model), que conviene e
 - **Centro-izquierda** (28): Lista del Apruebo (los partidos de la ex-Concertación: PS, PPD, DC, PR y afines) más los Independientes No Neutrales (independientes de centroizquierda).
 - **Izquierda** (51): Apruebo Dignidad (Frente Amplio + Partido Comunista) más la Lista del Pueblo (independientes de izquierda surgidos del estallido de 2019).
 - **PPOO / escaños reservados** (17): los convencionales de los 17 escaños reservados para pueblos originarios (7 mapuche, 2 aymara y uno por cada otro pueblo reconocido), electos en padrones propios.
-- **Otras / listas locales** (21): independientes electos por listas locales o regionales fuera de las coaliciones nacionales — listas distrito-específicas sin conglomerado nacional. Los términos, en cuatro familias:
+- **Others / Otras** (21): independientes electos por listas locales o regionales fuera de las coaliciones nacionales — listas distrito-específicas sin conglomerado nacional.
+
+La agrupación en cinco bloques sigue la clasificación de Fábrega (2020). Los términos, en cuatro familias:
 
 - **Base e ideología global**: *edges* (la propensión base a firmar), *miembro* (¿los miembros de la comisión firman más sus propias iniciativas?), y los *rangos por documento* (`b2covrange`) de $\theta_1$, $\theta_2$, edad y grado — cuán dispersos son los firmantes de cada texto en cada variable continua; negativo = los textos concentran firmantes parecidos.
 - **La matriz de mezcla de bloques** (15 términos, `b2twostar`): para cada documento, cada par de co-firmantes cae en la celda de sus dos bloques (Derecha–Derecha, Derecha–PPOO, …). Es el censo completo de "quién firma con quién" a nivel de bloque, estimado dentro de la red — no partiéndola.
@@ -450,91 +452,76 @@ La relación con 3.1 es de triangulación, no de redundancia — y con el híbri
 
 ## 4.1 Posiciones: la dinámica de la era de normas
 
-¿La red mueve las posiciones? Esta sección responde usando *solo* el tramo del proceso donde las posiciones tenían espacio real para moverse: la **era de normas** (15-feb a 14-may-2022), cuando el Pleno votó contenido constitucional bajo la regla de 2/3. La decisión de restringirse a esa era tiene dos motivos. Primero, es donde vive la dinámica: antes de febrero se votaba reglamento y procedimiento por mayoría simple — otra agenda, otro juego. Segundo, el termómetro: las posiciones $\theta_{i,t}$ se estiman de los votos, y mezclar dos regímenes de agenda en una sola estimación diluye justo el movimiento fino que queremos medir; aquí todo usa el $\theta$ de **régimen homogéneo** — re-estimado exclusivamente con las votaciones de la era. (La ruta original — el panel completo con el $\theta$ estándar, que entrega un nulo global — queda íntegra en el Anexo A.)
+¿La red mueve las posiciones? Esta sección responde usando *solo* el tramo del proceso donde las posiciones tenían espacio real para moverse: la **era de normas** (15-feb a 14-may-2022), cuando el Pleno votó contenido constitucional bajo la regla de 2/3. Tres decisiones de diseño, cada una con su motivo. Primera, la era: antes de febrero se votaba reglamento por mayoría simple — otra agenda, otro juego. Segunda, el termómetro: las posiciones $\theta_{i,t}$ se estiman de los votos, y mezclar dos regímenes de agenda diluye el movimiento fino; aquí todo usa el $\theta$ de **régimen homogéneo**, re-estimado exclusivamente con las votaciones de la era. Tercera — y es la novedad de esta versión final — la exposición tiene **cota temporal**: la exposición acumulada (toda la historia de co-firma desde noviembre) mezcla vínculos frescos con vínculos de hace meses en un solo número; si la influencia opera, opera a través de la colaboración *reciente*. (La ruta con exposición acumulada queda en el Anexo B; la ruta original completa, con el termómetro estándar y su nulo, en el Anexo A.)
 
-El modelo. La exposición de $i$ en la onda $t$ es la posición media de sus co-firmantes, ponderada por la intensidad de colaboración acumulada:
+La exposición con memoria acotada. Los pesos de la red decaen geométricamente sobre los *incrementos* de co-firma de cada onda:
 
-$$E_{i,t} = \frac{\sum_{j \neq i} w_{ij,t}\,\theta_{j,t}}{\sum_{j \neq i} w_{ij,t}},$$
+$$w^{(m)}_{ij,t} = \sum_{s \leq t} \lambda_m^{\,t-s}\, \Delta w_{ij,s}, \qquad \lambda_m = 0.1^{1/m},$$
 
-y la familia de modelos es un panel de efectos fijos sobre el cambio de posición:
+donde $m$ es la **memoria en ondas**: por construcción, el 90% del peso cae dentro de las últimas $m$ ondas. Con informes cada ~14 días (mediana de la era), $m=1$ recuerda unas dos semanas, $m=2$ un mes, $m=3$ seis semanas. La exposición es la posición media de los co-firmantes con esos pesos:
 
-$$\Delta\theta_{i,t} \;=\; \alpha_i \;+\; \mu_t \;+\; \beta\,\theta_{i,t-1} \;+\; \lambda\,E_{i,t-1} \;+\; \lambda_{innov}\,\tilde E_{i,t+2} \;+\; \varepsilon_{it},$$
+$$E^{(m)}_{i,t} = \frac{\sum_{j \neq i} w^{(m)}_{ij,t}\,\theta_{j,t}}{\sum_{j \neq i} w^{(m)}_{ij,t}},$$
 
-donde cada pieza tiene un trabajo intuitivo: $\alpha_i$ (efecto fijo por convencional) absorbe todo lo estable de cada persona — el modelo solo usa cómo cada uno se mueve respecto de su propio promedio; $\mu_t$ (efecto fijo por fecha de onda) absorbe los *shocks comunes* de la era — el pánico de las encuestas, los acuerdos transversales de abril-mayo: todo lo que movía a todos a la vez; $\beta$ captura la reversión a la media; y $\lambda$ es el parámetro de interés: si $\lambda > 0$, me muevo hacia donde estaba mi vecindario.
+y la familia de modelos es la misma escalera de efectos fijos:
 
-**El reloj de las exposiciones merece su propio párrafo, porque es fácil equivocarse.** Las posiciones se estiman de los votos, así que con los votos emitidos en $t$ se calcula la posición — y por tanto la exposición — de $t{+}1$. Dos consecuencias. Hacia adelante: si queremos una "exposición futura" genuinamente futura — no contaminada por votos contemporáneos al cambio que estamos explicando — no basta $t{+}1$ (que se construyó con votos de $t$): hay que ir a $t{+}2$. Hacia atrás: si queremos saber qué influyó en un convencional cuando decidió cómo votar en $t$, habría que usar al menos los votos de $t{-}1$ — es decir, la exposición medida en $t$; pero usar la exposición contemporánea como explicación es demasiado contraintuitivo (y quien no lo encuentre contraintuitivo dirá, con razón, "ándate uno más atrás"), así que usamos los votos de $t{-}2$: la **exposición medida en $t{-}1$**. En resumen: rezago en $t{-}1$, innovación desde $t{+}2$. (La raíz técnica es la misma en ambas puntas: el dynIRT es un suavizador de dos lados, y $t{\pm}1$ queda demasiado cerca de la ventana del cambio. Y no es precaución de papel: si se usa la exposición contemporánea $E_{i,t}$ como regresor, los coeficientes se disparan a valores mecánicamente contaminados.)
+$$\Delta\theta_{i,t} \;=\; \alpha_i \;+\; \mu_t \;+\; \beta\,\theta_{i,t-1} \;+\; \lambda\,E^{(m)}_{i,t-1} \;+\; \lambda_{innov}\,\tilde E^{(m)}_{i,t+2} \;+\; \varepsilon_{it},$$
 
-La *innovación* $\tilde E_{i,t+2}$ es la parte de la exposición futura que la pasada no contenía (el residuo within de $E_{t+2}$ sobre $E_{t-1}$). Es el test del árbitro contra la selección: si lo que llamamos "influencia" fuera en realidad que elijo co-firmantes hacia cuya posición ya me estoy moviendo, entonces *hacia dónde va* mi vecindario debería predecir mi cambio de hoy, y la exposición pasada debería morir al controlarla. Los tres modelos:
+con $\alpha_i$ (efecto fijo por convencional: solo variación dentro de cada persona), $\mu_t$ (efecto fijo por fecha de onda: los shocks comunes de la era), $\beta$ (reversión a la media) y $\lambda$ como parámetro de interés.
 
-**Tabla 9 — La familia de la era de normas: básico, shocks comunes, y el test del árbitro (FE por convencional; EE cluster por convencional).**
+**El reloj de las exposiciones merece su propio párrafo, porque es fácil equivocarse.** Las posiciones se estiman de los votos, así que con los votos emitidos en $t$ se calcula la posición — y por tanto la exposición — de $t{+}1$. Dos consecuencias. Hacia atrás: si queremos saber qué influyó en un convencional cuando decidió cómo votar en $t$, habría que usar al menos los votos de $t{-}1$ — es decir, la exposición medida en $t$; pero usar la exposición contemporánea como explicación es demasiado contraintuitivo (y quien no lo encuentre contraintuitivo dirá, con razón, "ándate uno más atrás"), así que usamos los votos de $t{-}2$: la **exposición medida en $t{-}1$**. Hacia adelante: para que la "exposición futura" del test de falsificación sea genuinamente futura — no contaminada por votos contemporáneos al cambio que explicamos — no basta $t{+}1$ (construida con votos de $t$): hay que ir a $t{+}2$. (La raíz técnica es la misma en ambas puntas: el dynIRT es un suavizador de dos lados. Y no es precaución de papel: con la exposición contemporánea como regresor los coeficientes se disparan a valores mecánicamente contaminados.)
+
+La *innovación* $\tilde E^{(m)}_{i,t+2}$ también es decaída: el promedio ponderado de las exposiciones futuras $E^{(m)}_{i,u}$ para $u \geq t{+}2$, con pesos $\lambda_m^{\,u-(t+2)}$ — el futuro *cercano* pesa más, el espejo exacto del decaimiento hacia atrás —, residualizado (within) sobre la exposición rezagada. Es el test del árbitro contra la selección: si lo que llamamos "influencia" fuera elegir co-firmantes hacia cuya posición ya me estoy moviendo, entonces *hacia dónde va* mi vecindario debería predecir mi cambio de hoy, y la exposición pasada debería morir al controlarla. La escalera, con memoria de un mes ($m = 2$):
+
+**Tabla 9 — La familia de la era de normas con memoria acotada ($m = 2$ ondas $\approx$ un mes): básico, shocks comunes, y el test del árbitro (FE por convencional; EE cluster por convencional).**
 
 | | M0 básico | M1 + FE fecha | M2 + innovación $t{+}2$ |
 |:---|:-:|:-:|:-:|
-| Posición rezagada $\theta_{i,t-1}$ ($\hat\beta$) | $-0.699^{***}$ (0.027) | $-0.702^{***}$ (0.028) | $-0.755^{***}$ (0.038) |
-| Exposición pasada $\hat\lambda$ ($E_{i,t-1}$) | $+0.021^{***}$ (0.005) | $+0.020^{***}$ (0.005) | $\mathbf{+0.020^{**}}$ (0.007), $p=.003$ |
-| Innovación $\hat\lambda_{innov}$ ($\tilde E_{i,t+2}$) | — | — | $-0.002$ (0.018), $p=.91$ |
+| Posición rezagada $\theta_{i,t-1}$ ($\hat\beta$) | $-0.698^{***}$ (0.027) | $-0.701^{***}$ (0.028) | $-0.756^{***}$ (0.037) |
+| Exposición decaída $\hat\lambda$ ($E^{(2)}_{i,t-1}$) | $+0.019^{***}$ (0.004) | $+0.017^{***}$ (0.004) | $\mathbf{+0.022^{***}}$ (0.006), $p=.0004$ |
+| Innovación decaída $\hat\lambda_{innov}$ | — | — | $-0.007$ (0.008), $p=.38$ |
 | FE de fecha ($\mu_t$) | no | sí | sí |
 | N (persona-onda) | 4.065 | 4.065 | 2.011 |
-| $R^2$ within | 0.366 | 0.383 | 0.369 |
+| $R^2$ within | 0.366 | 0.383 | 0.370 |
 
-Cómo leer la secuencia. **M0** establece la asociación básica: dentro de cada persona, moverse sigue a la exposición pasada ($+0.021$, $p < 10^{-4}$) — cerrar un 2% de la distancia al vecindario por onda. **M1** le quita la explicación más barata: no son los shocks comunes de la era — con efectos fijos de fecha el coeficiente casi no se mueve ($+0.020$). **M2** es el test decisivo: la innovación estrictamente futura no predice nada ($-0.002$, $p = .91$) y la exposición pasada queda en pie ($+0.020$, $p = .003$). La firma de la selección — el futuro "prediciendo" el presente — no sobrevive el reloj estricto; el componente de influencia sí. (La media-vuelta honesta: que la innovación a $t{+}2$ muera admite dos lecturas — que la selección aparente de los tests con $t{+}1$ era fuga contemporánea del suavizador, o que $t{+}2$ es un proxy demasiado lejano de hacia-dónde-va-el-vecindario. La primera favorece la influencia; la segunda solo dice que el test perdió filo. Ambas conviven con un hecho: el rezago no se cae.)
+Cómo leer la secuencia. **M0** establece la asociación básica: dentro de cada persona, moverse sigue a la exposición reciente ($+0.019$, $p < 10^{-5}$) — cerrar en torno al 2% de la distancia al vecindario por onda. **M1** le quita la explicación más barata: no son los shocks comunes de la era — con efectos fijos de fecha el coeficiente casi no se mueve. **M2** es el test decisivo: la innovación estrictamente futura no predice nada ($-0.007$, $p = .38$) y la exposición pasada queda en pie, incluso algo más nítida ($+0.022$, $p = .0004$). La firma de la selección — el futuro "prediciendo" el presente — no aparece bajo el reloj estricto; el componente de influencia sí.
 
-¿Y si la memoria relacional no es acumulada sino que se desvanece? La exposición con *decaimiento* pondera más la colaboración reciente ($w_{ij}$ con pesos $\lambda_w^{t-s}$ sobre los incrementos de co-firma):
+¿Y depende de cuánta memoria le demos a la exposición? No:
 
-**Tabla 9b — Los tres modelos de decaimiento en la era de normas (FE por convencional y por fecha; EE cluster).**
+**Tabla 9b — Sensibilidad a la memoria: la misma escalera con $m = 1, 2, 3$ ondas.**
 
-| | $\lambda_w = 0.25$ | $\lambda_w = 0.50$ | $\lambda_w = 0.75$ |
+| | $m = 1$ ($\approx$ 2 semanas) | $m = 2$ ($\approx$ 1 mes) | $m = 3$ ($\approx$ 6 semanas) |
 |:---|:-:|:-:|:-:|
-| Posición rezagada $\theta_{i,t-1}$ ($\hat\beta$) | $-0.700^{***}$ (0.028) | $-0.701^{***}$ (0.028) | $-0.701^{***}$ (0.028) |
-| Exposición con decaimiento $\hat\lambda$ | $+0.017^{***}$ (0.004) | $+0.018^{***}$ (0.004) | $+0.019^{***}$ (0.005) |
-| FE de fecha | sí | sí | sí |
-| N (persona-onda) | 4.065 | 4.065 | 4.065 |
-| $R^2$ within | 0.383 | 0.383 | 0.383 |
+| $\hat\lambda$ en M1 (+ FE fecha) | $+0.014^{***}$ (0.004) | $+0.017^{***}$ (0.004) | $+0.018^{***}$ (0.004) |
+| $\hat\lambda$ en M2 (test del árbitro) | $+0.022^{***}$ (0.006) | $+0.022^{***}$ (0.006) | $+0.021^{***}$ (0.006) |
+| Innovación en M2 | $-0.008$ ($p=.25$) | $-0.007$ ($p=.38$) | $-0.005$ ($p=.60$) |
 
-La lectura: con memoria que descuenta el pasado el resultado no se debilita — se afirma ($p < 10^{-4}$ en las tres). Vale el contraste con el termómetro estándar (Anexo A, Tabla A4): allí las mismas especificaciones rozaban apenas la significancia ($p \approx .04$--$.08$); con el régimen homogéneo, la señal es nítida. El termómetro importaba.
-
-Dos cautelas para cerrar. Primera, la de siempre: esto es un panel observacional con red elegida por los propios actores — la homofilia latente (elegir co-firmantes por afinidades no observadas que también predicen el movimiento) no es descartable por diseño en ningún estudio de este tipo, y por eso hablamos de un *componente de influencia* que sobrevive los tests disponibles, no de causalidad certificada. Segunda, la magnitud: $+0.02$ por onda es un acomodo — cerrar 2% de la distancia al vecindario entre informes — no una conversión; la reversión a la media ($\hat\beta \approx -0.7$) sigue siendo, por lejos, la fuerza dominante del movimiento de posiciones.
+Las tres memorias dicen lo mismo — nadie eligió $m$ mirando los resultados. Dos cautelas para cerrar. Primera, la de siempre: esto es un panel observacional con red elegida por los propios actores — la homofilia latente (elegir co-firmantes por afinidades no observadas que también predicen el movimiento) no es descartable por diseño en ningún estudio de este tipo, y por eso hablamos de un *componente de influencia* que sobrevive los tests disponibles, no de causalidad certificada. Segunda, la magnitud: $+0.02$ por onda es un acomodo — cerrar 2% de la distancia al vecindario entre informes —, no una conversión; la reversión a la media ($\hat\beta \approx -0.7$) sigue siendo, por lejos, la fuerza dominante del movimiento de posiciones.
 
 ## 4.2 Conducta: la defección viaja por la red
 
-La versión para la abuela primero. En cada votación, casi todos los convencionales votan igual que su lista — el libreto se respeta el 92% de las veces. Pero a veces alguien se sale del libreto. La pregunta: cuando alguien se sale, ¿se sale solo, o se sale acompañado de la gente con la que escribió iniciativas al comienzo? Y si acompañado — ¿es de verdad por esos lazos, o es casualidad de votaciones que dividen a todos?
+Las posiciones se acomodan poco; la conducta es otra historia. La intuición primero. Los bloques votan juntos — eso es la disciplina. Pero a veces alguien se sale del libreto. La pregunta: cuando alguien se sale, ¿se sale solo, o se sale acompañado de la gente con la que escribió iniciativas al comienzo? Y si acompañado — ¿es de verdad por esos lazos, o es casualidad de votaciones que dividen a todos?
 
-Las definiciones, una a una. Para el convencional $i$ y la votación $v$: la defección es $D_{iv} = 1$ si $i$ votó distinto de la mayoría de su lista en $v$ (y 0 si votó con ella); ocurre en el 7.9% de los casos. La exposición a defectores es la fracción ponderada de los co-firmantes de $i$ que defeccionaron en esa misma votación:
+Las definiciones. *Defección*: en la votación $v$, votar contra el voto mayoritario del propio bloque. *Exposición*: la fracción — ponderada por intensidad de co-firma $w_{ij}$ — de mis co-firmantes que defecciona *en esa misma votación*. El modelo final:
 
-$$X_{iv} = \frac{\sum_{j \neq i} w_{ij}\, D_{jv}}{\sum_{j \neq i} w_{ij}},$$
+$$X_{iv} = \frac{\sum_{j \neq i} w_{ij}\, D_{jv}}{\sum_{j \neq i} w_{ij}}, \qquad
+\Pr(D_{iv} = 1) = \Lambda\big(\eta_i + \mu_{b(i),v} + \phi\, X_{iv} + \gamma\, marg_{iv}\big),$$
 
-donde $w_{ij}$ es el peso de co-firma de la red génesis (cuántas iniciativas firmaron juntos $i$ y $j$). El modelo de regresión estimado es un logit con dos familias de efectos fijos:
+y cada pieza tiene un trabajo que se puede contar en fácil. $\eta_i$ (efecto fijo por persona) absorbe a los díscolos de nacimiento: no comparamos rebeldes con disciplinados, sino a cada uno consigo mismo. $\mu_{b(i),v}$ (efecto fijo por **bloque × votación**) es el corazón del diseño: absorbe por completo "esta votación partió a este bloque" — la fuente mecánica de co-defección. Con él, $\phi$ compara a dos personas *del mismo bloque en la misma votación* — sometidas a exactamente la misma presión — y pregunta si la que tiene co-firmantes defeccionando defecciona más. $marg_{iv}$ es la *marginalidad*: la distancia de la posición de $i$ (dynIRT del período de la votación) a la mediana de su bloque — el periférico ideológico de un bloque rompe filas más, y hay que descontarlo para que $\phi$ no se lo apropie. Y $\phi$ es el parámetro de interés: **¿defecciono más cuando defeccionan los míos?**
 
-$$\Pr(D_{iv} = 1) = \Lambda\big(\eta_i + \mu_v + \phi\, X_{iv}\big),$$
+**Tabla 10 — La escalera de la defección (era de normas; EE cluster por convencional).**
 
-donde $\Lambda$ es la función logística, $\eta_i$ absorbe la propensión individual a rebelarse (hay personalidades díscolas), $\mu_v$ absorbe la votación (hay votaciones que rompen a todo el mundo), y $\phi$ es el parámetro de interés: ¿defecciono más cuando defeccionan los míos? Errores agrupados por convencional; 374.047 observaciones en la era de votaciones de normas.
+| | $\phi$ | (EE) | Nota | N |
+|:---|:-:|:-:|:---|:-:|
+| FE persona + votación | $+11.21^{***}$ | (0.53) | el número crudo | 374.047 |
+| Benchmark de permutación | $+6.02$ | [p95: 6.08] | lo que produce la pura mecánica | — |
+| FE persona + **bloque × votación** | $+8.82^{***}$ | (0.60) | la mecánica, absorbida en el modelo | 186.988 |
+| **+ marginalidad (modelo final)** | $\mathbf{+8.75^{***}}$ | (0.61) | marginalidad: $+1.09^{***}$ (0.09) | 186.988 |
 
-El problema es que $\phi$ crudo exagera: si una votación parte a mi lista en dos, varios defeccionamos a la vez aunque no nos conozcamos. El contrafactual duro: barajamos los nombres de los defectores dentro de cada lista y votación — manteniendo exactamente cuántos defeccionaron en cada una — y re-estimamos 200 veces. Todo lo mecánico sobrevive al barajado; solo muere el alineamiento con la red. Y el chequeo adicional contra una historia alternativa: "defeccionamos juntos porque somos de la misma comisión y conocemos el artículo en tabla" — separamos la exposición según si el co-firmante es de mi comisión o de otra, controlando además la tasa de defección de mi comisión en esa votación ($C_{iv}$, la fracción de miembros de mi comisión que defeccionó, sin contarme).
+Cómo leer la escalera, fila por fila. La primera es el número crudo: enorme, pero sospechoso — si una votación parte a mi lista, mis co-firmantes y yo defeccionamos juntos *sin* transmisión alguna. La segunda fila mide exactamente esa sospecha con un contrafactual duro: en cada bloque × votación conservamos *cuántos* defeccionaron y barajamos *quiénes* — le pasamos las tarjetas de "rebelde" a miembros al azar del mismo bloque en la misma votación, 200 veces. Todo lo mecánico queda intacto (misma votación, mismo bloque, misma cantidad de rebeldes); lo único que se destruye es la conexión con la red. La mecánica sola produce $\phi = 6.0$. La tercera fila hace lo mismo por la vía paramétrica — el efecto fijo bloque × votación — y deja $\phi = 8.8$: comparando dentro del mismo bloque en la misma votación, los conectados a defectores defeccionan mucho más. Y la cuarta agrega la marginalidad: predice defección con fuerza ($+1.09$, el periférico del bloque rompe filas), pero **no le quita nada a $\phi$** ($8.82 \to 8.75$): el canal de red no es "los periféricos se agrupan". (La distancia al punto de corte de cada votación, probada como covariable adicional, queda redundante bajo estos efectos fijos.)
 
-**Tabla 10 — Co-defección: exposición a defectores en la red de co-firma.**
+¿Y por quién viaja? Partiendo la exposición por el atributo del *receptor*: los novatos reciben más ($\phi = 12.2$) que los experimentados ($9.5$); y la partición por *emisor* (Anexo C) mostró lo mismo del otro lado — los experimentados transmiten menos de la mitad que los novatos. La co-defección viaja por pares novatos en ambas puntas del lazo: la mayoría nueva se mueve junta, la vieja guardia ni arrastra ni se deja arrastrar.
 
-| Modelo | Variable | Coef. | EE | $p$ |
-|:---|:---|:-:|:-:|:-:|
-| Principal | Exposición a defectores ($\phi$) | $+11.21$ | 0.52 | $<10^{-100}$ |
-| Benchmark permutado (200 réplicas) | $\phi$ esperado por mecánica | $6.02$ [p95: $6.08$] | — | $< 0.005$ |
-| Período completo (robustez) | $\phi$ | $+11.06$ | 0.47 | $<10^{-121}$ |
-| Split por comisión | Exposición co-firmantes de otra comisión | $+8.67$ | 0.46 | $<10^{-15}$ |
-| | Exposición co-firmantes de mi comisión | $+2.99$ | 0.32 | $<10^{-15}$ |
-| | Tasa de defección de mi comisión ($C_{iv}$) | $-3.01$ | 0.45 | $<10^{-10}$ |
-| Rezagada: votación anterior (sola) | Exposición a defectores en $v-1$ | $+2.98$ | 0.17 | $<10^{-65}$ |
-| Horse race contemporánea + rezagada | Exposición contemporánea ($\phi$) | $+11.08$ | 0.52 | $<10^{-100}$ |
-| | Exposición en $v-1$ | $+0.72$ | 0.11 | $<10^{-11}$ |
-| Rezagada: día anterior de Pleno | Exposición del día anterior | $-0.10$ | 0.30 | $0.75$ |
-
-Lectura: la mitad del efecto crudo era mecánica de bloques ($11.2$ observado contra $6.0$ del mundo barajado), pero lo que sobra es enorme y real. Y la historia de "compartir sala con el artículo" queda descartada: la co-defección viaja más fuerte por los co-firmantes de *otras* comisiones que por los de la propia, y la tasa de defección de mi comisión, lejos de arrastrarme, tiene signo negativo. En una frase: la red no cambia lo que piensas (4.1), pero cuando llega el momento de desmarcarse del bloque, no te desmarcas solo — te desmarcas con los tuyos.
-
-¿Por qué habría de creerse que la defección de mis co-firmantes *en esta misma votación* me hace defeccionar a mí? La pregunta merece literatura, y la literatura tiene dos estantes. El estante a favor parte con la teoría clásica de las señales (*cue-taking*): un legislador no puede estudiar cada votación, así que decide mirando a colegas en los que confía (Matthews y Stimson, *Yeas and Nays*, 1975) — y si mis socios de escritura rompen con el bloque en esta votación, esa es exactamente la señal que miraría. La evidencia moderna respalda que la cercanía transmite votos: compañeros de escritorio en la asamblea de California votan más parecido (Masket, *QJPS* 2008); en el Parlamento Europeo, donde el asiento se asigna por orden alfabético — un experimento natural —, sentarse junto a un colega de partido reduce las discrepancias de voto, y el efecto *persiste* cuando ya no se sientan juntos (Harmon, Fisman y Kamenica, *AEJ: Applied* 2019); y un experimento de campo real muestra que informar a un legislador contagia el copatrocinio de sus vecinos de oficina (Zelizer, *APSR* 2019). El copatrocinio como lazo significativo viene de Fowler (*Political Analysis* 2006) y Kirkland (*JOP* 2011).
-
-El estante en contra es igual de serio, y hay que decirlo con todas sus letras. Manski (*REStud* 1993) mostró que regresionar mi conducta sobre la conducta *simultánea* de mi grupo no identifica influencia: mi defección está dentro de la de ellos y la de ellos dentro de la mía (el "problema del reflejo"). Angrist (*Labour Economics* 2014) agrega que el coeficiente de un promedio de pares es casi una correlación intraclase disfrazada — por eso NO leemos el $11.2$ como magnitud causal, sino que reportamos el *exceso* sobre el mundo barajado ($11.2$ contra $6.0$), que es la comparación que Angrist exige y la permutación construye. Shalizi y Thomas (*SMR* 2011) señalan el confundidor que ninguna permutación arregla: si los lazos se forman por parecidos no observados, los parecidos — no el lazo — pueden producir la co-defección; ese es el residuo honesto de esta sección. Y Rogowski y Sinclair (*Political Analysis* 2012), usando la lotería de oficinas del Congreso — identificación limpia de verdad —, encuentran efecto *cero* de la proximidad: recordatorio de que correlaciones observacionales pueden evaporarse.
-
-¿Y si miramos el pasado en vez del mismo instante? Los modelos rezagados (filas inferiores de la Tabla 10) rompen la simultaneidad de Manski: la defección de mis co-firmantes en la votación *anterior* predice la mía sola ($+2.98$), y en el horse race con la contemporánea, la contemporánea domina ($+11.1$) pero el rezago sobrevive ($+0.72$). El eco muere rápido: la exposición del *día anterior* de Pleno ya no predice nada. La lectura conjunta: coordinación de mismo momento sobre todo (consistente con señales dentro de la sesión), con un eco corto real — no contagio duradero. Dos cautelas de la propia literatura: los rezagos tampoco curan la homofilia latente (Lyons, *Statistics, Politics, and Policy* 2011, sobre los estudios de contagio de Christakis-Fowler; Aral, Muchnik y Sundararajan, *PNAS* 2009, muestran que el rezago ingenuo sobreestima varias veces), y una votación y la anterior pueden ser del mismo paquete temático. Por eso el titular de la sección se sostiene en su versión modesta y defendible: *la defección se agrupa por las líneas de la red de co-firma, mucho más allá de lo mecánico*; influencia es la interpretación natural, homofilia fina la alternativa que no podemos descartar.
-
-¿Y *quién* transmite? La exposición trata a todos los vecinos por igual; partirla por atributo del emisor pregunta si hay contagiadores especiales. Para cada atributo $a$ separamos $E^{a}_{iv}$ (exposición a defectores vecinos *con* el atributo) de $E^{\neg a}_{iv}$ (sin él) y estimamos ambos canales juntos. El resultado va en contra de la hipótesis de los emisores de élite: los abogados transmiten exactamente igual que los no abogados ($\phi = +5.8$ contra $+6.0$, diferencia nula — el tercer nulo de los abogados en este estudio, ahora como emisores); los posgraduados transmiten *menos* que el resto ($+4.3$ contra $+7.0$, $p = .003$); y los experimentados, mucho menos ($+2.6$ contra $+9.3$, $p < .001$). La co-defección viaja por los pares *novatos* — la mayoría nueva se mueve junta; la vieja guardia no arrastra a nadie. (Misma cautela de siempre: es clustering direccional por canal, no influencia causal; y los emisores con experiencia son solo 35, así que su canal se mide con menos precisión.)
+La cautela de cierre es la misma de la ruta original (Anexo C, con los modelos rezagados y la literatura): esto es clustering direccional de conducta por las líneas de la red, mucho más allá de lo mecánico; influencia es la lectura natural, homofilia fina la alternativa que no podemos descartar por diseño.
 
 # 5. RQ3 — ¿Qué hace ganar?
 
@@ -783,3 +770,95 @@ Antes de creerle, lo sometimos a los dos ataques obvios (Tabla A3). Primero: ¿n
 | | Innovación (EE) | $+0.041$ (0.019) |
 
 La lectura que defendemos, con su etiqueta honesta: dentro de la era de normas, y medido con posiciones de régimen homogéneo, aparece un componente de influencia acotado — del orden de cerrar 1.6% de la distancia al vecindario por onda — que sobrevive la falsificación de innovación y la propagación del error de medición, y que se concentra en el *arranque* del régimen de 2/3: cuando la aritmética de los 103 votos se estrenó y las posiciones tuvieron que asentarse bajo la regla nueva, los convencionales se acomodaron algo hacia sus vecindarios de trabajo; con el régimen ya rodado, el margen se agotó y quedó de nuevo solo la selección. El titular de la sección no se voltea — se refina: selección como regla del proceso completo; acomodo temprano bajo la regla nueva como excepción acotada y fechada. (La cautela de siempre aplica aquí con más fuerza: lag e innovación conviven, así que esto es evidencia de *coexistencia* de canales, no una estimación causal limpia — la homofilia latente no desaparece por cambiar el termómetro.)
+
+# Anexo B. RQ2a con exposición acumulada: la segunda familia
+
+*Este anexo conserva la familia intermedia de RQ2a: la era de normas con el termómetro de régimen homogéneo y el reloj estricto, pero con la **exposición acumulada** (toda la historia de co-firma desde noviembre) como regresor. La sección 4.1 del cuerpo principal la supersede con la exposición de memoria acotada; los resultados son cualitativamente idénticos.*
+
+¿La red mueve las posiciones? Esta sección responde usando *solo* el tramo del proceso donde las posiciones tenían espacio real para moverse: la **era de normas** (15-feb a 14-may-2022), cuando el Pleno votó contenido constitucional bajo la regla de 2/3. La decisión de restringirse a esa era tiene dos motivos. Primero, es donde vive la dinámica: antes de febrero se votaba reglamento y procedimiento por mayoría simple — otra agenda, otro juego. Segundo, el termómetro: las posiciones $\theta_{i,t}$ se estiman de los votos, y mezclar dos regímenes de agenda en una sola estimación diluye justo el movimiento fino que queremos medir; aquí todo usa el $\theta$ de **régimen homogéneo** — re-estimado exclusivamente con las votaciones de la era. (La ruta original — el panel completo con el $\theta$ estándar, que entrega un nulo global — queda íntegra en el Anexo A.)
+
+El modelo. La exposición de $i$ en la onda $t$ es la posición media de sus co-firmantes, ponderada por la intensidad de colaboración acumulada:
+
+$$E_{i,t} = \frac{\sum_{j \neq i} w_{ij,t}\,\theta_{j,t}}{\sum_{j \neq i} w_{ij,t}},$$
+
+y la familia de modelos es un panel de efectos fijos sobre el cambio de posición:
+
+$$\Delta\theta_{i,t} \;=\; \alpha_i \;+\; \mu_t \;+\; \beta\,\theta_{i,t-1} \;+\; \lambda\,E_{i,t-1} \;+\; \lambda_{innov}\,\tilde E_{i,t+2} \;+\; \varepsilon_{it},$$
+
+donde cada pieza tiene un trabajo intuitivo: $\alpha_i$ (efecto fijo por convencional) absorbe todo lo estable de cada persona — el modelo solo usa cómo cada uno se mueve respecto de su propio promedio; $\mu_t$ (efecto fijo por fecha de onda) absorbe los *shocks comunes* de la era — el pánico de las encuestas, los acuerdos transversales de abril-mayo: todo lo que movía a todos a la vez; $\beta$ captura la reversión a la media; y $\lambda$ es el parámetro de interés: si $\lambda > 0$, me muevo hacia donde estaba mi vecindario.
+
+**El reloj de las exposiciones merece su propio párrafo, porque es fácil equivocarse.** Las posiciones se estiman de los votos, así que con los votos emitidos en $t$ se calcula la posición — y por tanto la exposición — de $t{+}1$. Dos consecuencias. Hacia adelante: si queremos una "exposición futura" genuinamente futura — no contaminada por votos contemporáneos al cambio que estamos explicando — no basta $t{+}1$ (que se construyó con votos de $t$): hay que ir a $t{+}2$. Hacia atrás: si queremos saber qué influyó en un convencional cuando decidió cómo votar en $t$, habría que usar al menos los votos de $t{-}1$ — es decir, la exposición medida en $t$; pero usar la exposición contemporánea como explicación es demasiado contraintuitivo (y quien no lo encuentre contraintuitivo dirá, con razón, "ándate uno más atrás"), así que usamos los votos de $t{-}2$: la **exposición medida en $t{-}1$**. En resumen: rezago en $t{-}1$, innovación desde $t{+}2$. (La raíz técnica es la misma en ambas puntas: el dynIRT es un suavizador de dos lados, y $t{\pm}1$ queda demasiado cerca de la ventana del cambio. Y no es precaución de papel: si se usa la exposición contemporánea $E_{i,t}$ como regresor, los coeficientes se disparan a valores mecánicamente contaminados.)
+
+La *innovación* $\tilde E_{i,t+2}$ es la parte de la exposición futura que la pasada no contenía (el residuo within de $E_{t+2}$ sobre $E_{t-1}$). Es el test del árbitro contra la selección: si lo que llamamos "influencia" fuera en realidad que elijo co-firmantes hacia cuya posición ya me estoy moviendo, entonces *hacia dónde va* mi vecindario debería predecir mi cambio de hoy, y la exposición pasada debería morir al controlarla. Los tres modelos:
+
+**Tabla B1 — La familia de la era de normas: básico, shocks comunes, y el test del árbitro (FE por convencional; EE cluster por convencional).**
+
+| | M0 básico | M1 + FE fecha | M2 + innovación $t{+}2$ |
+|:---|:-:|:-:|:-:|
+| Posición rezagada $\theta_{i,t-1}$ ($\hat\beta$) | $-0.699^{***}$ (0.027) | $-0.702^{***}$ (0.028) | $-0.755^{***}$ (0.038) |
+| Exposición pasada $\hat\lambda$ ($E_{i,t-1}$) | $+0.021^{***}$ (0.005) | $+0.020^{***}$ (0.005) | $\mathbf{+0.020^{**}}$ (0.007), $p=.003$ |
+| Innovación $\hat\lambda_{innov}$ ($\tilde E_{i,t+2}$) | — | — | $-0.002$ (0.018), $p=.91$ |
+| FE de fecha ($\mu_t$) | no | sí | sí |
+| N (persona-onda) | 4.065 | 4.065 | 2.011 |
+| $R^2$ within | 0.366 | 0.383 | 0.369 |
+
+Cómo leer la secuencia. **M0** establece la asociación básica: dentro de cada persona, moverse sigue a la exposición pasada ($+0.021$, $p < 10^{-4}$) — cerrar un 2% de la distancia al vecindario por onda. **M1** le quita la explicación más barata: no son los shocks comunes de la era — con efectos fijos de fecha el coeficiente casi no se mueve ($+0.020$). **M2** es el test decisivo: la innovación estrictamente futura no predice nada ($-0.002$, $p = .91$) y la exposición pasada queda en pie ($+0.020$, $p = .003$). La firma de la selección — el futuro "prediciendo" el presente — no sobrevive el reloj estricto; el componente de influencia sí. (La media-vuelta honesta: que la innovación a $t{+}2$ muera admite dos lecturas — que la selección aparente de los tests con $t{+}1$ era fuga contemporánea del suavizador, o que $t{+}2$ es un proxy demasiado lejano de hacia-dónde-va-el-vecindario. La primera favorece la influencia; la segunda solo dice que el test perdió filo. Ambas conviven con un hecho: el rezago no se cae.)
+
+¿Y si la memoria relacional no es acumulada sino que se desvanece? La exposición con *decaimiento* pondera más la colaboración reciente ($w_{ij}$ con pesos $\lambda_w^{t-s}$ sobre los incrementos de co-firma):
+
+**Tabla B2 — Los tres modelos de decaimiento en la era de normas (FE por convencional y por fecha; EE cluster).**
+
+| | $\lambda_w = 0.25$ | $\lambda_w = 0.50$ | $\lambda_w = 0.75$ |
+|:---|:-:|:-:|:-:|
+| Posición rezagada $\theta_{i,t-1}$ ($\hat\beta$) | $-0.700^{***}$ (0.028) | $-0.701^{***}$ (0.028) | $-0.701^{***}$ (0.028) |
+| Exposición con decaimiento $\hat\lambda$ | $+0.017^{***}$ (0.004) | $+0.018^{***}$ (0.004) | $+0.019^{***}$ (0.005) |
+| FE de fecha | sí | sí | sí |
+| N (persona-onda) | 4.065 | 4.065 | 4.065 |
+| $R^2$ within | 0.383 | 0.383 | 0.383 |
+
+La lectura: con memoria que descuenta el pasado el resultado no se debilita — se afirma ($p < 10^{-4}$ en las tres). Vale el contraste con el termómetro estándar (Anexo A, Tabla A4): allí las mismas especificaciones rozaban apenas la significancia ($p \approx .04$--$.08$); con el régimen homogéneo, la señal es nítida. El termómetro importaba.
+
+Dos cautelas para cerrar. Primera, la de siempre: esto es un panel observacional con red elegida por los propios actores — la homofilia latente (elegir co-firmantes por afinidades no observadas que también predicen el movimiento) no es descartable por diseño en ningún estudio de este tipo, y por eso hablamos de un *componente de influencia* que sobrevive los tests disponibles, no de causalidad certificada. Segunda, la magnitud: $+0.02$ por onda es un acomodo — cerrar 2% de la distancia al vecindario entre informes — no una conversión; la reversión a la media ($\hat\beta \approx -0.7$) sigue siendo, por lejos, la fuerza dominante del movimiento de posiciones.
+
+# Anexo C. RQ2b: la ruta original (FE de votación y permutación)
+
+*Este anexo conserva el análisis original de la defección: el modelo con efectos fijos de persona y votación, el benchmark de permutación, los modelos rezagados y la partición por atributos del emisor. La sección 4.2 del cuerpo principal lo supersede con el modelo de efectos fijos bloque × votación y la marginalidad como covariable.*
+
+La versión para la abuela primero. En cada votación, casi todos los convencionales votan igual que su lista — el libreto se respeta el 92% de las veces. Pero a veces alguien se sale del libreto. La pregunta: cuando alguien se sale, ¿se sale solo, o se sale acompañado de la gente con la que escribió iniciativas al comienzo? Y si acompañado — ¿es de verdad por esos lazos, o es casualidad de votaciones que dividen a todos?
+
+Las definiciones, una a una. Para el convencional $i$ y la votación $v$: la defección es $D_{iv} = 1$ si $i$ votó distinto de la mayoría de su lista en $v$ (y 0 si votó con ella); ocurre en el 7.9% de los casos. La exposición a defectores es la fracción ponderada de los co-firmantes de $i$ que defeccionaron en esa misma votación:
+
+$$X_{iv} = \frac{\sum_{j \neq i} w_{ij}\, D_{jv}}{\sum_{j \neq i} w_{ij}},$$
+
+donde $w_{ij}$ es el peso de co-firma de la red génesis (cuántas iniciativas firmaron juntos $i$ y $j$). El modelo de regresión estimado es un logit con dos familias de efectos fijos:
+
+$$\Pr(D_{iv} = 1) = \Lambda\big(\eta_i + \mu_v + \phi\, X_{iv}\big),$$
+
+donde $\Lambda$ es la función logística, $\eta_i$ absorbe la propensión individual a rebelarse (hay personalidades díscolas), $\mu_v$ absorbe la votación (hay votaciones que rompen a todo el mundo), y $\phi$ es el parámetro de interés: ¿defecciono más cuando defeccionan los míos? Errores agrupados por convencional; 374.047 observaciones en la era de votaciones de normas.
+
+El problema es que $\phi$ crudo exagera: si una votación parte a mi lista en dos, varios defeccionamos a la vez aunque no nos conozcamos. El contrafactual duro: barajamos los nombres de los defectores dentro de cada lista y votación — manteniendo exactamente cuántos defeccionaron en cada una — y re-estimamos 200 veces. Todo lo mecánico sobrevive al barajado; solo muere el alineamiento con la red. Y el chequeo adicional contra una historia alternativa: "defeccionamos juntos porque somos de la misma comisión y conocemos el artículo en tabla" — separamos la exposición según si el co-firmante es de mi comisión o de otra, controlando además la tasa de defección de mi comisión en esa votación ($C_{iv}$, la fracción de miembros de mi comisión que defeccionó, sin contarme).
+
+**Tabla C1 — Co-defección: exposición a defectores en la red de co-firma.**
+
+| Modelo | Variable | Coef. | EE | $p$ |
+|:---|:---|:-:|:-:|:-:|
+| Principal | Exposición a defectores ($\phi$) | $+11.21$ | 0.52 | $<10^{-100}$ |
+| Benchmark permutado (200 réplicas) | $\phi$ esperado por mecánica | $6.02$ [p95: $6.08$] | — | $< 0.005$ |
+| Período completo (robustez) | $\phi$ | $+11.06$ | 0.47 | $<10^{-121}$ |
+| Split por comisión | Exposición co-firmantes de otra comisión | $+8.67$ | 0.46 | $<10^{-15}$ |
+| | Exposición co-firmantes de mi comisión | $+2.99$ | 0.32 | $<10^{-15}$ |
+| | Tasa de defección de mi comisión ($C_{iv}$) | $-3.01$ | 0.45 | $<10^{-10}$ |
+| Rezagada: votación anterior (sola) | Exposición a defectores en $v-1$ | $+2.98$ | 0.17 | $<10^{-65}$ |
+| Horse race contemporánea + rezagada | Exposición contemporánea ($\phi$) | $+11.08$ | 0.52 | $<10^{-100}$ |
+| | Exposición en $v-1$ | $+0.72$ | 0.11 | $<10^{-11}$ |
+| Rezagada: día anterior de Pleno | Exposición del día anterior | $-0.10$ | 0.30 | $0.75$ |
+
+Lectura: la mitad del efecto crudo era mecánica de bloques ($11.2$ observado contra $6.0$ del mundo barajado), pero lo que sobra es enorme y real. Y la historia de "compartir sala con el artículo" queda descartada: la co-defección viaja más fuerte por los co-firmantes de *otras* comisiones que por los de la propia, y la tasa de defección de mi comisión, lejos de arrastrarme, tiene signo negativo. En una frase: la red no cambia lo que piensas (4.1), pero cuando llega el momento de desmarcarse del bloque, no te desmarcas solo — te desmarcas con los tuyos.
+
+¿Por qué habría de creerse que la defección de mis co-firmantes *en esta misma votación* me hace defeccionar a mí? La pregunta merece literatura, y la literatura tiene dos estantes. El estante a favor parte con la teoría clásica de las señales (*cue-taking*): un legislador no puede estudiar cada votación, así que decide mirando a colegas en los que confía (Matthews y Stimson, *Yeas and Nays*, 1975) — y si mis socios de escritura rompen con el bloque en esta votación, esa es exactamente la señal que miraría. La evidencia moderna respalda que la cercanía transmite votos: compañeros de escritorio en la asamblea de California votan más parecido (Masket, *QJPS* 2008); en el Parlamento Europeo, donde el asiento se asigna por orden alfabético — un experimento natural —, sentarse junto a un colega de partido reduce las discrepancias de voto, y el efecto *persiste* cuando ya no se sientan juntos (Harmon, Fisman y Kamenica, *AEJ: Applied* 2019); y un experimento de campo real muestra que informar a un legislador contagia el copatrocinio de sus vecinos de oficina (Zelizer, *APSR* 2019). El copatrocinio como lazo significativo viene de Fowler (*Political Analysis* 2006) y Kirkland (*JOP* 2011).
+
+El estante en contra es igual de serio, y hay que decirlo con todas sus letras. Manski (*REStud* 1993) mostró que regresionar mi conducta sobre la conducta *simultánea* de mi grupo no identifica influencia: mi defección está dentro de la de ellos y la de ellos dentro de la mía (el "problema del reflejo"). Angrist (*Labour Economics* 2014) agrega que el coeficiente de un promedio de pares es casi una correlación intraclase disfrazada — por eso NO leemos el $11.2$ como magnitud causal, sino que reportamos el *exceso* sobre el mundo barajado ($11.2$ contra $6.0$), que es la comparación que Angrist exige y la permutación construye. Shalizi y Thomas (*SMR* 2011) señalan el confundidor que ninguna permutación arregla: si los lazos se forman por parecidos no observados, los parecidos — no el lazo — pueden producir la co-defección; ese es el residuo honesto de esta sección. Y Rogowski y Sinclair (*Political Analysis* 2012), usando la lotería de oficinas del Congreso — identificación limpia de verdad —, encuentran efecto *cero* de la proximidad: recordatorio de que correlaciones observacionales pueden evaporarse.
+
+¿Y si miramos el pasado en vez del mismo instante? Los modelos rezagados (filas inferiores de la Tabla C1) rompen la simultaneidad de Manski: la defección de mis co-firmantes en la votación *anterior* predice la mía sola ($+2.98$), y en el horse race con la contemporánea, la contemporánea domina ($+11.1$) pero el rezago sobrevive ($+0.72$). El eco muere rápido: la exposición del *día anterior* de Pleno ya no predice nada. La lectura conjunta: coordinación de mismo momento sobre todo (consistente con señales dentro de la sesión), con un eco corto real — no contagio duradero. Dos cautelas de la propia literatura: los rezagos tampoco curan la homofilia latente (Lyons, *Statistics, Politics, and Policy* 2011, sobre los estudios de contagio de Christakis-Fowler; Aral, Muchnik y Sundararajan, *PNAS* 2009, muestran que el rezago ingenuo sobreestima varias veces), y una votación y la anterior pueden ser del mismo paquete temático. Por eso el titular de la sección se sostiene en su versión modesta y defendible: *la defección se agrupa por las líneas de la red de co-firma, mucho más allá de lo mecánico*; influencia es la interpretación natural, homofilia fina la alternativa que no podemos descartar.
+
+¿Y *quién* transmite? La exposición trata a todos los vecinos por igual; partirla por atributo del emisor pregunta si hay contagiadores especiales. Para cada atributo $a$ separamos $E^{a}_{iv}$ (exposición a defectores vecinos *con* el atributo) de $E^{\neg a}_{iv}$ (sin él) y estimamos ambos canales juntos. El resultado va en contra de la hipótesis de los emisores de élite: los abogados transmiten exactamente igual que los no abogados ($\phi = +5.8$ contra $+6.0$, diferencia nula — el tercer nulo de los abogados en este estudio, ahora como emisores); los posgraduados transmiten *menos* que el resto ($+4.3$ contra $+7.0$, $p = .003$); y los experimentados, mucho menos ($+2.6$ contra $+9.3$, $p < .001$). La co-defección viaja por los pares *novatos* — la mayoría nueva se mueve junta; la vieja guardia no arrastra a nadie. (Misma cautela de siempre: es clustering direccional por canal, no influencia causal; y los emisores con experiencia son solo 35, así que su canal se mide con menos precisión.)
