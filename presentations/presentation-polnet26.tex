@@ -302,19 +302,10 @@ s(y) = \Big(\underbrace{\sum_{i,a} y_{ia}}_{\#\text{ edges}},\;\;
 
 \begin{frame}[plain]
 \TablaPerfil
-\begin{tikzpicture}[remember picture, overlay]\ovalmark{genL}{genR}\end{tikzpicture}
-\end{frame}
-
-\begin{frame}[plain]
-\TablaPerfil
 \begin{tikzpicture}[remember picture, overlay]\ovalmark{distL}{distR}\end{tikzpicture}
 \end{frame}
 
 % ------------------------------------------------------------------ 9 TABLE B (2 overlays)
-\begin{frame}[plain]
-\TablaControles
-\begin{tikzpicture}[remember picture, overlay]\ovalmark{rngL}{rngR}\end{tikzpicture}
-\end{frame}
 
 \begin{frame}[plain]
 \TablaControles
@@ -362,7 +353,7 @@ $R^2$ within & 0.370 & 0.370 & 0.369 \\
 \vspace{0.25cm}
 \begin{itemize}
   \item The lagged exposure is significant across all memories $m$.
-  \item The \emphr{strictly future innovation predicts nothing}, at every memory.
+  \item The \emphr{future predicts nothing}, at every memory.
   \item The \emphr{influence component} survives every test; but latent homophily cannot be excluded by design.
 \end{itemize}
 \end{frame}
@@ -371,7 +362,7 @@ $R^2$ within & 0.370 & 0.370 & 0.369 \\
 
 
 % ------------------------------------------------------------------ 14 RQ2b
-\begin{frame}{RQ2b: defection — the design}
+\begin{frame}{RQ2b: discipline — the design}
 \begin{itemize}
   \item When someone breaks ranks: alone, or with the people they wrote initiatives with?
 \end{itemize}
@@ -381,7 +372,7 @@ $$X_{iv} = \frac{\sum_{j \neq i} w_{ij}\, D_{jv}}{\sum_{j \neq i} w_{ij}},
 \Pr(D_{iv} = 1) = \Lambda\big(\eta_i + \mu_{b(i),v} + \phi\, X_{iv} + \gamma\, marg_{iv}\big)$$
 \begin{itemize}
   \item $\eta_i$ absorbs the born rebels; $\mu_{b(i),v}$ absorbs ``this vote split this bloc''.
-  \item $marg_{iv}$: distance to one's own bloc's median position.
+  \item $marg_{iv}$: outsiders break ranks more.
   \item $\phi$ is the \emphr{parameter of interest}: do I defect more when the people I wrote initiatives with defect?
 \end{itemize}
 \end{frame}
@@ -452,14 +443,14 @@ AIC & 1393 & 1384 & 1386 \\
 
 
 % ------------------------------------------------------------------ 17 SDM
-\sectionslide{RQ3b — Members}{Whose success is it?}
+\sectionslide{RQ3b — Members}{Does the context an initiative is born into matter?}
 
 \begin{frame}{Does the context an initiative is born into matter?}
 \begin{itemize}
-  \item \emphr{Success}: of all the article text you co-signed, how much survived into the draft? ($y_i$ = mean textual retention of $i$'s articles, 0 to 1.)
+  \item \emphr{Success}: $y_i$ = mean textual retention of $i$'s articles, 0 to 1.
 \end{itemize}
 \begin{center}
-  \includegraphics[width=0.72\textwidth]{../results/figures/retention_dynamics_all_commissions.pdf}
+  \includegraphics[width=0.75\textwidth]{../results/figures/retention_dynamics_all_commissions.pdf}
 \end{center}
 \end{frame}
 
@@ -467,7 +458,7 @@ AIC & 1393 & 1384 & 1386 \\
 \begin{itemize}
   \item Success is \emphr{not individual}: it clusters on the co-sponsorship network (Moran's $I = 0.44$, $p < .001$). Your success looks like your co-signers' success.
   \vspace{0.3cm}
-  \item To test whether the context an initiative is born into matters, we relate each member's success to the \emph{average success of their co-signers}:
+  \item To test whether the context matters, we ran the SDM (spatial Durbin model):
   $$y = \rho\, W y + X\beta + W X \gamma + \varepsilon,$$
   where $W$ is the row-normalized co-sponsorship network and $\rho$ answers whether that company matters.
 \end{itemize}
@@ -486,7 +477,7 @@ Betweenness & $-0.0000$ & .98 & $-0.0020$ & .40 \\
 \multicolumn{5}{l}{\emphr{--- Ideological position}}\\
 Mean revealed vote ($\theta$) & $+0.008$ & .33 & $+0.056$ & .11 \\
 SD of $\theta$ & $-0.018$ & .42 & $+0.026$ & .85 \\
-Own distance to the $\tfrac{2}{3}$ pivot & $-0.002$ & .95 & $-0.265$ & \textbf{.050} \\
+Distance to the $\tfrac{2}{3}$ pivot & $-0.002$ & .95 & $-0.265$ & \textbf{.050} \\
 Ego heterophily & $-0.024$ & .088 & $-0.255$ & .055 \\
 \multicolumn{5}{l}{\emphr{--- Credentials and profile}}\\
 Lawyer & $+0.011$ & .13 & $+0.193$ & \textbf{.041} \\
@@ -505,15 +496,17 @@ $\rho$* & $0.891$ & $\textbf{<.001}$ & — & — \\
 % ------------------------------------------------------------------ 18 TAKEAWAYS
 \begin{frame}{Conclusions}
 \begin{itemize}
-  \item The network \emphr{was predictable} from what people brought with them: political bloc and — conditionally — shared district. Credentials organized nothing, in any bloc.
+  \item The network \emphr{was predictable} from what people brought with them: political bloc and shared district (Right wing). Credentials \emphr{organized nothing}.
   \vspace{0.2cm}
-  \item Territory is the right's internal glue and the system's bridge; gender crosses blocs; and \texttt{gwdsp} $< 0$ everywhere: coalitions re-form with fresh pairs — the \emphr{structural signature of a tabula rasa}.
+  \item \texttt{gwdsp} $< 0$ everywhere: coalitions re-form with fresh pairs. The structural signature of a \emphr{tabula rasa} (?).
   \vspace{0.2cm}
-  \item In the norms era, positions \emphr{drift toward the recent neighborhood} ($\sim$2\% of the distance per wave), and the strictly-future placebo shows nothing: an influence component, not just selection.
+  \item Political positions \emphr{drift toward the neighborhood}: an influence component, not just selection.
   \vspace{0.2cm}
-  \item Defection \emphr{travels along co-sponsorship ties} — same bloc, same vote, same pressure — carried by newcomers at both ends.
+  \item Defection \emphr{travels along co-sponsorship ties}: when you break ranks, you do it with your co-signers.
   \vspace{0.2cm}
-  \item Articles win by \emphr{geometry and team history}, not credentials; and for the authors, \emphr{the context is the coalition}: success is a coalition good.
+  \item Articles win by geometry and team history, \emphr{not credentials}.
+  \vspace{0.2cm}
+  \item Success is a \emphr{coalition good}. Your network shapes your success.
 \end{itemize}
 \end{frame}
 
@@ -525,7 +518,7 @@ $\rho$* & $0.891$ & $\textbf{<.001}$ & — & — \\
     {\color{ndred}\rule{0.22\textwidth}{1.1pt}}\\[0.8cm]
     \qrcode[height=2.6cm]{https://github.com/aoliveram/Networked-Influence-Chilean-Constitutional-Convention}\\[0.35cm]
     {\small GitHub project repository}\\[0.5cm]
-    {\small\color{ndgray} anibal.olivera.m@gmail.com $\cdot$ aoliveram.cl}
+    {\small\color{ndgray} an.oliveram@udd.cl $\cdot$ aoliveram.cl}
   \end{center}
   \vfill
 \end{frame}
